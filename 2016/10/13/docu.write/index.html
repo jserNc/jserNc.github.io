@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="title:关于document.write引入第三方脚本问题最近，在chrome控制台出现了下面的警告：
+1A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via doc" />
+  
 
   
   
@@ -11,14 +14,21 @@
   
   
   
-  <title>Learn javascript</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Learn javascript">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Learn javascript">
+  <meta name="description" content="title:关于document.write引入第三方脚本问题最近，在chrome控制台出现了下面的警告：
+1A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2016/10/13/docu.write/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title:关于document.write引入第三方脚本问题最近，在chrome控制台出现了下面的警告：
+1A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser i">
+<meta property="og:updated_time" content="2016-10-13T08:06:30.070Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Learn javascript">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title:关于document.write引入第三方脚本问题最近，在chrome控制台出现了下面的警告：
+1A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser i">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -35,7 +45,7 @@
       <header id="masthead" class="site-header" role="banner">
     <hgroup>
       <h1 class="site-title">
-        <a href="/" title="Learn javascript" rel="home">Learn javascript</a>
+        <a href="/" title="Hexo" rel="home">Hexo</a>
       </h1>
       
         <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
@@ -58,34 +68,25 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-document-write" class="post-document-write post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-docu.write" class="post-docu.write post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
-    </h1>
-  
-
-        
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/document-write/" data-id="ciu82hd5q000060ba1tflc8t7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/docu.write/" data-id="ciu81u6ut0000hcbarp7i144c" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>最近，在chrome控制台出现了下面的警告：</p>
+        <hr>
+<h2 id="title-关于document-write引入第三方脚本问题"><a href="#title-关于document-write引入第三方脚本问题" class="headerlink" title="title:关于document.write引入第三方脚本问题"></a>title:关于document.write引入第三方脚本问题</h2><p>最近，在chrome控制台出现了下面的警告：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.</div></pre></td></tr></table></figure>
 <p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(&apos;&lt;script src=&quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/script&gt;&apos;);</div></pre></td></tr></table></figure>
-<p>使用document.write会有什么问题？</p>
+<p>document.write会有什么问题？</p>
 <p>在浏览器渲染页面之前，它必须先解析html标签来构建dom树。每当解析器遇到了一个脚本，它就会暂停解析html，下载并解析执行这个脚本，脚本执行完再继续解析dom，如果，这个脚本又动态注入另一个或多个脚本，那解析器还得等待更长时间才能继续往下走，这会明显拖慢网页渲染速度。</p>
 <p>chrome测试发现，使用2g等连接缓慢的用户，通过document.write动态注入的脚本可能会使得页面显示延迟数十秒，甚至加载失败。另外，在2g网络上，使用document.write插入第三方脚本的网页通常比其他网页加载慢两倍。</p>
 <p>当满足以下所有条件时，chrome就不会执行通过document.write注入的script脚本：</p>
@@ -93,15 +94,15 @@
 <p>2.document.write用在顶级文档中（之所以不包括iframe页面，是因其不会阻止主页面的渲染）；</p>
 <p>3.document.write引入的同步脚本（具有async或defer属性的异步脚本不会阻塞页面渲染）；</p>
 <p>4.该脚本不在浏览器缓存中（缓存了的脚本并不会产生网络延迟，所以仍会执行）；</p>
-<p>5.页面不是重新加载（如果用户主动重新加载该页面，chrome就不会干预，并正常执行该网页）。</p>
+<p>5.页面不是重新加载（如果用户主动重新加载该页面，chrome就不会干预，并正常执行该网页）；</p>
 <p>自chrome 53开始，如果document.write请求符合以上的条件2-5,chrome就会发出上面的警告。自10月中旬发布的chrome 54开始2g用户的注入脚本将被干预，以后，任何连接缓慢的用户（即缓慢的3g或WiFi）都可能被干预。</p>
 
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2016/10/13/document-write/">
-    <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
+    <a href="/2016/10/13/docu.write/">
+    <time datetime="2016-10-13T07:53:12.153Z" class="entry-date">
         2016-10-13
     </time>
 </a>
@@ -111,62 +112,20 @@
 </article>
 
 
-
-
-
-
-  
-    <article id="post-hello-world" class="post-hello-world post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/09/30/hello-world/">操作指南</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/09/30/hello-world/" data-id="ciu82hd75000160back19ozv6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/09/30/hello-world/">
-    <time datetime="2016-09-30T06:01:55.146Z" class="entry-date">
-        2016-09-30
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    </footer>
-</article>
+        <span class="nav-next"><a href="/2016/09/30/hello-world/" rel="next">Hello World <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
@@ -189,11 +148,11 @@
       <ul>
         
           <li>
-            <a href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
+            <a href="/2016/10/13/docu.write/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/09/30/hello-world/">操作指南</a>
+            <a href="/2016/09/30/hello-world/">Hello World</a>
           </li>
         
       </ul>
@@ -208,7 +167,7 @@
 </div>
       </div>
       <footer id="colophon" role="contentinfo">
-    <p>&copy; 2016 nanc
+    <p>&copy; 2016 John Doe
     All rights reserved.</p>
     <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
 </footer>
