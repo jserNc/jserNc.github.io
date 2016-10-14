@@ -24,8 +24,7 @@
 1var c = [3, 5, 3, 7, 33, 4];
 (1) 冒泡排序
 　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。
-　　实现：
-//交换数">
+　　实现：123456">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js排序算法">
 <meta property="og:url" content="http://yoursite.com/2016/10/13/sort/index.html">
@@ -35,9 +34,8 @@
 1var c = [3, 5, 3, 7, 33, 4];
 (1) 冒泡排序
 　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。
-　　实现：
-//交换数">
-<meta property="og:updated_time" content="2016-10-13T09:24:46.280Z">
+　　实现：123456">
+<meta property="og:updated_time" content="2016-10-14T02:16:57.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js排序算法">
 <meta name="twitter:description" content="测试用例：1var a = [85, 24, 63, 45, 17, 31, 96, 50];
@@ -45,8 +43,7 @@
 1var c = [3, 5, 3, 7, 33, 4];
 (1) 冒泡排序
 　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。
-　　实现：
-//交换数">
+　　实现：123456">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -101,7 +98,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/sort/" data-id="ciu84o7zz0000isbacgvz0xd8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/sort/" data-id="ciu94bhug0001qobasx51ee24" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -112,171 +109,20 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var c = [3, 5, 3, 7, 33, 4];</div></pre></td></tr></table></figure>
 <p><strong>(1) 冒泡排序</strong></p>
 <p>　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong></p>
-<pre><code>//交换数组相邻两元素
-function swap(arr,i){
-    var temp = arr[i]; 
-    arr[i] = arr[i+1];
-    arr[i+1] = temp;
-}
-//冒泡排序,会改变原数组
-function bubbleSort(arr){
-    var len = arr.length - 1,
-        i = 0,
-        j = 0;
-
-    for (;i &lt; len;i++){
-        for (j = 0;j &lt; len - i; j++){
-            if (arr[j] &gt; arr[j+1]){
-                swap(arr,j);
-            }
-        }
-    }
-    return arr;
-}
-</code></pre><p><strong>(2) 选择排序</strong></p>
+<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//交换数组相邻两元素</div><div class="line"></div><div class="line">function swap(arr,i)&#123;</div><div class="line">    var temp = arr[i]; </div><div class="line">    arr[i] = arr[i+1];</div><div class="line">    arr[i+1] = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//冒泡排序,会改变原数组</div><div class="line"></div><div class="line">function bubbleSort(arr)&#123;</div><div class="line">    var len = arr.length - 1,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line"></div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        for (j = 0;j &lt; len - i; j++)&#123;</div><div class="line">            if (arr[j] &gt; arr[j+1])&#123;</div><div class="line">                swap(arr,j);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>(2) 选择排序</strong></p>
 <p>　　找出数组中最大的数字与最末尾数字位置交换。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong></p>
-<pre><code>//将数组最大元素放置在最末尾
-function selectMax(arr,len){
-    var length = arr.length || 0,
-        len = len || length,
-        i = 0,
-        max = arr[0],
-        index = 0,
-        temp = 0;
-
-    for (;i &lt; len;i ++){
-        if (arr[i] &gt; max){
-            max = arr[i];
-            index = i;
-        }
-    }
-
-    temp = arr[len-1];
-    arr[len-1] = arr[index];
-    arr[index] = temp;        
-}
-//选择排序，会改变原数组
-function selectSort(arr){
-    var len = arr.length,
-        i = 0;
-
-    for (;i &lt; len - 1;i++){
-        selectMax(arr,len-i);
-    }
-    return arr;
-}
-</code></pre><p><strong>(3) 插入排序</strong></p>
+<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//将数组最大元素放置在最末尾</div><div class="line"></div><div class="line">function selectMax(arr,len)&#123;</div><div class="line">    var length = arr.length || 0,</div><div class="line">        len = len || length,</div><div class="line">        i = 0,</div><div class="line">        max = arr[0],</div><div class="line">        index = 0,</div><div class="line">        temp = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; len;i ++)&#123;</div><div class="line">        if (arr[i] &gt; max)&#123;</div><div class="line">            max = arr[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    temp = arr[len-1];</div><div class="line">    arr[len-1] = arr[index];</div><div class="line">    arr[index] = temp;		</div><div class="line">&#125;</div><div class="line"></div><div class="line">//选择排序，会改变原数组</div><div class="line"></div><div class="line">function selectSort(arr)&#123;</div><div class="line">    var len = arr.length,</div><div class="line">        i = 0;</div><div class="line"></div><div class="line">    for (;i &lt; len - 1;i++)&#123;</div><div class="line">        selectMax(arr,len-i);</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>(3) 插入排序</strong></p>
 <p>　　它将数组分成“已排序”和“未排序”两部分，一开始的时候，“已排序”的部分只有一个元素，然后将它后面一个元素从“未排序”部分插入“已排序”部分，从而“已排序”部分增加一个元素，“未排序”部分减少一个元素。以此类推，完成全部排序。</p>
-<p>　　<strong>实现：</strong></p>
-<pre><code>//向升序数组插入数字
-function insertNum(arr,num){
-    var length = arr.length,
-        i = 0,
-        j = 0;
-
-    for (;i &lt; length;i++){
-        if (num &lt;= arr[i]){
-            for (j = length;j &gt; i;j--){
-                arr[j] = arr[j-1]
-            }
-            arr[i] = num;
-            break;
-        }
-    }
-    if (length === arr.length){
-        arr[length] = num;
-    }
-}
-//插入排序，不会改变原数组
-function insertSort(arr){
-    var arr1 = [arr[0]],
-        len = arr.length - 1,
-        i = 0;
-
-    for (;i &lt; len;i++){
-        insertNum(arr1,arr[i+1]);
-    }
-    return arr1;
-}
-</code></pre><p><strong>(4) 合并排序</strong></p>
+<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//向升序数组插入数字</div><div class="line"></div><div class="line">function insertNum(arr,num)&#123;</div><div class="line">    var length = arr.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        if (num &lt;= arr[i])&#123;</div><div class="line">            for (j = length;j &gt; i;j--)&#123;</div><div class="line">                arr[j] = arr[j-1]</div><div class="line">            &#125;</div><div class="line">            arr[i] = num;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if (length === arr.length)&#123;</div><div class="line">        arr[length] = num;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//插入排序，不会改变原数组</div><div class="line"></div><div class="line">function insertSort(arr)&#123;</div><div class="line">    var arr1 = [arr[0]],</div><div class="line">        len = arr.length - 1,</div><div class="line">        i = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        insertNum(arr1,arr[i+1]);</div><div class="line">    &#125;</div><div class="line">    return arr1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>(4) 合并排序</strong></p>
 <p>　　将数组拆开，分成n个只有一个元素的数组，然后不断地两两合并，直到全部排序完成。</p>
-<p>　　<strong>实现：</strong></p>
-<pre><code>//合并两个有序数组
-function mergeArr(arr1,arr2){
-    var length = arr2.length,
-        i = 0;
+<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">//合并两个有序数组</div><div class="line"></div><div class="line">function mergeArr(arr1,arr2)&#123;</div><div class="line">    var length = arr2.length,</div><div class="line">        i = 0;</div><div class="line"></div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        insertNum(arr1,arr2[i]);</div><div class="line">    &#125;</div><div class="line">    return arr1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//合并排序,不会影响原数组</div><div class="line"></div><div class="line">function mergeSort(arr)&#123;</div><div class="line">    var length = arr.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line">        arr1 = [];</div><div class="line">    </div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        arr1[i] = [arr[i]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (;j &lt; length - 1;j++)&#123;</div><div class="line">        arr1[j+1] = mergeArr(arr1[j],arr1[j+1]);</div><div class="line">    &#125;</div><div class="line">    return arr1[length - 1];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>(5) 快速排序</strong></p>
+<p>　　先确定一个“支点”（pivot），然后将所有小于“支点”的值都放在该点的左侧，大于等于“支点”的值都放在该点的右侧，然后对左右两侧不断重复这个过程，直到所有排序完成。</p>
+<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">//连接数组，不影响原数组</div><div class="line"></div><div class="line">function joinArr(arr1,num,arr2)&#123;</div><div class="line">    var len1 = arr1.length,</div><div class="line">        len2 = arr2.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0,</div><div class="line">        arr = [];</div><div class="line">    </div><div class="line">    for (;i &lt; len1;i++)&#123;</div><div class="line">        arr[i] = arr1[i];</div><div class="line">    &#125;</div><div class="line">    arr[i] = num;</div><div class="line">    for (;j &lt; len2;j++)&#123;</div><div class="line">        arr[i+1+j] = arr2[j];</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//快速排序</div><div class="line"></div><div class="line">function quickSort(arr)&#123;</div><div class="line">    var len = arr.length,</div><div class="line">        pivotIdx = Math.floor((len - 0.5) / 2),</div><div class="line">        pivot = arr[pivotIdx],</div><div class="line">        i = 0,</div><div class="line">        leftArr = [],</div><div class="line">        rightArr = [];</div><div class="line"></div><div class="line">    if (len &lt; 2)&#123;</div><div class="line">        return arr;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        if (i === pivotIdx)&#123;</div><div class="line">            continue;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (arr[i] &lt; pivot)&#123;</div><div class="line">                leftArr[leftArr.length] = arr[i];</div><div class="line">            &#125; else &#123;</div><div class="line">                rightArr[rightArr.length] = arr[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return joinArr(quickSort(leftArr),pivot,quickSort(rightArr));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-    for (;i &lt; length;i++){
-        insertNum(arr1,arr2[i]);
-    }
-    return arr1;
-}
-
-//合并排序,不会影响原数组
-function mergeSort(arr){
-    var length = arr.length,
-        i = 0,
-        j = 0;
-        arr1 = [];
-
-    for (;i &lt; length;i++){
-        arr1[i] = [arr[i]];
-    }
-
-    for (;j &lt; length - 1;j++){
-        arr1[j+1] = mergeArr(arr1[j],arr1[j+1]);
-    }
-    return arr1[length - 1];
-}
-</code></pre><p><strong>(5) 快速排序</strong></p>
-<p>　　先确定一个“支点”（pivot），将所有小于“支点”的值都放在该点的左侧，大于等于“支点”的值都放在该点的右侧，然后对左右两侧不断重复这个过程，直到所有排序完成。</p>
-<p>　　<strong>实现：</strong></p>
-<pre><code>//连接数组，不影响原数组
-function joinArr(arr1,num,arr2){
-    var len1 = arr1.length,
-        len2 = arr2.length,
-        i = 0,
-        j = 0,
-        arr = [];
-
-    for (;i &lt; len1;i++){
-        arr[i] = arr1[i];
-    }
-    arr[i] = num;
-    for (;j &lt; len2;j++){
-        arr[i+1+j] = arr2[j];
-    }
-    return arr;
-}
-//快速排序
-function quickSort(arr){
-    var len = arr.length,
-        pivotIdx = Math.floor((len - 0.5) / 2),
-        pivot = arr[pivotIdx],
-        i = 0,
-        leftArr = [],
-        rightArr = [];
-
-    if (len &lt; 2){
-        return arr;
-    }
-
-    for (;i &lt; len;i++){
-        if (i === pivotIdx){
-            continue;
-        } else {
-            if (arr[i] &lt; pivot){
-                leftArr[leftArr.length] = arr[i];
-            } else {
-                rightArr[rightArr.length] = arr[i];
-            }
-        }
-    }
-    return joinArr(quickSort(leftArr),pivot,quickSort(rightArr));
-}
-</code></pre>
       
     </div><!-- .entry-content -->
 
