@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>toString.call()引起的一些思考 | Learn javascript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="toString.call()引起的一些思考">
+<meta property="og:url" content="http://yoursite.com/2016/10/14/tostring/index.html">
+<meta property="og:site_name" content="Learn javascript">
+<meta property="og:description" content="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果">
+<meta property="og:updated_time" content="2016-10-14T09:52:05.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="toString.call()引起的一些思考">
+<meta name="twitter:description" content="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Learn javascript" rel="home">Learn javascript</a>
+      </h1>
+      
+        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
+        <h2 class="site-description"><script>hitokoto();</script></h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-tostring" class="post-tostring post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      toString.call()引起的一些思考
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/14/tostring/" data-id="ciu9kg4k70005gwbaxffu7jei" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object-prototype-toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object-prototype还是找不到，则返回undefined。"><a href="#toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object-prototype-toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object-prototype还是找不到，则返回undefined。" class="headerlink" title="toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。"></a>toString作为一个全局方法执行时，挂载于window对象。Object对象也有属于自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。“原型链”的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。</h3><p>首先，所有全局方法均属于window对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString === window.toString  //true</div><div class="line">window instanceof Object      //true</div></pre></td></tr></table></figure></p>
+<p>window是个对象，不是构造函数，其构造函数是Window<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">window.prototype              //undefined</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">window.constructor === Window         //true</div><div class="line">window.constructor === window.Window  //true</div><div class="line">window.__proto__ === Window.prototype //true</div></pre></td></tr></table></figure>
+<p>对象的静态方法和原型方法不同，静态方法可以继承自对象的原型也可以自行定义(优先级更高)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object.prototype.toString === Object.toString //false</div><div class="line">(&#123;&#125;).toString === Object.prototype.toString   //true</div></pre></td></tr></table></figure></p>
+<p>Object的原型部署了toString方法，在其原型对象上调用该方法，始终返回”[object Object]”。换句话讲，Object.prototype.toString方法本不需要传参，传参也被忽视。字符串[object Object]本身没有太大的用处，但是其继承对象可以自定义该方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Object.toString()                //&quot;function Object() &#123; [native code] &#125;&quot;</div><div class="line">Object.prototype.toString()      //&quot;[object Object]&quot;</div><div class="line">Object.prototype.toString([])    //&quot;[object Object]&quot;</div><div class="line">Object.prototype.toString(true)  //&quot;[object Object]&quot;</div></pre></td></tr></table></figure></p>
+<p>window.toString()也不需要传参，传参会被忽视<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">window.toString(1)  //&quot;[object Window]&quot;</div><div class="line">toString(1)         //&quot;[object Window]&quot;</div><div class="line">window.toString([]) //&quot;[object Window]&quot;</div><div class="line">toString([])        //&quot;[object Window]&quot;</div></pre></td></tr></table></figure></p>
+<p>然而，window.toString和Object.prototype.toString并不相等<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">window.toString === Object.prototype.toString //false</div><div class="line">Array.toString === Array.prototype.toString   //false</div><div class="line">Array.toString === Object.prototype.toString  //false</div></pre></td></tr></table></figure></p>
+<p>但是,window.toString和Object.prototype.toString通过call调用的时候能得到一样结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Object.prototype.toString.call([])    //&quot;[object Array]&quot;</div><div class="line">window.toString.call([])              //&quot;[object Array]&quot;</div><div class="line">Object.prototype.toString.call(1)     //&quot;[object Number]&quot;</div><div class="line">window.toString.call(1)               //&quot;[object Number]&quot;</div></pre></td></tr></table></figure></p>
+<p>再来看看数组原型方法Array.prototype.toString<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[1,2,3].toString === Array.prototype.toString  //true</div><div class="line">[1,2,3].toString()                             //&quot;1,2,3&quot;</div><div class="line">Array.prototype.toString([1,2,3])              //&quot;&quot;</div></pre></td></tr></table></figure></p>
+<p>事实上，和toString类似，直接给Array.prototype.toString传参返回值都是””<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Array.prototype.toString()    //&quot;&quot;</div><div class="line">Array.prototype.toString(1)   //&quot;&quot;</div><div class="line">Array.prototype.toString([])  //&quot;&quot;</div></pre></td></tr></table></figure></p>
+<p>通过call调用，就完全不一样了，数组参数会格式化为字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Array.prototype.toString.call([1,2,3])  //&quot;1,2,3&quot;</div></pre></td></tr></table></figure></p>
+<p>非数组参数返回结果同window.toString.call()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Array.prototype.toString.call(1)        //&quot;[object Number]&quot;</div><div class="line">Array.prototype.toString.call(&#123;&#125;)       //&quot;[object Object]&quot;</div></pre></td></tr></table></figure></p>
+<p>再看布尔型构造函数原型方法Boolean.prototype.toString<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">true.toString === Boolean.prototype.toString   //true</div><div class="line">true.toString()                                //&quot;true&quot;</div><div class="line">false.toString()                               //&quot;false&quot;</div><div class="line">Boolean.prototype.toString(true)               //&quot;false&quot;</div><div class="line">Boolean.prototype.toString(false)              //&quot;false&quot;</div></pre></td></tr></table></figure></p>
+<p>同样，直接给Boolean.prototype.toString传参返回值都是”false”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Boolean.prototype.toString([])   //&quot;false&quot;</div><div class="line">Boolean.prototype.toString(1)    //&quot;false&quot;</div><div class="line">Boolean.prototype.toString(&#123;&#125;)   //&quot;false&quot;</div></pre></td></tr></table></figure></p>
+<p>通过call调用,布尔型参数会格式化为字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Boolean.prototype.toString.call(true)   //&quot;true&quot;</div><div class="line">Boolean.prototype.toString.call(false)  //&quot;false&quot;</div></pre></td></tr></table></figure></p>
+<p>非布尔型参数会怎样？报错！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Boolean.prototype.toString.call(1)   </div><div class="line">//TypeError: Boolean.prototype.toString is not generic</div><div class="line">Boolean.prototype.toString.call(&#123;&#125;)   </div><div class="line">//TypeError: Boolean.prototype.toString is not generic</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[].constructor === Array         //true</div><div class="line">[].__proto__ === Array.prototype //true</div><div class="line">Array.prototype                  //[]</div><div class="line">[].__proto__ === []              //false</div></pre></td></tr></table></figure>
+<p>Array的原型对象不等于其构造函数的原型对象!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Array.prototype === Array.__proto__                              //false</div></pre></td></tr></table></figure></p>
+<p>Funtion的原型对象等于其构造函数的原型对象!!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Function.prototype === Function.__proto__                        //true</div><div class="line">Function.prototype === Function.constructor.prototype            //true</div><div class="line">Function.prototype.__proto__ === Function.__proto__.__proto__    //true</div></pre></td></tr></table></figure></p>
+<p>Function构造函数的原型是Object的实例,但是其原型的原型的构造函数就是Object!但是，Function的原型的原型却不是Object的实例！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Function.__proto__                                   //function Empty() &#123;&#125;</div><div class="line">Function.__proto__  instanceof Object                //true</div><div class="line">Function.__proto__.__proto__                         //Object &#123;&#125;</div><div class="line">Function.__proto__.__proto__.constructor === Object  //true</div><div class="line">Function.__proto__.__proto__  instanceof Object      //false 为什么？？</div><div class="line">Object instanceof Object                             //true</div><div class="line">Function.__proto__.__proto__ === Object              //false</div><div class="line">Function.__proto__.constructor === Function          //true</div><div class="line">Function.prototype                                   //function Empty() &#123;&#125;</div><div class="line">Function.prototype.__proto__ === Object.prototype     //true</div><div class="line">Function.__proto__.__proto__ === Function.__proto__.constructor.prototype    </div><div class="line">//false 为什么？？</div><div class="line">Function.__proto__.__proto__  ===  Function.__proto__.constructor.prototype  </div><div class="line">//false 为什么？？</div></pre></td></tr></table></figure></p>
+<p>一般情况下，p.__proto__ === p.constructor.prototype是恒等的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function Person(name) &#123;</div><div class="line">    this.name = name</div><div class="line">&#125;</div><div class="line">var p = new Person(&apos;jack&apos;);</div><div class="line">p.constructor === Person                  //true</div><div class="line">p.__proto__ === p.constructor.prototype   //true</div></pre></td></tr></table></figure></p>
+<p>但是，总有例外，毕竟对象的属性是可以修改的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function Person(name) &#123;</div><div class="line">    this.name = name</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>重写原型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Person.prototype = &#123;</div><div class="line">    getName: function() &#123;&#125;</div><div class="line">&#125;</div><div class="line">var p = new Person(&apos;jack&apos;);</div><div class="line">p.__proto__ === Person.prototype           //true</div><div class="line">p.__proto__ === p.constructor.prototype    //false 为什么？？</div></pre></td></tr></table></figure></p>
+<p>其实也很好理解,p.constructor不再指向Person<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p.constructor === Person                        //false</div><div class="line">p.constructor === Person.prototype.constructor  //true</div></pre></td></tr></table></figure></p>
+<p>prototype被重写后，constructor相应就变了，再看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var o = new Object(),o1 = new Object(); </div><div class="line">o.__proto__  === o.constructor.prototype   //true</div><div class="line">o.__proto__ = o1;</div><div class="line">o.__proto__  === o.constructor.prototype   //false</div></pre></td></tr></table></figure></p>
+<p>目前JS内置的构造函数有12个，global环境下可以访问的有8个<br>所有的构造器都来自于Function.prototype<br>即所有构造器都继承了Function.prototype的属性及方法，也包括Function自己和Object<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Number.__proto__ === Function.prototype  // true</div><div class="line">Boolean.__proto__ === Function.prototype // true</div><div class="line">String.__proto__ === Function.prototype  // true</div><div class="line">Function.__proto__ === Function.prototype // true</div><div class="line">Array.__proto__ === Function.prototype   // true</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Number.__proto__ === Object.__proto__    //true</div><div class="line">Number.__proto__ === Function.__proto__  //true</div><div class="line">Number.__proto__ === Array.__proto__     //true</div><div class="line">Number.__proto__ === String.__proto__    //true</div><div class="line">Number.__proto__                         //function Empty() &#123;&#125;</div><div class="line">Empty                                    //ReferenceError: Empty is not defined</div></pre></td></tr></table></figure>
+<p>也就是说Empty不是全局构造方法，但是，Number、Function、Array等是全局构造方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Number === window.Number   //true</div></pre></td></tr></table></figure></p>
+<p>当然了，“所有的”构造函数也包括自定义的构造函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var MyArray = function () &#123;&#125;;</div><div class="line">MyArray instanceof Function               //true</div><div class="line">MyArray.__proto__ === Function.prototype  //true</div><div class="line">MyArray.__proto__ === Function.__proto__  //true</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Function.constructor  //function Function() &#123; [native code] &#125;</div><div class="line">Function.constructor === Function                      //true</div><div class="line">Function.constructor.prototype === Function.__proto__  //true</div></pre></td></tr></table></figure>
+<p>函数也是一等公民<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Function.prototype.__proto__ === Object.prototype</div></pre></td></tr></table></figure></p>
+<p>说明了所有的构造器也是一个普通的对象，继承了Object.prototype所有的方法</p>
+<p>可以先new一个对象，然后修改该对象的prototype属性,eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var MyArray = function () &#123;&#125;;</div><div class="line">MyArray.prototype                        //MyArray &#123;&#125;</div><div class="line">MyArray.__proto__                        //function Empty() &#123;&#125;</div><div class="line">MyArray.__proto__  === Object.__proto__  //true</div><div class="line">MyArray.prototype = new Array();</div><div class="line">MyArray.prototype.constructor = MyArray;</div></pre></td></tr></table></figure></p>
+<p>instanceof运算符的实质，它依次与实例对象的所有构造函数的constructor属性进行比较<br>只要有一个符合就返回true，否则返回false<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var mine = new MyArray();</div></pre></td></tr></table></figure></p>
+<p>于是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mine instanceof Array</div></pre></td></tr></table></figure></p>
+<p>相当于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(Array === MyArray.prototype.constructor) ||</div><div class="line">(Array === Array.prototype.constructor) ||</div><div class="line">(Array === Object.prototype.constructor )</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object.prototype                         //Object &#123;&#125;</div><div class="line">Object.prototype === Object.__proto__    //false</div><div class="line">Object.prototype.__proto__               //null</div></pre></td></tr></table></figure>
+<p>再回到toString(),以下都很好理解了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">toString([])             //&quot;[object Window]&quot;</div><div class="line">toString.call(window,[]) //&quot;[object Window]&quot;</div><div class="line">window.toString([])      //&quot;[object Window]&quot;</div><div class="line">window.toString()        //&quot;[object Window]&quot;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call([])        //&quot;[object Array]&quot;</div><div class="line">[].toString()            //&quot;&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(&#123;&#125;) //&quot;[object Object]&quot;</div><div class="line">(&#123;&#125;).toString()   //&quot;[object Object]&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(true) //&quot;[object Boolean]&quot;</div><div class="line">true.toString()     //&quot;true&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(function()&#123;&#125;) //&quot;[object Function]&quot;</div><div class="line">(function()&#123;&#125;).toString()   //&quot;function ()&#123;&#125;&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(1) //&quot;[object Number]&quot;</div><div class="line">(1).toString()   //&quot;1&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(null)  //&quot;[object Window]&quot;</div><div class="line">null.toString()      //TypeError: Cannot read property &apos;toString&apos; of null</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toString.call(undefined) //&quot;[object Window]&quot;</div><div class="line">undefined.toString()     //TypeError: Cannot read property &apos;toString&apos; of undefined</div></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/10/14/tostring/">
+    <time datetime="2016-10-14T09:20:13.000Z" class="entry-date">
+        2016-10-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/10/14/https/" rel="next">https本地环境搭建(windows) <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/14/tostring/">toString.call()引起的一些思考</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/https/">https本地环境搭建(windows)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/point24/">point24</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/13/sort/">js排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 nanc
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
