@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="js实现任意4个整数的24算法：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071" />
+  
 
   
   
@@ -11,14 +14,21 @@
   
   
   
-  <title>Learn javascript</title>
+  <title>point24 | Learn javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Learn javascript">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="js实现任意4个整数的24算法：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596">
+<meta property="og:type" content="article">
+<meta property="og:title" content="point24">
+<meta property="og:url" content="http://yoursite.com/2016/10/14/point24/index.html">
 <meta property="og:site_name" content="Learn javascript">
+<meta property="og:description" content="js实现任意4个整数的24算法：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596">
+<meta property="og:updated_time" content="2016-10-14T06:44:05.808Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Learn javascript">
+<meta name="twitter:title" content="point24">
+<meta name="twitter:description" content="js实现任意4个整数的24算法：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -58,17 +68,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-point24" class="post-point24 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-point24" class="post-point24 post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/14/point24/">point24</a>
+    <h1 class="entry-title article-title">
+      point24
     </h1>
   
 
@@ -99,178 +107,20 @@
 </article>
 
 
-
-
-
-
-  
-    <article id="post-sort" class="post-sort post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/13/sort/">js排序算法</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/sort/" data-id="ciu9e3tnp0003gwbamrlsatm3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h3 id="测试用例："><a href="#测试用例：" class="headerlink" title="测试用例："></a>测试用例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var a = [85, 24, 63, 45, 17, 31, 96, 50];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var b = [3,5,3,7,65,4,45,43,33];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var c = [3, 5, 3, 7, 33, 4];</div></pre></td></tr></table></figure>
-<p><strong>(1) 冒泡排序</strong></p>
-<p>　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//交换数组相邻两元素</div><div class="line"></div><div class="line">function swap(arr,i)&#123;</div><div class="line">    var temp = arr[i]; </div><div class="line">    arr[i] = arr[i+1];</div><div class="line">    arr[i+1] = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//冒泡排序,会改变原数组</div><div class="line"></div><div class="line">function bubbleSort(arr)&#123;</div><div class="line">    var len = arr.length - 1,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line"></div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        for (j = 0;j &lt; len - i; j++)&#123;</div><div class="line">            if (arr[j] &gt; arr[j+1])&#123;</div><div class="line">                swap(arr,j);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>(2) 选择排序</strong></p>
-<p>　　找出数组中最大的数字与最末尾数字位置交换。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//将数组最大元素放置在最末尾</div><div class="line"></div><div class="line">function selectMax(arr,len)&#123;</div><div class="line">    var length = arr.length || 0,</div><div class="line">        len = len || length,</div><div class="line">        i = 0,</div><div class="line">        max = arr[0],</div><div class="line">        index = 0,</div><div class="line">        temp = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; len;i ++)&#123;</div><div class="line">        if (arr[i] &gt; max)&#123;</div><div class="line">            max = arr[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    temp = arr[len-1];</div><div class="line">    arr[len-1] = arr[index];</div><div class="line">    arr[index] = temp;		</div><div class="line">&#125;</div><div class="line"></div><div class="line">//选择排序，会改变原数组</div><div class="line"></div><div class="line">function selectSort(arr)&#123;</div><div class="line">    var len = arr.length,</div><div class="line">        i = 0;</div><div class="line"></div><div class="line">    for (;i &lt; len - 1;i++)&#123;</div><div class="line">        selectMax(arr,len-i);</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>(3) 插入排序</strong></p>
-<p>　　它将数组分成“已排序”和“未排序”两部分，一开始的时候，“已排序”的部分只有一个元素，然后将它后面一个元素从“未排序”部分插入“已排序”部分，从而“已排序”部分增加一个元素，“未排序”部分减少一个元素。以此类推，完成全部排序。</p>
-<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//向升序数组插入数字</div><div class="line"></div><div class="line">function insertNum(arr,num)&#123;</div><div class="line">    var length = arr.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        if (num &lt;= arr[i])&#123;</div><div class="line">            for (j = length;j &gt; i;j--)&#123;</div><div class="line">                arr[j] = arr[j-1]</div><div class="line">            &#125;</div><div class="line">            arr[i] = num;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if (length === arr.length)&#123;</div><div class="line">        arr[length] = num;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//插入排序，不会改变原数组</div><div class="line"></div><div class="line">function insertSort(arr)&#123;</div><div class="line">    var arr1 = [arr[0]],</div><div class="line">        len = arr.length - 1,</div><div class="line">        i = 0;</div><div class="line">    </div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        insertNum(arr1,arr[i+1]);</div><div class="line">    &#125;</div><div class="line">    return arr1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>(4) 合并排序</strong></p>
-<p>　　将数组拆开，分成n个只有一个元素的数组，然后不断地两两合并，直到全部排序完成。</p>
-<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">//合并两个有序数组</div><div class="line"></div><div class="line">function mergeArr(arr1,arr2)&#123;</div><div class="line">    var length = arr2.length,</div><div class="line">        i = 0;</div><div class="line"></div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        insertNum(arr1,arr2[i]);</div><div class="line">    &#125;</div><div class="line">    return arr1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//合并排序,不会影响原数组</div><div class="line"></div><div class="line">function mergeSort(arr)&#123;</div><div class="line">    var length = arr.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0;</div><div class="line">        arr1 = [];</div><div class="line">    </div><div class="line">    for (;i &lt; length;i++)&#123;</div><div class="line">        arr1[i] = [arr[i]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (;j &lt; length - 1;j++)&#123;</div><div class="line">        arr1[j+1] = mergeArr(arr1[j],arr1[j+1]);</div><div class="line">    &#125;</div><div class="line">    return arr1[length - 1];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>(5) 快速排序</strong></p>
-<p>　　先确定一个“支点”（pivot），然后将所有小于“支点”的值都放在该点的左侧，大于等于“支点”的值都放在该点的右侧，然后对左右两侧不断重复这个过程，直到所有排序完成。</p>
-<p>　　<strong>实现：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">//连接数组，不影响原数组</div><div class="line"></div><div class="line">function joinArr(arr1,num,arr2)&#123;</div><div class="line">    var len1 = arr1.length,</div><div class="line">        len2 = arr2.length,</div><div class="line">        i = 0,</div><div class="line">        j = 0,</div><div class="line">        arr = [];</div><div class="line">    </div><div class="line">    for (;i &lt; len1;i++)&#123;</div><div class="line">        arr[i] = arr1[i];</div><div class="line">    &#125;</div><div class="line">    arr[i] = num;</div><div class="line">    for (;j &lt; len2;j++)&#123;</div><div class="line">        arr[i+1+j] = arr2[j];</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//快速排序</div><div class="line"></div><div class="line">function quickSort(arr)&#123;</div><div class="line">    var len = arr.length,</div><div class="line">        pivotIdx = Math.floor((len - 0.5) / 2),</div><div class="line">        pivot = arr[pivotIdx],</div><div class="line">        i = 0,</div><div class="line">        leftArr = [],</div><div class="line">        rightArr = [];</div><div class="line"></div><div class="line">    if (len &lt; 2)&#123;</div><div class="line">        return arr;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (;i &lt; len;i++)&#123;</div><div class="line">        if (i === pivotIdx)&#123;</div><div class="line">            continue;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (arr[i] &lt; pivot)&#123;</div><div class="line">                leftArr[leftArr.length] = arr[i];</div><div class="line">            &#125; else &#123;</div><div class="line">                rightArr[rightArr.length] = arr[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return joinArr(quickSort(leftArr),pivot,quickSort(rightArr));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/10/13/sort/">
-    <time datetime="2016-10-13T09:12:08.000Z" class="entry-date">
-        2016-10-13
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-document-write" class="post-document-write post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/document-write/" data-id="ciu9e3tnf0002gwbakw45fmd9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>最近，在chrome控制台出现了下面的警告：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.</div></pre></td></tr></table></figure>
-<p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(&apos;&lt;script src=&quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/script&gt;&apos;);</div></pre></td></tr></table></figure>
-<p>使用document.write会有什么问题？</p>
-<p>在浏览器渲染页面之前，它必须先解析html标签来构建dom树。每当解析器遇到了一个脚本，它就会暂停解析html，下载并解析执行这个脚本，脚本执行完再继续解析dom，如果，这个脚本又动态注入另一个或多个脚本，那解析器还得等待更长时间才能继续往下走，这会明显拖慢网页渲染速度。</p>
-<p>chrome测试发现，使用2g等连接缓慢的用户，通过document.write动态注入的脚本可能会使得页面显示延迟数十秒，甚至加载失败。另外，在2g网络上，使用document.write插入第三方脚本的网页通常比其他网页加载慢两倍。</p>
-<p>当满足以下所有条件时，chrome就不会执行通过document.write注入的script脚本：</p>
-<p>1.用户网络缓慢，特别是2g网这种（不过，以后可能会包括比较缓慢的3g，wifi网络）；</p>
-<p>2.document.write用在顶级文档中（之所以不包括iframe页面，是因其不会阻止主页面的渲染）；</p>
-<p>3.document.write引入的同步脚本（具有async或defer属性的异步脚本不会阻塞页面渲染）；</p>
-<p>4.该脚本不在浏览器缓存中（缓存了的脚本并不会产生网络延迟，所以仍会执行）；</p>
-<p>5.页面不是重新加载（如果用户主动重新加载该页面，chrome就不会干预，并正常执行该网页）。</p>
-<p>自chrome 53开始，如果document.write请求符合以上的条件2-5,chrome就会发出上面的警告。自10月中旬发布的chrome 54开始2g用户的注入脚本将被干预，以后，任何连接缓慢的用户（即缓慢的3g或WiFi）都可能被干预。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/10/13/document-write/">
-    <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
-        2016-10-13
-    </time>
-</a>
+        <span class="nav-next"><a href="/2016/10/13/sort/" rel="next">js排序算法 <span class="meta-nav">→</span></a></span>
     
-    
-    </footer>
-</article>
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-    <article id="post-hello-world" class="post-hello-world post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/09/30/hello-world/">操作指南</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/09/30/hello-world/" data-id="ciu9e3tn50001gwba7gbkt8qd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/09/30/hello-world/">
-    <time datetime="2016-09-30T06:01:55.146Z" class="entry-date">
-        2016-09-30
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
