@@ -778,7 +778,8 @@ footer[role="contentinfo"] {
 	font-size: 0.857142857rem;
 	line-height: 2;
 	max-width: 960px;
-	max-width: 68.571428571rem;
+	/*max-width: 68.571428571rem;*/
+	max-width: 80rem;
 	margin-top: 24px;
 	margin-top: 1.714285714rem;
 	margin-left: auto;
@@ -982,7 +983,8 @@ article.sticky .featured-post {
 .comment-content li,
 .mu_register li {
 	margin: 0 0 0 36px;
-	margin: 0 0 0 2.571428571rem;
+	/*margin: 0 0 0 2.571428571rem;*/
+	margin: 0 0 0 4rem;
 }
 .entry-content blockquote,
 .comment-content blockquote {
@@ -1674,7 +1676,8 @@ img#wpstats {
 	.site {
 		margin: 0 auto;
 		max-width: 960px;
-		max-width: 68.571428571rem;
+		/*max-width: 68.571428571rem;*/
+		max-width: 80rem;
 		overflow: hidden;
 	}
 	.site-content {

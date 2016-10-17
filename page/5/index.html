@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Learn javascript">
-<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:url" content="http://nanchao.win/page/5/index.html">
 <meta property="og:site_name" content="Learn javascript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learn javascript">
@@ -26,9 +26,12 @@
   <link rel="stylesheet" href="/css/style.css">
   
 
-  
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
   <!-- baidu webmaster push -->
-  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
 </head>
 <body class="home blog custom-background custom-font-enabled single-author">
   <div id="page" class="hfeed site">
@@ -38,8 +41,9 @@
         <a href="/" title="Learn javascript" rel="home">Learn javascript</a>
       </h1>
       
-        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
-        <h2 class="site-description"><script>hitokoto();</script></h2>
+        <h2 class="site-description">
+          <a href="/" id="subtitle">There is no royal road to learning.</a>
+        </h2>
       
     </hgroup>
 
@@ -75,17 +79,17 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/13/document-write/" data-id="ciudgw8sz0000x0ba0lvtgiev" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciudluwfq0000qgbafqfj6bwl" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>最近，在chrome控制台出现了下面的警告：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.</div></pre></td></tr></table></figure>
-<p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.write(&apos;&lt;script src=&quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/script&gt;&apos;);</div></pre></td></tr></table></figure>
-<p>使用document.write会有什么问题？</p>
+<pre><code>A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.
+</code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
+<pre><code>document.write(&#39;&lt;script src=&quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/script&gt;&#39;);
+</code></pre><p>使用document.write会有什么问题？</p>
 <p>在浏览器渲染页面之前，它必须先解析html标签来构建dom树。每当解析器遇到了一个脚本，它就会暂停解析html，下载并解析执行这个脚本，脚本执行完再继续解析dom，如果，这个脚本又动态注入另一个或多个脚本，那解析器还得等待更长时间才能继续往下走，这会明显拖慢网页渲染速度。</p>
 <p>chrome测试发现，使用2g等连接缓慢的用户，通过document.write动态注入的脚本可能会使得页面显示延迟数十秒，甚至加载失败。另外，在2g网络上，使用document.write插入第三方脚本的网页通常比其他网页加载慢两倍。</p>
 <p>当满足以下所有条件时，chrome就不会执行通过document.write注入的script脚本：</p>
@@ -173,9 +177,16 @@
     All rights reserved.</p>
     <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
 </footer>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    <script src="/js/jquery-2.0.3.min.js"></script>
 
-<script src="/js/jquery-2.0.3.min.js"></script>
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
@@ -187,6 +198,7 @@
 <script src="/js/navigation.js"></script>
 
 <div id="bg"></div>
+
 
   </div>
 </body>
