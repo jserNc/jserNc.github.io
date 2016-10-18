@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻" />
+  <meta name="description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。" />
   
 
   
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/14/tostring/index.html">
 <meta property="og:site_name" content="Learn javascript">
 <meta property="og:description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的">
-<meta property="og:updated_time" content="2016-10-18T02:22:53.660Z">
+<meta property="og:updated_time" content="2016-10-18T02:50:08.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="toString.call()引起的一些思考">
 <meta name="twitter:description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的">
@@ -85,13 +85,14 @@
             
             <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciuetd8od000698babu6v7b2n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciuew70h20005o0ba0lossrif" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。</p>
+<a id="more"></a>
 <p>首先，所有全局方法均属于window对象</p>
 <pre><code>toString === window.toString  //true
 window instanceof Object      //true
@@ -309,7 +310,7 @@ undefined.toString()
     <h3 class="assistive-text">文章导航</h3>
     
     
-        <span class="nav-next"><a href="/2016/10/14/https/" rel="next">https本地环境搭建(windows) <span class="meta-nav">→</span></a></span>
+        <p><span class="nav-next"><a href="/2016/10/14/https/" rel="next"><span class="meta-nav">下一篇：</span>https本地环境搭建(windows) </a></span></p>
     
 </nav><!-- .nav-single -->
 

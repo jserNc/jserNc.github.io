@@ -512,6 +512,8 @@ img.wp-smiley,
 .paged #nav-above {
 	display: block;
 }
+
+/*
 .nav-previous,
 .previous-image {
 	float: left;
@@ -519,10 +521,16 @@ img.wp-smiley,
 }
 .nav-next,
 .next-image {
+	float: left;
+	
 	float: right;
 	text-align: right;
+	
 	width: 50%;
 }
+
+*/
+
 .nav-single + .comments-area,
 #comment-nav-above {
 	margin: 48px 0;
