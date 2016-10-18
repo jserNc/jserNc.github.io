@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="最近，在chrome控制台出现了下面的警告：" />
+  <meta name="description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
+最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的警告：" />
   
 
   
@@ -15,16 +16,19 @@
   
   <title>关于document.write引入第三方脚本问题 | Learn javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近，在chrome控制台出现了下面的警告：">
+  <meta name="description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
+最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于document.write引入第三方脚本问题">
 <meta property="og:url" content="http://nanchao.win/2016/10/13/document-write/index.html">
 <meta property="og:site_name" content="Learn javascript">
-<meta property="og:description" content="最近，在chrome控制台出现了下面的警告：">
-<meta property="og:updated_time" content="2016-10-18T03:24:23.362Z">
+<meta property="og:description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
+最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
+<meta property="og:updated_time" content="2016-10-18T03:59:03.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于document.write引入第三方脚本问题">
-<meta name="twitter:description" content="最近，在chrome控制台出现了下面的警告：">
+<meta name="twitter:description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
+最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -85,13 +89,14 @@
             
             <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciuew70fc0000o0bavil2g86h" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciuextd9t0000cobazi403xp2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>最近，在chrome控制台出现了下面的警告：</p>
+        <p>一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。</p>
+<p>最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的警告：</p>
 <a id="more"></a>
 <pre><code>A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.
 </code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
