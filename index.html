@@ -26,12 +26,18 @@
   <link rel="stylesheet" href="/css/style.css">
   
 
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
 
   <link rel="stylesheet" href="/css/prettify.css" type="text/css">
   <script src="/js/prettify.js" type="text/javascript"></script>
 
   <!-- baidu webmaster push -->
   <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
 </head>
 <body class="home blog custom-background custom-font-enabled single-author">
   <div id="page" class="hfeed site">
@@ -61,6 +67,26 @@
             </div>
     </nav>
 </header>
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
@@ -81,7 +107,7 @@
             
             <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciugce4tj0004e4bai5tv1s6a" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciujcdjc700050oba87ih5ot1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -134,7 +160,7 @@
             
             <a href="/2016/10/14/https/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="ciugce4t30001e4bap4ce2wms" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="ciujcdjbn00040obal71qd3os" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -189,7 +215,7 @@
             
             <a href="/2016/10/14/point24/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciugce4t90002e4batweuuxs0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciujcdjbd00030oba5fb51vr7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -243,7 +269,7 @@
             
             <a href="/2016/10/13/sort/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciugce4tf0003e4ba196glnb0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciujcdj8b00010oba94q32e7s" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -296,7 +322,7 @@
             
             <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciugce4sr0000e4baobn73lxa" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciujcdj8v00020obaat5v0wxe" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -350,7 +376,7 @@
             
             <a href="/2016/09/30/hello-world/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/09/30/hello-world/" data-id="ciugce4tr0005e4baw1lcmmfx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/09/30/hello-world/" data-id="ciujcdj6300000oba2x91bmvq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -444,7 +470,7 @@
         </span>
     </p>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
+    
 
 <script>
 $(window).load(function(){

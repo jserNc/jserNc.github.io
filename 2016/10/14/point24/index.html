@@ -36,12 +36,18 @@ js实现任意4个整数">
   <link rel="stylesheet" href="/css/style.css">
   
 
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
 
   <link rel="stylesheet" href="/css/prettify.css" type="text/css">
   <script src="/js/prettify.js" type="text/javascript"></script>
 
   <!-- baidu webmaster push -->
   <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
 </head>
 <body class="home blog custom-background custom-font-enabled single-author">
   <div id="page" class="hfeed site">
@@ -71,6 +77,26 @@ js实现任意4个整数">
             </div>
     </nav>
 </header>
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main"><article id="post-point24" class="post-point24 post type-post status-publish format-standard hentry">
     <!---->
@@ -89,7 +115,7 @@ js实现任意4个整数">
             
             <a href="/2016/10/14/point24/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciugce4t90002e4batweuuxs0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciujcdjbd00030oba5fb51vr7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -484,7 +510,7 @@ js实现任意4个整数">
         </span>
     </p>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
+    
 
 <script>
 $(window).load(function(){
