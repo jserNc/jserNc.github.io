@@ -27,7 +27,7 @@
 <meta property="og:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？
 举个例子：当你点击了一个按钮，你确实是点击了这个按钮，但同时你实际上也点击了按钮所在的div区域，dody元素以及html元素等等，怎么确定你到底想点的是哪个元素呢？
 对此，dom标准事件流规定：当一个事件发生后，会经过3个传播阶段：">
-<meta property="og:updated_time" content="2016-10-24T06:06:41.730Z">
+<meta property="og:updated_time" content="2016-10-24T06:28:13.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件代理（委托）">
 <meta name="twitter:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？
@@ -125,7 +125,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ciunnur0c0002s8bayup6fdl6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ciunomkka0002msbajeh79xi3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -191,7 +191,32 @@
 </code></pre><p>再注意一下event.target,将其和event.currentTarget对比一下：</p>
 <p><strong>event.currentTarget</strong>：返回事件当前所在的节点，会随着事件捕获和事件冒泡改变。也就是事件监听函数中的this。</p>
 <p><strong>event.target</strong>：返回目标节点（最深层节点），固定的。正是这个属性使得事件代理成为可能。</p>
-<p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>地瓜哥 <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
+<p>有时候，为了阻止事件冒泡和事件默认操作，我们还会采取以下事件处理方法：</p>
+<pre><code>function myHandler(e){
+    var e = e || window.event;
+    var src = e.target || e.srcElement;
+
+    //do something
+
+    //无冒泡
+    if (typeof e.stopPropagation === &#39;function&#39;){
+        e.stopPropagation();    //w3c
+    }
+
+    if (typeof e.cancelBubble !== &#39;undefined&#39;){
+        e.cancelBubble = true;  //ie
+    }
+
+    //阻止默认操作
+    if (typeof e.preventDefault === &#39;function&#39;){
+        e.preventDefault();     //w3c
+    }
+
+    if (typeof e.returnValue !== &#39;undefined&#39;){
+        e.returnValue = false;  //ie
+    }
+}
+</code></pre><p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>地瓜哥 <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
 
       
     </div><!-- .entry-content -->
