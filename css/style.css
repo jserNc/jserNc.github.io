@@ -586,7 +586,8 @@ body.custom-font-enabled {
 }
 a {
 	outline: none;
-	color: rgb(81, 165, 168); /*Article Title Normal*/
+	/*color: rgb(81, 165, 168); Article Title Normal*/
+	color: rgb(229, 129, 18);
     text-decoration: none;
 }
 a:hover {
@@ -597,7 +598,7 @@ a:hover {
 
 /* Backgroud image */
 #bg {
-  background-image: url("images/body.jpg");
+  background-image: url("images/by9.jpg");
   background-color: #050a10;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -649,7 +650,8 @@ a:hover {
 .site {
 	padding: 0 24px;
 	padding: 0 1.714285714rem;
-	background-color: rgba(255, 255, 255, 0.20); /* Main Page */
+	/*background-color: rgba(255, 255, 255, 0.20);  Main Page */
+	background-color: rgba(255, 255, 255, 0.85);
 }
 .site-content {
 	margin: 24px 0 0;
