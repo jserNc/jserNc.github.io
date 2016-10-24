@@ -27,7 +27,7 @@
 <meta property="og:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？
 举个例子：当你点击了一个按钮，你确实是点击了这个按钮，但同时你实际上也点击了按钮所在的div区域，body元素以及html元素等等，浏览器怎么知道你想点的到底是哪个元素呢？
 对此，dom标准事件流规定：当一个事件发生后，会经过3个传播阶段：">
-<meta property="og:updated_time" content="2016-10-24T06:38:39.865Z">
+<meta property="og:updated_time" content="2016-10-24T06:43:32.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件代理（委托）">
 <meta name="twitter:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？
@@ -125,7 +125,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ciunp09lh0000gcbabpis7tsu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ciunt6haa0007agbakuu8tvr7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -137,7 +137,7 @@
 <p>举个例子：当你点击了一个按钮，你确实是点击了这个按钮，但同时你实际上也点击了按钮所在的div区域，body元素以及html元素等等，浏览器怎么知道你想点的到底是哪个元素呢？</p>
 <p>对此，dom标准事件流规定：当一个事件发生后，会经过3个传播阶段：</p>
 <a id="more"></a>
-<p><strong>第一阶段：从顶层window对象传播到最深层节点（目标节点），称为：捕获阶段</strong><br><strong>第二阶段：事件到达最深层的目标节点，称为：目标阶段</strong><br><strong>第三阶段：事件从目标节点传播回window对象，称为：冒泡阶段</strong></p>
+<p><strong>第一阶段：从顶层window对象传播到最深层节点（目标节点），称为：捕获阶段</strong><br><strong>第二阶段：事件到达最深层的目标节点，称为：处于目标阶段</strong><br><strong>第三阶段：事件从目标节点传播回window对象，称为：冒泡阶段</strong></p>
 <p>以下面这段dom结构为例：</p>
 <pre><code>&lt;html&gt;
     &lt;head&gt;
@@ -246,6 +246,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
+        <p><span class="nav-previous"><a href="/2016/10/24/prototype/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript原型链</a></span></p>
+    
     
         <p><span class="nav-next"><a href="/2016/10/14/tostring/" rel="next"><span class="meta-nav">下一篇：</span>toString.call()引起的一些思考 </a></span></p>
     
@@ -291,6 +293,10 @@
       <ul>
         
           <li>
+            <a href="/2016/10/24/prototype/">JavaScript原型链</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/24/event-delegation/">JavaScript事件代理（委托）</a>
           </li>
         
@@ -304,10 +310,6 @@
         
           <li>
             <a href="/2016/10/14/point24/">point24</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/13/sort/">js排序算法</a>
           </li>
         
       </ul>
