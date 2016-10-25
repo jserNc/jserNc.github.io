@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
-<meta property="og:updated_time" content="2016-10-25T03:26:07.750Z">
+<meta property="og:updated_time" content="2016-10-25T03:43:07.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript原型链">
 <meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
@@ -117,7 +117,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuoxktdw0005esba3uayw9zt" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuoy7glt0005dwba8gv58dwh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -137,6 +137,9 @@ v instanceof Vehicle    //true
 <pre><code>var arr = [];
 arr instanceof Array;        //true
 arr instanceof Object;        //true
+
+arr.__proto__ === Array.prototype //true
+Array.prototype.__proto__ === Object.prototype //true
 </code></pre><p>再看：</p>
 <pre><code>function A(){};
 var a = new A();
