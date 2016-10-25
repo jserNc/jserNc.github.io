@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
-<meta property="og:updated_time" content="2016-10-25T05:26:17.118Z">
+<meta property="og:updated_time" content="2016-10-25T05:29:21.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript原型链">
 <meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
@@ -117,7 +117,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciup1uym80002w8bau35fsgap" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciup1ysjf0006u8bawvr27b6p" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -222,7 +222,8 @@ var b = {__proto__ : a};
 b.x     //1
 
 Object.getPrototypeOf(b) === a  //true
-</code></pre><p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a></p>
+</code></pre><p>以上，把b对象的<strong>proto</strong>属性指向a对象，a对象便成了b对象的原型对象。其中，Object.getPrototypeOf()方法是获取一个对象的原型对象的标准方法！</p>
+<p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a></p>
 
       
     </div><!-- .entry-content -->
