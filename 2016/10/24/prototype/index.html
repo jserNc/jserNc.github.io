@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
-<meta property="og:updated_time" content="2016-10-25T05:41:45.019Z">
+<meta property="og:updated_time" content="2016-10-25T06:27:58.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript原型链">
 <meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
@@ -117,7 +117,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciup2ekeo000504bafd0ggvvm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciup42igz0005y0ba00h3p1y1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -231,7 +231,31 @@ b.x     //1
 
 Object.getPrototypeOf(b) === a  //true
 </code></pre><p>其中，Object.getPrototypeOf()方法为某对象（即第一个参数）设置原型对象（第二个参数），返回值为一个新对象。即将对象{}的原型对象设置为a,然后变量b指向返回的新对象。</p>
-<p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a></p>
+<p>以上多次用到new运算符，我们再来看看new：</p>
+<p>new命令调用后会依次执行以下步骤：</p>
+<ol>
+<li>创建一个空对象，作为将要返回的对象实例；</li>
+<li>将这个空对象的原型对象（__proto__）指向构造函数的prototype属性；</li>
+<li>将构造函数内部的this指向该空对象；</li>
+<li>执行构造函数代码。</li>
+</ol>
+<p>例如：</p>
+<pre><code>var F = function(){
+    this.foo = &#39;bar&#39;;
+};
+
+var f = new F();
+</code></pre><p>会发生：</p>
+<ol>
+<li>一个新的空对象{}会被创建，并且该对象的原型对象为F.prototype；</li>
+<li>构造函数F内的上下文（this）指定为这个新对象，然后执行构造函数；</li>
+<li>如果构造函数中明确地用return返回了一个其他对象，那么这个对象会作为整个new运算的返回结果。否则，返回刚才创建的那个对象。</li>
+</ol>
+<p>总结一下：new命令通过构造函数创建新的实例对象，实质就是：<strong>将实例对象的原型指向构造函数的prototype的属性，然后在实例对象上执行构造函数（实例对象为构造函数的执行上下文）</strong>，所以，以上的new命名可以换种写法：</p>
+<pre><code>var f = Object.setPrototypeOf({}, F.prototype);
+F.call(f);
+f.foo   //&quot;bar&quot;
+</code></pre><p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a></p>
 
       
     </div><!-- .entry-content -->
