@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
-最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的警告：" />
+  <meta name="description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：" />
   
 
   
@@ -14,21 +13,18 @@
   
   
   
-  <title>关于document.write引入第三方脚本问题 | Enjoy javascript</title>
+  <title>script.onerror的兼容写法 | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
-最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
+  <meta name="description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于document.write引入第三方脚本问题">
-<meta property="og:url" content="http://nanchao.win/2016/10/13/document-write/index.html">
+<meta property="og:title" content="script.onerror的兼容写法">
+<meta property="og:url" content="http://nanchao.win/2016/10/27/script-error/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
-最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
-<meta property="og:updated_time" content="2016-10-18T03:59:03.518Z">
+<meta property="og:description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
+<meta property="og:updated_time" content="2016-10-27T10:47:12.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于document.write引入第三方脚本问题">
-<meta name="twitter:description" content="一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。
-最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的">
+<meta name="twitter:title" content="script.onerror的兼容写法">
+<meta name="twitter:description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -104,7 +100,7 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-document-write" class="post-document-write post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-script-error" class="post-script-error post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -112,16 +108,16 @@
         
   
     <h1 class="entry-title article-title">
-      关于document.write引入第三方脚本问题
+      script.onerror的兼容写法
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="cius7yh450002r8ba6om6fy2u" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cius7yhd70004r8bazr82yb12" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,31 +125,34 @@
 
     <div class="entry-content">
       
-        <p>一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。</p>
-<p>最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的警告：</p>
+        <p>script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：</p>
 <a id="more"></a>
-<pre><code>A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.
-</code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a>指出chrome即将干预通过document.write引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
-<pre><code>document.write(&#39;&lt;script src=&quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/script&gt;&#39;);
-</code></pre><p>使用document.write会有什么问题？</p>
-<p>在浏览器渲染页面之前，它必须先解析html标签来构建dom树。每当解析器遇到了一个脚本，它就会暂停解析html，下载并解析执行这个脚本，脚本执行完再继续解析dom，如果，这个脚本又动态注入另一个或多个脚本，那解析器还得等待更长时间才能继续往下走，这会明显拖慢网页渲染速度。</p>
-<p>chrome测试发现，使用2g等连接缓慢的用户，通过document.write动态注入的脚本可能会使得页面显示延迟数十秒，甚至加载失败。另外，在2g网络上，使用document.write插入第三方脚本的网页通常比其他网页加载慢两倍。</p>
-<p>当满足以下所有条件时，chrome就不会执行通过document.write注入的script脚本：</p>
-<p>1.用户网络缓慢，特别是2g网这种（不过，以后可能会包括比较缓慢的3g，wifi网络）；</p>
-<p>2.document.write用在顶级文档中（之所以不包括iframe页面，是因其不会阻止主页面的渲染）；</p>
-<p>3.document.write引入的同步脚本（具有async或defer属性的异步脚本不会阻塞页面渲染）；</p>
-<p>4.该脚本不在浏览器缓存中（缓存了的脚本并不会产生网络延迟，所以仍会执行）；</p>
-<p>5.页面不是重新加载（如果用户主动重新加载该页面，chrome就不会干预，并正常执行该网页）。</p>
-<p>自chrome 53开始，如果document.write请求符合以上的条件2-5,chrome就会发出上面的警告。自10月中旬发布的chrome 54开始2g用户的注入脚本将被干预，以后，任何连接缓慢的用户（即缓慢的3g或WiFi）都可能被干预。</p>
+<pre><code>function loadjs(url, obj){
+    var s = document.createElement(&#39;script&#39;);
+    var head = document.getElementsByTagName(&#39;head&#39;)[0];
+    s.onreadystatechange = s.onerror = function(){
+        if( !this.readyState || 
+            ( (this.readyState ===&#39;loaded&#39; || 
+               this.readyState ===&#39;complete&#39;) &amp;&amp; 
+               !window[obj]) ){
+            console.log(&#39;File Loaded Error&#39;);
+        }
+    };
+    s.src = url;
+    head.appendChild(s);
+}
+loadjs(myUrl, &#39;objName&#39;);
+</code></pre><p>对非ie的其他浏览器，!this.readyState为true；而ie浏览器，当script.readyState为’loaded’或’complete’，则表示script加载完成或失败（404的时候，同样为loaded或complete），所以还要判断，此时某特定对象是否存在，来确定，究竟是文件加载完成，还是404等。</p>
+<p>参考：<a href="http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html" target="_blank" rel="external">http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html</a></p>
 
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2016/10/13/document-write/">
-    <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
-        2016-10-13
+    <a href="/2016/10/27/script-error/">
+    <time datetime="2016-10-27T10:26:33.000Z" class="entry-date">
+        2016-10-27
     </time>
 </a>
     
@@ -174,10 +173,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2016/10/13/sort/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript排序算法</a></span></p>
     
-    
-        <p><span class="nav-next"><a href="/2016/09/30/hello-world/" rel="next"><span class="meta-nav">下一篇：</span>hexo新建博文操作指南 </a></span></p>
+        <p><span class="nav-next"><a href="/2016/10/25/chain-call/" rel="next"><span class="meta-nav">下一篇：</span>浅谈JavaScript链式调用 </a></span></p>
     
 </nav><!-- .nav-single -->
 
@@ -188,7 +185,7 @@
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-document-write" data-title="关于document.write引入第三方脚本问题" data-url="http://nanchao.win/2016/10/13/document-write/"></div>
+  <div class="ds-thread" data-thread-key="post-script-error" data-title="script.onerror的兼容写法" data-url="http://nanchao.win/2016/10/27/script-error/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
