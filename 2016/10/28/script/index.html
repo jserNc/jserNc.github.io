@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="原文：http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>关于script脚本加载方式（翻译） | Enjoy javascript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文：http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于script脚本加载方式（翻译）">
+<meta property="og:url" content="http://nanchao.win/2016/10/28/script/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="原文：http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+<meta property="og:image" content="http://nanchao.win/css/images/script/legend.svg">
+<meta property="og:image" content="http://nanchao.win/css/images/script/script.svg">
+<meta property="og:image" content="http://nanchao.win/css/images/script/script-async.svg">
+<meta property="og:image" content="http://nanchao.win/css/images/script/script-defer.svg">
+<meta property="og:updated_time" content="2016-10-28T10:03:13.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于script脚本加载方式（翻译）">
+<meta name="twitter:description" content="原文：http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
+我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+<meta name="twitter:image" content="http://nanchao.win/css/images/script/legend.svg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">There is no royal road to learning.</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/test">Test</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-script" class="post-script post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      关于script脚本加载方式（翻译）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="ciutea5mn0006egbatwnpnju1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文：<a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html" target="_blank" rel="external">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a></p>
+<p>我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。</p>
+<a id="more"></a>
+<p>下面我们对比一下&lt;script&gt;、&lt;script async&gt;、&lt;script defer&gt;等三种脚本加载方式：</p>
+<p>图例：<br><img src="/css/images/script/legend.svg" alt="图例"></p>
+<p>&lt;script&gt;</p>
+<p>对这种不带特殊属性的&lt;script&gt;标签。当html页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析html文档。</p>
+<p><img src="/css/images/script/script.svg" width="700" alt="script"></p>
+<p>&lt;script async&gt;</p>
+<p>有async属性的script脚本下载过程并不会阻塞页面继续解析，但是，等到脚本下载完成后，会暂停页面解析并立即执行该脚本。脚本执行完毕再接着解析html文档。由于脚本下载完成时刻不可控，所以，无法确定该脚本和其他代码执行顺序。</p>
+<p><img src="/css/images/script/script-async.svg" width="700" alt="script-async"></p>
+<p>&lt;script defer&gt;</p>
+<p>有defer属性的script脚本下载过程也不会阻塞页面继续解析，它会等到这个页面解析完成后再执行，而且多个带defer的脚本会按其在页面中出现的顺序依次执行。</p>
+<p><img src="/css/images/script/script-defer.svg" width="700" alt="script-defer"></p>
+<p>那么，我们该如何选择呢？</p>
+<p>一般说来，首选async,其次是defer,最后是不带属性。规则如下：</p>
+<ul>
+<li><p>如果是模块化的脚本，并且不依赖于其他脚本，用async属性。</p>
+</li>
+<li><p>如果当前脚本依赖于其他脚本或者被其他脚本依赖，用defer属性。</p>
+</li>
+<li><p>如果当前脚本比较小并且被其他脚本依赖，则不需带以上两种属性。</p>
+</li>
+</ul>
+<p>注意：IE9及其以下版本对defer属性并不是支持得很好，并不能保证defer脚本的执行顺序。所以，IE9及其以下版本并不推荐使用defer属性。比如，如果非要保证脚本执行顺序，就不带任何属性，使其同步执行。</p>
+<p>总结：</p>
+<ul>
+<li>async和defer在网络读取（下载）这个过程是一样的，都不会阻塞页面解析。</li>
+<li>defer脚本会在页面渲染完成后按顺序执行，而async不会。</li>
+</ul>
+<p>另外，关于script标签属性，有以下标准：</p>
+<ul>
+<li><p><strong>如果src属性没有设置，则执行script标签内的脚本内容；如果src有指定的url，则忽略script脚本里的内容，只是去请求指定的url内容。</strong></p>
+</li>
+<li><p><strong>若script标签已存在于dom文档中，之后再去动态的修改script标签的src、type、charset、async以及defer等属性是没有效果的。</strong></p>
+</li>
+</ul>
+<p>例如：不要使用类似下面这种方式来加载js(请求根本不会发出去)</p>
+<pre><code>div.innerHTML = &#39;&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;&#39;;
+</code></pre><p>任何动态添加script节点（如appendChild(scriptNode)）的方式引入的js文件都是异步执行的。需要引起我们注意的是：<strong>只创建script节点和设置其src属性并不会发起加载js的请求（ie6~9除外），必须等到scriptNode插入到dom后才会发起请求。这和图片img的预加载是不同的</strong></p>
+<p>我们看一个图片预加载方法：</p>
+<pre><code>beacon = function (src,cb) {
+    var img = new Image();
+
+    img.onload = img.onerror = img.onabort = function(){
+        img.onload = img.onerror = img.onabort = null;
+        img = null;
+        cb &amp;&amp; cb();
+    };
+
+    img.src = src;
+};
+</code></pre><p>这个方法预加载图片，利用的原理就是：只要图片对象被设置了src属性，就会立即发出http请求。也正是因为这个，所以以上img的onload、onerror以及onabort等属性必须在src属性之前定义！</p>
+<p>参考：<br><a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html" target="_blank" rel="external">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a><br><a href="http://zhangyaochun.iteye.com/blog/1522144" target="_blank" rel="external">http://zhangyaochun.iteye.com/blog/1522144</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/28/script/">
+    <time datetime="2016-10-28T06:10:12.000Z" class="entry-date">
+        2016-10-28
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/27/script-error/" rel="next"><span class="meta-nav">下一篇：</span>script.onerror的兼容写法 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-script" data-title="关于script脚本加载方式（翻译）" data-url="http://nanchao.win/2016/10/28/script/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'nanc'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/28/script/">关于script脚本加载方式（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/27/script-error/">script.onerror的兼容写法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/chain-call/">浅谈JavaScript链式调用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/prototype/">JavaScript原型链</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/event-delegation/">JavaScript事件代理（委托）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/tostring/">toString.call()引起的一些思考</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/https/">https本地环境搭建(windows)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/point24/">JavaScript24点游戏算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/13/sort/">JavaScript排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 nanc
+    All rights reserved.</p>
+    <p>Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
