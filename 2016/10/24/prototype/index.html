@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
-<meta property="og:updated_time" content="2016-10-25T06:56:43.386Z">
+<meta property="og:updated_time" content="2016-10-29T02:35:46.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript原型链">
 <meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
@@ -117,7 +117,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuukgy4w0007xcba796jjez4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuulj9eu0008n4baq3v1a9az" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,7 +129,7 @@
 <a id="more"></a>
 <p>换个角度讲：由于所有的js对象都有构造函数，而所有的构造函数都有prototype属性（其实是所有函数都有该属性），所以，我们可以说所有的对象都有自己的原型对象(该对象的构造的prototype属性)。而原型对象也是对象，其也有自己的原型对象，于是，层层上溯就形成了一条“原型链”。</p>
 <p>“原型链”的作用是：读取对象的某个属性的时候，js引擎会先遍历对象本身的属性，如果找不到，就去对象的原型对象去找，如果还是没有，就去对象的原型对象的原型对象去找，直到顶层的Object.prototype，如果还是找不到，那么就会返回undefined（所以，读取对象的某个属性时，哪怕它不存在也不会报错）。</p>
-<p>原型可以用__proto__直观的表示：（当然了，标准做法是，用Object.getPrototypeof()（读取原型）和Object.setPrototypeOf()（设置原型），来读写对象的原型对象）</p>
+<p>原型可以用__proto__直观的表示,看一个简单的例子：（当然了，标准做法是，用Object.getPrototypeof()（读取原型）和Object.setPrototypeOf()（设置原型），来读写对象的原型对象）</p>
 <pre><code>var A = {
   name: &#39;张三&#39;
 };
@@ -148,7 +148,28 @@ B.__proto__ = proto;
 
 A.print() // 张三
 B.print() // 李四
-</code></pre><p>再看看instanceof运算符：</p>
+</code></pre><p>再换一种写法，加深一下理解：</p>
+<pre><code>var a = {
+    x : 10,
+    calculate : function(z){
+        return this.x + this.y + z;
+    }
+};
+
+var b = {
+    y : 20,
+    __proto__ : a
+};
+
+var c = {
+    y : 30,
+    __proto__ : a
+};
+
+b.calculate(30);    //60
+
+c.calculate(40);    //80
+</code></pre><p>再来看看instanceof运算符：</p>
 <pre><code>var v = new Vehicle();
 v instanceof Vehicle    //true
 </code></pre><p>以上结果并不意外，我们看到instanceof 运算符左边是实例对象，右边是构造函数。<strong>其运算实质是：检查右边构造函数的prototype属性是否在左边的实例对象的原型链上。</strong>上例即判断Vehicle.prototype是否在对象v的原型链上。</p>
