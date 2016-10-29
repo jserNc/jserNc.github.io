@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript这么灵活，实现链式调用的方式也有多种，以下，我们简单地实现一下链式调用，以展示其原理。" />
+  <meta name="description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>浅谈JavaScript链式调用 | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript这么灵活，实现链式调用的方式也有多种，以下，我们简单地实现一下链式调用，以展示其原理。">
+  <meta name="description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈JavaScript链式调用">
 <meta property="og:url" content="http://nanchao.win/2016/10/25/chain-call/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript这么灵活，实现链式调用的方式也有多种，以下，我们简单地实现一下链式调用，以展示其原理。">
-<meta property="og:updated_time" content="2016-10-28T10:25:55.034Z">
+<meta property="og:description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。">
+<meta property="og:updated_time" content="2016-10-29T01:14:31.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈JavaScript链式调用">
-<meta name="twitter:description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript这么灵活，实现链式调用的方式也有多种，以下，我们简单地实现一下链式调用，以展示其原理。">
+<meta name="twitter:description" content="函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -117,7 +117,7 @@
             
             <a href="/2016/10/25/chain-call/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="ciutmrw4h0000rwba5mx4z6yn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="ciuuip9yj0002sobargzt1wvm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -125,7 +125,7 @@
 
     <div class="entry-content">
       
-        <p>函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript这么灵活，实现链式调用的方式也有多种，以下，我们简单地实现一下链式调用，以展示其原理。</p>
+        <p>函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。</p>
 <a id="more"></a>
 <p>先看一段简单的代码：</p>
 <pre><code>var n = 1;
@@ -140,12 +140,12 @@ console.log(n);     //2
 
 f()()();
 console.log(n);     //5
-</code></pre><p>这里的函数f返回了它自身，无论其怎么执行返回的都是自己，函数f的调用可以无限嵌套。</p>
+</code></pre><p>这里的函数f返回了它自身，无论其怎么执行返回的都是自己，所以，调用函数f时其后可以跟任意多个括号。</p>
 <p>函数返回自身还有个特殊的地方：</p>
 <pre><code>new f === f     //true
 new f() === f   //true
-</code></pre><p>我们看到，对f进行new操作来新建实例对象也“失效”了，只是因为f函数返回的是f自身（一个对象）。当构造函数不带实参时，new操作可以不带括号，在这里以上两种写法等效。</p>
-<p>再来看一个用对象实现链式调用的简单例子：</p>
+</code></pre><p>我们看到，对f进行new操作来新建实例对象也“失效”了，这是因为f函数返回的是f自身（一个对象）。当构造函数不带实参时，new操作可以不带括号，在这里以上两种写法等效。</p>
+<p>再来看一个基于对象实现链式调用的例子：</p>
 <pre><code>var n = 1;
 var o = {
     add : function(){
@@ -160,7 +160,7 @@ var o = {
 
 o.add().add().sub();
 console.log(n);     //2
-</code></pre><p>只要对象的每个方法都返回该对象即可以实现这种链式调用效果。只是，实际开发中我们一般不会这么写，下面我们看看更专业的写法：</p>
+</code></pre><p>我们看到到以上对象的每个方法都返回该对象自身，所以方法的调用结果又可以作为下一个方法的“驱动对象”，这样就可以实现多个方法链式调用的效果。只是，实际开发中我们一般不会这么写，下面我们看个更专业的例子：</p>
 <pre><code>window.$ = function(id){
     return new _$(id);
 };
