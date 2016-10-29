@@ -452,7 +452,7 @@ img.wp-smiley,
   border-radius: 2px;
   text-align: center;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.24);
+ /* border: 1px solid rgba(0, 0, 0, 0.24);*/
 }
 #pagination:before,
 #pagination:after {
@@ -1123,7 +1123,8 @@ img.aligncenter,
 }
 .site-content article {
     /* Border Line for Article Bottom*/
-	border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+	/*border-bottom: 1px solid rgba(0, 0, 0, 0.24);*/
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	margin-bottom: 72px;
 	margin-bottom: 5.142857143rem;
 	padding-bottom: 24px;
