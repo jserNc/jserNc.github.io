@@ -96,6 +96,61 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-tostring" class="post-tostring post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/14/tostring/">toString.call()引起的一些思考</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciuxg9ijb000b24ba2xeecm4f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/14/tostring/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/14/tostring/">
+    <time datetime="2016-10-14T09:20:13.000Z" class="entry-date">
+        2016-10-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-https" class="post-https post type-post status-publish format-standard hentry">
     <!---->
 
@@ -113,7 +168,7 @@
             
             <a href="/2016/10/14/https/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="ciuxdi4vk00052wbapz5jpvt7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="ciuxg9iig000624ba83zj39m6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -170,7 +225,7 @@
             
             <a href="/2016/10/14/point24/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciuxdi4wf00082wbauss5gs88" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="ciuxg9iig000724ba6cx9rmjn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -226,7 +281,7 @@
             
             <a href="/2016/10/13/sort/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciuxdi4vz00072wbakjv8yklg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciuxg9ijb000c24bas9xceypc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -281,7 +336,7 @@
             
             <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciuxdi4sj00002wba54gc4nce" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="ciuxg9ih5000224baqbmdbfph" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -337,7 +392,7 @@
             
             <a href="/2016/09/30/hello-world/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/09/30/hello-world/" data-id="ciuxdi4te00032wbapj3ytt57" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/09/30/hello-world/" data-id="ciuxg9ii1000524ba70yf0ghc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -397,6 +452,10 @@
       <ul>
         
           <li>
+            <a href="/2016/10/31/execution-context/">JavaScript执行上下文（转载）</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/28/script/">关于script脚本加载方式（翻译）</a>
           </li>
         
@@ -430,10 +489,6 @@
         
           <li>
             <a href="/2016/10/13/sort/">JavaScript排序算法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
           </li>
         
       </ul>
