@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。" />
   
 
@@ -14,21 +14,21 @@
   
   
   
-  <title>JavaScript闭包（译 + 转） | Enjoy javascript</title>
+  <title>JavaScript闭包（译） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript闭包（译 + 转）">
+<meta property="og:title" content="JavaScript闭包（译）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
-<meta property="og:updated_time" content="2016-11-01T11:07:46.408Z">
+<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta property="og:updated_time" content="2016-11-01T11:14:28.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript闭包（译 + 转）">
-<meta name="twitter:description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
+<meta name="twitter:title" content="JavaScript闭包（译）">
+<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -112,7 +112,7 @@
         
   
     <h1 class="entry-title article-title">
-      JavaScript闭包（译 + 转）
+      JavaScript闭包（译）
     </h1>
   
 
@@ -121,7 +121,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuze9uwm0001nwbajmo341on" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzedisf0002tcbae034tvm1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,7 +129,7 @@
 
     <div class="entry-content">
       
-        <p>原文：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html</a></p>
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 <p>在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。</p>
 <a id="more"></a>
 <p>首先，我们说，JavaScript有两种作用域：全局作用域和函数作用域。函数内部可以直接读取全局变量，反之则不行！</p>
@@ -350,7 +350,7 @@ Uncaught ReferenceError: x is not defined(…)
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript闭包（译 + 转）" data-url="http://nanchao.win/2016/11/01/closures/"></div>
+  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript闭包（译）" data-url="http://nanchao.win/2016/11/01/closures/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -383,7 +383,7 @@ Uncaught ReferenceError: x is not defined(…)
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript闭包（译 + 转）</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
           </li>
         
           <li>
