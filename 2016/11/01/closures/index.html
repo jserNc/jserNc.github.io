@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 
-��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա��������Ͳ������ĺ��������߽׺�����ͬ������Ҳ���Դ����������з��ء��������������ĺ��������Ժ���Ϊֵ�ĺ�����" />
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。" />
   
 
   
@@ -15,24 +15,24 @@
   
   
   
-  <title>JavaScript�հ����룩 | Enjoy javascript</title>
+  <title>JavaScript闭包（译） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 
-��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript�հ����룩">
+<meta property="og:title" content="JavaScript闭包（译）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+<meta property="og:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 
-��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
-<meta property="og:updated_time" content="2016-11-01T10:47:55.982Z">
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta property="og:updated_time" content="2016-11-01T10:52:57.498Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript�հ����룩">
-<meta name="twitter:description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+<meta name="twitter:title" content="JavaScript闭包（译）">
+<meta name="twitter:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 
-��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +116,7 @@
         
   
     <h1 class="entry-title article-title">
-      JavaScript�հ����룩
+      JavaScript闭包（译）
     </h1>
   
 
@@ -125,7 +125,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdg5vs00000cba5xj4kgxo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdlrzx0002v8bagex0t66i" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,16 +133,16 @@
 
     <div class="entry-content">
       
-        <p>ԭ�ģ�<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+        <p>原文：<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 <blockquote>
-<p>��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա��������Ͳ������ĺ��������߽׺�����ͬ������Ҳ���Դ����������з��ء��������������ĺ��������Ժ���Ϊֵ�ĺ�����</p>
+<p>在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。</p>
 </blockquote>
 <a id="more"></a>
-<p>��һ����������һ���������Ϸ��أ������㣩ʱ��Ϊ���ڼ�ʹ�����������Ľ�����������Ҳ�ܷ������еı������ڲ������ڱ�������ʱ����������[[Scope]]�����б��游�������������������Ե����������õ�ʱ�����������ĵ����������ᱻ��ʽ���ɵ�ǰ�����ı������󣨺����ı�������Ҳ��һ��ͬ���򵥵ı������󣬵��ǳ��˱����ͺ�������֮�⣬�����洢���βκ�arguments���󣬲��������������[[Scope]]���ԣ��������������������ĺͣ�</p>
+<p>当一个函数从另一个函数向上返回（到外层）时。为了在即使父函数上下文结束的情况下也能访问其中的变量，内部函数在被创建的时候会在它的[[Scope]]属性中保存父函数的作用域链。所以当函数被调用的时候，它上下文的作用域链会被格式化成当前函数的变量对象（函数的变量对象也是一个同样简单的变量对象，但是除了变量和函数声明之外，它还存储了形参和arguments对象，并叫作活动对象）与[[Scope]]属性（父函数的作用域链）的和：</p>
 <blockquote>
 <p>Scope chain = Activation object + [[Scope]]</p>
 </blockquote>
-<p>�ٴ�ǿ�������ؼ���:ȷ�е�˵��<strong>����ʱ��</strong>�����ᱣ�游������������������Ϊȷ�е�˵����������������������������δ���ĺ�������ʱ�������ұ�����ע����<strong>����ʱ��</strong>��������<strong>����ʱ��</strong>��</p>
+<p>再次强调这个关键点:确切的说在<strong>创建时刻</strong>函数会保存父函数的作用域链，因为确切的说这个保存下来的作用域链将会在未来的函数调用时用来查找变量，注意是<strong>创建时刻</strong>，而不是<strong>调用时刻</strong>。</p>
 <pre><code>function foo() {
   var x = 10;
   return function bar() {
@@ -154,8 +154,8 @@ var returnedFunction = foo();
 
 var x = 20;
 
-returnedFunction();     //10,������20
-</code></pre><p>js��������������̬�����ߴʷ��������������ǿ�������x�ڷ��ص�bar������[[Scope]]�����б��ҵ�������˵bar������[[Scope]]�������Ҳ���������ȥȫ�ֻ������ң����ǿ���ȥ��foo�����е�x��������֤һ���������ۡ�</p>
+returnedFunction();     //10,而不是20
+</code></pre><p>js中作用域叫作静态（或者词法）作用域。我们看到变量x在返回的bar函数的[[Scope]]属性中被找到。如果说bar函数的[[Scope]]属性中找不到，继续去全局环境中找，我们可以去掉foo函数中的x变量，验证一下这个结论。</p>
 <pre><code>function foo() {
   return function bar() {
     console.log(x);
@@ -167,8 +167,8 @@ var returnedFunction = foo();
 var x = 20;
 
 returnedFunction();     //20
-</code></pre><p>��Ȼ���������Ҳ���ʱ���ͻ�ȥȫ�����������ҡ�</p>
-<p>�����ٿ�����һ�����⣺��һ��ȫ�ֺ�������һ�������ڲ������ã���������ôȡֵ��</p>
+</code></pre><p>果然，父函数找不到时，就会去全局作用域中找。</p>
+<p>我们再看另外一个问题：当一个全局函数在另一个函数内部被调用，变量会怎么取值？</p>
 <pre><code>var x = 10;
 
 function foo() {
@@ -182,7 +182,7 @@ function foo() {
   funArg(); // 10, but not 20
 
 })(foo);
-</code></pre><p>���ǿ���x��δ��������ȥȡֵ������ȥ������ʱ���ڻ�����ȫ������������ȡֵ����ô������������ȥ��ȫ���������б���x����������������</p>
+</code></pre><p>我们看到x并未到父函数去取值，而是去其声明时所在环境（全局作用域）中取值。那么，如果，我们去掉全局作用域中变量x的声明，会怎样？</p>
 <pre><code>function foo() {
   console.log(x);
 }
@@ -192,17 +192,17 @@ function foo() {
   var x = 20;
 
   funArg(); 
-  //Uncaught ReferenceError: x is not defined(��) 
+  //Uncaught ReferenceError: x is not defined(…) 
 
 })(foo);
-</code></pre><p>���ǿ����������ˣ�����ʵ��������һ����Ҫ���ۣ�<strong>������function������ʱ���ڵĻ������������������򣡣���Ҳ����˵������������������������ʱȷ����������������ʱ����</strong></p>
-<p>���仰���������ڱ�ʶ����ʹ���ĸ���������ֵ���Ծ�̬�ķ�ʽ�洢�ں�������ʱ�̵Ļ�����ִ�й������Զ�̬��ʽ���ɵģ�����caller�������򣩣�JavaScript���õ���ǰ�ߣ�JavaScriptû�ж�̬��������</p>
-<p>���ǿ��Զ϶�<strong>��̬������</strong>��һ������ӵ��<strong>�հ��ı�������</strong>���������հ��¸����壺</p>
+</code></pre><p>我们看到，报错了！！其实，这里有一个重要结论：<strong>函数（function）声明时所在的环境代表其作用域方向！！，也就是说函数的作用域链是在其声明时确定，而不是其调用时！！</strong></p>
+<p>换句话讲，函数内标识符该使用哪个作用域的值－以静态的方式存储在函数创建时刻的还是在执行过程中以动态方式生成的（比如caller的作用域）？JavaScript采用的是前者！JavaScript没有动态作用域。</p>
+<p>我们可以断定<strong>静态作用域</strong>是一门语言拥有<strong>闭包的必需条件</strong>。下面个闭包下个定义：</p>
 <blockquote>
-<p>�հ���һ�������飨��ECMAScript��һ�����������Ծ�̬��ʽ/�ʷ���ʽ���д洢�����и���������һ�������塣���ԣ�ͨ����Щ�洢�������򣬺������Ժ����׵��ҵ����ɱ�����</p>
+<p>闭包是一个代码块（在ECMAScript是一个函数）和以静态方式/词法方式进行存储的所有父作用域的一个集合体。所以，通过这些存储的作用域，函数可以很容易的找到自由变量。</p>
 </blockquote>
-<p>����ÿ������׼�ģ��������ڴ�����ʱ�򱣴���[[Scope]]������������������ECMAScript�е����к������Ǳհ���</p>
-<p>��һ�����⣬������������ӵ����ͬ�ĸ������������Ǻܳ��������������統����ӵ�������ڲ�/ȫ�ֺ�����ʱ�򣩡������������£�[[Scope]]�����д洢�ı�������ӵ����ͬ���������������к���֮�乲���ġ�һ���հ��Ա������е��޸Ļ���������һ���հ�����Щ�����Ķ�ȡ�ϣ�</p>
+<p>由于每个（标准的）函数都在创建的时候保存了[[Scope]]，所以理论上来讲，ECMAScript中的所有函数都是闭包。</p>
+<p>另一个问题，多个函数可能拥有相同的父作用域（这是很常见的情况，比如当我们拥有两个内部/全局函数的时候）。在这种情况下，[[Scope]]属性中存储的变量是在拥有相同父作用域链的所有函数之间共享的。一个闭包对变量进行的修改会体现在另一个闭包对这些变量的读取上：</p>
 <pre><code>function baz() {
   var x = 1;
   return {
@@ -217,7 +217,7 @@ console.log(
   closures.foo(), // 2
   closures.bar()  // 1
 );
-</code></pre><p>���������ڴ����ĺ�����ʹ��ѭ����������ʱ���ͺ�������:</p>
+</code></pre><p>这个问题在创建的函数中使用循环计数器的时候就很明显了:</p>
 <pre><code>var data = [];
 
 for (var k = 0; k &lt; 3; k++) {
@@ -229,8 +229,8 @@ for (var k = 0; k &lt; 3; k++) {
 data[0](); // 3, but not 0
 data[1](); // 3, but not 1
 data[2](); // 3, but not 2
-</code></pre><p>������Щ����ӵ��ͬһ��[[Scope]]�����������е�ѭ����������ֵ������һ��������ֵ��</p>
-<p>Ҫ����������0,1,2�����ǿ���һ�·�ʽ���庯����</p>
+</code></pre><p>以上这些函数拥有同一个[[Scope]]，这个属性中的循环计数器的值是最后一次所赋的值。</p>
+<p>要想依次输出0,1,2，我们可以一下方式定义函数：</p>
 <pre><code>var data = [];
 
 for (var k = 0; k &lt; 3; k++) {
@@ -245,7 +245,7 @@ for (var k = 0; k &lt; 3; k++) {
 data[0](); // 0
 data[1](); // 1
 data[2](); // 2
-</code></pre><p>�����൱�ڣ�</p>
+</code></pre><p>以上相当于：</p>
 <pre><code>var data = [];
 
 data[0] = (function(x){
@@ -265,7 +265,7 @@ data[2] = (function(x){
         console.log(x);
     };
 })(2);
-</code></pre><p>�����ٿ�һ��������</p>
+</code></pre><p>我们再看一个函数：</p>
 <pre><code>var fn = (function(x){
     return function () {
         console.log(x);
@@ -274,7 +274,7 @@ data[2] = (function(x){
 
 fn();    //undefined
 fn(1);   //undefined
-</code></pre><p>����ȥ�����㺯�����β�x����������</p>
+</code></pre><p>如果去掉外层函数的形参x，会怎样？</p>
 <pre><code>var fn = (function(){
     return function () {
         console.log(x);
@@ -282,9 +282,9 @@ fn(1);   //undefined
 })();
 
 fn();
-Uncaught ReferenceError: x is not defined(��)
-</code></pre><p>���Կ������ڲ㺯����������ȷʵ�Ǻ������㺯��ϢϢ���أ�</p>
-<p>�ο���<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+Uncaught ReferenceError: x is not defined(…)
+</code></pre><p>可以看到，内层函数的作用域确实是和其外层函数息息相关！</p>
+<p>参考：<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
     </div><!-- .entry-content -->
@@ -326,7 +326,7 @@ Uncaught ReferenceError: x is not defined(��)
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript�հ����룩" data-url="http://nanchao.win/2016/11/01/closures/"></div>
+  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript闭包（译）" data-url="http://nanchao.win/2016/11/01/closures/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -359,7 +359,7 @@ Uncaught ReferenceError: x is not defined(��)
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript�հ����룩</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
           </li>
         
           <li>
