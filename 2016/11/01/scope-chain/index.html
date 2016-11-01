@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：" />
+  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。
+
+作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！" />
   
 
   
@@ -13,18 +17,32 @@
   
   
   
-  <title>script.onerror的兼容写法 | Enjoy javascript</title>
+  <title>JavaScript作用域链（译） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
+  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。
+
+作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="script.onerror的兼容写法">
-<meta property="og:url" content="http://nanchao.win/2016/10/27/script-error/index.html">
+<meta property="og:title" content="JavaScript作用域链（译）">
+<meta property="og:url" content="http://nanchao.win/2016/11/01/scope-chain/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
-<meta property="og:updated_time" content="2016-10-27T10:47:12.769Z">
+<meta property="og:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。
+
+作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！">
+<meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
+<meta property="og:updated_time" content="2016-11-01T07:37:13.640Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="script.onerror的兼容写法">
-<meta name="twitter:description" content="script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
+<meta name="twitter:title" content="JavaScript作用域链（译）">
+<meta name="twitter:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。
+
+作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！">
+<meta name="twitter:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -100,7 +118,7 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-script-error" class="post-script-error post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-scope-chain" class="post-scope-chain post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -108,16 +126,16 @@
         
   
     <h1 class="entry-title article-title">
-      script.onerror的兼容写法
+      JavaScript作用域链（译）
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="ciuyu6tmc0007ogbaqwmrnd5w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="ciuyu6tmc0006ogba8q8dpdas" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -125,34 +143,38 @@
 
     <div class="entry-content">
       
-        <p>script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：</p>
+        <p>原文：<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+<blockquote>
+<p><strong>作用域链</strong>是一个对象列表，<strong>执行上下文</strong>中出现的标识符在这个列表中进行查找。</p>
+</blockquote>
+<p>作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！</p>
 <a id="more"></a>
-<pre><code>function loadjs(url, obj){
-    var s = document.createElement(&#39;script&#39;);
-    var head = document.getElementsByTagName(&#39;head&#39;)[0];
-    s.onreadystatechange = s.onerror = function(){
-        if( !this.readyState || 
-            ( (this.readyState ===&#39;loaded&#39; || 
-               this.readyState ===&#39;complete&#39;) &amp;&amp; 
-               !window[obj]) ){
-            console.log(&#39;File Loaded Error&#39;);
-        }
-    };
-    s.src = url;
-    head.appendChild(s);
-}
-loadjs(myUrl, &#39;objName&#39;);
-</code></pre><p>对非ie的其他浏览器，!this.readyState为true；而ie浏览器，当script.readyState为’loaded’或’complete’，则表示script加载完成或失败（404的时候，同样为loaded或complete），所以还要判断，此时某特定对象是否存在，来确定，究竟是文件加载完成，还是404等。</p>
-<p>参考：<a href="http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html" target="_blank" rel="external">http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html</a></p>
+<p>通常情况下，“作用域链”是一个包含所有父（外层函数或者全局环境）变量对象以及自身变量对象的一个列表。当然了，这个作用域链也可能包含其他的对象，比如，上下文执行过程中动态加入到作用域中的对象（with对象或者特殊的catch语句对象）。</p>
+<p>举个例子：</p>
+<pre><code>var x = 10;
+
+(function foo() {
+  var y = 20;
+  (function bar() {
+    var z = 30;
+
+    console.log(x + y + z);     //60
+  })();
+})();
+</code></pre><p>我们看到最内层函数bar能读到其外层函数foo以及全局作用域中的变量。</p>
+<p>我们可以假设通过隐式的<strong>parent</strong>属性来和作用域链对象进行关联，这个属性指向作用域链中的下一个对象。利用<strong>parent</strong>概念，我们可以用下面的图来表现上面的例子（并且父变量对象存储在函数的[[Scope]]属性中）：</p>
+<p><img src="/css/images/scope-chain/scope-chain.png" alt="作用域链"></p>
+<p>另外，作用域链可以通过使用with语句和catch从句对象来增强，这里就不讨论了。</p>
+<p>参考：<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2016/10/27/script-error/">
-    <time datetime="2016-10-27T10:26:33.000Z" class="entry-date">
-        2016-10-27
+    <a href="/2016/11/01/scope-chain/">
+    <time datetime="2016-11-01T01:46:50.000Z" class="entry-date">
+        2016-11-01
     </time>
 </a>
     
@@ -173,10 +195,8 @@ loadjs(myUrl, &#39;objName&#39;);
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2016/10/28/script/" rel="prev"><span class="meta-nav">上一篇：</span>关于script脚本加载方式（译）</a></span></p>
     
-    
-        <p><span class="nav-next"><a href="/2016/10/25/chain-call/" rel="next"><span class="meta-nav">下一篇：</span>浅谈JavaScript链式调用 </a></span></p>
+        <p><span class="nav-next"><a href="/2016/10/31/execution-context/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript执行上下文（译） </a></span></p>
     
 </nav><!-- .nav-single -->
 
@@ -187,7 +207,7 @@ loadjs(myUrl, &#39;objName&#39;);
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-script-error" data-title="script.onerror的兼容写法" data-url="http://nanchao.win/2016/10/27/script-error/"></div>
+  <div class="ds-thread" data-thread-key="post-scope-chain" data-title="JavaScript作用域链（译）" data-url="http://nanchao.win/2016/11/01/scope-chain/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

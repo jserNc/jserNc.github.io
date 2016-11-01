@@ -1002,7 +1002,7 @@ article.sticky .featured-post {
     margin: 0 0 1.714285714rem;
     border-left: 4px solid #aaa;
     padding: 0 15px;
-    color: #aaa;
+    color: #000;
 }
 .entry-content blockquote>:first-child,
 .comment-content blockquote>:first-child {
