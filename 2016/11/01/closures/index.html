@@ -5,7 +5,6 @@
   
   
   <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。" />
   
 
@@ -18,20 +17,17 @@
   <title>JavaScript闭包（译） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript闭包（译）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
-<meta property="og:updated_time" content="2016-11-01T10:52:57.498Z">
+<meta property="og:updated_time" content="2016-11-01T10:55:46.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript闭包（译）">
 <meta name="twitter:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
   
   
@@ -125,7 +121,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdlrzx0002v8bagex0t66i" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdpf1j0002osbaml1j3si4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -134,14 +130,10 @@
     <div class="entry-content">
       
         <p>原文：<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
-<blockquote>
 <p>在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。</p>
-</blockquote>
 <a id="more"></a>
 <p>当一个函数从另一个函数向上返回（到外层）时。为了在即使父函数上下文结束的情况下也能访问其中的变量，内部函数在被创建的时候会在它的[[Scope]]属性中保存父函数的作用域链。所以当函数被调用的时候，它上下文的作用域链会被格式化成当前函数的变量对象（函数的变量对象也是一个同样简单的变量对象，但是除了变量和函数声明之外，它还存储了形参和arguments对象，并叫作活动对象）与[[Scope]]属性（父函数的作用域链）的和：</p>
-<blockquote>
-<p>Scope chain = Activation object + [[Scope]]</p>
-</blockquote>
+<p><strong>Scope chain = Activation object + [[Scope]]</strong></p>
 <p>再次强调这个关键点:确切的说在<strong>创建时刻</strong>函数会保存父函数的作用域链，因为确切的说这个保存下来的作用域链将会在未来的函数调用时用来查找变量，注意是<strong>创建时刻</strong>，而不是<strong>调用时刻</strong>。</p>
 <pre><code>function foo() {
   var x = 10;
