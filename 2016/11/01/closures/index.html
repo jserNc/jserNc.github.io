@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա��������Ͳ������ĺ��������߽׺�����ͬ������Ҳ���Դ����������з��ء��������������ĺ��������Ժ���Ϊֵ�ĺ�����" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript�հ����룩 | Enjoy javascript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript�հ����룩">
+<meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
+<meta property="og:updated_time" content="2016-11-01T10:47:55.982Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript�հ����룩">
+<meta name="twitter:description" content="ԭ�ģ�http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+
+��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա�">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">There is no royal road to learning.</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/test">Test</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-closures" class="post-closures post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript�հ����룩
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdg5vs00000cba5xj4kgxo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>ԭ�ģ�<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+<blockquote>
+<p>��ECMAScript�У������ǵ�һ����first-class������������������ζ�ź���������Ϊ�������ݸ����������������������£���Щ�����������������Ͳ������������ա��������Ͳ������ĺ��������߽׺�����ͬ������Ҳ���Դ����������з��ء��������������ĺ��������Ժ���Ϊֵ�ĺ�����</p>
+</blockquote>
+<a id="more"></a>
+<p>��һ����������һ���������Ϸ��أ������㣩ʱ��Ϊ���ڼ�ʹ�����������Ľ�����������Ҳ�ܷ������еı������ڲ������ڱ�������ʱ����������[[Scope]]�����б��游�������������������Ե����������õ�ʱ�����������ĵ����������ᱻ��ʽ���ɵ�ǰ�����ı������󣨺����ı�������Ҳ��һ��ͬ���򵥵ı������󣬵��ǳ��˱����ͺ�������֮�⣬�����洢���βκ�arguments���󣬲��������������[[Scope]]���ԣ��������������������ĺͣ�</p>
+<blockquote>
+<p>Scope chain = Activation object + [[Scope]]</p>
+</blockquote>
+<p>�ٴ�ǿ�������ؼ���:ȷ�е�˵��<strong>����ʱ��</strong>�����ᱣ�游������������������Ϊȷ�е�˵����������������������������δ���ĺ�������ʱ�������ұ�����ע����<strong>����ʱ��</strong>��������<strong>����ʱ��</strong>��</p>
+<pre><code>function foo() {
+  var x = 10;
+  return function bar() {
+    console.log(x);
+  };
+}
+
+var returnedFunction = foo();
+
+var x = 20;
+
+returnedFunction();     //10,������20
+</code></pre><p>js��������������̬�����ߴʷ��������������ǿ�������x�ڷ��ص�bar������[[Scope]]�����б��ҵ�������˵bar������[[Scope]]�������Ҳ���������ȥȫ�ֻ������ң����ǿ���ȥ��foo�����е�x��������֤һ���������ۡ�</p>
+<pre><code>function foo() {
+  return function bar() {
+    console.log(x);
+  };
+}
+
+var returnedFunction = foo();
+
+var x = 20;
+
+returnedFunction();     //20
+</code></pre><p>��Ȼ���������Ҳ���ʱ���ͻ�ȥȫ�����������ҡ�</p>
+<p>�����ٿ�����һ�����⣺��һ��ȫ�ֺ�������һ�������ڲ������ã���������ôȡֵ��</p>
+<pre><code>var x = 10;
+
+function foo() {
+  console.log(x);
+}
+
+(function (funArg) {
+
+  var x = 20;
+
+  funArg(); // 10, but not 20
+
+})(foo);
+</code></pre><p>���ǿ���x��δ��������ȥȡֵ������ȥ������ʱ���ڻ�����ȫ������������ȡֵ����ô������������ȥ��ȫ���������б���x����������������</p>
+<pre><code>function foo() {
+  console.log(x);
+}
+
+(function (funArg) {
+
+  var x = 20;
+
+  funArg(); 
+  //Uncaught ReferenceError: x is not defined(��) 
+
+})(foo);
+</code></pre><p>���ǿ����������ˣ�����ʵ��������һ����Ҫ���ۣ�<strong>������function������ʱ���ڵĻ������������������򣡣���Ҳ����˵������������������������ʱȷ����������������ʱ����</strong></p>
+<p>���仰���������ڱ�ʶ����ʹ���ĸ���������ֵ���Ծ�̬�ķ�ʽ�洢�ں�������ʱ�̵Ļ�����ִ�й������Զ�̬��ʽ���ɵģ�����caller�������򣩣�JavaScript���õ���ǰ�ߣ�JavaScriptû�ж�̬��������</p>
+<p>���ǿ��Զ϶�<strong>��̬������</strong>��һ������ӵ��<strong>�հ��ı�������</strong>���������հ��¸����壺</p>
+<blockquote>
+<p>�հ���һ�������飨��ECMAScript��һ�����������Ծ�̬��ʽ/�ʷ���ʽ���д洢�����и���������һ�������塣���ԣ�ͨ����Щ�洢�������򣬺������Ժ����׵��ҵ����ɱ�����</p>
+</blockquote>
+<p>����ÿ������׼�ģ��������ڴ�����ʱ�򱣴���[[Scope]]������������������ECMAScript�е����к������Ǳհ���</p>
+<p>��һ�����⣬������������ӵ����ͬ�ĸ������������Ǻܳ��������������統����ӵ�������ڲ�/ȫ�ֺ�����ʱ�򣩡������������£�[[Scope]]�����д洢�ı�������ӵ����ͬ���������������к���֮�乲���ġ�һ���հ��Ա������е��޸Ļ���������һ���հ�����Щ�����Ķ�ȡ�ϣ�</p>
+<pre><code>function baz() {
+  var x = 1;
+  return {
+    foo: function foo() { return ++x; },
+    bar: function bar() { return --x; }
+  };
+}
+
+var closures = baz();
+
+console.log(
+  closures.foo(), // 2
+  closures.bar()  // 1
+);
+</code></pre><p>���������ڴ����ĺ�����ʹ��ѭ����������ʱ���ͺ�������:</p>
+<pre><code>var data = [];
+
+for (var k = 0; k &lt; 3; k++) {
+  data[k] = function () {
+    console.log(k);
+  };
+}
+
+data[0](); // 3, but not 0
+data[1](); // 3, but not 1
+data[2](); // 3, but not 2
+</code></pre><p>������Щ����ӵ��ͬһ��[[Scope]]�����������е�ѭ����������ֵ������һ��������ֵ��</p>
+<p>Ҫ����������0,1,2�����ǿ���һ�·�ʽ���庯����</p>
+<pre><code>var data = [];
+
+for (var k = 0; k &lt; 3; k++) {
+  data[k] = (function (x) {
+    return function () {
+      console.log(x);
+    };
+  })(k); // pass &quot;k&quot; value
+}
+
+// now it is correct
+data[0](); // 0
+data[1](); // 1
+data[2](); // 2
+</code></pre><p>�����൱�ڣ�</p>
+<pre><code>var data = [];
+
+data[0] = (function(x){
+    return function () {
+        console.log(x);
+    };
+})(0);
+
+data[1] = (function(x){
+    return function () {
+        console.log(x);
+    };
+})(1);
+
+data[2] = (function(x){
+    return function () {
+        console.log(x);
+    };
+})(2);
+</code></pre><p>�����ٿ�һ��������</p>
+<pre><code>var fn = (function(x){
+    return function () {
+        console.log(x);
+    };
+})();
+
+fn();    //undefined
+fn(1);   //undefined
+</code></pre><p>����ȥ�����㺯�����β�x����������</p>
+<pre><code>var fn = (function(){
+    return function () {
+        console.log(x);
+    };
+})();
+
+fn();
+Uncaught ReferenceError: x is not defined(��)
+</code></pre><p>���Կ������ڲ㺯����������ȷʵ�Ǻ������㺯��ϢϢ���أ�</p>
+<p>�ο���<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/01/closures/">
+    <time datetime="2016-11-01T07:55:44.000Z" class="entry-date">
+        2016-11-01
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/01/scope-chain/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript作用域链（译） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript�հ����룩" data-url="http://nanchao.win/2016/11/01/closures/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'nanc'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/01/closures/">JavaScript�հ����룩</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/scope-chain/">JavaScript作用域链（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/31/execution-context/">JavaScript执行上下文（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/28/script/">关于script脚本加载方式（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/27/script-error/">script.onerror的兼容写法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/chain-call/">浅谈JavaScript链式调用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/prototype/">JavaScript原型链</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/event-delegation/">JavaScript事件代理（委托）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/tostring/">toString.call()引起的一些思考</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/14/https/">https本地环境搭建(windows)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 nanc
+    All rights reserved.</p>
+    <p>Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
