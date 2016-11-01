@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2016-11-01T02:08:37.679Z">
+<meta property="og:updated_time" content="2016-11-01T11:09:16.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript执行上下文（译）">
 <meta name="twitter:description" content="原文：http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
@@ -126,7 +126,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="ciuzdpf2h0005osba3rfh0nea" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="ciuze9uz4000cnwba90sqm8co" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -293,7 +293,7 @@ foo(22);
 <p>因为在上下文的建立阶段，<strong>先是处理arguments, 参数，接着是函数的声明，最后是变量的声明</strong>。那么，发现foo函数的声明后，就会在variableObject下面建立一个foo属性，其值是一个指向函数的引用。当处理变量声明的时候，发现有var foo的声明，但是variableObject已经具有了foo属性，所以直接跳过。当进入代码执行阶段的时候，就可以通过访问到foo属性了，因为它已经就存在，并且是一个函数引用。</p>
 <p>2.为什么bar类型是undefined？</p>
 <p>因为bar是变量的声明，在建立阶段的时候，被赋予的默认的值为undefined。由于它只会在后续代码执行过程中才会被赋予具体的值，所以，当调用typeof(bar)的时候输出的值为undefined。</p>
-<p>参考：<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br><a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br>[3] <a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>
 
       
     </div><!-- .entry-content -->
@@ -370,7 +370,7 @@ foo(22);
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译 + 转）</a>
           </li>
         
           <li>

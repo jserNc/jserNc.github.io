@@ -34,7 +34,7 @@
 
 作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！">
 <meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
-<meta property="og:updated_time" content="2016-11-01T07:37:13.640Z">
+<meta property="og:updated_time" content="2016-11-01T11:07:57.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript作用域链（译）">
 <meta name="twitter:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -135,7 +135,7 @@
             
             <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="ciuzdpf3b0008osbaxr98gkx4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="ciuze9uyk0008nwba8511flha" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -165,7 +165,7 @@
 <p>我们可以假设通过隐式的<strong>parent</strong>属性来和作用域链对象进行关联，这个属性指向作用域链中的下一个对象。利用<strong>parent</strong>概念，我们可以用下面的图来表现上面的例子（并且父变量对象存储在函数的[[Scope]]属性中）：</p>
 <p><img src="/css/images/scope-chain/scope-chain.png" alt="作用域链"></p>
 <p>另外，作用域链可以通过使用with语句和catch从句对象来增强，这里就不讨论了。</p>
-<p>参考：<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
     </div><!-- .entry-content -->
@@ -195,7 +195,7 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2016/11/01/closures/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript闭包（译）</a></span></p>
+        <p><span class="nav-previous"><a href="/2016/11/01/closures/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript闭包（译 + 转）</a></span></p>
     
     
         <p><span class="nav-next"><a href="/2016/10/31/execution-context/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript执行上下文（译） </a></span></p>
@@ -242,7 +242,7 @@
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译 + 转）</a>
           </li>
         
           <li>

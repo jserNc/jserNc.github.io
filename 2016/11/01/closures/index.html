@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+  <meta name="description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
 在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。" />
   
 
@@ -14,21 +14,21 @@
   
   
   
-  <title>JavaScript闭包（译） | Enjoy javascript</title>
+  <title>JavaScript闭包（译 + 转） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+  <meta name="description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript闭包（译）">
+<meta property="og:title" content="JavaScript闭包（译 + 转）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
-<meta property="og:updated_time" content="2016-11-01T10:55:46.125Z">
+<meta property="og:description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
+<meta property="og:updated_time" content="2016-11-01T11:07:46.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript闭包（译）">
-<meta name="twitter:description" content="原文：http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta name="twitter:title" content="JavaScript闭包（译 + 转）">
+<meta name="twitter:description" content="原文：[1] http://dmitrysoshnikov.com/ecmascript/javascript-the-core/[2] http://javascript.ruanyifeng.com/grammar/function.html
+在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -112,7 +112,7 @@
         
   
     <h1 class="entry-title article-title">
-      JavaScript闭包（译）
+      JavaScript闭包（译 + 转）
     </h1>
   
 
@@ -121,7 +121,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuzdpf1j0002osbaml1j3si4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ciuze9uwm0001nwbajmo341on" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,10 +129,25 @@
 
     <div class="entry-content">
       
-        <p>原文：<a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+        <p>原文：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html</a></p>
 <p>在ECMAScript中，函数是第一级（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。</p>
 <a id="more"></a>
-<p>当一个函数从另一个函数向上返回（到外层）时。为了在即使父函数上下文结束的情况下也能访问其中的变量，内部函数在被创建的时候会在它的[[Scope]]属性中保存父函数的作用域链。所以当函数被调用的时候，它上下文的作用域链会被格式化成当前函数的变量对象（函数的变量对象也是一个同样简单的变量对象，但是除了变量和函数声明之外，它还存储了形参和arguments对象，并叫作活动对象）与[[Scope]]属性（父函数的作用域链）的和：</p>
+<p>首先，我们说，JavaScript有两种作用域：全局作用域和函数作用域。函数内部可以直接读取全局变量，反之则不行！</p>
+<pre><code>var n = 999;
+
+function f1() {
+    console.log(n);
+}
+
+f1() // 999
+</code></pre><p>但是，在函数外部无法读取函数内部声明的变量。</p>
+<pre><code>function f1() {
+  var n = 999;
+}
+
+console.log(n)
+// Uncaught ReferenceError: n is not defined(…)
+</code></pre><p>当一个函数从另一个函数向上返回（到外层）时。为了在即使父函数上下文结束的情况下也能访问其中的变量，内部函数在被创建的时候会在它的[[Scope]]属性中保存父函数的作用域链。所以当函数被调用的时候，它上下文的作用域链会被格式化成当前函数的变量对象（函数的变量对象也是一个同样简单的变量对象，但是除了变量和函数声明之外，它还存储了形参和arguments对象，并叫作活动对象）与[[Scope]]属性（父函数的作用域链）的和：</p>
 <p><strong>Scope chain = Activation object + [[Scope]]</strong></p>
 <p>再次强调这个关键点:确切的说在<strong>创建时刻</strong>函数会保存父函数的作用域链，因为确切的说这个保存下来的作用域链将会在未来的函数调用时用来查找变量，注意是<strong>创建时刻</strong>，而不是<strong>调用时刻</strong>。</p>
 <pre><code>function foo() {
@@ -189,9 +204,26 @@ function foo() {
 })(foo);
 </code></pre><p>我们看到，报错了！！其实，这里有一个重要结论：<strong>函数（function）声明时所在的环境代表其作用域方向！！，也就是说函数的作用域链是在其声明时确定，而不是其调用时！！</strong></p>
 <p>换句话讲，函数内标识符该使用哪个作用域的值－以静态的方式存储在函数创建时刻的还是在执行过程中以动态方式生成的（比如caller的作用域）？JavaScript采用的是前者！JavaScript没有动态作用域。</p>
+<blockquote>
+<p>由于在JavaScript语言中，只有函数内部的子函数才能读取内部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。闭包最大的特点，就是它可以“记住”诞生的环境，比如内部函数f2记住了它诞生的环境外部函数f1，所以从f2可以得到f1的内部变量。在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+</blockquote>
+<p>闭包的最大用处有两个，<strong>一个是可以读取函数内部的变量，另一个就是让这些变量始终保持在内存中</strong>，即闭包可以使得它诞生环境一直存在。请看下面的例子，闭包使得内部变量记住上一次调用时的运算结果。</p>
+<pre><code>function createIncrementor(start) {
+  return function () {
+    return start++;
+  };
+}
+
+var inc = createIncrementor(5);
+
+inc() // 5
+inc() // 6
+inc() // 7
+</code></pre><p>上面代码中，start是函数createIncrementor的内部变量。通过闭包，start的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。从中可以看到，闭包inc使得函数createIncrementor的内部环境，一直存在。所以，闭包可以看作是函数内部作用域的一个接口。</p>
+<p>为什么会这样呢？原因就在于inc始终在内存中，而inc的存在依赖于createIncrementor，因此也始终在内存中，不会在调用结束后，被垃圾回收机制回收。</p>
 <p>我们可以断定<strong>静态作用域</strong>是一门语言拥有<strong>闭包的必需条件</strong>。下面个闭包下个定义：</p>
 <blockquote>
-<p>闭包是一个代码块（在ECMAScript是一个函数）和以静态方式/词法方式进行存储的所有父作用域的一个集合体。所以，通过这些存储的作用域，函数可以很容易的找到自由变量。</p>
+<p><strong>闭包</strong>是一个代码块（在ECMAScript是一个函数）和以静态方式/词法方式进行存储的所有父作用域的一个集合体。所以，通过这些存储的作用域，函数可以很容易的找到自由变量。</p>
 </blockquote>
 <p>由于每个（标准的）函数都在创建的时候保存了[[Scope]]，所以理论上来讲，ECMAScript中的所有函数都是闭包。</p>
 <p>另一个问题，多个函数可能拥有相同的父作用域（这是很常见的情况，比如当我们拥有两个内部/全局函数的时候）。在这种情况下，[[Scope]]属性中存储的变量是在拥有相同父作用域链的所有函数之间共享的。一个闭包对变量进行的修改会体现在另一个闭包对这些变量的读取上：</p>
@@ -276,7 +308,7 @@ fn(1);   //undefined
 fn();
 Uncaught ReferenceError: x is not defined(…)
 </code></pre><p>可以看到，内层函数的作用域确实是和其外层函数息息相关！</p>
-<p>参考：<br><a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br><a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a><br>[3] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html</a></p>
 
       
     </div><!-- .entry-content -->
@@ -318,7 +350,7 @@ Uncaught ReferenceError: x is not defined(…)
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript闭包（译）" data-url="http://nanchao.win/2016/11/01/closures/"></div>
+  <div class="ds-thread" data-thread-key="post-closures" data-title="JavaScript闭包（译 + 转）" data-url="http://nanchao.win/2016/11/01/closures/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -351,7 +383,7 @@ Uncaught ReferenceError: x is not defined(…)
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译 + 转）</a>
           </li>
         
           <li>

@@ -23,7 +23,7 @@
 <meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2016-10-31T01:49:08.389Z">
+<meta property="og:updated_time" content="2016-11-01T11:10:29.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript原型链">
 <meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
@@ -120,7 +120,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuzdpf45000dosbadqc8bie2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ciuze9uy00006nwbav7isja4v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -327,7 +327,7 @@ var f = new F();
 <pre><code>var f = Object.setPrototypeOf({}, F.prototype);
 F.call(f);
 f.foo   //&quot;bar&quot;
-</code></pre><p>参考：<br>阮一峰 <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a><br>Dmitry <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+</code></pre><p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a><br>[2] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 
       
     </div><!-- .entry-content -->
@@ -404,7 +404,7 @@ f.foo   //&quot;bar&quot;
       <ul>
         
           <li>
-            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译 + 转）</a>
           </li>
         
           <li>
