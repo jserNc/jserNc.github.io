@@ -1869,7 +1869,7 @@ img#wpstats {
 		box-shadow: none;
 	}
 
-	#content .entry-content p, #secondary .widget-content a {
+	#content .entry-content p ,#secondary .widget-content a {
 		font-size : medium;
 	}
 }

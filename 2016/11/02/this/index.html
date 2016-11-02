@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this是执行上下文的一个属性，this总是返回一个对象。在全局上下文中，this就等于全局对象本身。在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。" />
+  <meta name="description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this都是执行上下文的一个属性，并且this总是返回一个对象。（1）在全局上下文中，this就是全局对象本身。（2）在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>JavaScript中this该如何理解？ | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this是执行上下文的一个属性，this总是返回一个对象。在全局上下文中，this就等于全局对象本身。在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。">
+  <meta name="description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this都是执行上下文的一个属性，并且this总是返回一个对象。（1）在全局上下文中，this就是全局对象本身。（2）在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中this该如何理解？">
 <meta property="og:url" content="http://nanchao.win/2016/11/02/this/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this是执行上下文的一个属性，this总是返回一个对象。在全局上下文中，this就等于全局对象本身。在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。">
-<meta property="og:updated_time" content="2016-11-02T08:25:59.551Z">
+<meta property="og:description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this都是执行上下文的一个属性，并且this总是返回一个对象。（1）在全局上下文中，this就是全局对象本身。（2）在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的">
+<meta property="og:updated_time" content="2016-11-02T09:11:38.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中this该如何理解？">
-<meta name="twitter:description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this是执行上下文的一个属性，this总是返回一个对象。在全局上下文中，this就等于全局对象本身。在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。">
+<meta name="twitter:description" content="this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this都是执行上下文的一个属性，并且this总是返回一个对象。（1）在全局上下文中，this就是全局对象本身。（2）在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/02/this/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="civ0ot99g000du0barmpyl6bp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="civ0p3csp000d20ba64qe0s5c" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -125,7 +125,7 @@
 
     <div class="entry-content">
       
-        <p>this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this是执行上下文的一个属性，this总是返回一个对象。在全局上下文中，this就等于全局对象本身。在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。</p>
+        <p>this出现的地方无非两种：全局环境中和函数中。不管哪种情况，this都是执行上下文的一个属性，并且this总是返回一个对象。（1）在全局上下文中，this就是全局对象本身。（2）在函数上下文中，函数的每次调用对应this对象都可能不同。不过，关于函数中的this，我们可以记住一句结论：this对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文）。</p>
 <a id="more"></a>
 <p>1.全局环境中this</p>
 <pre><code>this === window;    //true
