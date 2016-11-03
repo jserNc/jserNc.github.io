@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript中setTimeout该如何理解？ | Enjoy javascript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中setTimeout该如何理解？">
+<meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
+<meta property="og:updated_time" content="2016-11-03T08:37:11.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中setTimeout该如何理解？">
+<meta name="twitter:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">There is no royal road to learning.</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/test">Test</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-setTimeout" class="post-setTimeout post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript中setTimeout该如何理解？
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="civ23nf85000dy4balvtm9w32" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。</p>
+<a id="more"></a>
+<p>我们先看一个简单的例子：</p>
+<pre><code>var timer = setTimeout(&quot;console.log(1)&quot;,3000);
+</code></pre><p>3秒（3000毫秒）后，会输出1。setTimeout方法发第一个参数可以是引号包含的代码、待执行的函数名以及匿名方法等，第二个参数是延迟执行的毫秒数，是我们换成以下两种写法：</p>
+<pre><code>//写法一
+function f(){
+    console.log(1);
+}
+var timer = setTimeout(f,3000);
+
+//写法二
+var timer = setTimeout(function(){
+    console.log(1);
+}, 3000);
+</code></pre><p>下面我们用clearTimeout()取消定时器：</p>
+<pre><code>var timer = setTimeout(function(){
+    console.log(1);
+}, 3000);
+
+clearTimeout(timer);
+</code></pre><p>这样3秒之后就不会再输出1了。</p>
+<p>再看一个例子：</p>
+<pre><code>var startTime = new Date();
+setTimeout(function(){
+    console.log(&#39;延时：&#39;,new Date() - startTime);
+}, 200);
+</code></pre><p>执行以上代码，会输出多少呢？</p>
+<p>chrome控制台下连续执行3次，结果依次是：{延时：201,201,202}。下面对以上代码稍作修改：</p>
+<pre><code>var startTime = new Date();
+
+setTimeout(function(){
+    console.log(&#39;延时：&#39;,new Date() - startTime);
+}, 200);
+
+while((+new Date() - startTime) &lt; 1000){
+    console.log(&#39;...&#39;);
+}
+</code></pre><p>再次执行3次，结果依次是{延时：1001,1000,1000}。</p>
+<p>根据以上对比，我们可以断定，上述打印结果res取决于后面的同步任务执行时间（忽略延时代码执行的几毫秒的误差），即：</p>
+<blockquote>
+<p>res = max(同步执行时间，200)</p>
+</blockquote>
+<p>再看一个例子：</p>
+<pre><code>setTimeout(function(){
+    console.log(1);
+}, 0);
+console.log(2);
+</code></pre><p>以上代码，我们写的延迟时间是0，我们期待的是立刻输出1。然而，执行以后我们发现，先输出2，然后才输出1。为什么会这样呢？</p>
+<p>首先，我们明确一个概念：JavaScript是<strong>单线程*</strong>的语言，在执行时必须等前面的任务处理完以后才会处理后面的；而且是一个一个连续同步执行的。JavaScript中的任务分为<strong>同步任务</strong>和<strong>异步任务</strong>，同步任务就是主线程上一个个排队执行的任务；异步任务则不进入主线任务而是被加入到任务队列中，任务队列的任务只有在主线任务执行完成之后才去处理任务队列中的任务。</p>
+<p>setTimeout方法中待执行的代码就是异步任务。延时参数设为0，仅仅表示同步任务执行完后尽可能早地执行该异步任务。0毫秒的延迟在实际中也不存在的。为了防止多个setTimeout(f,0)连续执行造成性能问题，html5规定，setTimeout方法指定的时间最少是4毫秒。如果小于这个值，会自动增加到4毫秒。当然了，设置的延迟时间太长也不行。setTimeout最多只能延迟24.8天（2147483647毫秒，浏览器内部使用32位带符号的整数，来储存推迟执行的时间），超过这个时间，等同于延迟时间设为0，即setTimeout(f,0)。</p>
+<p>由于要等到本次事件循环的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照setTimeout方法指定的延迟时间执行。</p>
+<pre><code>setTimeout(someTask,100);
+veryLongTask();
+</code></pre><p>上面代码指定100毫秒后运行一个任务。但是，如果后面立即执行的任务（当前脚本的同步任务）非常耗时，运行超过100毫秒无法结束。那么，推迟的someTask只有等着，等到前面的veryLongTask运行结束才开始执行。</p>
+<p>实际应用中，为了防止阻塞，我们可以把耗时的大块任务分成一个个小块，每个小块用setTimeout(f,0)方法调用，即将大任务分成一个个小任务，让浏览器在空余时间尽早执行。</p>
+<p>假如有三个函数处理时间都很长</p>
+<pre><code>longTask1();
+longTask2();
+longTask3();
+</code></pre><p>可以用setTimeout把这些大任务拆开。这样就可以腾出时间来响应其他任务了。</p>
+<p>var arr = [longTask1, longTask2, longTask3],<br>    len = arr.length,<br>    i = 0;<br>for(; i &lt; len; i++){<br>    setTimeout(arr[i], 0);<br>}</p>
+<p>再看个例子：</p>
+<pre><code>var div = document.getElementsByTagName(&#39;div&#39;)[0];
+
+// 写法一
+for (var i = 0xA00000; i &lt; 0xFFFFFF; i++) {
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+}
+
+// 写法二
+var timer;
+var i=0x100000;
+
+function func() {
+  timer = setTimeout(func, 0);
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+  if (i++ == 0xFFFFFF) clearTimeout(timer);
+}
+
+timer = setTimeout(func, 0);
+</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为JavaScript执行速度远高于DOM，会造成大量DOM操作“堆积”，而写法二就不会，这就是setTimeout(f, 0)的好处。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/advanced/timer.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/03/setTimeout/">
+    <time datetime="2016-11-03T06:46:59.000Z" class="entry-date">
+        2016-11-03
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/02/this/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript中this该如何理解？ </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-setTimeout" data-title="JavaScript中setTimeout该如何理解？" data-url="http://nanchao.win/2016/11/03/setTimeout/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'nanc'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/03/setTimeout/">JavaScript中setTimeout该如何理解？</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/02/this/">JavaScript中this该如何理解？</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/closures/">JavaScript闭包（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/scope-chain/">JavaScript作用域链（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/31/execution-context/">JavaScript执行上下文（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/28/script/">关于script脚本加载方式（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/27/script-error/">script.onerror的兼容写法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/chain-call/">浅谈JavaScript链式调用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/prototype/">JavaScript原型链</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/24/event-delegation/">JavaScript事件代理（委托）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 nanc
+    All rights reserved.</p>
+    <p>Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
