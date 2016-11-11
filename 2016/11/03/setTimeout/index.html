@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
-<meta property="og:updated_time" content="2016-11-03T08:38:19.522Z">
+<meta property="og:updated_time" content="2016-11-11T01:19:30.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中setTimeout该如何理解？">
 <meta name="twitter:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="civ3lvl5e000c8cba22aqrics" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="civagr7f1000er0ba3av4k9f8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -184,8 +184,13 @@ veryLongTask();
 longTask2();
 longTask3();
 </code></pre><p>可以用setTimeout把这些大任务拆开。这样就可以腾出时间来响应其他任务了。</p>
-<p>var arr = [longTask1, longTask2, longTask3],<br>    len = arr.length,<br>    i = 0;<br>for(; i &lt; len; i++){<br>    setTimeout(arr[i], 0);<br>}</p>
-<p>再看个例子：</p>
+<pre><code>var arr = [longTask1, longTask2, longTask3],
+    len = arr.length,
+    i = 0;
+for(; i &lt; len; i++){
+    setTimeout(arr[i], 0);
+}
+</code></pre><p>再看个例子：</p>
 <pre><code>var div = document.getElementsByTagName(&#39;div&#39;)[0];
 
 // 写法一
