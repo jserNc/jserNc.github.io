@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/15/chrome-extension/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉http报文、过滤页面广告、修改网页内容……IE扩展开发涉及C++和COM技术，火狐扩展开发涉及环境搭建以及web开发以外的知识，而chrome扩展相对来说就比较简单，具备JavaScript等前端知识就能快速上手。以下，我们简单地介绍一下chrome扩展开发。">
-<meta property="og:updated_time" content="2016-11-15T09:47:13.453Z">
+<meta property="og:updated_time" content="2016-11-15T09:52:41.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chrome扩展开发">
 <meta name="twitter:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉http报文、过滤页面广告、修改网页内容……IE扩展开发涉及C++和COM技术，火狐扩展开发涉及环境搭建以及web开发以外的知识，而chrome扩展相对来说就比较简单，具备JavaScript等前端知识就能快速上手。以下，我们简单地介绍一下chrome扩展开发。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/15/chrome-extension/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="civjaywt90000mkbadsi9imgk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="civjdh5ew00059obatfeul92f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,7 +129,7 @@
 <p>Chrome扩展本质上就是web应用，它可以使用浏览器提供的所有api（如XMLHttpRequest），还可以访问浏览器的内部功能（如书签）。实际过程中，借助这些api，再加上一些前端基础知识（主要是JavaScript），就可以完成一个简单的chrome扩展的开发。</p>
 <p>一般情况下，扩展会是browser action或page action两者中的一种。browser action扩展图标会显示在chrome工具栏上（地址栏之外），并且一直都显示；而page action图标会显示在工具栏地址栏内部右边，特定页面才有。所以，实际开发中，如果不是全部页面都使用的功能应使用page action方式。</p>
 <p>下面，我们跟着<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">谷歌官网教程</a> 做一个获取图片的小插件。首先新建一个文件夹getPic。</p>
-<h3 id="创建manifest-json配置文件"><a href="#创建manifest-json配置文件" class="headerlink" title="创建manifest.json配置文件"></a>创建manifest.json配置文件</h3><p>文件夹getPic内创建一个名为manifest.json的配置文件。这个文件以json格式声明扩展程序的基本信息。如扩展程序名、版本号、功能描述等。更高级点的扩展还会声明这个扩展要做什么以及需要什么样的权限等信息。下面manifest.json文件中，我们声明一个browser action。其中包括activeTab（获取当前tab的url）和host权限(获取外部的谷歌图片搜索API)。</p>
+<h3 id="1-创建manifest-json配置文件"><a href="#1-创建manifest-json配置文件" class="headerlink" title="1.创建manifest.json配置文件"></a>1.创建manifest.json配置文件</h3><p>文件夹getPic内创建一个名为manifest.json的配置文件。这个文件以json格式声明扩展程序的基本信息。如扩展程序名、版本号、功能描述等。更高级点的扩展还会声明这个扩展要做什么以及需要什么样的权限等信息。下面manifest.json文件中，我们声明一个browser action。其中包括activeTab（获取当前tab的url）和host权限(获取外部的谷歌图片搜索API)。</p>
 <pre><code class="json">{
     &quot;manifest_version&quot;: 2,
     &quot;name&quot;: &quot;Getting started example&quot;,
@@ -145,7 +145,7 @@
     ]
 }
 </code></pre>
-<h3 id="创建资源文件"><a href="#创建资源文件" class="headerlink" title="创建资源文件"></a>创建资源文件</h3><p>我们看到manifest.json中声明了该扩展的两个资源文件（icon.png和popup.html）,下面我们在文件夹getPic中创建这两个文件。</p>
+<h3 id="2-创建资源文件"><a href="#2-创建资源文件" class="headerlink" title="2.创建资源文件"></a>2.创建资源文件</h3><p>我们看到manifest.json中声明了该扩展的两个资源文件（icon.png和popup.html）,下面我们在文件夹getPic中创建这两个文件。</p>
 <ul>
 <li><p>icon.png</p>
 <p>这个图片就是该扩展显示在chrome工具栏的小图标。我们可以从网上下载或者自己制作一张自定义的小图标（19px*19px）。</p>
@@ -248,7 +248,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
 });
 </code></pre>
 <p>getCurrentTabUrl方法获取当前tab标签的url，获取到url后触发callback回调方法；getImageUrl方法获取图片，并填充popup.html主体内容。该方法第一个参数为查询关键字，第二个参数是成功取回图片后的回调方法，第三个参数是图片请求失败的错误处理方法。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装该插件。以上步骤操作完毕后，文件夹getPic内应该有manifest.json,icon.png, popup.html, popup.js. 等4个文件。下面我们需要把文件夹getPic打包成.crx文件。打开chrome，更多工具-&gt;扩展程序(或者输入地址：chrome://extensions/)打开chrome扩展页面。勾选页面上方的“开发者模式”。点击“打包扩展程序…”按钮，在弹窗里选中文件夹getPic，点击“打包扩展程序”。打包完毕后，我们可以在getPic的父级文件夹里找到打包好的crx文件。然后把这个crx文件拖拽到刚才打开的chrome扩展页面即可安装。如果不能安装该crx文件，可以点击“加载已解压的扩展程序…”直接选择文件夹getPic。</p>
+<h3 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h3><p>安装该插件。以上步骤操作完毕后，文件夹getPic内应该有manifest.json,icon.png, popup.html, popup.js. 等4个文件。下面我们需要把文件夹getPic打包成.crx文件。打开chrome，更多工具-&gt;扩展程序(或者输入地址：chrome://extensions/)打开chrome扩展页面。勾选页面上方的“开发者模式”。点击“打包扩展程序…”按钮，在弹窗里选中文件夹getPic，点击“打包扩展程序”。打包完毕后，我们可以在getPic的父级文件夹里找到打包好的crx文件。然后把这个crx文件拖拽到刚才打开的chrome扩展页面即可安装。如果不能安装该crx文件，可以点击“加载已解压的扩展程序…”直接选择文件夹getPic。</p>
 <p>注：以上谷歌接口可能已经废弃，所以我们看不到谷歌返回的图片。但是以上开发流程是值得参考的。以后，还会有更详细的实例介绍。</p>
 <p>参考：<br>[1] <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">https://developer.chrome.com/extensions/getstarted</a><br>[2] <a href="http://open.chrome.360.cn/extension_dev/overview.html" target="_blank" rel="external">http://open.chrome.360.cn/extension_dev/overview.html</a><br>[3] <a href="http://www.cnblogs.com/guogangj/p/3235703.html" target="_blank" rel="external">http://www.cnblogs.com/guogangj/p/3235703.html</a></p>
 
