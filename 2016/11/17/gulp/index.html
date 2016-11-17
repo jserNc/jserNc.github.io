@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/17/gulp/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="在前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp就是可以替我们开发者完成这些重复工作的自动化构建工具。换句话说，gulp是一个编译、打包、压缩javascript/coffee/sass/less/html/image/css等文件的工具。类似的工具还有较早的ant、grunt等。">
-<meta property="og:updated_time" content="2016-11-17T06:44:31.863Z">
+<meta property="og:updated_time" content="2016-11-17T07:47:36.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具gulp">
 <meta name="twitter:description" content="在前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp就是可以替我们开发者完成这些重复工作的自动化构建工具。换句话说，gulp是一个编译、打包、压缩javascript/coffee/sass/less/html/image/css等文件的工具。类似的工具还有较早的ant、grunt等。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="civltqg130004qkbafvqg52ws" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="civm1ymhj0008gcba19j4kogp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -176,7 +176,38 @@ gulp.task(&#39;minify&#39;, function () {
    gulp.watch(&#39;js/app.js&#39;, [&#39;build&#39;]);
 });
 </code></pre><p>一旦js/app.js发生改动，就执行build任务。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/tool/gulp.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/tool/gulp.html</a><br>[2] <a href="http://javascript.ruanyifeng.com/tool/grunt.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/tool/grunt.html</a><br>[3] <a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">http://www.gulpjs.com.cn/</a><br>[4] <a href="http://www.ydcss.com/archives/18" target="_blank" rel="external">http://www.ydcss.com/archives/18</a><br>[5] <a href="http://javascript.ruanyifeng.com/nodejs/basic.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/nodejs/basic.html</a><br>[6] <a href="https://www.zhihu.com/question/30597893?sort=created" target="_blank" rel="external">https://www.zhihu.com/question/30597893?sort=created</a></p>
+<p>再看个完整的实例gulpfile.js文件：</p>
+<pre><code>var gulp = require(&#39;gulp&#39;);
+var jshint = require(&#39;gulp-jshint&#39;);//语法检查
+var concat = require(&#39;gulp-concat&#39;);//合并文件
+var uglify = require(&#39;gulp-uglify&#39;);//压缩代码
+var rename = require(&#39;gulp-rename&#39;);//重命名
+
+// 语法检查
+gulp.task(&#39;jshint&#39;, function () {
+    return gulp.src(&#39;js/*.js&#39;)
+               .pipe(jshint())
+               .pipe(jshint.reporter(&#39;default&#39;));
+});
+
+// 合并文件之后压缩代码
+gulp.task(&#39;minify&#39;, function (){
+    return gulp.src(&#39;js/*.js&#39;)
+               .pipe(concat(&#39;all.js&#39;))
+               .pipe(gulp.dest(&#39;js/dist&#39;))
+               .pipe(uglify())
+               .pipe(rename(&#39;all.min.js&#39;))
+               .pipe(gulp.dest(&#39;js/dist&#39;));
+});
+
+// 监视文件的变化
+gulp.task(&#39;watch&#39;, function () {
+    gulp.watch(&#39;js/*.js&#39;, [&#39;jshint&#39;, &#39;minify&#39;]);
+});
+
+// 注册缺省任务
+gulp.task(&#39;default&#39;, [&#39;jshint&#39;, &#39;minify&#39;, &#39;watch&#39;]);
+</code></pre><p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/tool/gulp.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/tool/gulp.html</a><br>[2] <a href="http://javascript.ruanyifeng.com/tool/grunt.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/tool/grunt.html</a><br>[3] <a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">http://www.gulpjs.com.cn/</a><br>[4] <a href="http://www.ydcss.com/archives/18" target="_blank" rel="external">http://www.ydcss.com/archives/18</a><br>[5] <a href="http://javascript.ruanyifeng.com/nodejs/basic.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/nodejs/basic.html</a><br>[6] <a href="https://www.zhihu.com/question/30597893?sort=created" target="_blank" rel="external">https://www.zhihu.com/question/30597893?sort=created</a><br>[7] <a href="http://blog.sina.com.cn/s/blog_6592d8070102vmuq.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_6592d8070102vmuq.html</a></p>
 
       
     </div><!-- .entry-content -->
