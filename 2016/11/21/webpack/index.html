@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
 <meta property="og:image" content="http://nanchao.win/css/images/webpack/webpack.png">
-<meta property="og:updated_time" content="2016-11-21T09:35:03.569Z">
+<meta property="og:updated_time" content="2016-12-01T08:57:59.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端模块化和打包工具webpack">
 <meta name="twitter:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/21/webpack/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="civrlxjpv000le8bag6vfuqqd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="ciw64rz18000jnobadqjx3w2s" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -132,7 +132,7 @@
 <h3 id="为什么要模块化加载？"><a href="#为什么要模块化加载？" class="headerlink" title="为什么要模块化加载？"></a>为什么要模块化加载？</h3><p>目前，越来越多的网站已经从网页模式进化到了webapp模式，页面需要的JavaScript、css、图片等等各种资源也越来越多，特别是大量的js代码会给前端开发流程和资源组织带来巨大挑战。</p>
 <p>前端资源是通过增量加载的方式在浏览器端运行，如何组织好前端代码和资源，使它们能够快速、优雅地加载和更新，是一个模块化系统需要解决的问题。</p>
 <p>前端模块需要增量加载到用户浏览器中执行。关于这个过程，我们设想两种极端的方式：一种是每个模块都单独请求；另一种是把所有文件打包成一个文件，然后请求一次。很明显，这两种方式简单粗暴的方式都不够好，第一种方式请求数太多，网页响应速度太慢；第二种会导致流量浪费、初始化过程慢。</p>
-<p>##分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案##。要实现模块的按需加载，就需要一个对整个代码库中的模块进行静态分析、编译打包的过程。这就是webpack要做的工作。</p>
+<h3 id="分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。"><a href="#分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。" class="headerlink" title="分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。"></a>分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。</h3><p>要实现模块的按需加载，就需要一个对整个代码库中的模块进行静态分析、编译打包的过程。这就是webpack要做的工作。</p>
 <p>下面，就以一个简单实例介绍webpack的使用流程。</p>
 <h3 id="1-安装webpack"><a href="#1-安装webpack" class="headerlink" title="1.安装webpack"></a>1.安装webpack</h3><p>首先，得具备node环境。安装node会顺带安装包管理器npm，我们用npm全局安装webpack。</p>
 <pre><code>npm install webpack -g
@@ -204,9 +204,7 @@ document.write(require(&#39;./module.js&#39;))
 </code></pre><p>然后执行：</p>
 <pre><code>npm install
 </code></pre><p>安装依赖。新建webpack.config.js配置文件：</p>
-<pre><code>var webpack = require(&#39;webpack&#39;)
-
-module.exports = {
+<pre><code>module.exports = {
   entry: &#39;./entry.js&#39;,
   output: {
     path: __dirname,
