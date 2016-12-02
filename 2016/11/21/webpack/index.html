@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
 <meta property="og:image" content="http://nanchao.win/css/images/webpack/webpack.png">
-<meta property="og:updated_time" content="2016-12-01T08:57:59.921Z">
+<meta property="og:updated_time" content="2016-12-02T01:53:48.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端模块化和打包工具webpack">
 <meta name="twitter:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/21/webpack/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="ciw64rz18000jnobadqjx3w2s" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="ciw751wfg000j8gbajmgveq23" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -165,7 +165,8 @@ document.write(require(&#39;./module.js&#39;))
 </code></pre><p>刷新index.html,页面显示为：It works.It works from module.js.</p>
 <h3 id="3-loader"><a href="#3-loader" class="headerlink" title="3.loader"></a>3.loader</h3><p>以上我们打包的模块都是js文件，实际上，webpack本身也只能处理JavaScript模块。如果要处理css、图片等非js文件，就需要使用loader进行转换。在这里，loader充当一个模块和资源之间的转换器。我们用npm来安装loader：</p>
 <pre><code>npm install css-loader style-loader
-</code></pre><p>新建一个style.css文件：</p>
+</code></pre><p>我们需要两种loader来转换css文件。css-loader用来读取css文件，style-loader用来将style标签插入html页面。</p>
+<p>新建一个style.css文件：</p>
 <pre><code>body { background: yellow; }
 </code></pre><p>修改entry.js：</p>
 <pre><code>require(&quot;!style!css!./style.css&quot;) // 载入 style.css
@@ -216,7 +217,8 @@ document.write(require(&#39;./module.js&#39;))
     ]
   }
 }
-</code></pre><p>同时简化 entry.js 中的 style.css 加载方式：</p>
+</code></pre><p>不同的loader用感叹号（!）分隔，上面的style和css分别指Style-loader和CSS-loader。</p>
+<p>同时简化 entry.js 中的 style.css 加载方式：</p>
 <pre><code>require(&#39;./style.css&#39;)
 </code></pre><p>最后运行webpack编译打包，刷新页面，就可以看到之前的效果了。</p>
 <pre><code>webpack
