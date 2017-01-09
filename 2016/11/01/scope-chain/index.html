@@ -40,7 +40,7 @@
 
 作用域链和原型链类似：如果一个变">
 <meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
-<meta property="og:updated_time" content="2017-01-06T08:28:56.383Z">
+<meta property="og:updated_time" content="2017-01-09T03:34:50.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript作用域链（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -141,7 +141,7 @@
             
             <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cixpi1u7b0014d4baz574hhgd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cixpj9ylv0015k4bapcyr7viw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -175,6 +175,32 @@
 <p>另外，作用域链可以通过使用with语句和catch从句对象来增强，这里就不讨论了。</p>
 <p>在js语言里，全局作用域可以理解为window对象，记住window是对象而不是构造函数或类，也就是说window是被实例化的对象，这个实例化过程是在页面加载时由js引擎完成的。虽然我们在开发过程中不能控制这个实例化过程，但是我们不要忽略这个事实。</p>
 <p>另外，在js语言里，任何匿名函数都是属于window对象，它们也都是在全局作用域构造时候完成定义和赋值的。但是匿名函数是没有名字的函数变量，只是在定义匿名函数时会返回其内存地址，如果此时有个变量接受了这个内存地址，那么这个匿名函数就能在其他地方调用了。</p>
+<p>最后，说明一点：<strong> 函数本身也是一个值，它的作用域绑定函数声明时所在的环境。</strong></p>
+<pre><code>var a = 1;
+var f1 = function(){
+    console.log(a);
+}
+
+function f2(){
+    var a = 2;
+    f1();
+}
+
+f2();
+// 1
+</code></pre><p>以上打印结果是1，而不是2。函数f1是在f2外部的全局环境中声明的，f1的作用域绑定全局环境，取不到f2内部的a。鉴于这点，有个容易犯的错误：<strong> 函数A调用函数B，却没有考虑到B并不会调用函数A内部定义的变量。</strong> 还是上面的例子，做点修改：</p>
+<pre><code>var f1 = function(){
+    console.log(a);
+}
+
+function f2(){
+    var a = 2;
+    f1();
+}
+
+f2();
+// Uncaught ReferenceError: a is not defined
+</code></pre><p>我们看到，这里会报错，f1根本不能取到f2内部定义的变量a。</p>
 <p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
