@@ -94,28 +94,43 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-execution-context" class="post-execution-context post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/31/execution-context/">JavaScript执行上下文（译）</a>
+      <a class="article-title" href="/2016/10/31/execution-context/">JavaScript执行上下文（译）</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cixpi1u53000dd4balf93phf9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
+<p>执行上下文是JavaScript中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来举个变量提升的例子：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/31/execution-context/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/31/execution-context/">
     <time datetime="2016-10-31T02:23:26.000Z" class="entry-date">
         2016-10-31
@@ -128,20 +143,52 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-chain-call" class="post-chain-call post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/25/chain-call/">浅谈JavaScript链式调用</a>
+      <a class="article-title" href="/2016/10/25/chain-call/">浅谈JavaScript链式调用</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/25/chain-call/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cixpi1u3p0002d4bagvof7c4m" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>函数链式调用jQuery等框架中经常出现的一种函数调用方式，这种方式在面向对象编程中用得比较多。JavaScript的灵活性，使得实现链式调用的方式有多种，下面，我们简单地实现一下链式调用，以展示其原理。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/25/chain-call/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/25/chain-call/">
     <time datetime="2016-10-25T08:34:44.000Z" class="entry-date">
         2016-10-25
@@ -154,20 +201,52 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-prototype" class="post-prototype post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/24/prototype/">JavaScript原型链</a>
+      <a class="article-title" href="/2016/10/24/prototype/">JavaScript原型链</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cixpi1u71000zd4bax80r32i1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。<strong>原型对象的所有属性和方法都可以被派生对象共享</strong>，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。<strong>实例对象生成时候的构造函数的prototype属性</strong>即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/24/prototype/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/24/prototype/">
     <time datetime="2016-10-24T07:00:44.000Z" class="entry-date">
         2016-10-24
@@ -180,9 +259,22 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
   
-    </div></section>
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/tags/js/">&laquo; Prev</a><a class="page-number" href="/tags/js/">1</a><span class="page-number current">2</span>
+      </nav>
+    </nav>
   
 
 </div></div>

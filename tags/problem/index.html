@@ -94,28 +94,42 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-ajax-status" class="post-ajax-status post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/19/ajax-status/">关于ajax请求status值为0</a>
+      <a class="article-title" href="/2016/12/19/ajax-status/">关于ajax请求status值为0</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/19/ajax-status/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cixpi1u3f0000d4bak23ds9w8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>一个ajax请求，onreadystatechange事件会触发5次，分别对应readyState从0到4的变化。例如：值为4表示请求已经完成或者传输过程中出现错误。readyState总共有5个状态值，分别为0~4，每个值代表了不同的含义：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/19/ajax-status/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/12/19/ajax-status/">
     <time datetime="2016-12-19T01:44:25.000Z" class="entry-date">
         2016-12-19
@@ -128,20 +142,53 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-script" class="post-script post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/28/script/">关于script脚本加载方式（译）</a>
+      <a class="article-title" href="/2016/10/28/script/">关于script脚本加载方式（译）</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cixpi1u7b0018d4badg0rj89x" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a></p>
+<p>我们知道，js同步加载会阻塞浏览器对dom解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取js脚本。但由于某些js代码中有可能输出document内容、修改dom、重定向等行为，所以默认同步执行脚本才是安全的。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/28/script/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/28/script/">
     <time datetime="2016-10-28T06:10:12.000Z" class="entry-date">
         2016-10-28
@@ -154,20 +201,52 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-script-error" class="post-script-error post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/27/script-error/">script.onerror的兼容写法</a>
+      <a class="article-title" href="/2016/10/27/script-error/">script.onerror的兼容写法</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cixpi1u710011d4balk9pga52" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>script的onerror事件IE6~8与opera11都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/27/script-error/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/27/script-error/">
     <time datetime="2016-10-27T10:26:33.000Z" class="entry-date">
         2016-10-27
@@ -180,20 +259,53 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-document-write" class="post-document-write post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
+      <a class="article-title" href="/2016/10/13/document-write/">关于document.write引入第三方脚本问题</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="cixpi1u4t0009d4bao1f2pvxn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>一般情况下，我们会选择异步方式调取js文件，但是某些场景又不得不使用同步方式来调用js。除了直接用script标签插入同步脚本，document.write也是一种选择。然而，chrome认为其会拖慢页面加载速度，牺牲用户体验。所以，新版chrome决定对用document.write注入第三方脚本的方式采取一些干预措施。</p>
+<p>最近，可能也有人像我一样，看某些网页的时候，chrome控制台出现了下面的警告：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/13/document-write/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/13/document-write/">
     <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
         2016-10-13
@@ -206,9 +318,16 @@
 
     </footer>
 </article>
+
+
+
+
+
+
+
+
+
   
-  
-    </div></section>
   
 
 </div></div>
