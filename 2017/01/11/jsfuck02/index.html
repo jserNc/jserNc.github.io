@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="查看JSFuck源码 ，我们发现，之所以能用[，]，(，)，!，+ 等6个字符来写JavaScript代码，是因为所有的字符（变量）都可以通过这6个字符来表示（直接或者间接转换），下面我们分析各个字符和这6个元字符之间的映射关系。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>jsfuck 6个字符写js代码（三） | Enjoy javascript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查看JSFuck源码 ，我们发现，之所以能用[，]，(，)，!，+ 等6个字符来写JavaScript代码，是因为所有的字符（变量）都可以通过这6个字符来表示（直接或者间接转换），下面我们分析各个字符和这6个元字符之间的映射关系。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsfuck 6个字符写js代码（三）">
+<meta property="og:url" content="http://nanchao.win/2017/01/11/jsfuck02/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="查看JSFuck源码 ，我们发现，之所以能用[，]，(，)，!，+ 等6个字符来写JavaScript代码，是因为所有的字符（变量）都可以通过这6个字符来表示（直接或者间接转换），下面我们分析各个字符和这6个元字符之间的映射关系。">
+<meta property="og:updated_time" content="2017-01-11T06:18:56.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsfuck 6个字符写js代码（三）">
+<meta name="twitter:description" content="查看JSFuck源码 ，我们发现，之所以能用[，]，(，)，!，+ 等6个字符来写JavaScript代码，是因为所有的字符（变量）都可以通过这6个字符来表示（直接或者间接转换），下面我们分析各个字符和这6个元字符之间的映射关系。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-jsfuck02" class="post-jsfuck02 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      jsfuck 6个字符写js代码（三）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cixsasxso00126sbaqq6juqip" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>查看<a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="external">JSFuck源码</a> ，我们发现，之所以能用[，]，(，)，!，+ 等6个字符来写JavaScript代码，是因为所有的字符（变量）都可以通过这6个字符来表示（直接或者间接转换），下面我们分析各个字符和这6个元字符之间的映射关系。</p>
+<a id="more"></a>
+<p><strong> [，]，(，)，!，+ 等6个字符表示的基本数据 </strong></p>
+<pre><code>false === ![]
+
+true === !![]
+
+undefined === [][[]]
+
++[![]]
+-&gt; NaN
+//NaN不等于其自身，所以，此处不能像上面那样用 === 表示
+
+Infinity === +(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+
+             [+!+[]]+[+[]]+[+[]]+[+[]])
+</code></pre><p><strong> 构造函数 </strong></p>
+<pre><code>Array === [].constructor
+-&gt; function Array() { [native code] }
+
+Number === (+[]).constructor
+-&gt; (0).constructor
+-&gt; function Number() { [native code] }
+
+String === ([]+[]).constructor
+-&gt; (&quot;&quot;).constructor
+-&gt; function String() { [native code] }
+
+Boolean === (![]).constructor
+-&gt; (false).constructor
+-&gt; function Boolean() { [native code] }
+
+Function === [][&quot;filter&quot;].constructor
+-&gt; Array.prototype.filter.constructor
+-&gt; function Function() { [native code] }
+
+RegExp === Function(&quot;return/&quot;+false+&quot;/&quot;)().constructor
+-&gt; /false/.constructor
+-&gt; function RegExp() { [native code] }
+</code></pre><p><strong> 小写字母映射 </strong></p>
+<pre><code>&quot;a&quot; === (false+&quot;&quot;)[1]
+-&gt; &quot;false&quot;[1]
+-&gt; &quot;a&quot;
+
+&quot;b&quot; === (Function(&quot;return{}&quot;)()+&quot;&quot;)[2]
+-&gt; ({} + &quot;&quot;)[2]
+-&gt; &quot;[object Object]&quot;[2]
+-&gt; &quot;b&quot;
+
+&quot;c&quot; === ([][&quot;filter&quot;]+&quot;&quot;)[3]
+-&gt; (Array.prototype.filter + &quot;&quot;)[3]
+-&gt; &quot;function filter() { [native code] }&quot;[3]
+-&gt; &quot;c&quot;
+
+&quot;d&quot; === (undefined+&quot;&quot;)[2]
+-&gt; &quot;undefined&quot;[2]
+-&gt; &quot;d&quot;
+
+&quot;e&quot; === (true+&quot;&quot;)[3]
+-&gt; &quot;true&quot;[3]
+-&gt; &quot;e&quot;
+
+&quot;f&quot; === (false+&quot;&quot;)[0]
+-&gt; &quot;false&quot;[0]
+-&gt; &quot;f&quot;
+
+&quot;g&quot; === (false+[0]+String)[20]
+-&gt; &quot;false0function String() { [native code] }&quot;[20]
+-&gt; &quot;g&quot;
+
+&quot;h&quot; === (+(101))[&quot;toString&quot;](21)[1]
+-&gt; (101).toString(21)[1]
+-&gt; &quot;4h&quot;[1]
+-&gt; &quot;h&quot;
+//其中，toString()可以传递一个参数，表示待转换的数值的基数
+
+&quot;i&quot; === ([false]+undefined)[10]
+-&gt; &quot;falseundefined&quot;[10]
+-&gt; &quot;i&quot;
+
+&quot;j&quot; === (Function(&quot;return{}&quot;)()+&quot;&quot;)[10]
+-&gt; ({} + &quot;&quot;)[10]
+-&gt; &quot;[object Object]&quot;[10]
+
+&quot;k&quot; === (+(20))[&quot;toString&quot;](21)
+-&gt; (20).toString(21)
+-&gt; &quot;k&quot;
+
+&quot;l&quot; === (false+&quot;&quot;)[2]
+-&gt; &quot;false&quot;[2]
+-&gt; &quot;l&quot;
+
+&quot;m&quot; === (Number+&quot;&quot;)[11]
+-&gt; &quot;function Number() { [native code] }&quot;[11]
+-&gt; &quot;m&quot;
+
+&quot;n&quot; === (undefined+&quot;&quot;)[1]
+-&gt; &quot;undefined&quot;[1]
+-&gt; &quot;n&quot;
+
+&quot;o&quot; === (true+[][&quot;filter&quot;])[10]
+-&gt; &quot;truefunction filter() { [native code] }&quot;[10]
+-&gt; &quot;o&quot;
+
+&quot;p&quot; === (+(211))[&quot;toString&quot;](31)[1]
+-&gt; (211).toString(31)[1]
+-&gt; &quot;6p&quot;[1]
+-&gt; &quot;p&quot;
+
+&quot;q&quot; === (+(212))[&quot;toString&quot;](31)[1]
+-&gt; &quot;6q&quot;[1]
+-&gt; &quot;q&quot;
+
+&quot;r&quot; === (true+&quot;&quot;)[1]
+-&gt; &quot;true&quot;[1]
+-&gt; &quot;r&quot;
+
+&quot;s&quot; === (false+&quot;&quot;)[3]
+-&gt; &quot;false&quot;[3]
+-&gt; &quot;s&quot;
+
+&quot;t&quot; === (true+&quot;&quot;)[0]
+-&gt; &quot;true&quot;[0]
+-&gt; &quot;t&quot;
+
+&quot;u&quot; === (undefined+&quot;&quot;)[0]
+-&gt; &quot;undefined&quot;[0]
+-&gt; &quot;u&#39;
+
+&quot;v&quot; === (+(31))[&quot;toString&quot;](32)
+-&gt; (31).toString(32)
+-&gt; &quot;v&quot;
+
+&quot;w&quot; === (+(32))[&quot;toString&quot;](33)
+-&gt; (32).toString(33)
+-&gt; &quot;w&quot;
+
+&quot;x&quot; === (+(101))[&quot;toString&quot;](34)[1]
+-&gt; (101).toString(34)[1]
+-&gt; &quot;2x&quot;[1]
+-&gt; &quot;x&quot;
+
+&quot;y&quot; === (NaN+[Infinity])[10]
+-&gt; &quot;NaNInfinity&quot;[10]
+-&gt; &quot;y&quot;
+
+&quot;z&quot; === (+(35))[&quot;toString&quot;](36)
+-&gt; (35).toString(36)
+-&gt; &quot;z&quot;
+</code></pre><p>说明一点：将一个值转换成字符串有两种方法，一是使用toString()方法，二是使用转型函数String()，几乎每个值都有toString()方法，但是 null 和 undefined没有。</p>
+<p><strong> 大写字母映射 </strong></p>
+<pre><code>&quot;A&quot; === (+[]+Array)[10]
+-&gt; &quot;0function Array() { [native code] }&quot;[10]
+-&gt; &quot;A&quot;
+
+&quot;B&quot; === (+[]+Boolean)[10]
+-&gt; &quot;0function Boolean() { [native code] }&quot;
+-&gt; &quot;B&quot;
+
+&quot;C&quot; === Function(&quot;return escape&quot;)()((&quot;&quot;)[&quot;italics&quot;]())[2]
+-&gt; scape(&quot;&quot;.italics())[2]
+-&gt; escape(&quot;&lt;i&gt;&lt;/i&gt;&quot;)[2]
+-&gt; &quot;%3Ci%3E%3C/i%3E&quot;[2]
+-&gt; &quot;C&quot;
+//italics()方法会在字符串，外层加上&lt;i&gt;标签，如：
+&quot;字符变斜体&quot;.italics()
+-&gt; &quot;&lt;i&gt;字符变斜体&lt;/i&gt;&quot;
+//escape() 函数可对字符串进行编码,如：
+escape(&quot;&lt;&quot;)
+-&gt; &quot;%3C&quot;
+
+&quot;D&quot; === Function(&quot;return escape&quot;)()([][&quot;filter&quot;])[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; escape([][&quot;filter&quot;])[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; escape(String([][&quot;filter&quot;]))[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; escape(&quot;function filter() { [native code] }&quot;)[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; &quot;function%20filter%28%29%20%7B%20%5Bnative%20code%5D%20%7D&quot;[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; &quot;D&quot;
+
+&quot;E&quot; === (RegExp+&quot;&quot;)[12]
+-&gt; &quot;function RegExp() { [native code] }&quot;[12]
+-&gt; &quot;E&quot;
+
+&quot;F&quot; === (+[]+Function)[10]
+-&gt; &quot;0function Function() { [native code] }&quot;[10]
+-&gt; &quot;F&quot;
+
+&quot;G&quot; === (false+Function(&quot;return Date&quot;)()())[30]
+-&gt; (false+Date())[30]
+-&gt; (false+&quot;Wed Jan 11 2017 13:32:46 GMT+0800 (中国标准时间)&quot;)[30]
+-&gt; &quot;falseWed Jan 11 2017 13:32:46 GMT+0800 (中国标准时间)&quot;[30]
+-&gt; &quot;G&quot;
+
+&quot;I&quot; === (Infinity+&quot;&quot;)[0]
+-&gt; &quot;Infinity&quot;[0]
+-&gt; &quot;I&quot;
+
+&quot;M&quot; === (true+Function(&quot;return Date&quot;)()())[30]
+-&gt; &quot;trueWed Jan 11 2017 13:36:13 GMT+0800 (中国标准时间)&quot;[30]
+-&gt; &quot;M&quot;
+
+&quot;N&quot; === (NaN+&quot;&quot;)[0]
+-&gt; &quot;NaN&quot;[0]
+-&gt; &quot;N&quot;
+
+&quot;O&quot; === (NaN+Function(&quot;return{}&quot;)())[11]
+-&gt; (NaN+{})[11]
+-&gt; &quot;NaN[object Object]&quot;[11]
+
+&quot;R&quot; === (+[]+RegExp)[10]
+-&gt; &quot;0function RegExp() { [native code] }&quot;[10]
+-&gt; &quot;R&quot;
+
+&quot;S&quot; === (+[]+String)[10]
+-&gt; &quot;0function String() { [native code] }&quot;[10]
+-&gt; &quot;S&quot;
+
+&quot;T&quot; === (NaN+Function(&quot;return Date&quot;)()())[30]
+-&gt; &quot;NaNWed Jan 11 2017 13:54:41 GMT+0800 (中国标准时间)&quot;[30]
+-&gt; &quot;T&quot;
+
+&quot;U&quot; === (NaN+Function(&quot;return{}&quot;)()[&quot;toString&quot;][&quot;call&quot;]())[11]
+-&gt; (NaN + ({}).toString.call())[11]
+-&gt; (NaN + &quot;[object Undefined]&quot;)[11]
+-&gt; &quot;NaN[object Undefined]&quot;[11]
+-&gt; &quot;U&quot;
+//注意({}).toString.call()的用法
+({}).toString.call(window)
+-&gt; &quot;[object Window]&quot;
+({}).toString.call(null)
+-&gt; &quot;[object Null]&quot;
+({}).toString.call(undefined)
+-&gt; &quot;[object Undefined]&quot;
+({}).toString.call(1)
+-&gt; &quot;[object Number]&quot;
+</code></pre><p>由于篇幅太长，不便查看，就先写到这里。下篇我们接着这里讨论。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/11/jsfuck02/">
+    <time datetime="2017-01-11T01:49:12.000Z" class="entry-date">
+        2017-01-11
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/01/09/jsfuck01/" rel="next"><span class="meta-nav">下一篇：</span>jsfuck 6个字符写js代码（二） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-jsfuck02" data-title="jsfuck 6个字符写js代码（三）" data-url="http://nanchao.win/2017/01/11/jsfuck02/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'nanc'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/11/jsfuck02/">jsfuck 6个字符写js代码（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/09/jsfuck01/">jsfuck 6个字符写js代码（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/06/jsfuck/">jsfuck 6个字符写js代码（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/06/throttle-debounce/">去抖和节流（debounce &amp; throttle）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/30/page-optimization/">网页性能优化建议</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/28/jsonp-beacon/">JSONP和图像灯塔</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/26/css-vertical-centering/">css垂直居中几种实现方法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/22/batch-processing/">windows批处理脚本修改文件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/19/ajax-status/">关于ajax请求status值为0</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/21/webpack/">前端模块化和打包工具webpack</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 10px;">grammar</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/method/" style="font-size: 17.5px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 nanc
+    All rights reserved.</p>
+    <p>Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
