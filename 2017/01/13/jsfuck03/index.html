@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/13/jsfuck03/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前文我们说JavaScript语言中所有的字符都可以用[，]，(，)，!，+ 等6个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了JSFuck的原理。">
-<meta property="og:updated_time" content="2017-01-13T06:28:36.445Z">
+<meta property="og:updated_time" content="2017-01-13T06:35:09.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6个字符写js代码（四）">
 <meta name="twitter:description" content="前文我们说JavaScript语言中所有的字符都可以用[，]，(，)，!，+ 等6个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了JSFuck的原理。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/01/13/jsfuck03/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cixv5e6uq000ub8ba9f3fo3j4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cixvfjgga000t9wba5w68z8j3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -236,10 +236,6 @@
 &#39;}&#39; === ([][&quot;filter&quot;]+&quot;&quot;)[&quot;slice&quot;](&quot;-1&quot;)
 -&gt; &quot;function filter() { [native code] }&quot;.slice(-1)
 -&gt; &#39;}&#39;
-
-&#39;&amp;&#39;: === (&quot;&quot;)[&quot;link&quot;](0+&quot;)[10]  ??
-&#39;-&#39; === (+(.+[0000000001])+&quot;&quot;)[2]  ??
-&#39;;&#39; === (&quot;&quot;)[&quot;link&quot;](&quot;)[14]   ??
 </code></pre><p>仔细看完前文，我们会发现有一部分大写字母（H、J、K…）和符号（#、$…）并没有出现在以上的映射表里。</p>
 <p><strong> 下面我们补全这部分字符：</strong></p>
 <pre><code>&#39;Function(&quot;return unescape&quot;)()(&quot;%&quot;&#39;+ key.charCodeAt(0).toString(16).replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
