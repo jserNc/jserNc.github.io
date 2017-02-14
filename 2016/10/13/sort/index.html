@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/13/sort/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出了我自己关于冒泡排序、选择排序、插入排序、合并排序、快速排序等5种排序的js代码实现，以便将来参考和在此基础上改进。">
-<meta property="og:updated_time" content="2017-01-06T08:27:38.179Z">
+<meta property="og:updated_time" content="2017-02-14T08:44:23.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript排序算法">
 <meta name="twitter:description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出了我自己关于冒泡排序、选择排序、插入排序、合并排序、快速排序等5种排序的js代码实现，以便将来参考和在此基础上改进。">
@@ -116,7 +116,7 @@
             
             <a href="/2016/10/13/sort/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciz4yhczk001hu0bal7j7hets" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciz5aaf6u001fpcba10oojr2r" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -130,7 +130,7 @@
 </code></pre><pre><code>var b = [3,5,3,7,65,4,45,43,33];
 </code></pre><pre><code>var c = [3, 5, 3, 7, 33, 4];
 </code></pre><p><strong>(1) 冒泡排序</strong></p>
-<p>　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
+<p>　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除末尾元素外的数组元素重复该过程，直至全部数字升序排列。</p>
 <p>　　<strong>实现：</strong></p>
 <pre><code>//交换数组相邻两元素
 function swap(arr,i){
@@ -155,7 +155,7 @@ function bubbleSort(arr){
     return arr;
 }
 </code></pre><p><strong>(2) 选择排序</strong></p>
-<p>　　找出数组中最大的数字与最末尾数字位置交换。对除最后一位以外的数组重复该过程，直至全部数字升序排列。</p>
+<p>　　找出数组中最大的数字与最末尾数字位置交换。对除末尾元素外的数组元素重复该过程，直至全部数字升序排列。</p>
 <p>　　<strong>实现：</strong></p>
 <pre><code>//将数组最大元素放置在最末尾
 function selectMax(arr,len){
