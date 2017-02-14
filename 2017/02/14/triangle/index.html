@@ -5,6 +5,8 @@
   <base target="_blank" />
   <meta name="baidu-site-verification" content="fMNlfUVVLO" />
   
+  <meta name="description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用css来实现这种三角形效果，下面我们分析一下怎么利用css制作三角形。" />
+  
 
   
   
@@ -12,14 +14,18 @@
   
   
   
-  <title>Archives: 2016 | Enjoy javascript</title>
+  <title>css制作三角形 | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Enjoy javascript">
-<meta property="og:url" content="http://nanchao.win/archives/2016/index.html">
+  <meta name="description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用css来实现这种三角形效果，下面我们分析一下怎么利用css制作三角形。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css制作三角形">
+<meta property="og:url" content="http://nanchao.win/2017/02/14/triangle/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用css来实现这种三角形效果，下面我们分析一下怎么利用css制作三角形。">
+<meta property="og:updated_time" content="2017-02-14T05:39:47.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Enjoy javascript">
+<meta name="twitter:title" content="css制作三角形">
+<meta name="twitter:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用css来实现这种三角形效果，下面我们分析一下怎么利用css制作三角形。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -93,85 +99,79 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-triangle" class="post-triangle post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/30/page-optimization/">网页性能优化建议</a>
+    <h1 class="entry-title article-title">
+      css制作三角形
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/30/page-optimization/">
-    <time datetime="2016-12-30T01:42:26.000Z" class="entry-date">
-        2016-12-30
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+        
+        <div class="comments-link">
+            
+            <a href="/2017/02/14/triangle/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/02/14/triangle/" data-id="ciz4yhd00001lu0baztt94klh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
 
-    </footer>
-</article>
-  
     
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
+
+    <div class="entry-content">
       
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/28/jsonp-beacon/">JSONP和图像灯塔</a>
-    </h1>
-  
+        <p>向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用css来实现这种三角形效果，下面我们分析一下怎么利用css制作三角形。</p>
+<a id="more"></a>
+<p>首先，我们给一个div设置一个边框：</p>
+<pre><code>//样式
+.div { 
+    border : 30px solid green;
+    height : 100px;
+    width : 100px;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border:30px solid green;height:100px;width:100px;background-color:#f5f5f5;"><div></div></div></p>
+<p>看到这里，好像并没有什么特殊的地方，下面，我们给上面的边框换成4种不同的颜色：</p>
+<pre><code>.div { 
+    border : 30px solid;
+    border-color : red yellow blue green;
+    height : 100px;
+    width : 100px;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border:30px solid;border-color:red yellow blue green;height:100px;width:100px;background:#f5f5f5;"><div></div></div></p>
+<p>这时候会看到，边框每一边都呈梯形。我们进步一把div内容设置为空，即width和height都为0：</p>
+<pre><code>.div { 
+    border : 30px solid;
+    border-color : red yellow blue green;
+    height : 0;
+    width : 0;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border:30px solid;border-color:red yellow blue green;height:0;width:0;background:#f5f5f5;"><div></div></div></p>
+<p>出现了4个三角形，如果我们需要得到一个三角形，比如蓝色的三角形，只需要把其他三边框的颜色设置成背景色就好了</p>
+<pre><code>.div { 
+    border : 30px solid;
+    border-color : #f5f5f5 #f5f5f5 blue #f5f5f5;
+    height : 0;
+    width : 0;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border:30px solid;border-color:#f5f5f5 #f5f5f5 blue #f5f5f5;height :0;width:0;background:#f5f5f5;"><div></div></div></p>
+<p>这样，一个三角形就出现了。我们通过改变边框颜色，宽度，就可以随意改变这个三角形了。</p>
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/28/jsonp-beacon/">
-    <time datetime="2016-12-28T09:13:08.000Z" class="entry-date">
-        2016-12-28
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
       
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/26/css-vertical-centering/">css垂直居中几种实现方法</a>
-    </h1>
-  
+    </div><!-- .entry-content -->
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/26/css-vertical-centering/">
-    <time datetime="2016-12-26T10:07:32.000Z" class="entry-date">
-        2016-12-26
+
+    <footer class="entry-meta">
+    <a href="/2017/02/14/triangle/">
+    <time datetime="2017-02-14T03:05:36.000Z" class="entry-date">
+        2017-02-14
     </time>
 </a>
     
@@ -181,88 +181,50 @@
 
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/22/batch-processing/">windows批处理脚本修改文件</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/22/batch-processing/">
-    <time datetime="2016-12-22T03:46:32.000Z" class="entry-date">
-        2016-12-22
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/19/ajax-status/">关于ajax请求status值为0</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/19/ajax-status/">
-    <time datetime="2016-12-19T01:44:25.000Z" class="entry-date">
-        2016-12-19
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/11/21/webpack/">前端模块化和打包工具webpack</a>
-    </h1>
-  
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/11/21/webpack/">
-    <time datetime="2016-11-21T03:57:27.000Z" class="entry-date">
-        2016-11-21
-    </time>
-</a>
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+        <p><span class="nav-next"><a href="/2017/01/13/jsfuck03/" rel="next"><span class="meta-nav">下一篇：</span>jsfuck 6个字符写js代码（四） </a></span></p>
+    
+</nav><!-- .nav-single -->
 
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-triangle" data-title="css制作三角形" data-url="http://nanchao.win/2017/02/14/triangle/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'nanc'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
