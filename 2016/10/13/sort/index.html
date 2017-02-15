@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/13/sort/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出了我自己关于冒泡排序、选择排序、插入排序、合并排序、快速排序等5种排序的js代码实现，以便将来参考和在此基础上改进。">
-<meta property="og:updated_time" content="2017-02-14T08:44:23.384Z">
+<meta property="og:updated_time" content="2017-02-15T09:50:42.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript排序算法">
 <meta name="twitter:description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出了我自己关于冒泡排序、选择排序、插入排序、合并排序、快速排序等5种排序的js代码实现，以便将来参考和在此基础上改进。">
@@ -116,7 +116,7 @@
             
             <a href="/2016/10/13/sort/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciz5aaf6u001fpcba10oojr2r" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="ciz6s29ov0019vcbaawivz1zu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -131,7 +131,6 @@
 </code></pre><pre><code>var c = [3, 5, 3, 7, 33, 4];
 </code></pre><p><strong>(1) 冒泡排序</strong></p>
 <p>　　依次比较相邻两数，如果前者大于后者则交换位置，一趟下来最大数就在数组末尾。对除末尾元素外的数组元素重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong></p>
 <pre><code>//交换数组相邻两元素
 function swap(arr,i){
     var temp = arr[i]; 
@@ -156,7 +155,6 @@ function bubbleSort(arr){
 }
 </code></pre><p><strong>(2) 选择排序</strong></p>
 <p>　　找出数组中最大的数字与最末尾数字位置交换。对除末尾元素外的数组元素重复该过程，直至全部数字升序排列。</p>
-<p>　　<strong>实现：</strong></p>
 <pre><code>//将数组最大元素放置在最末尾
 function selectMax(arr,len){
     var length = arr.length || 0,
@@ -190,7 +188,6 @@ function selectSort(arr){
 }
 </code></pre><p><strong>(3) 插入排序</strong></p>
 <p>　　它将数组分成“已排序”和“未排序”两部分，一开始的时候，“已排序”的部分只有一个元素，然后将它后面一个元素从“未排序”部分插入“已排序”部分，从而“已排序”部分增加一个元素，“未排序”部分减少一个元素。以此类推，完成全部排序。</p>
-<p>　　<strong>实现：</strong></p>
 <pre><code>//向升序数组插入数字
 function insertNum(arr,num){
     var length = arr.length,
@@ -224,7 +221,6 @@ function insertSort(arr){
 }
 </code></pre><p><strong>(4) 合并排序</strong></p>
 <p>　　将数组拆开，分成n个只有一个元素的数组，然后不断地两两合并，直到全部排序完成。</p>
-<p>　　<strong>实现：</strong></p>
 <pre><code>//合并两个有序数组
 function mergeArr(arr1,arr2){
     var length = arr2.length,
@@ -254,7 +250,6 @@ function mergeSort(arr){
 }
 </code></pre><p><strong>(5) 快速排序</strong></p>
 <p>　　先确定一个“支点”（pivot），然后将所有小于“支点”的值都放在该点的左侧，大于等于“支点”的值都放在该点的右侧，然后对左右两侧不断重复这个过程，直到所有排序完成。</p>
-<p>　　<strong>实现：</strong></p>
 <pre><code>//连接数组，不影响原数组
 function joinArr(arr1,num,arr2){
     var len1 = arr1.length,
