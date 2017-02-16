@@ -5,7 +5,7 @@
   <base target="_blank" />
   <meta name="baidu-site-verification" content="fMNlfUVVLO" />
   
-  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽奖按钮；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件。" />
+  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件，如果回调事件复杂，造成浏览器卡顿。" />
   
 
   
@@ -16,16 +16,16 @@
   
   <title>去抖和节流（debounce &amp; throttle） | Enjoy javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽奖按钮；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件。">
+  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件，如果回调事件复杂，造成浏览器卡顿。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="去抖和节流（debounce & throttle）">
 <meta property="og:url" content="http://nanchao.win/2017/01/06/throttle-debounce/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽奖按钮；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件。">
-<meta property="og:updated_time" content="2017-01-11T10:07:59.888Z">
+<meta property="og:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件，如果回调事件复杂，造成浏览器卡顿。">
+<meta property="og:updated_time" content="2017-02-16T05:39:39.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="去抖和节流（debounce & throttle）">
-<meta name="twitter:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽奖按钮；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件。">
+<meta name="twitter:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件，如果回调事件复杂，造成浏览器卡顿。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +116,7 @@
             
             <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="ciz7xy6jz001kxgbapztxcjro" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="ciz7yj7yt001o8cba80jf6lw3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,7 +124,7 @@
 
     <div class="entry-content">
       
-        <p>关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽奖按钮；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件。</p>
+        <p>关于函数去抖和节流，一言以蔽之，<strong>去抖</strong>是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；<strong>节流</strong>是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发scroll事件，如果回调事件复杂，造成浏览器卡顿。</p>
 <a id="more"></a>
 <p>举两个例子：</p>
 <p><strong> 场景一：</strong></p>
@@ -133,7 +133,7 @@
 <p>年会现场，主持人邀请嘉宾抽取1位特等奖幸运小伙伴，如果嘉宾不小心连续点击了两次【特等奖】按钮，而没有采取去抖处理，可能会连续触发两次抽取程序，然后出现2位获奖小伙伴，这就尴尬了。</p>
 <p>下面详细地阐述一下去抖和节流的概念以及实现。</p>
 <h3 id="去抖（debounce）"><a href="#去抖（debounce）" class="headerlink" title="去抖（debounce）"></a>去抖（debounce）</h3><p>如果用手指一直按住一个弹簧，虽然它有弹起的趋势，但是只要你按住不放（保持对它施力），它将不会弹起直到你松手为止。</p>
-<p>也就是说，假定事件A会触发回调函数callback，当事件A连续发生时，理论上会连续触发回调函数callback。但是，只要短时间内连续触发的callback我们就不让其执行，直到时间A发生超过指定时间后，我们才调用一次callback。即：当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间。</p>
+<p>换个角度，假定事件A会触发回调函数callback，当事件A连续发生时，理论上会连续触发回调函数callback。但是，只要短时间内连续触发的callback我们就不让其执行，直到时间A发生超过指定时间后，我们才调用一次callback。即：<strong>当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间。</strong></p>
 <p>debounce函数简单实现如下：</p>
 <pre><code>/**
 * 空闲时间必须大于或等于 idle，action 才会执行
@@ -160,7 +160,7 @@ var debounce = function(idle, action){
 };
 window.addEventListener(&#39;scroll&#39;,debounce(2000,f),false);
 </code></pre><h3 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h3><p>如果将水龙头拧紧直到水是以水滴的形式流出，发现每隔一段时间，就会有一滴水流出。</p>
-<p>也就是说，假定事件A会触发回调函数callback，当事件A连续发生时，理论上会连续触发回调函数callback。但是，如果两次调用callback函数的事件间隔小于指定时间，就不让callback函数执行，当下次调用callback函数并且和上次调用时间间隔超过指定时间，再执行一次callback。即：函数无法在很短的时间间隔内连续调用，当过了规定的时间间隔，才能进行该函数的下一次调用。</p>
+<p>换个角度，假定事件A会触发回调函数callback，当事件A连续发生时，理论上会连续触发回调函数callback。但是，如果两次调用callback函数的事件间隔小于指定时间，就不让callback函数执行，当下次调用callback函数并且和上次调用时间间隔超过指定时间，再执行一次callback。即：<strong>函数无法在很短的时间间隔内连续调用，当过了规定的时间间隔，才能进行该函数的下一次调用。</strong></p>
 <p>throttle函数简单实现如下：</p>
 <pre><code>/**
 * 频率控制，action 执行频率限定为 1次 / delay
