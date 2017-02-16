@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/28/jsonp-beacon/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="当我们需要和服务器交换数据并更新网页部分内容的时候，我们很容易想到用ajax。即通过原生的XMLHttpRequest对象（IE5 和 IE6 使用 ActiveXObject）发出HTTP请求，得到服务器返回的数据后，再进行处理。不过，遗憾的是：受浏览器同源策略的限制，ajax只能向同源（协议、域名、端口都相同）网址发出http请求，跨源请求会被阻止、报错。">
-<meta property="og:updated_time" content="2017-01-06T08:25:56.882Z">
+<meta property="og:updated_time" content="2017-02-16T07:38:55.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSONP和图像灯塔">
 <meta name="twitter:description" content="当我们需要和服务器交换数据并更新网页部分内容的时候，我们很容易想到用ajax。即通过原生的XMLHttpRequest对象（IE5 和 IE6 使用 ActiveXObject）发出HTTP请求，得到服务器返回的数据后，再进行处理。不过，遗憾的是：受浏览器同源策略的限制，ajax只能向同源（协议、域名、端口都相同）网址发出http请求，跨源请求会被阻止、报错。">
@@ -116,7 +116,7 @@
             
             <a href="/2016/12/28/jsonp-beacon/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/28/jsonp-beacon/" data-id="ciz807z6k00131kbaedfklwrm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/28/jsonp-beacon/" data-id="ciz82sgac0010cwbafg7dziqa" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -189,7 +189,7 @@ renderAd(adData);
     img.src = src;
 };
 </code></pre><p>这种模式称为图像灯塔（image beacon）。这在向服务器发送日志数据时很有用的，比如收集网页访问者的统计信息。</p>
-<p><strong> 最后再强调一点，只创建script节点和设置其src属性并不会发起加载js的请求（ie6~9除外），必须等到scriptNode插入到dom后才会发起请求。这和图片img的预加载是不同的，图片设置src属性后会立即发起请求，所以以上beacon方法中，img的onload、onerror、onabort等回调函数都需要定义在src属性之前！ </strong> </p>
+<p>最后再强调一点，<strong> 只创建script节点和设置其src属性并不会发起加载js的请求（ie6~9除外），必须等到scriptNode插入到dom后才会发起请求。这和图片img的预加载是不同的，图片设置src属性后会立即发起请求，所以以上beacon方法中，img的onload、onerror、onabort等回调函数都需要定义在src属性之前！ </strong> </p>
 <p>参考：<br>[1] 《JavaScript模式》Stoyan Stefanov 著<br>[2] <a href="http://javascript.ruanyifeng.com/bom/ajax.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/ajax.html</a></p>
 
       
