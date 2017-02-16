@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/26/css-vertical-centering/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="利用css来实现div的垂直居中有多种方法，每种方法都有其优缺点，不能断定某种方法就是最好的，我们应该根据应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。">
-<meta property="og:updated_time" content="2017-02-16T05:20:00.579Z">
+<meta property="og:updated_time" content="2017-02-16T05:23:24.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css垂直居中几种实现方法">
 <meta name="twitter:description" content="利用css来实现div的垂直居中有多种方法，每种方法都有其优缺点，不能断定某种方法就是最好的，我们应该根据应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。">
@@ -116,7 +116,7 @@
             
             <a href="/2016/12/26/css-vertical-centering/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="ciz7xu7nf0010skba171y4jxa" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="ciz7xy6gi000axgbayj2292yk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -198,8 +198,8 @@
 &lt;/div&gt;
 </code></pre><div style="height:200px;"><div id="wrapper" style="height:200px;width:600px;background-color: #0f0;position: absolute;"><div id="content" style="position: absolute;top: 0;bottom: 0;margin: auto;height: 20px;background-color: #ff0;"> Content goes here</div></div></div>
 
-<p>使用绝对定位。这个div的top和bottom均为0，但是它有高度，实际上并不能上下偏移都为0，margin设为auto会使它居中（如果需要水平也居中，可以说将left、right也设置为0）。遗憾的是ie兼容性不好，空间不够时，content会被截断。</p>
-<p><strong> 方法四：css3属性transform，3行搞定</strong></p>
+<p>使用绝对定位。这个div的top和bottom均为0，但是它有高度，实际上并不能上下偏移都为0，margin设为auto会使它居中（如果需要水平也居中，可以说将left、right也设置为0）。只是ie兼容性不好，空间不够时，content会被截断。</p>
+<p><strong> 方法四：css3属性transform</strong></p>
 <pre><code>&lt;style&gt;
     #wrapper {
         height:200px;
