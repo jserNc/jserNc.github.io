@@ -5,7 +5,8 @@
   <base target="_blank" />
   <meta name="baidu-site-verification" content="fMNlfUVVLO" />
   
-  <meta name="description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。" />
+  <meta name="description" content="toString作为全局方法时，挂载于window对象。作为最顶层的原型对象 Object.prototype 有着自己的 Object.prototype.toString 方法，另外，Array、String、Boolean、Function、Date等构造函数也也都部署了自己的toString方法。
+为了方便下文的理解，再强调一下原型链的作用：读取对象的某个属性时，JavaScript引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，直到顶层原型对象 Object.prototype。如果一层一层到最顶层的还是找不到，则返回undefined。" />
   
 
   
@@ -16,16 +17,19 @@
   
   <title>toString.call()引起的一些思考 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的">
+  <meta name="description" content="toString作为全局方法时，挂载于window对象。作为最顶层的原型对象 Object.prototype 有着自己的 Object.prototype.toString 方法，另外，Array、String、Boolean、Function、Date等构造函数也也都部署了自己的toString方法。
+为了方便下文的理解，再强调一下原型链的作用：读取对象的某个属性时，JavaScript引擎先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="toString.call()引起的一些思考">
 <meta property="og:url" content="http://nanchao.win/2016/10/14/tostring/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的">
-<meta property="og:updated_time" content="2017-01-06T08:26:31.834Z">
+<meta property="og:description" content="toString作为全局方法时，挂载于window对象。作为最顶层的原型对象 Object.prototype 有着自己的 Object.prototype.toString 方法，另外，Array、String、Boolean、Function、Date等构造函数也也都部署了自己的toString方法。
+为了方便下文的理解，再强调一下原型链的作用：读取对象的某个属性时，JavaScript引擎先">
+<meta property="og:updated_time" content="2017-02-17T10:03:46.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="toString.call()引起的一些思考">
-<meta name="twitter:description" content="toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的">
+<meta name="twitter:description" content="toString作为全局方法时，挂载于window对象。作为最顶层的原型对象 Object.prototype 有着自己的 Object.prototype.toString 方法，另外，Array、String、Boolean、Function、Date等构造函数也也都部署了自己的toString方法。
+为了方便下文的理解，再强调一下原型链的作用：读取对象的某个属性时，JavaScript引擎先">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +120,7 @@
             
             <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciz9ghqpf001nhsbatcdb82hc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="ciz9mhqgl001mlsbadju3tzcg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,9 +128,10 @@
 
     <div class="entry-content">
       
-        <p>toString作为全局方法时，挂载于window对象。Object对象也有自己的Object.prototype.toString方法，Array、String、Boolean、Function、Date等也都部署了自己的toString方法。[原型链]的作用是，读取对象的某个属性时，JS引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。</p>
+        <p>toString作为全局方法时，挂载于window对象。作为最顶层的原型对象 Object.prototype 有着自己的 Object.prototype.toString 方法，另外，Array、String、Boolean、Function、Date等构造函数也也都部署了自己的toString方法。</p>
+<p>为了方便下文的理解，再强调一下原型链的作用：<strong>读取对象的某个属性时，JavaScript引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，直到顶层原型对象 Object.prototype。如果一层一层到最顶层的还是找不到，则返回undefined。</strong></p>
 <a id="more"></a>
-<p>首先，所有全局方法均属于window对象</p>
+<p>首先，所有全局方法均挂载于window对象，所有对象都继承自Object对象。</p>
 <pre><code>toString === window.toString  //true
 window instanceof Object      //true
 </code></pre><p>window是个对象，不是构造函数，其构造函数是Window</p>
