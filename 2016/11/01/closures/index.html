@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
-<meta property="og:updated_time" content="2017-02-21T06:39:07.299Z">
+<meta property="og:updated_time" content="2017-02-21T07:14:43.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript闭包（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -119,7 +119,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cizeye9910007fgba2qijkn0f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cizf75e1h000620baek2n1q45" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -320,7 +320,7 @@ data[2] = (function(x){
 
 fn();    //undefined
 fn(1);   //undefined
-</code></pre><p>如果去掉外层函数的形参x，会怎样？</p>
+</code></pre><p>如果去掉外层函数的形参 x，会怎样？</p>
 <pre><code>var fn = (function(){
     return function () {
         console.log(x);
