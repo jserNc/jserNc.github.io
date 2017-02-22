@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。" />
+  <meta name="description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>JavaScript中setTimeout该如何理解？ | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
+  <meta name="description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中setTimeout该如何理解？">
 <meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
-<meta property="og:updated_time" content="2017-01-06T08:29:04.003Z">
+<meta property="og:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
+<meta property="og:updated_time" content="2017-02-22T03:02:40.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中setTimeout该如何理解？">
-<meta name="twitter:description" content="setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。">
+<meta name="twitter:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cizfc6152001ei0bafsfe5c96" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cizgai4uq001grkba8b9jilo9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,11 +123,12 @@
 
     <div class="entry-content">
       
-        <p>setTimeout(code,ms) 方法用于在指定的毫秒数后调用函数或计算表达式。这种定时功能我们又叫定时器，该方法返回一个整数num，标识该定时器，之后可以用clearTimeout(num)方法来取消该定时器。</p>
+        <p>setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。</p>
 <a id="more"></a>
 <p>我们先看一个简单的例子：</p>
 <pre><code>var timer = setTimeout(&quot;console.log(1)&quot;,3000);
-</code></pre><p>3秒（3000毫秒）后，会输出1。setTimeout方法发第一个参数可以是引号包含的代码、待执行的函数名以及匿名方法等，第二个参数是延迟执行的毫秒数，是我们换成以下两种写法：</p>
+</code></pre><p>3000 毫秒（3 秒）后，会在控制台输出 1。</p>
+<p>setTimeout 方法第 1 个参数可以是引号包含的代码、待执行的函数名或者匿名方法等，第 2 个参数是延迟执行的毫秒数，下面两种写法和上面实现同样的效果：</p>
 <pre><code>//写法一
 function f(){
     console.log(1);
@@ -138,20 +139,20 @@ var timer = setTimeout(f,3000);
 var timer = setTimeout(function(){
     console.log(1);
 }, 3000);
-</code></pre><p>下面我们用clearTimeout()取消定时器：</p>
+</code></pre><p>定时任务执行之前，我们可以用 clearTimeout() 来取消该定时器：</p>
 <pre><code>var timer = setTimeout(function(){
     console.log(1);
 }, 3000);
 
 clearTimeout(timer);
-</code></pre><p>这样3秒之后就不会再输出1了。</p>
-<p>再看一个例子：</p>
+</code></pre><p>这样 3 秒之后就不会再输出 1 了。</p>
+<p>setTimeout 基本用法就是这样，下面我们再来看看它的其他作用。看一个小例子：</p>
 <pre><code>var startTime = new Date();
 setTimeout(function(){
     console.log(&#39;延时：&#39;,new Date() - startTime);
 }, 200);
 </code></pre><p>执行以上代码，会输出多少呢？</p>
-<p>chrome控制台下连续执行3次，结果依次是：{延时：201,201,202}。下面对以上代码稍作修改：</p>
+<p>chrome控制台下连续执行 3 次，结果依次是：{ 延时：201,201,202 }。下面对以上代码稍作修改：</p>
 <pre><code>var startTime = new Date();
 
 setTimeout(function(){
@@ -161,36 +162,36 @@ setTimeout(function(){
 while((+new Date() - startTime) &lt; 1000){
     console.log(&#39;...&#39;);
 }
-</code></pre><p>再次执行3次，结果依次是{延时：1001,1000,1000}。</p>
-<p>根据以上对比，我们可以断定，上述打印结果res取决于后面的同步任务执行时间（忽略延时代码执行的几毫秒的误差），即：</p>
+</code></pre><p>再次执行 3 次，结果依次是  { 延时：1001,1000,1000 }。</p>
+<p>根据以上对比，我们可以断定，上述打印结果 res 取决于后面的同步任务执行时间（忽略延时代码执行的几毫秒的误差），即 res 是“同步任务执行时间”和“指定的延迟时间”直接的较大者：</p>
 <blockquote>
-<p>res = max(同步执行时间，200)</p>
+<p><strong>res = max(同步任务执行时间，200)</strong></p>
 </blockquote>
-<p>再看一个例子：</p>
+<p>好，再看：</p>
 <pre><code>setTimeout(function(){
     console.log(1);
 }, 0);
 console.log(2);
-</code></pre><p>以上代码，我们写的延迟时间是0，我们期待的是立刻输出1。然而，执行以后我们发现，先输出2，然后才输出1。为什么会这样呢？</p>
-<p>首先，我们明确一个概念：JavaScript是<strong>单线程*</strong>的语言，在执行时必须等前面的任务处理完以后才会处理后面的；而且是一个一个连续同步执行的。JavaScript中的任务分为<strong>同步任务</strong>和<strong>异步任务</strong>，同步任务就是主线程上一个个排队执行的任务；异步任务则不进入主线任务而是被加入到任务队列中，任务队列的任务只有在主线任务执行完成之后才去处理任务队列中的任务。</p>
-<p>setTimeout方法中待执行的代码就是异步任务。延时参数设为0，仅仅表示同步任务执行完后尽可能早地执行该异步任务。0毫秒的延迟在实际中也不存在的。为了防止多个setTimeout(f,0)连续执行造成性能问题，html5规定，setTimeout方法指定的时间最少是4毫秒。如果小于这个值，会自动增加到4毫秒。当然了，设置的延迟时间太长也不行。setTimeout最多只能延迟24.8天（2147483647毫秒，浏览器内部使用32位带符号的整数，来储存推迟执行的时间），超过这个时间，等同于延迟时间设为0，即setTimeout(f,0)。</p>
-<p>由于要等到本次事件循环的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照setTimeout方法指定的延迟时间执行。</p>
+</code></pre><p>以上代码，我们写的延迟时间是 0，我们期待的是立刻输出 1。然而，执行以后我们发现，先输出 2，然后才输出 1。为什么会这样呢？</p>
+<p>首先，我们明确一个概念：<strong>JavaScript 是单线程的语言，在执行时必须等前面的任务处理完以后才会处理后面的。JavaScript 中的任务分为同步任务和异步任务，同步任务就是主线程上一个个排队执行的任务；异步任务则不进入主线任务而是被加入到任务队列中，任务队列的任务只有在主线任务执行完成之后才去处理任务队列中的任务。</strong></p>
+<p>setTimeout 方法中待执行的代码就是异步任务。延时参数设为 0，仅仅表示同步任务执行完后尽可能早地执行该异步任务。0 毫秒的延迟在实际中也不存在的。为了防止多个 setTimeout(f,0) 连续执行造成性能问题，html5 规定，setTimeout 方法指定的时间最少是 4 毫秒。如果小于这个值，会自动增加到 4 毫秒。当然了，设置的延迟时间太长也不行。setTimeout 最多只能延迟 24.8 天（ 即 2147483647 毫秒，因为浏览器内部使用 32 位带符号的整数，来储存推迟执行的时间），超过这个时间，等同于延迟时间设为 0，即 setTimeout(f,0)。</p>
+<p>由于要等到本次事件循环的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照 setTimeout 方法指定的延迟时间执行。</p>
 <pre><code>setTimeout(someTask,100);
 veryLongTask();
-</code></pre><p>上面代码指定100毫秒后运行一个任务。但是，如果后面立即执行的任务（当前脚本的同步任务）非常耗时，运行超过100毫秒无法结束。那么，推迟的someTask只有等着，等到前面的veryLongTask运行结束才开始执行。</p>
-<p>实际应用中，为了防止阻塞，我们可以把耗时的大块任务分成一个个小块，每个小块用setTimeout(f,0)方法调用，即将大任务分成一个个小任务，让浏览器在空余时间尽早执行。</p>
+</code></pre><p>上面代码指定 100 毫秒后运行一个任务。但是，如果后面立即执行的任务（当前脚本的同步任务）非常耗时，运行超过 100 毫秒无法结束。那么，推迟的 someTask 只有等着，等到前面的 veryLongTask 运行结束才开始执行。</p>
+<p>实际应用中，为了防止阻塞，我们可以把耗时的大块任务分成一个个小块，每个小块用 setTimeout(f,0) 方法调用，即将大任务分成一个个小任务，让浏览器在空余时间尽早执行。</p>
 <p>假如有三个函数处理时间都很长</p>
 <pre><code>longTask1();
 longTask2();
 longTask3();
-</code></pre><p>可以用setTimeout把这些大任务拆开。这样就可以腾出时间来响应其他任务了。</p>
+</code></pre><p>可以用setTimeout把这些大任务拆开。这样就可以优先来响应其他小任务了，不至于堵在这种耗时大任务这里。</p>
 <pre><code>var arr = [longTask1, longTask2, longTask3],
     len = arr.length,
     i = 0;
 for(; i &lt; len; i++){
     setTimeout(arr[i], 0);
 }
-</code></pre><p>再看个例子：</p>
+</code></pre><p>再看：</p>
 <pre><code>var div = document.getElementsByTagName(&#39;div&#39;)[0];
 
 // 写法一
@@ -200,16 +201,18 @@ for (var i = 0xA00000; i &lt; 0xFFFFFF; i++) {
 
 // 写法二
 var timer;
-var i=0x100000;
+var i = 0x100000;
 
 function func() {
   timer = setTimeout(func, 0);
   div.style.backgroundColor = &#39;#&#39; + i.toString(16);
-  if (i++ == 0xFFFFFF) clearTimeout(timer);
+  if (i++ === 0xFFFFFF) {
+      clearTimeout(timer);
+  } 
 }
 
 timer = setTimeout(func, 0);
-</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为JavaScript执行速度远高于DOM，会造成大量DOM操作“堆积”，而写法二就不会，这就是setTimeout(f, 0)的好处。</p>
+</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 DOM 操作消耗较大，这种连续的 DOM 操作会造成大量DOM操作“堆积”，浏览器卡顿。而写法二将任务分散在空余时间执行，就不会造成“堵塞”，这就是 setTimeout(f, 0) 的好处。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/advanced/timer.html</a></p>
 
       
