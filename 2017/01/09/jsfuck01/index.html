@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/09/jsfuck01/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
-<meta property="og:updated_time" content="2017-02-23T03:46:29.864Z">
+<meta property="og:updated_time" content="2017-02-23T03:55:14.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6个字符写js代码（二）">
 <meta name="twitter:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/09/jsfuck01/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cizhr8tfp000vbobar8xkl1lc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cizhuvotm000tr4barnpf6khp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -175,7 +175,7 @@
 -&gt; ~0
 -&gt; -1
 </code></pre><p><strong>(6) -~-~-~[]</strong></p>
-<p>- 和 ~ 运算符具有相同的优先级，右结合性。</p>
+<p>作为一元运算符时 - 和 ~ 运算符具有相同的优先级，右结合性。</p>
 <pre><code>-~-~-~[]
 -&gt; -~-~-(-1)
 -&gt; -~-~1
@@ -234,7 +234,9 @@ Number([])
 <pre><code>+(+!+[] + (!+[]+[]) [!+[]+!+[]+!+[]] + 
  [+!+[]] + [+[]] + [+[]] + [+[]])
 </code></pre><p>分别计算：</p>
-<pre><code>+!+[]
+<pre><code>// 一元运算符 + \- ~ ! 优先级一元，右结合性
+
++!+[]
 -&gt; +!0
 -&gt; +true
 -&gt; 1
