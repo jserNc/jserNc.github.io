@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/09/jsfuck01/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
-<meta property="og:updated_time" content="2017-02-22T08:53:32.274Z">
+<meta property="og:updated_time" content="2017-02-23T03:46:29.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6个字符写js代码（二）">
 <meta name="twitter:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/09/jsfuck01/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cizgnpms6000vwobam7w62lgi" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cizhr8tfp000vbobar8xkl1lc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -189,7 +189,10 @@
 -&gt; true + &quot;&quot;
 -&gt; &quot;true&quot;
 </code></pre><p><strong>(8) $_[_/_] + $_[+$]</strong></p>
-<pre><code>$_[_/_] + $_[+$]
+<pre><code>// 假设
+// $ = [], _ = -~-~-~$, $_ = !&quot;&quot; + $
+
+$_[_/_] + $_[+$]
 -&gt; &quot;true&quot;[3/3] + &quot;true&quot;[+[]]
 -&gt; &quot;true&quot;[1] + &quot;true&quot;[+&quot;&quot;]
 -&gt; &quot;true&quot;[1] + &quot;true&quot;[0]
@@ -215,10 +218,13 @@ Number([])
 
 [][[]]
 -&gt; undefined
+
+[][[]] === [][0]
+// true
 </code></pre><p><strong>(11) +[![]]</strong></p>
 <pre><code>+[![]]
 -&gt; +[false]
--&gt; +&#39;false&#39;
+-&gt; Number([false])
 -&gt; Number(&#39;false&#39;)
 -&gt; NaN
 </code></pre><p>下面再看一个稍微复杂些的表达式：</p>
@@ -230,11 +236,11 @@ Number([])
 </code></pre><p>分别计算：</p>
 <pre><code>+!+[]
 -&gt; +!0
--&gt; +1
+-&gt; +true
 -&gt; 1
 
 (!+[]+[])
--&gt; !0 + &quot;&quot;
+-&gt; !0 + []
 -&gt; true + &quot;&quot;
 -&gt; &quot;true&quot;
 
