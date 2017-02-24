@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/17/gulp/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
-<meta property="og:updated_time" content="2017-02-24T06:50:53.541Z">
+<meta property="og:updated_time" content="2017-02-24T09:23:24.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具 gulp">
 <meta name="twitter:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cizjgoa9a000h10ba2l9xg517" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cizjm2y590017ogba9togdiw1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -153,7 +153,7 @@ gulp.task(&#39;minify&#39;, function () {
         .pipe(uglify())
         .pipe(gulp.dest(&#39;build&#39;));
 });
-</code></pre><p>上面代码中，首先加载 gulp 和 gulp-uglify 两个模块（上述流程 3 中安装）。gulp.task() 方法用于指定具体任务，第一个参数是任务名称，第二个参数是任务函数或任务数组。在这里自定义的任务名是 minify，任务函数是一个匿名函数。在这个匿名任务函数中，使用 gulp.src() 方法指定要处理的文件，然后通过管道函数 pipe 进行链式处理。这里使用了两次 pipe 方法，第一次是使用 uglify() 方法对源文件进行压缩，第二步是 gulp.dest() 方法将上一步的输出写入文件 build.js（这里可以省略文件后缀 .js）。</p>
+</code></pre><p>上面代码中，首先加载 gulp 和 gulp-uglify 两个模块（上述流程 3 中安装）。gulp.task() 方法用于指定具体任务，第一个参数是任务名称，第二个参数是任务函数或任务数组。在这里自定义的任务名是 minify，任务函数是一个匿名函数。在这个匿名任务函数中，使用 gulp.src() 方法指定要处理的文件，然后通过管道函数 pipe 进行链式处理。这里使用了两次 pipe 方法，第一次是使用 uglify() 方法对源文件进行压缩，第二步是 gulp.dest() 方法将上一步的输出写入到 build 目录下的同名压缩文件。</p>
 <p>然后我们按照流程 5，运行 minify 任务，即可以将 js 目录下的 app.js 文件压缩到 build.js 文件。</p>
 <p><strong> gulp 模块主要的几个方法如下：</strong></p>
 <blockquote>
