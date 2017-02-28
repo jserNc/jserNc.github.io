@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
 <meta property="og:image" content="http://nanchao.win/css/images/webpack/webpack.png">
-<meta property="og:updated_time" content="2017-02-28T07:48:56.965Z">
+<meta property="og:updated_time" content="2017-02-28T08:05:01.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端模块化和打包工具 webpack">
 <meta name="twitter:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/21/webpack/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="cizp548n4001u90baog4uirap" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="cizp8npdl001o0gba6eny3x1t" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -169,7 +169,9 @@ document.write(require(&#39;./module.js&#39;))
 <p>新建一个 style.css 文件：</p>
 <pre><code>body { background: yellow; }
 </code></pre><p>修改 entry.js：</p>
-<pre><code>require(&quot;!style-loader!css-loader!./style.css&quot;) // 载入 style.css
+<pre><code>// 载入 style.css
+require(&quot;!style-loader!css-loader!./style.css&quot;) 
+
 document.write(&#39;It works.&#39;)
 document.write(require(&#39;./module.js&#39;))
 </code></pre><p>重新编译，打包资源：</p>
@@ -178,7 +180,7 @@ document.write(require(&#39;./module.js&#39;))
 <p>如果觉得 entry.js 中加载 style.css 的方式比较冗长，我们可以将 entry.js 中的 style.css 加载方式改为：</p>
 <pre><code>require(&quot;./style.css&quot;)
 </code></pre><p>相应地，编译打包方式修改为：</p>
-<pre><code>webpack entry.js bundle.js --module-bind &#39;css=style!css&#39;
+<pre><code>webpack entry.js bundle.js --module-bind &#39;css=style-loader!css-loader&#39;
 </code></pre><h3 id="4-配置文件"><a href="#4-配置文件" class="headerlink" title="4.配置文件"></a>4.配置文件</h3><p>如果我们向通过一个简单的</p>
 <pre><code>webpack
 </code></pre><p>命令来实现编译，打包过程。我们只需要事先准备好一个配置文件 webpack.config.js。</p>
@@ -199,7 +201,7 @@ document.write(require(&#39;./module.js&#39;))
     &quot;devDependencies&quot;: {
     &quot;css-loader&quot;: &quot;^0.21.0&quot;,
     &quot;style-loader&quot;: &quot;^0.13.0&quot;,
-    &quot;webpack&quot;: &quot;^1.12.2&quot;
+    &quot;webpack&quot;: &quot;^2.2.1&quot;
     }
 }
 </code></pre><p>然后执行：</p>
@@ -213,7 +215,7 @@ document.write(require(&#39;./module.js&#39;))
   },
   module: {
     loaders: [
-      {test: /\.css$/, loader: &#39;style!css&#39;}
+      {test: /\.css$/, loader: &#39;style-loader!css-loader&#39;}
     ]
   }
 }
