@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/22/batch-processing/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。">
-<meta property="og:updated_time" content="2017-03-01T11:26:35.817Z">
+<meta property="og:updated_time" content="2017-03-01T11:32:53.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows 批处理脚本修改文件">
 <meta name="twitter:description" content="有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/12/22/batch-processing/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cizqvn9kv0004z8bag6do42cs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cizqvvvzf000340bao2lcy7oj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -147,12 +147,17 @@ rd /s/q middleFile
 <p>以上除了 sed 命令，均为基本的 cmd 命令。<strong> sed 全名叫 stream editor，流编辑器，用程序的方式来编辑文本。sed 基本上就是玩正则模式匹配，所以，玩 sed，对正则表达式要求比较高 </strong>。</p>
 <p>要在 cmd 中使用 sed 命令，我们需要先进行一个简单的配置操作：</p>
 <blockquote>
-<p>1.下载 <a href="http://gnuwin32.sourceforge.net/packages/sed.htm" target="_blank" rel="external">sed for Windows</a> ,进入网站后，下载 Binaries zip 文件，解压后在 bin 目录找到 sed.exe 文件;<br>2.下载 <a href="http://gnuwin32.sourceforge.net/packages/libintl.htm" target="_blank" rel="external">libintl3.dll</a> 、 <a href="http://gnuwin32.sourceforge.net/packages/libiconv.htm" target="_blank" rel="external">libiconv2.dll</a> 、<a href="http://gnuwin32.sourceforge.net/packages/regex.htm" target="_blank" rel="external">regex2.dll</a> ，操作同上；<br>3.将 sed.exe 复制到 C:\Windows\System32；<br>4.将 libintl3.dll、libiconv2.dll 以及 regex2.dll 等 3 个 dll 文件复制到C:\Windows\SysWOW64。</p>
+<ol>
+<li>下载 <a href="http://gnuwin32.sourceforge.net/packages/sed.htm" target="_blank" rel="external">sed for Windows</a> ,进入网站后，下载 Binaries zip 文件，解压后在 bin 目录找到 sed.exe 文件;</li>
+<li>下载 <a href="http://gnuwin32.sourceforge.net/packages/libintl.htm" target="_blank" rel="external">libintl3.dll</a> 、 <a href="http://gnuwin32.sourceforge.net/packages/libiconv.htm" target="_blank" rel="external">libiconv2.dll</a> 、<a href="http://gnuwin32.sourceforge.net/packages/regex.htm" target="_blank" rel="external">regex2.dll</a> ，操作同上；</li>
+<li>将 sed.exe 复制到 C:\Windows\System32；</li>
+<li>将 libintl3.dll、libiconv2.dll 以及 regex2.dll 等 3 个 dll 文件复制到C:\Windows\SysWOW64。</li>
+</ol>
 </blockquote>
 <p>sed 有很多有用的命令，以上我们只用到 s 命令进行字符串替换。</p>
 <p>s 命令主要用法：</p>
 <pre><code>sed &quot;s/str1/str2/g&quot; a.txt
-</code></pre><p>s 表示替换命令，将 a.tex 中的字符串 “str1” 替换为 “str2”，/g 表示一行上的替换所有的匹配，上午例子中，我们字符串中包含/字符，所以用\/进行转义。</p>
+</code></pre><p>s 表示替换命令，将 a.txt 中的字符串 “str1” 替换为 “str2”，/g 表示一行上的替换所有的匹配，上面 tg.cmd 例子中，我们字符串中包含 / 字符，所以用到 \/ 进行转义。</p>
 <p>参考：<br>[1] <a href="http://coolshell.cn/articles/9104.html" target="_blank" rel="external">http://coolshell.cn/articles/9104.html</a><br>[2] <a href="https://dotblogs.com.tw/jses88001/2014/11/13/147283" target="_blank" rel="external">https://dotblogs.com.tw/jses88001/2014/11/13/147283</a><br>[3] <a href="http://gnuwin32.sourceforge.net/packages/sed.htm" target="_blank" rel="external">http://gnuwin32.sourceforge.net/packages/sed.htm</a></p>
 
       
