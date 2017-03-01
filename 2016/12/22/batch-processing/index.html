@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/22/batch-processing/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。">
-<meta property="og:updated_time" content="2017-03-01T11:24:34.726Z">
+<meta property="og:updated_time" content="2017-03-01T11:26:35.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows 批处理脚本修改文件">
 <meta name="twitter:description" content="有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/12/22/batch-processing/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cizqvl1lq0003xkba4yywt7fr" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cizqvn9kv0004z8bag6do42cs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -143,7 +143,7 @@ sed &quot;s/www.baidu.com\/?36505/www.baidu.com\/?37095-0001/&quot; middleFile\1
 
 :: 删除过渡文件
 rd /s/q middleFile
-</code></pre><p>其中，::为 cmd 文件注释，echo 命令中 &lt;、&gt; 等符号均需用^转义；</p>
+</code></pre><p>其中，:: 为 cmd 文件注释，echo 命令中 &lt;、&gt; 等符号均需用 ^ 转义；</p>
 <p>以上除了 sed 命令，均为基本的 cmd 命令。<strong> sed 全名叫 stream editor，流编辑器，用程序的方式来编辑文本。sed 基本上就是玩正则模式匹配，所以，玩 sed，对正则表达式要求比较高 </strong>。</p>
 <p>要在 cmd 中使用 sed 命令，我们需要先进行一个简单的配置操作：</p>
 <blockquote>
