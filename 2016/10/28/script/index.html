@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://nanchao.win/css/images/script/script.svg">
 <meta property="og:image" content="http://nanchao.win/css/images/script/script-async.svg">
 <meta property="og:image" content="http://nanchao.win/css/images/script/script-defer.svg">
-<meta property="og:updated_time" content="2017-03-07T05:26:44.714Z">
+<meta property="og:updated_time" content="2017-03-07T05:35:20.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 script 脚本加载方式（译）">
 <meta name="twitter:description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cizz3g5nw001fcsbarcgvzie0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cizz3k3qb001gycbaqybmbjl8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -159,8 +159,10 @@
 <p>注意：IE9 及其以下版本对 defer 属性并不是支持得很好，并不能保证 defer 脚本的执行顺序。所以，IE9 及其以下版本并不推荐使用 defer 属性。比如，如果非要保证脚本执行顺序，就不带任何属性，使其同步执行。</p>
 <p>总结：</p>
 <ul>
-<li>async 和 defer 在网络读取（下载）这个过程是一样的，都不会阻塞页面解析。</li>
-<li>defer 脚本会在页面渲染完成后按顺序执行，而 async 不会。</li>
+<li><p>async 和 defer 在网络读取（下载）这个过程是一样的，都不会阻塞页面解析。</p>
+</li>
+<li><p>defer 脚本会在页面渲染完成后按顺序执行，而 async 不会。</p>
+</li>
 </ul>
 <p>另外，关于 script 标签属性，有以下标准：</p>
 <ul>
