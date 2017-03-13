@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
-<meta property="og:updated_time" content="2017-02-24T06:47:30.785Z">
+<meta property="og:updated_time" content="2017-03-13T09:36:45.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 JavaScript 中 setTimeout">
 <meta name="twitter:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cj07vl7ra001pj4baamr8xj1y" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cj07x0ck6001abkbaeai8ts4h" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -184,7 +184,7 @@ veryLongTask();
 <pre><code>longTask1();
 longTask2();
 longTask3();
-</code></pre><p>可以用setTimeout把这些大任务拆开。这样就可以优先来响应其他小任务了，不至于堵在这种耗时大任务这里。</p>
+</code></pre><p>可以用 setTimeout 把这些大任务拆开。这样就可以优先来响应其他小任务了，不至于堵在这种耗时大任务这里。</p>
 <pre><code>var arr = [longTask1, longTask2, longTask3],
     len = arr.length,
     i = 0;
@@ -212,7 +212,7 @@ function func() {
 }
 
 timer = setTimeout(func, 0);
-</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 DOM 操作消耗较大，这种连续的 DOM 操作会造成大量DOM操作“堆积”，浏览器卡顿。而写法二将任务分散在空余时间执行，就不会造成“堵塞”，这就是 setTimeout(f, 0) 的好处。</p>
+</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 DOM 操作消耗较大，这种连续的 DOM 操作会造成大量 DOM 操作“堆积”，浏览器卡顿。而写法二将任务分散在空余时间执行，就不会造成“堵塞”，这就是 setTimeout(f, 0) 的好处。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/advanced/timer.html</a></p>
 
       
