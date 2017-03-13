@@ -13,17 +13,17 @@
   
   
   
-  <title>css 实现三角形效果 | 南潮的博客</title>
+  <title>css 三角形 扇形 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用 css 来实现这种三角形效果，下面我们分析一下怎么利用 css 制作三角形。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css 实现三角形效果">
+<meta property="og:title" content="css 三角形 扇形">
 <meta property="og:url" content="http://nanchao.win/2017/02/14/triangle/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用 css 来实现这种三角形效果，下面我们分析一下怎么利用 css 制作三角形。">
-<meta property="og:updated_time" content="2017-03-07T01:19:44.379Z">
+<meta property="og:updated_time" content="2017-03-13T02:00:02.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css 实现三角形效果">
+<meta name="twitter:title" content="css 三角形 扇形">
 <meta name="twitter:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用 css 来实现这种三角形效果，下面我们分析一下怎么利用 css 制作三角形。">
   
   
@@ -106,7 +106,7 @@
         
   
     <h1 class="entry-title article-title">
-      css 实现三角形效果
+      css 三角形 扇形
     </h1>
   
 
@@ -115,7 +115,7 @@
             
             <a href="/2017/02/14/triangle/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/02/14/triangle/" data-id="cj03nkm7l001ppcbale2xfumt" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/02/14/triangle/" data-id="cj07fw7l7001skcbacrajrbwo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -162,6 +162,56 @@
 }
 </code></pre><p><div style="border:30px solid;border-color:#f5f5f5 #f5f5f5 blue #f5f5f5;height :0;width:0;background:#f5f5f5;"><div></div></div></p>
 <p>这样，一个三角形就出现了。我们通过改变边框颜色，宽度，就可以随意改变这个三角形了。</p>
+<p>如果，我们想得到的是扇形，只需对边框附加一个 border-radius 属性即可。下面，我们分别给上边 3 个图形加上该属性：</p>
+<pre><code>.div { 
+    border-radius : 100px;
+    border : 30px solid;
+    border-color : red yellow blue green;
+    height : 100px;
+    width : 100px;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border-radius:100px;border:30px solid;border-color:red yellow blue green;height:100px;width:100px;background:#f5f5f5;"><div></div></div></p>
+<p>矩形框，变成了圆环。接着把内容设为空：</p>
+<pre><code>.div { 
+    border-radius : 30px;
+    border : 30px solid;
+    border-color : red yellow blue green;
+    height : 0;
+    width : 0;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border-radius:30px;border:30px solid;border-color:red yellow blue green;height:0;width:0;background:#f5f5f5;"><div></div></div></p>
+<p>把三个边框设为背景色：</p>
+<pre><code>.div { 
+    border-radius : 30px;
+    border : 30px solid;
+    border-color : #f5f5f5 #f5f5f5 blue #f5f5f5;
+    height : 0;
+    width : 0;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border-radius:30px;border:30px solid;border-color:#f5f5f5 #f5f5f5 blue #f5f5f5;height:0;width:0;background:#f5f5f5;"><div></div></div></p>
+<p>我们看到，扇形左右两侧有蓝色的弧形，下面，我们把 3 个边框背景透明化：</p>
+<pre><code>.div { 
+    border-radius : 30px;
+    border : 30px solid;
+    border-color : transparent transparent blue transparent;
+    height : 0;
+    width : 0;
+    background : #f5f5f5;
+}
+</code></pre><p><div style="border-radius:30px;border:30px solid;border-color:transparent transparent blue transparent;height :0;width:0;background:#f5f5f5;"><div></div></div></p>
+<p>于是，得到一个扇形，我们还可以将 div 背景色设为透明：</p>
+<pre><code>.div { 
+    border-radius : 30px;
+    border : 30px solid;
+    border-color : transparent transparent blue transparent;
+    height : 0;
+    width : 0;
+    background : transparent;
+}
+</code></pre><p><div style="border-radius:30px;border:30px solid;border-color:transparent transparent blue transparent;height :0;width:0;background:transparent;"><div></div></div></p>
 
       
     </div><!-- .entry-content -->
@@ -206,7 +256,7 @@
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-triangle" data-title="css 实现三角形效果" data-url="http://nanchao.win/2017/02/14/triangle/"></div>
+  <div class="ds-thread" data-thread-key="post-triangle" data-title="css 三角形 扇形" data-url="http://nanchao.win/2017/02/14/triangle/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -239,7 +289,7 @@
       <ul>
         
           <li>
-            <a href="/2017/02/14/triangle/">css 实现三角形效果</a>
+            <a href="/2017/02/14/triangle/">css 三角形 扇形</a>
           </li>
         
           <li>
