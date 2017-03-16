@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）" />
+  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）" />
   
 
   
@@ -15,18 +15,18 @@
   
   <title>JavaScript 原型链 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
+  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 原型链">
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
+<meta property="og:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2017-02-24T06:46:12.961Z">
+<meta property="og:updated_time" content="2017-03-16T12:49:09.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 原型链">
-<meta name="twitter:description" content="js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更">
+<meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
 <meta name="twitter:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
   
   
@@ -118,7 +118,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj08y3c1c0018pkba7m03v3aj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj0ce7qyj000txwbad9yjit8w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,20 +126,20 @@
 
     <div class="entry-content">
       
-        <p>js中，除了null，每个对象都会继承另一个对象，后者称为“原型对象”。<strong>原型对象的所有属性和方法都可以被派生对象共享，这是js的继承机制。</strong>通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。<strong>实例对象生成时候的构造函数的prototype属性即为实例对象的原型对象。</strong>（在此我们需要注意原型对象是实例对象生成时的构造函数的prototype属性，因为构造函数的prototype属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）</p>
+        <p>js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。<strong>原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。</strong>通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。<strong>实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。</strong>（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）</p>
 <a id="more"></a>
-<p>换个角度讲：由于所有的js对象都有构造函数，而所有的构造函数都有prototype属性（其实是所有函数都有该属性），所以，我们可以说所有的对象都有自己的原型对象(该对象的构造的prototype属性)。而原型对象也是对象，其也有自己的原型对象，于是，层层上溯就形成了一条<strong>“原型链”</strong>。</p>
-<p><strong>“原型链”</strong>的作用是：读取对象的某个属性的时候，js引擎会先遍历对象本身的属性，如果找不到，就去对象的原型对象去找，如果还是没有，就去对象的原型对象的原型对象去找，直到最顶层的原型对象Object.prototype，如果还是找不到，那么就会返回undefined（所以，读取对象的某个属性时，哪怕它不存在也不会报错）。</p>
-<p>一个对象就是一个属性集合，并拥有独立的原型。这个原型可以是一个对象或者null。</p>
-<p>我们看一个关于对象的基本例子。一个对象的prototype是以内部的[[Prototype]]属性来引用的。但是，在示意图里边我们将会使用_（下划线）来替代括号，于是这里的原型对象表示为：__proto__。</p>
+<p>换个角度讲：由于所有的 js 对象都有构造函数，而所有的构造函数都有 prototype 属性（其实是所有函数都有该属性），所以，我们可以说所有的对象都有自己的原型对象(该对象的构造的prototype 属性)。而原型对象也是对象，也有自己的原型对象，于是，层层上溯就形成了一条<strong>“原型链”</strong>。</p>
+<p><strong>“原型链”</strong>的作用是：读取对象的某个属性的时候，js 引擎会先遍历对象本身的属性，如果找不到，就去对象的原型对象去找，如果还是没有，就去对象的原型对象的原型对象去找，直到最顶层的原型对象 Object.prototype，如果还是找不到，那么就会返回 undefined（所以，读取对象的某个属性时，哪怕它不存在也不会报错）。</p>
+<p>一个对象就是一个属性集合，并拥有独立的原型。这个原型可以是一个对象或者 null。</p>
+<p>对象的 prototype 是以内部的 [[Prototype]] 属性来引用的，在下面示意图里我们用 _（下划线）来替代括号，于是这里的原型对象表示为：__proto__。</p>
 <p>看一个简单的对象：</p>
 <pre><code>var foo = {
     x : 10,
     y : 20
 };
-</code></pre><p>该对象拥有一个这样的结构，两个显性的自身属性 x 和 y 以及一个隐含的__proto__属性，这个属性是对foo对象的原型对象（prototype）的引用：</p>
+</code></pre><p>该对象拥有一个这样的结构，两个显性的自身属性 x 和 y 以及一个隐含的 __proto__ 属性，这个属性是对 foo 对象的原型对象（prototype）的引用：</p>
 <p><img src="/css/images/prototype/basic-object.png" alt="foo对象结构"></p>
-<p>以上我们看到，可以用对象的__proto__属性直观的表示对象的原型对象（当然了，标准做法是，用Object.getPrototypeOf()方法和Object.setPrototypeOf()方法，来读写对象的原型对象）。再看另一个例子：</p>
+<p>以上我们看到，可以用对象的 __proto__ 属性直观的表示对象的原型对象（当然了，标准做法是，用 Object.getPrototypeOf() 方法和 Object.setPrototypeOf() 方法，来读写对象的原型对象）。再看另一个例子：</p>
 <pre><code>var A = {
   name: &#39;zx&#39;
 };
@@ -179,14 +179,14 @@ var c = {
 b.calculate(30);    //60
 
 c.calculate(40);    //80
-</code></pre><p>以上我们看到可以以字面量方式定义对象的原型对象。如果没有明确为一个字面量对象指定原型，那么它将使用__proto__的默认值 Object.prototype，当然了，Object.prototype对象也有原型，值为null,这是原型链的终点。我们来验证一下：</p>
+</code></pre><p>以上我们看到可以以字面量方式定义对象的原型对象。如果没有明确为一个字面量对象指定原型，那么它将使用 __proto__ 的默认值 Object.prototype，当然了，Object.prototype 对象也有原型，值为 null，这是原型链的终点。我们来验证一下：</p>
 <pre><code>var o = {};
 Object.getPrototypeOf(o) === Object.prototype;
 // true
 
 Object.getPrototypeOf(Object.prototype) === null;
 // true
-</code></pre><p>我们也可以用ES5的Object.create()方式实现上面的对象a，b，c的关系：</p>
+</code></pre><p>我们也可以用 ES5 的 Object.create() 方式实现上面的对象 a，b，c 的关系：<br>（Object.create 方法第一个参数为原型对象，第二个参数是属性描述对象）</p>
 <pre><code>var b = Object.create(a,{y : {value : 20}});
 var c = Object.create(a,{y : {value : 30}});
 </code></pre><p>我们再用构造函数方式重写上面的例子：</p>
@@ -205,13 +205,13 @@ var c = new Foo(30);
 b.calculate(30);    //60
 c.calculate(40);    //80
 </code></pre><p>各对象之间的继承关系如下：<br><img src="/css/images/prototype/constructor-proto-chain.png" alt="对象继承关系"></p>
-<p>我们看到，普通构造函数Foo的prototype属性的原型对象和Function构造函数的prototype属性的原型对象一样，都是 Object.prototype，而 Object.prototype 的原型对象是 null。即：</p>
+<p>我们看到，普通构造函数 Foo 的 prototype 属性的原型对象和 Function 构造函数的 prototype 属性的原型对象一样，都是 Object.prototype，而 Object.prototype 的原型对象是 null。即：</p>
 <pre><code>Foo.prototype.__proto__ === Function.prototype.__proto__
 // true
-</code></pre><p>原型对象先说到这里。再来看看instanceof运算符：</p>
+</code></pre><p>原型对象先说到这里。再来看看 instanceof 运算符：</p>
 <pre><code>var v = new Vehicle();
 v instanceof Vehicle    //true
-</code></pre><p>对于以上结果我们并不会感到意外，instanceof 运算符左边运算子是一个实例对象，右边运算子是某个构造函数。<strong>instanceof运算的实质是：检查右边构造函数的prototype属性是否在左边的实例对象的原型链上。</strong>上例中判断Vehicle.prototype是否在对象v的原型链上，显然是的。</p>
+</code></pre><p>对于以上结果我们并不会感到意外，instanceof 运算符左边运算子是一个实例对象，右边运算子是某个构造函数。<strong> instanceof 运算的实质是：检查右边构造函数的 prototype 属性是否在左边的实例对象的原型链上。</strong>上例中判断 Vehicle.prototype 是否在对象 v 的原型链上，显然是的。</p>
 <p>那么，对以下结果我们应该也不意外：</p>
 <pre><code>var arr = [];
 arr instanceof Array;        //true
@@ -219,7 +219,7 @@ arr instanceof Object;        //true
 
 arr.__proto__ === Array.prototype //true
 Array.prototype.__proto__ === Object.prototype //true
-</code></pre><p>所有对象（除了null）的原型链的顶层就是 Object.prototype，所以，任何对象对Object进行instanceof运算都返回true。</p>
+</code></pre><p>所有对象（除了null）的原型链的顶层就是 Object.prototype，所以，任何对象对 Object 进行 instanceof 运算都返回 true。</p>
 <p>好，再看：</p>
 <pre><code>function A(){};
 var a = new A();
@@ -228,8 +228,8 @@ a instanceof A;   //true
 function B(){};
 A.prototype = B.prototype;
 a instanceof A;   //false , why?
-</code></pre><p>A.prototype改变后，再对 a 进行instanceof运算返回了false。那我们怎么确定A.prototype不在a的原型链上这个事实？</p>
-<p>回顾一下以上过程，定义A构造函数时，A的prototype属性就已确定，这时候新建一个实例对象a，那么a的原型对象（a.__proto__）就是此时的A.prototype，然后将A的prototype属性指向B的prototype属性，而a的原型对象还是原来的A.prototype。</p>
+</code></pre><p>A.prototype 改变后，再对 a 进行 instanceof 运算返回了 false。那我们怎么确定 A.prototype 不在 a 的原型链上这个事实？</p>
+<p>回顾一下以上过程，定义构造函数 A 时，A 的 prototype 属性就已确定，这时候新建一个实例对象 a，那么 a 的原型对象（a.__proto__）就是此时的 A.prototype，然后将 A 的prototype 属性指向 B 的 prototype 属性，而 a 的原型对象还是原来的 A.prototype。</p>
 <p>稍作修改，再执行一遍以上代码：</p>
 <pre><code>function A(){};
 var a = new A();
@@ -243,11 +243,11 @@ a instanceof A;     //false
 
 a.__proto__ === protoA;         //true
 a.__proto__ === A.prototype;    //false
-</code></pre><p>事实确实如此，a的原型对象依然是原来的protoA 。所以我们可以认为对象a的原型对象在对象生a成的时候就已经确定了，并不会随着构造函数的prototype属性改变自动改变。<strong>总结一点：对象的原型对象就是该对象生成时刻其构造函数对应的prototype属性。</strong></p>
+</code></pre><p>事实确实如此，a 的原型对象依然是原来的 protoA 。所以我们可以认为对象 a 的原型对象在对象生 a 成的时候就已经确定了，并不会随着构造函数的 prototype 属性改变自动改变。<strong>总结一点：对象的原型对象就是该对象生成时刻其构造函数对应的 prototype 属性。</strong></p>
 <p>所以，对下面的执行结果也很好理解了：</p>
 <pre><code>a.constructor === A      //true
 A.prototype.constructor === B       //true
-</code></pre><p>那么，这时候我们再新建一个A的实例会怎样？</p>
+</code></pre><p>那么，这时候我们再新建一个 A 的实例会怎样？</p>
 <pre><code>var aa = new A();
 aa.__proto__ === A.prototype    //true
 
@@ -266,8 +266,8 @@ aa.constructor === B;   //true
 
 aa instanceof A     //true
 aa instanceof B     //true
-</code></pre><p>我们发现，虽然a是A的实例，但修改了A.prototype以后，A的constructor属性的指向就跟着变了。</p>
-<p>所以，修改构造函数的prototype属性时，一般也同时将新的prototype属性的constructor属性指向原来的构造函数。</p>
+</code></pre><p>我们发现，虽然 a 是 A 的实例，但修改了 A.prototype 以后，A 的 constructor 属性就不再指向构造函数 A 了。</p>
+<p>所以，修改构造函数的 prototype 属性时，一般也将新的 prototype 属性的 constructor 属性指向原来的构造函数。</p>
 <pre><code>function A(){};
 var a = new A();
 a instanceof A;        //true
@@ -280,8 +280,8 @@ a instanceof A;        //false,返回false不应该意外
 
 aa = new A();
 aa.constructor === A;     
-//true,是因为中间把constructor重新指向了A
-</code></pre><p>如果让某个函数的prototype属性指向一个数组，那么该函数就可以当做数组的构造函数。</p>
+// true,是因为中间把constructor重新指向了A
+</code></pre><p>如果让某个函数的 prototype 属性指向一个数组，那么该函数就可以当做数组的构造函数。</p>
 <pre><code>var MyArray = function () {};
 
 MyArray.prototype = new Array();
@@ -295,15 +295,15 @@ mine.length     // 3
 mine instanceof Array   //true why?
 
 MyArray.prototype.__proto__ === Array.prototype //true
-</code></pre><p>可以看到，构造函数的prototype的方法都可以被实例对象调用。并再次验证了：<strong>只要instanceof运算符右边的运算子的prototype属性在左边运算子的原型链上，即返回true！</strong></p>
-<p>当然了，对象的原型对象是可以自行设置的</p>
+</code></pre><p>可以看到，构造函数的 prototype 的方法都可以被实例对象调用。并再次验证了：<strong>只要 instanceof 运算符右边的运算子的 prototype 属性在左边运算子的原型链上，即返回 true！</strong></p>
+<p>当然了，对象的原型对象是可以自行设置的：</p>
 <pre><code>var a = {x : 1};
 
 var b = {__proto__ : a};
 b.x     //1
 
 Object.getPrototypeOf(b) === a  //true
-</code></pre><p>把b对象的__proto__属性指向a对象，a对象便成了b对象的原型对象。其中Object.getPrototypeOf()方法是获取一个对象的原型对象的标准方法！</p>
+</code></pre><p>把 b 对象的 __proto__ 属性指向 a 对象，a 对象便成了 b 对象的原型对象。其中 Object.getPrototypeOf() 方法是获取一个对象的原型对象的标准方法！</p>
 <p>以上，也可以换种写法：</p>
 <pre><code>var a = {x : 1};
 
@@ -311,9 +311,9 @@ var b = Object.setPrototypeOf({},a);
 b.x     //1
 
 Object.getPrototypeOf(b) === a  //true
-</code></pre><p>其中，Object.setPrototypeOf()方法为某对象（即第一个参数）设置原型对象（第二个参数），返回值为一个新对象。即将对象{}的原型对象设置为a,然后变量b指向返回的新对象。</p>
-<p>上文中多次用到new运算符，我们再来看看new运算符的实质：</p>
-<p><strong>new命令调用后会依次执行以下步骤：</strong></p>
+</code></pre><p>其中，Object.setPrototypeOf() 方法为某对象（即第一个参数）设置原型对象（第二个参数），返回值为一个新对象。即将对象 {} 的原型对象设置为 a,然后变量 b 指向返回的新对象。</p>
+<p>上文中多次用到 new 运算符，我们再来看看 new 运算符的实质：</p>
+<p><strong> new 命令调用后会依次执行以下步骤：</strong></p>
 <blockquote>
 <p>1.创建一个空对象，作为将要返回的对象实例；<br>2.将这个空对象的原型对象（__proto__）指向构造函数的 prototype 属性；<br>3.将构造函数内部的 this 指向该空对象；<br>4.执行构造函数代码。</p>
 </blockquote>
@@ -325,9 +325,9 @@ Object.getPrototypeOf(b) === a  //true
 var f = new F();
 </code></pre><p>会发生：</p>
 <blockquote>
-<p>1.一个新的空对象 {} 会被创建，并且该对象的原型对象（__proto__）为 F.prototype；<br>2.构造函数 F 内的 this 指向这个新对象，然后执行构造函数；<br>3.如果构造函数中明确地用return（返回）了一个其他对象，那么这个对象会作为整个new运算的返回结果。否则，返回刚才创建的那个对象。</p>
+<p>1.一个新的空对象 {} 会被创建，并且该对象的原型对象（__proto__）为 F.prototype；<br>2.构造函数 F 内的 this 指向这个新对象，然后执行构造函数；<br>3.如果构造函数中明确地用 return（返回）了一个其他对象，那么这个对象会作为整个 new 运算的返回结果。否则，返回刚才创建的那个对象。</p>
 </blockquote>
-<p>总结一下：new命令通过构造函数创建新的实例对象，实质就是：<strong>将实例对象的原型指向构造函数的prototype的属性，然后在实例对象上执行构造函数（构造函数内 this 绑定为该实例对象）</strong>，所以，以上的new命名可以换种写法：</p>
+<p>总结一下：new 命令通过构造函数创建新的实例对象，实质就是：<strong>将实例对象的原型指向构造函数的 prototype 的属性，然后在实例对象上执行构造函数（构造函数内 this 绑定为该实例对象）</strong>，所以，以上的 new 命名可以换种写法：</p>
 <pre><code>var f = Object.setPrototypeOf({}, F.prototype);
 F.call(f);
 f.foo   //&quot;bar&quot;
