@@ -646,6 +646,11 @@ a:hover {
 	z-index: 100000; /* Above WP toolbar */
 }
 
+/* wangyiyun comment */
+#cloud-tie-wrapper.cloud-tie-wrapper{
+	margin-top:20px;
+}
+
 /* Page structure */
 .site {
 	padding: 0 24px;
