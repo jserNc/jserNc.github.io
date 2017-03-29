@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、服务器负载和降低页面显示速度。一般，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接本地取，这就是浏览器缓存。" />
+  <meta name="description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>浏览器缓存 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、服务器负载和降低页面显示速度。一般，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接本地取，这就是浏览器缓存。">
+  <meta name="description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器缓存">
 <meta property="og:url" content="http://nanchao.win/2017/03/28/cache/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、服务器负载和降低页面显示速度。一般，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接本地取，这就是浏览器缓存。">
-<meta property="og:updated_time" content="2017-03-28T11:21:14.955Z">
+<meta property="og:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。">
+<meta property="og:updated_time" content="2017-03-29T01:15:23.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存">
-<meta name="twitter:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、服务器负载和降低页面显示速度。一般，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接本地取，这就是浏览器缓存。">
+<meta name="twitter:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/28/cache/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/28/cache/" data-id="cj0tf9umb00054wbadn5gtfya" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/28/cache/" data-id="cj0ua5dfq0004gkbajhnfdekk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,7 +123,7 @@
 
     <div class="entry-content">
       
-        <p>对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、服务器负载和降低页面显示速度。一般，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接本地取，这就是浏览器缓存。</p>
+        <p>对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。</p>
 <a id="more"></a>
 <p>那么问题来了，一旦服务器文件更新了，浏览器怎么判断是该使用缓存文件，还是去服务器请求新的文件呢？</p>
 <p>为了解决这个问题，这里有一个<strong>缓存协商</strong>的概念：浏览器在请求某个文件的时候，服务器在返回文件时会在返回头加一些额外的信息，比如这个文件在多长时间内可以使用、文件的最后修改时间是什么等等。这样浏览器在下次再请求这个文件的时候就会根据之前服务器在头部加入的额外信息来对应的进行一些处理。</p>
@@ -206,10 +206,10 @@ ExpiresByType video/x-flv &quot;access plus 10 days&quot;
 <p><strong>第二层：304</strong><br>这一层由 last-modified/E-tag 控制。当第一层失效或用户点击 [刷新]/F5 时，浏览器就发送请求给服务器，如果服务端没有变化，则返回 304 给浏览器。</p>
 <p><strong>第三层：200</strong><br>当浏览器本地没有缓存或者上一层失效，或者用户点击 ctrl+F5 时，浏览器就会去服务器下载最新数据。</p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>① cache-control 的值覆盖其他的设置，如 expires；</p>
-<p>② E-tag 和 last-modified 共存的时候以 E-tag 为准；</p>
-<p>③ F5 刷新的时候不论缓存是否过期，都会和缓存协商（带上 E-tag、last-modified 之类的信息）；</p>
-<p>④ ctrl+F5 的时候由浏览器单方面决定不使用缓存；</p>
-<p>⑤ 在后退的时候除非显式声明 no-cache，否则不论是否过期，都使用缓存；</p>
+<p>② E-tag 和 Last-modified 共存的时候以 E-tag 为准；</p>
+<p>③ F5 刷新的时候不论缓存是否过期，都会缓存协商（带上 E-tag、Last-modified 之类的信息）；</p>
+<p>④ ctrl+F5 强制刷新的时候由浏览器单方面决定不使用缓存；</p>
+<p>⑤ 在后退的时候除非显式声明 no-cache，否则不论是否过期，都使用缓存。</p>
 
       
     </div><!-- .entry-content -->
