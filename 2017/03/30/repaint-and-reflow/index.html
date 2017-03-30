@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
+  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
+回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。" />
+  
 
   
   
@@ -11,14 +14,21 @@
   
   
   
-  <title>Archives | 南潮的博客</title>
+  <title>重绘和回流（repaint &amp; reflow） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Enjoy javascript">
-<meta property="og:url" content="http://nanchao.win/archives/page/5/index.html">
+  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
+回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重绘和回流（repaint & reflow）">
+<meta property="og:url" content="http://nanchao.win/2017/03/30/repaint-and-reflow/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
+回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta property="og:updated_time" content="2017-03-30T08:50:47.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Enjoy javascript">
+<meta name="twitter:title" content="重绘和回流（repaint & reflow）">
+<meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
+回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -92,173 +102,121 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-repaint-and-reflow" class="post-repaint-and-reflow post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/25/chain-call/">浅谈 JavaScript 链式调用</a>
+    <h1 class="entry-title article-title">
+      重绘和回流（repaint &amp; reflow）
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/25/chain-call/">
-    <time datetime="2016-10-25T08:34:44.000Z" class="entry-date">
-        2016-10-25
+        
+        <div class="comments-link">
+            
+            <a href="/2017/03/30/repaint-and-reflow/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj0w3yp78001ddwba3znhhajn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p><strong>重绘（repaint）</strong>：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；</p>
+<p><strong>回流（reflow）</strong>：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。</p>
+<a id="more"></a>
+<p><strong>首先说下页面的渲染过程：</strong></p>
+<blockquote>
+<p>① 解析 html 结构为 dom 树。包括 display : none 元素和用 js 动态添加的元素；<br>② 解析 css，产生 css 规则树；<br>③ 通过 dom 树和 css 规则树构造渲染（render）树；<br>④ 浏览器“画”出所有渲染树中的节点。</p>
+</blockquote>
+<p>其中，渲染树不包括隐藏的节点，比如 display : none 的节点，head 节点等。</p>
+<p><strong>以下情况会触发「重绘」和「回流」：</strong></p>
+<p>（1）页面首次加载；<br>（2）dom 元素的添加，修改，删除；<br>（3）应用新的 css 样式；<br>（4）resize 浏览器窗口、滚动页面；<br>（5）读取元素的某些属性（scrollTop/Left、clientTop/Left、currentStyle等）。</p>
+<p>前 4 条触发重绘或者回流的原因比较好理解。这里解释一下第 5 条：由于每次重绘、回流都会产生计算消耗，所以大多数浏览器都通过维护一个回流/重绘队列并批量执行来优化重排过程，而不是一句代码就回流/重绘一次的。但是，<strong>获取布局信息的（返回最新的布局信息）</strong>操作会导致队列被强制刷新（浏览器马上执行渲染队列并触发重排以返回正确值）</p>
+<p>重绘不一定需要回流。比如改变某个元素的颜色，就只会发生重绘，而不会发生回流，因为页面布局没有变。但是回流必然会导致重绘，比如，改变一个元素的大小，就会同时触发重绘和回流。提高网页性能的手段之一就是减少页面重绘和回流，以下都是实践中的一些小技巧。</p>
+<p><strong>减少「重绘」和「回流」：</strong></p>
+<p>（1）不要一条条修改样式，尽量通过 className 来修改；</p>
+<pre><code>// 反模式
+var left = 10,top = 20;
+el.style.left = left + &quot;px&quot;;
+el.style.top = top + &quot;px&quot;;
+
+// 推荐
+el.className += &quot; newClassName&quot;;
+
+// 推荐
+el.style.cssText += &quot;;left:&quot;+left+&quot;px;top:&quot;+top+&quot;px;&quot;;
+</code></pre><p>（2）dom 离线后修改；</p>
+<p>  · clone一份要修改的DOM节点，改完后，覆盖在线的对应节点；</p>
+<p>  · 先把 DOM 给 display:none （有一次 reflow），然后修改。改好了再把它显示出来。</p>
+<p>（3）如果需要创建多个 dom 节点，使用 documentFragment 创建完后一次性加入 document；</p>
+<p>（4）不要把 dom 节点的属性放在循环里，不然会大量读取这个节点的属性；</p>
+<p>（5）尽可能地修改层级比较低的 dom；</p>
+<p>（6）动画节点的 position 属性设置为 fixed 或 absoult，修改他们的 CSS 是不会 reflow 的；</p>
+<p>（7）不要使用table布局。因为可能很小的一个小改动会造成整个table的重新布局。</p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/03/30/repaint-and-reflow/">
+    <time datetime="2017-03-30T07:56:54.000Z" class="entry-date">
+        2017-03-30
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/24/prototype/">JavaScript 原型链</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/24/prototype/">
-    <time datetime="2016-10-24T07:00:44.000Z" class="entry-date">
-        2016-10-24
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/24/event-delegation/">JavaScript 事件代理（委托）</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/24/event-delegation/">
-    <time datetime="2016-10-24T05:09:38.000Z" class="entry-date">
-        2016-10-24
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/21/index/">pjax 应用 demo</a>
-    </h1>
-  
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/21/index/">
-    <time datetime="2016-10-21T08:24:36.000Z" class="entry-date">
-        2016-10-21
-    </time>
-</a>
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    </footer>
-</article>
-  
+        <p><span class="nav-next"><a href="/2017/03/28/cache/" rel="next"><span class="meta-nav">下一篇：</span>浏览器缓存 </a></span></p>
     
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/14/tostring/">toString.call() 引起的一些思考</a>
-    </h1>
-  
+</nav><!-- .nav-single -->
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/14/tostring/">
-    <time datetime="2016-10-14T09:20:13.000Z" class="entry-date">
-        2016-10-14
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/14/https/">https 本地环境搭建(windows)</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/14/https/">
-    <time datetime="2016-10-14T08:45:00.000Z" class="entry-date">
-        2016-10-14
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
