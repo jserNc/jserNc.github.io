@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/03/28/cache/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。">
-<meta property="og:updated_time" content="2017-03-31T06:04:41.901Z">
+<meta property="og:updated_time" content="2017-03-31T06:06:55.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存">
 <meta name="twitter:description" content="对于一些较少变化的静态资源文件，如 js、css、image 等，每次刷新页面都去服务器重新请求，这会加大带宽、增加服务器负载以及降低页面显示速度。比较好的做法是，在第一次请求这些文件后，浏览器会将这些文件存放在用户本地，下次需要这些文件的时候直接在用户浏览器缓存中去读取。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/28/cache/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/28/cache/" data-id="cj0xfculg00043obazefmxw63" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/28/cache/" data-id="cj0xffu150023zobaatvfxey4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -206,7 +206,7 @@ ExpiresByType video/x-flv &quot;access plus 10 days&quot;
 <h2 id="状态码："><a href="#状态码：" class="headerlink" title="状态码："></a>状态码：</h2><p><strong>第一层：200(from cache)</strong><br>这一层由 expires/cache-control 控制。expires 是绝对时间，cache-control 是相对时间。两者并存时，后者覆盖前者。只要没过期，浏览器只访问自己的缓存。</p>
 <p><strong>第二层：304</strong><br>这一层由 last-modified/E-tag 控制。当第一层失效或用户点击 [刷新]/F5 时，浏览器就发送请求给服务器，如果服务端没有变化，则返回 304 给浏览器。</p>
 <p><strong>第三层：200</strong><br>当浏览器本地没有缓存或者上一层失效，或者用户点击 ctrl+F5 时，浏览器就会去服务器下载最新数据。</p>
-<p>浏览器的资源请求，如果使用了缓存基本上是两种情况: <strong>status code: 200 ok ( from cache )</strong> 和 <strong>status code 304 Not Modified</strong>。</p>
+<p>浏览器发起的资源请求，如果使用了缓存基本上是两种情况: <strong>status code: 200 ok ( from cache )</strong> 和 <strong>status code 304 Not Modified</strong>。</p>
 <p>前者是不向浏览器发送请求，直接使用本地缓存文件。后者，浏览器虽然发现了本地有该资源的缓存，但是不确定是否是最新的，于是想服务器询问，若服务器认为浏览器的缓存版本还可用，那么便会返回 304。即客户端有缓存的文档并发出了一个条件性的请求（一般是提供 If-Modified-Since 头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓存的文档还可以继续使用。</p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>① cache-control 的值覆盖其他的设置，如 expires；</p>
 <p>② E-tag 和 Last-modified 共存的时候以 E-tag 为准；</p>
