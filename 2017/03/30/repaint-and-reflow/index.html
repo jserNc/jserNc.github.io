@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
 回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
-<meta property="og:updated_time" content="2017-03-31T01:31:54.487Z">
+<meta property="og:updated_time" content="2017-03-31T01:54:36.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重绘和回流（repaint & reflow）">
 <meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
@@ -119,7 +119,7 @@
             
             <a href="/2017/03/30/repaint-and-reflow/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj0x5m3t3001g64ba0qblfom9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj0x6fpm8001hu4babk5vjw2w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -152,11 +152,58 @@ el.className += &quot; newClassName&quot;;
 // 推荐
 el.style.cssText += &quot;;left:&quot;+left+&quot;px;top:&quot;+top+&quot;px;&quot;;
 </code></pre><p>（2）<strong>dom 离线后修改；</strong></p>
-<p>  · clone一份要修改的DOM节点，改完后，覆盖在线的对应节点；</p>
+<p>  · clone 一份要修改的 DOM 节点，改完后，覆盖在线的对应节点；</p>
 <p>  · 先把 DOM 给 display:none （有一次 reflow），然后修改。改好了再把它显示出来。</p>
-<p>（3）<strong>如果创建多个 dom 节点，使用 documentFragment 创建完后一次性加入 document；</strong></p>
-<p>（4）<strong>不要把 dom 节点的属性放在循环里，以免大量读取这个节点的属性；</strong></p>
-<p>（5）<strong>尽可能地修改层级比较低的 dom；</strong></p>
+<pre><code>var oldNode = document.getElementById(&quot;res&quot;),
+    clone = oldNode.cloneNode(true);
+
+// 处理克隆对象...
+
+// 完成后：
+oldNode.parentNode.replaceChild(clone,oldNode);
+</code></pre><p>（3）<strong>如果创建多个 dom 节点，使用 documentFragment 创建完后一次性加入 document；</strong></p>
+<pre><code>// 反模式，创建完节点立即添加进文档
+var p,t;
+
+p = document.createElement(&#39;p&#39;);
+t = document.createTextNode(&#39;first paragraph&#39;);
+p.appendChild(t);
+document.body.appendChild(p);
+
+p = document.createElement(&#39;p&#39;);
+t = document.createTextNode(&#39;second paragraph&#39;);
+p.appendChild(t);
+document.body.appendChild(p);
+
+// 推荐，使用文档碎片，添加一次碎片节点
+var p,t,frag;
+
+frag = document.createDocumentFragment();
+
+p = document.createElement(&#39;p&#39;);
+t = document.createTextNode(&#39;first paragraph&#39;);
+p.appendChild(t);
+frag.appendChild(p);
+
+p = document.createElement(&#39;p&#39;);
+t = document.createTextNode(&#39;second paragraph&#39;);
+p.appendChild(t);
+frag.appendChild(p);
+
+document.body.appendChild(frag);
+</code></pre><p>（4）<strong>不要把 dom 节点的属性放在循环里，以免大量读取这个节点的属性；</strong></p>
+<pre><code>// 反模式
+for (var i = 0;i &lt; 100;i++){
+    document.getElementById(&quot;res&quot;).innerHTML += i;
+}
+
+// 推荐
+var i = 0,content = &quot;&quot;;
+for (;i &lt; 100;i++){
+    content += i;
+}
+document.getElementById(&quot;res&quot;).innerHTML += content;
+</code></pre><p>（5）<strong>尽可能地修改层级比较低的 dom；</strong></p>
 <p>（6）<strong>动画节点的 position 属性设置为 fixed 或 absolute；</strong></p>
 <p>（7）<strong>不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。</strong></p>
 
