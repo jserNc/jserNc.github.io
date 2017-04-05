@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/05/localStorage01/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
-<meta property="og:updated_time" content="2017-04-05T05:47:00.314Z">
+<meta property="og:updated_time" content="2017-04-05T05:50:17.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器本地存储（二）">
 <meta name="twitter:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/05/localStorage01/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/localStorage01/" data-id="cj14b6vvp0000mkbagm92utsf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/localStorage01/" data-id="cj14k1t3i001b88ba7wyvnmup" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -127,6 +127,8 @@
 <a id="more"></a>
 <p><strong>localStorage 相比于 cookie，最显著的特点就是：</strong></p>
 <p>① 除非主动清除数据，否则永远不会过期；<br>② 存储空间较大，5MB 左右；<br>③ 数据仅存在于浏览器客户端，不会随着请求来回传递；<br>④ ie8 以下浏览器不支持，兼容性不太好；<br>⑤ 同域名下，http 和 https 不可以共享数据。</p>
+<p><strong>localStorage 与 sessionStorage 区别是：</strong></p>
+<p>sessionStorage 方法针对一个 session 进行数据存储。当用户关闭浏览器窗口后，数据会被删除。</p>
 <p><strong>localStorage 使用方法：</strong></p>
 <p><strong>(1) 读取数据</strong></p>
 <p>直接打印 localStorage 会输出一个包含各个“键值对”的 Storage 对象。</p>
