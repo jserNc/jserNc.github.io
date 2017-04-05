@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。" />
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>XSS 攻击原理 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS 攻击原理">
 <meta property="og:url" content="http://nanchao.win/2017/04/05/XSS/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
-<meta property="og:updated_time" content="2017-04-05T09:24:12.523Z">
+<meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
+<meta property="og:updated_time" content="2017-04-05T09:28:43.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS 攻击原理">
-<meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。">
+<meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/05/XSS/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cj14kwnbg00063wbaxq4dyytu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cj14ruib90004y0bafmbs2zru" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,10 +123,10 @@
 
     <div class="entry-content">
       
-        <p>XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收的网页中，以完成某种不利于用户的操作。</p>
+        <p>XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。</p>
 <a id="more"></a>
 <p>简单地说，攻击者可以利用 XSS 漏洞向用户发送攻击脚本，因为用户的浏览器并不知道这段脚本是恶意的，所以依然会执行它。这段恶意脚本可以像正常脚本一样访问 cookie、读取保存在浏览器里的敏感信息，甚至还可以改写页面，进行钓鱼攻击。</p>
-<p>下面看两个例子，我们会对 XSS 有个直观的认识。</p>
+<p>下面两个例子，会让我们对 XSS 有个直观的认识。</p>
 <p><strong>场景一：</strong></p>
 <p>攻击者在某网站评论页面，提交了一段可执行的 JavaScript 脚本（这里假设为“恶意脚本”），若服务器端接收到这段脚本后，没有进行过滤或者转义这段脚本，而是将其作为普通的内容发布到了用户评论区，那么，后续用户访问到这个页面后，就会执行这段注入的“恶意脚本”。</p>
 <p><strong>场景二：</strong></p>
