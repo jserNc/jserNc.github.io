@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）" />
+  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）" />
   
 
   
@@ -15,18 +15,18 @@
   
   <title>JavaScript 原型链 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
+  <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 protot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 原型链">
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
+<meta property="og:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 protot">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2017-03-16T12:49:09.167Z">
+<meta property="og:updated_time" content="2017-04-06T08:39:54.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 原型链">
-<meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototyp">
+<meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 protot">
 <meta name="twitter:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
   
   
@@ -118,7 +118,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj163rl88001n5cba0bumykbg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj165k79j001puwba3h812a2d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,12 +126,12 @@
 
     <div class="entry-content">
       
-        <p>js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。<strong>原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。</strong>通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。<strong>实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。</strong>（在此我们需要注意原型对象是实例对象生成时的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）</p>
+        <p>js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。<strong>原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。</strong>通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。<strong>实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。</strong>（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototype 属性后来是可以更改的，而先前生成好的实例的原型是不会跟着变的。）</p>
 <a id="more"></a>
-<p>换个角度讲：由于所有的 js 对象都有构造函数，而所有的构造函数都有 prototype 属性（其实是所有函数都有该属性），所以，我们可以说所有的对象都有自己的原型对象(该对象的构造的prototype 属性)。而原型对象也是对象，也有自己的原型对象，于是，层层上溯就形成了一条<strong>“原型链”</strong>。</p>
+<p>换个角度讲：由于所有的 js 对象都有构造函数，而所有的构造函数都有 prototype 属性（其实是所有函数都有该属性），所以，我们可以说所有的对象都有自己的原型对象(该对象的构造的 prototype 属性)。而原型对象也是对象，也有自己的原型对象，于是，层层上溯就形成了一条<strong>“原型链”</strong>。</p>
 <p><strong>“原型链”</strong>的作用是：读取对象的某个属性的时候，js 引擎会先遍历对象本身的属性，如果找不到，就去对象的原型对象去找，如果还是没有，就去对象的原型对象的原型对象去找，直到最顶层的原型对象 Object.prototype，如果还是找不到，那么就会返回 undefined（所以，读取对象的某个属性时，哪怕它不存在也不会报错）。</p>
 <p>一个对象就是一个属性集合，并拥有独立的原型。这个原型可以是一个对象或者 null。</p>
-<p>对象的 prototype 是以内部的 [[Prototype]] 属性来引用的，在下面示意图里我们用 _（下划线）来替代括号，于是这里的原型对象表示为：__proto__。</p>
+<p>对象的 prototype 是以内部的 [[Prototype]] 属性来引用的，在下面示意图里我们用 _（下划线）来替代中括号，于是这里的原型对象表示为：__proto__。</p>
 <p>看一个简单的对象：</p>
 <pre><code>var foo = {
     x : 10,
