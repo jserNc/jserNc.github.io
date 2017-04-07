@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/30/page-optimization/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
-<meta property="og:updated_time" content="2017-02-28T10:42:11.817Z">
+<meta property="og:updated_time" content="2017-04-07T02:20:32.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页性能优化建议">
 <meta name="twitter:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/12/30/page-optimization/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cj166x27v001jhkbahwua1a6s" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cj175zkp2001lloba2xmljns2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,16 +126,30 @@
         <p>通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。</p>
 <a id="more"></a>
 <p>下面简单的罗列一下网页性能优化的几点建议：</p>
-<h3 id="1-减少-http-请求数"><a href="#1-减少-http-请求数" class="headerlink" title="1. 减少 http 请求数"></a>1. 减少 http 请求数</h3><p>​合并图片（css sprites）,尽可能地合并 css 和 js 文件。css sprites 是指只用将页面上的背景元素合并成一张图，然后通过调整 css 的 background-position 属性获取对应的背景图。</p>
-<h3 id="2-css-文件放在页面头部，js文件放置页面底部"><a href="#2-css-文件放在页面头部，js文件放置页面底部" class="headerlink" title="2. css 文件放在页面头部，js文件放置页面底部"></a>2. css 文件放在页面头部，js文件放置页面底部</h3><p>ie，firefox 等浏览器在 css 全部传输完全之前不会去渲染任何的东西。css 的全称是 Cascading Style Sheets（层叠样式表），层叠，顾名思义，后面的样式可以覆盖前面的样式，优先级高的样式可以覆盖优先级低的样式，所以为了避免页面加载过程中重画某些页面元素，导致闪烁和性能问题，浏览器这么做也是合理的。</p>
+<blockquote>
+<h2 id="加载优化"><a href="#加载优化" class="headerlink" title="加载优化"></a>加载优化</h2></blockquote>
+<h3 id="·-减少-http-请求数"><a href="#·-减少-http-请求数" class="headerlink" title="· 减少 http 请求数"></a>· 减少 http 请求数</h3><p>​合并图片（css sprites）,尽可能地合并 css 和 js 文件。css sprites 是指只用将页面上的背景元素合并成一张图，然后通过调整 css 的 background-position 属性获取对应的背景图。</p>
+<h3 id="·-css-文件放在页面头部，js文件放置页面底部"><a href="#·-css-文件放在页面头部，js文件放置页面底部" class="headerlink" title="· css 文件放在页面头部，js文件放置页面底部"></a>· css 文件放在页面头部，js文件放置页面底部</h3><p>ie，firefox 等浏览器在 css 全部传输完全之前不会去渲染任何的东西。css 的全称是 Cascading Style Sheets（层叠样式表），层叠，顾名思义，后面的样式可以覆盖前面的样式，优先级高的样式可以覆盖优先级低的样式，所以为了避免页面加载过程中重画某些页面元素，导致闪烁和性能问题，浏览器这么做也是合理的。</p>
 <p>不带特殊属性的 script 标签。当 html 页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析 html 文档。如果该脚本中有耗时任务，那么页面视觉上加载就比较慢了。考虑到页面内容和脚本之间的依赖关系，我们并不能做到把所有脚本放置页面底部，所以，还是尽可能地往后放吧。</p>
-<h3 id="3-精简css和js文件，即压缩文件体积"><a href="#3-精简css和js文件，即压缩文件体积" class="headerlink" title="3. 精简css和js文件，即压缩文件体积"></a>3. 精简css和js文件，即压缩文件体积</h3><h3 id="4-使用-cdn，图片、css、js等静态资源使用-cdn-分发"><a href="#4-使用-cdn，图片、css、js等静态资源使用-cdn-分发" class="headerlink" title="4. 使用 cdn，图片、css、js等静态资源使用 cdn 分发"></a>4. 使用 cdn，图片、css、js等静态资源使用 cdn 分发</h3><h3 id="5-避免空的-href-和-src-等属性值为空"><a href="#5-避免空的-href-和-src-等属性值为空" class="headerlink" title="5. 避免空的 href 和 src 等属性值为空"></a>5. 避免空的 href 和 src 等属性值为空</h3><p>当 link 标签的 href 属性为空、script 标签的 src 属性为空的时候，浏览器渲染的时候会把当前页面的 URL 作为它们的属性值，从而把页面的内容加载进来作为它们的值。</p>
-<h3 id="6-合理利用缓存（Expires-或者-Cache-Control）"><a href="#6-合理利用缓存（Expires-或者-Cache-Control）" class="headerlink" title="6. 合理利用缓存（Expires 或者 Cache-Control）"></a>6. 合理利用缓存（Expires 或者 Cache-Control）</h3><p>前提是 css 和 js 写在外部文件中。例如，用 Exipres 是用来设置 css、js、图片资源文件的过期时间，可以使这些内容在指定时间内具有缓存性，这样下回再访问同样的资源时就通过浏览器缓存区读取，不需要再发出 http 请求（用户强制刷新页面除外）。不过哪些文件应该缓存，哪些文件应该实时更新给用户还是应该斟酌一下。</p>
-<h3 id="7-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#7-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="7. 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>7. 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>比如外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间,在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
-<h3 id="8-避免重定向"><a href="#8-避免重定向" class="headerlink" title="8. 避免重定向"></a>8. 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="external">http://baidu.com/</a> 。</p>
-<h3 id="9-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量"><a href="#9-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量" class="headerlink" title="9. 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量"></a>9. 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量</h3><p>比如 css、js、图片等，客户端请求静态文件的时候，减少了 cookie 的反复传输对主域名的影响。</p>
-<h3 id="10-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”"><a href="#10-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”" class="headerlink" title="10. js 尽量使用“异步加载”，非首屏模块使用“惰性加载”"></a>10. js 尽量使用“异步加载”，非首屏模块使用“惰性加载”</h3><p>首屏一定要快！能不加载的先不加载，能不执行的先不执行！</p>
-<p>参考：<br>[1] <a href="http://developer.51cto.com/art/201207/347525_all.htm" target="_blank" rel="external">http://developer.51cto.com/art/201207/347525_all.htm</a><br>[2] <a href="http://div.io/topic/371" target="_blank" rel="external">http://div.io/topic/371</a></p>
+<h3 id="·-精简-css-和-js-文件，即压缩文件体积"><a href="#·-精简-css-和-js-文件，即压缩文件体积" class="headerlink" title="· 精简 css 和 js 文件，即压缩文件体积"></a>· 精简 css 和 js 文件，即压缩文件体积</h3><h3 id="·-使用-cdn，图片、css、js等静态资源使用-cdn-分发"><a href="#·-使用-cdn，图片、css、js等静态资源使用-cdn-分发" class="headerlink" title="· 使用 cdn，图片、css、js等静态资源使用 cdn 分发"></a>· 使用 cdn，图片、css、js等静态资源使用 cdn 分发</h3><h3 id="·-避免空的-href-和-src-等属性值为空"><a href="#·-避免空的-href-和-src-等属性值为空" class="headerlink" title="· 避免空的 href 和 src 等属性值为空"></a>· 避免空的 href 和 src 等属性值为空</h3><p>当 link 标签的 href 属性为空、script 标签的 src 属性为空的时候，浏览器渲染的时候会把当前页面的 URL 作为它们的属性值，从而把页面的内容加载进来作为它们的值。</p>
+<h3 id="·-合理利用缓存（Expires-或者-Cache-Control）"><a href="#·-合理利用缓存（Expires-或者-Cache-Control）" class="headerlink" title="· 合理利用缓存（Expires 或者 Cache-Control）"></a>· 合理利用缓存（Expires 或者 Cache-Control）</h3><p>前提是 css 和 js 写在外部文件中。例如，用 Exipres 是用来设置 css、js、图片资源文件的过期时间，可以使这些内容在指定时间内具有缓存性，这样下回再访问同样的资源时就通过浏览器缓存区读取，不需要再发出 http 请求（用户强制刷新页面除外）。不过哪些文件应该缓存，哪些文件应该实时更新给用户还是应该斟酌一下。</p>
+<h3 id="·-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#·-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="· 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>· 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>比如外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间,在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
+<h3 id="·-避免重定向"><a href="#·-避免重定向" class="headerlink" title="· 避免重定向"></a>· 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="external">http://baidu.com/</a> 。</p>
+<h3 id="·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量"><a href="#·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量" class="headerlink" title="· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量"></a>· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量</h3><p>cookie 会影响加载速度，所以静态资源域名不使用 cookie。</p>
+<h3 id="·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”"><a href="#·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”" class="headerlink" title="· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”"></a>· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”</h3><p>首屏一定要快！能不加载的先不加载，能不执行的先不执行！</p>
+<blockquote>
+<h2 id="js-代码优化"><a href="#js-代码优化" class="headerlink" title="js 代码优化"></a>js 代码优化</h2></blockquote>
+<h3 id="·-减少重绘和回流"><a href="#·-减少重绘和回流" class="headerlink" title="· 减少重绘和回流"></a>· 减少重绘和回流</h3><p>详细内容参见 <a href="http://nanchao.win/2017/03/30/repaint-and-reflow/">重绘和回流（repaint &amp; reflow）</a></p>
+<h3 id="·-缓存-dom，缓存-array-length"><a href="#·-缓存-dom，缓存-array-length" class="headerlink" title="· 缓存 dom，缓存 array.length"></a>· 缓存 dom，缓存 array.length</h3><p>dom 访问代价挺高的，尽量减少</p>
+<h3 id="·-尽量使用事件代理，避免批量绑定事件"><a href="#·-尽量使用事件代理，避免批量绑定事件" class="headerlink" title="· 尽量使用事件代理，避免批量绑定事件"></a>· 尽量使用事件代理，避免批量绑定事件</h3><p>逻辑更清晰，性能更优</p>
+<h3 id="·-尽量使用-id-选择器"><a href="#·-尽量使用-id-选择器" class="headerlink" title="· 尽量使用 id 选择器"></a>· 尽量使用 id 选择器</h3><p>id 选择器速度快</p>
+<blockquote>
+<h2 id="css-代码优化"><a href="#css-代码优化" class="headerlink" title="css 代码优化"></a>css 代码优化</h2></blockquote>
+<h3 id="·-尽量避免写在-html-标签中写-style-属性"><a href="#·-尽量避免写在-html-标签中写-style-属性" class="headerlink" title="· 尽量避免写在 html 标签中写 style 属性"></a>· 尽量避免写在 html 标签中写 style 属性</h3><p>这样写维护性差</p>
+<h3 id="·-正确使用-display-的属性"><a href="#·-正确使用-display-的属性" class="headerlink" title="· 正确使用 display 的属性"></a>· 正确使用 display 的属性</h3><p>display 属性会影响页面的渲染，因此请合理使用<br>1) display:inline 后不应该再使用 width、height、margin、padding 以及 float<br>2) display:inline-block 后不应该再使用 float<br>3) display:block 后不应该再使用 vertical-align<br>4) display:table-* 后不应该再使用 margin 或者 float</p>
+<h3 id="·-不滥用-float"><a href="#·-不滥用-float" class="headerlink" title="· 不滥用 float"></a>· 不滥用 float</h3><p>float 在渲染时计算量比较大，尽量减少使用</p>
+<h3 id="·-值为-0-时不需要任何单位"><a href="#·-值为-0-时不需要任何单位" class="headerlink" title="· 值为 0 时不需要任何单位"></a>· 值为 0 时不需要任何单位</h3><p>为了浏览器的兼容性和性能，值为 0 时不要带单位</p>
+<p>参考：<br>[1] <a href="http://developer.51cto.com/art/201207/347525_all.htm" target="_blank" rel="external">http://developer.51cto.com/art/201207/347525_all.htm</a><br>[2] <a href="http://div.io/topic/371" target="_blank" rel="external">http://div.io/topic/371</a><br>[3] <a href="https://isux.tencent.com/h5-performance.html" target="_blank" rel="external">https://isux.tencent.com/h5-performance.html</a></p>
 
       
     </div><!-- .entry-content -->
@@ -211,6 +225,10 @@
       <ul>
         
           <li>
+            <a href="/2017/04/07/javascript-variable/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
           </li>
         
@@ -246,10 +264,6 @@
             <a href="/2017/01/13/jsfuck03/">jsfuck 6 个字符写 js 代码（四）</a>
           </li>
         
-          <li>
-            <a href="/2017/01/11/jsfuck02/">jsfuck 6 个字符写 js 代码（三）</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -259,7 +273,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </aside>
 
@@ -268,7 +282,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 13.33px;">grammar</a> <a href="/tags/js/" style="font-size: 16.67px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 20px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 15px;">grammar</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 20px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
     </div>
   </aside>
 
