@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/07/javascript-variable/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
-<meta property="og:updated_time" content="2017-04-07T07:59:06.383Z">
+<meta property="og:updated_time" content="2017-04-07T08:04:13.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 数据类型">
 <meta name="twitter:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/07/javascript-variable/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/javascript-variable/" data-id="cj17iuy5h0013qsbarux2mjsa" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/javascript-variable/" data-id="cj17jpkwz0012wwbatx30gqv1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,6 +129,7 @@
 <blockquote>
 <p>（1）<strong>基本类型：</strong> number、string、boolean、null、undefined<br>（2）<strong>引用类型：</strong> object</p>
 </blockquote>
+<p>js 标识符是严格区分大小写的，所以必须注意 null、undefined 等关键词全为小写字母构成。</p>
 <p><strong>那么，基本类型数据怎么能调用方法呢？</strong></p>
 <p>5 种基本类型，除了 null 和 undefined 以外，其他 3 种都有与之对应的特殊的引用类型——包装类型。当代码被解释执行时，底层会对基本类型做一个类型转换，转换成相应的引用类型，然后就可以调用相应引用类型有权访问的方法（或属性）了。</p>
 <pre><code>&quot;enjoy javascript&quot;.length;  // 16
@@ -138,8 +139,7 @@
 var oStringObject = new String(&quot;enjoy javascript&quot;);
 oStringObject.length  // 16
 oStringObject.toUpperCase();  // &quot;ENJOY JAVASCRIPT&quot;
-</code></pre><p>js 标识符是严格区分大小写的，所以必须注意 null、undefined 等关键词全为小写字母构成。</p>
-<p>JavaScript 有 3 种方法，可以确定一个值到底什么类型：</p>
+</code></pre><p><strong>JavaScript 有 3 种方法，可以确定一个值到底什么类型：</strong></p>
 <blockquote>
 <p>① typeof 运算符<br>② instanceof 运算符<br>③ Object.prototype.toString 方法</p>
 </blockquote>
