@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/03/31/localStorage/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
-<meta property="og:updated_time" content="2017-04-12T07:45:01.523Z">
+<meta property="og:updated_time" content="2017-04-13T06:39:50.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器本地存储（一）">
 <meta name="twitter:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/31/localStorage/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj1fychms001f34bankfeff6n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj1fz1ode001dz0bacu0tn9h2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -212,8 +212,44 @@
 <p>同源政策规定，两个网址只要域名和端口相同就可以共享 cookie，也即是说，它不要求协议相同，同域下 http 和 https 共享 cookie。即 <a href="http://a.com" target="_blank" rel="external">http://a.com</a> 下设置的 cookie，可以被 <a href="https://a.com" target="_blank" rel="external">https://a.com</a> 读取。</p>
 <p><strong>(5) 无法被 JavaScript  读取的 cookie</strong></p>
 <p>服务器端设置 cookie的时候，如果加上了 HttpOnly 属性，则这个 cookie 无法被 JavaScript 读取。即 document.cookie 不会返回这个 cookie 的值，但是这个 cookie 会跟随 http 请求发送至服务端。</p>
-<p>先到这里，下篇继续这个话题。</p>
-<p>参考：<br>[1] <a href="http://www.w3school.com.cn/js/js_cookies.asp" target="_blank" rel="external">http://www.w3school.com.cn/js/js_cookies.asp</a><br>[2] <a href="http://javascript.ruanyifeng.com/bom/cookie.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/cookie.html</a><br>[3] <a href="http://jerryzou.com/posts/cookie-and-web-storage/" target="_blank" rel="external">http://jerryzou.com/posts/cookie-and-web-storage/</a></p>
+<p>对于 chrome 等浏览器，或者说是正常人使用的浏览器，我们通过浏览器自带的开发者工具的控制台（Console）、网络（Network）等面板可以很方便地打印或者直接查看 cookie 信息；而对于 ie6 等浏览器，我们怎么快速地查看 cookie 信息呢？</p>
+<blockquote>
+<p><strong>浏览器地址栏运行 JavaScript 代码</strong></p>
+</blockquote>
+<pre><code>javascript:alert(document.cookie)
+</code></pre><p>打开一个网页，在浏览器地址栏输入以上代码，回车。我们会看到一个弹窗，内容为当前页面下的 cookie 内容。</p>
+<p>当然了，你也可以运行其他 JavaScript 代码，格式为：</p>
+<pre><code>javascript:your_code_here
+</code></pre><p>需要注意的是：不是所有浏览器都支持地址栏运行代码，例如，Firefox 就不支持。另外，如果通过复制以上语句然后粘贴到地址栏，某些浏览器也不一定会执行，所以，尽量手动输入以上代码吧。</p>
+<p>这里提到了 alert，顺便总结一下 alert 和 console.log 方法的不同的。</p>
+<blockquote>
+<p><strong>alert</strong></p>
+</blockquote>
+<p>【1】有阻塞作用，不点击弹窗“确定”按钮，后续代码不能继续执行；<br>【2】只能输出字符串（string），不是字符串的参数，自动调用其 toString 方法；<br>【3】只能接收一个参数，即每次输出一个字符串。</p>
+<blockquote>
+<p><strong>console.log</strong></p>
+</blockquote>
+<p>【1】用于在浏览器开发者工具 console 窗口输出信息，不阻塞后续代码；<br>【2】可以打印任何类型数据，可以接受多个参数（包括格式化字符串）；<br>【3】支持以下占位符</p>
+<pre><code>%s 字符串
+%d 整数
+%i 整数
+%f 浮点数
+%o 对象的链接
+%c CSS格式字符串
+</code></pre><p>例如：</p>
+<pre><code>var num = 1316;
+var suffix = &#39;days&#39;;
+
+console.log(&#39;We know each other for %d %s&#39;,num,suffix);
+// We know each other for 1316 days
+</code></pre><p>使用 %c 占位符，还可以对输出内容添加样式：</p>
+<pre><code>console.log(
+  &#39;%c这段文字是红色的，背景黄色&#39;,
+  &#39;color: red; background: yellow; font-size: 24px;&#39;
+)
+</code></pre><p>执行以上代码，将会以第二个参数指定的样式输出第一个参数内容。</p>
+<p>扯远了，下篇继续本地存储这个话题。</p>
+<p>参考：<br>[1] <a href="http://www.w3school.com.cn/js/js_cookies.asp" target="_blank" rel="external">http://www.w3school.com.cn/js/js_cookies.asp</a><br>[2] <a href="http://javascript.ruanyifeng.com/bom/cookie.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/cookie.html</a><br>[3] <a href="http://jerryzou.com/posts/cookie-and-web-storage/" target="_blank" rel="external">http://jerryzou.com/posts/cookie-and-web-storage/</a><br>[4] <a href="http://www.jb51.net/article/71547.htm" target="_blank" rel="external">http://www.jb51.net/article/71547.htm</a><br>[5] <a href="http://javascript.ruanyifeng.com/stdlib/console.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/stdlib/console.html</a><br>[6] <a href="http://www.cnblogs.com/iyangyuan/p/4493322.html" target="_blank" rel="external">http://www.cnblogs.com/iyangyuan/p/4493322.html</a></p>
 
       
     </div><!-- .entry-content -->
