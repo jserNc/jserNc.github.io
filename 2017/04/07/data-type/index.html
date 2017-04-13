@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/07/data-type/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
-<meta property="og:updated_time" content="2017-04-12T03:35:59.075Z">
+<meta property="og:updated_time" content="2017-04-13T03:36:15.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 数据类型">
 <meta name="twitter:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/07/data-type/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj1eqwmdj000ljwbarb42zn0f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj1ftwoz4000dbwbay4wss5af" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -139,7 +139,69 @@
 var oStringObject = new String(&quot;enjoy javascript&quot;);
 oStringObject.length  // 16
 oStringObject.toUpperCase();  // &quot;ENJOY JAVASCRIPT&quot;
-</code></pre><p><strong>JavaScript 有 3 种方法，可以确定一个值到底什么类型：</strong></p>
+
+// 再看
+1.toSting();
+// 报错 SyntaxError: Invalid or unexpected token
+// 解析器把 1 后面的 . 当初小数点了
+
+// 正确姿势
+(1).toString()
+// &quot;1&quot;
+</code></pre><p>这里提到 toString 方法，就多说两句。该方法属于 Object 对象，用于<strong>将当前对象以字符串形式返回</strong>。由于所有的对象都“继承”了 Object 对象，因此所有的实例对象都可以使用该方法。但是，Array、Boolean、Function、Number 以及其他内置对象都重写了该函数，以满足其自身需要。</p>
+<p>下面分别看看各类型数据的 toString 方法返回怎样的值（chrome 控制台执行以下代码）：</p>
+<pre><code>// 对象 Object
+var o = {site : &quot;Enjoy javascript&quot;};
+o.toString();
+// &quot;[object Object]&quot;
+
+// 数组 Array
+var arr = [&#39;I&#39;,&#39;love&#39;,&#39;zx&#39;,1314];
+arr.toString()
+// &quot;I,love,zx,1314&quot;
+
+// 数字 Number
+var num = 0.37208511093539554;
+num.toString();
+// &quot;0.37208511093539554&quot;
+
+// 布尔值 Boolean
+var bool = true;
+bool.toString();
+// &quot;true&quot;
+
+// 日期 Date
+var now = new Date();
+now.toString();
+// &quot;Thu Apr 13 2017 11:06:32 GMT+0800 (中国标准时间)&quot;
+
+// DOM 节点
+var eles = document.getElementsByTagName(&quot;body&quot;);
+eles.toString()
+// &quot;[object HTMLCollection]&quot;
+eles[0].toString()
+// &quot;[object HTMLBodyElement]&quot;
+</code></pre><p>这里着重说一下 Number.prototype.toString 方法。该方法将数字包装对象转换为字符串，其接收 1 个参数，表示输出字符串的进制，取值范围为整数 2-36，不在这个范围的参数会报错。如果省略参数，则默认取 10 进制。</p>
+<pre><code>// 默认 10 进制
+(30).toString();
+// &quot;30&quot;
+
+// 36 进制（0-9,a-z 共 36 个字符）
+(30).toString(36);
+// &quot;u&quot;
+</code></pre><p>于是，可以利用 Math.random 和 Number.prototype.toString 方法来生成随机字符串。</p>
+<pre><code>function generateRandomAlphaNum(len) {
+    var s = &quot;&quot;;
+    for (;s.length &lt; len;){
+        s += Math.random().toString(36).substr(2);
+    }
+    return s.substr(0,len);   
+}
+
+generateRandomAlphaNum(6);
+// &quot;uhfjlr&quot;
+</code></pre><p>好了，言归正传。JavaScript 各个类型数据的定义就不多说了。JavaScript 是一门动态类型语言，也就是说变量声明后，可以被赋予各种类型的值。以下主要探讨如何确定一个变量最终是什么类型的值。</p>
+<p><strong>JavaScript 有 3 种方法，可以确定一个值到底什么类型：</strong></p>
 <blockquote>
 <p>① typeof 运算符<br>② instanceof 运算符<br>③ Object.prototype.toString 方法</p>
 </blockquote>
@@ -282,7 +344,7 @@ Number(false);
 
 null == false  // false，为什么?
 </code></pre><p>其实，以上关于相等运算符 == 的比较规则在比较其他值的时候都适用，唯独不适用于 null。那我们把 null 和 undefined 单独分出来，记住一个事实，<strong>null 和 undefined 之间相等，它们与其他值比较都不相等。</strong></p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/types.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/types.html</a><br>[2] <a href="http://www.cnblogs.com/sharpxiajun/p/4133462.html" target="_blank" rel="external">http://www.cnblogs.com/sharpxiajun/p/4133462.html</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/types.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/types.html</a><br>[2] <a href="http://www.cnblogs.com/sharpxiajun/p/4133462.html" target="_blank" rel="external">http://www.cnblogs.com/sharpxiajun/p/4133462.html</a><br>[3] <a href="http://www.cnblogs.com/think_fish/p/3800241.html" target="_blank" rel="external">http://www.cnblogs.com/think_fish/p/3800241.html</a><br>[4] <a href="http://www.cnblogs.com/fybsp58/p/5683206.html" target="_blank" rel="external">http://www.cnblogs.com/fybsp58/p/5683206.html</a></p>
 
       
     </div><!-- .entry-content -->
