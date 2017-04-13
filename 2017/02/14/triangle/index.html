@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/02/14/triangle/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用 css 来实现这种三角形效果，下面我们分析一下怎么利用 css 制作三角形。">
-<meta property="og:updated_time" content="2017-03-13T02:00:02.469Z">
+<meta property="og:updated_time" content="2017-04-13T07:22:10.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css 三角形 扇形">
 <meta name="twitter:description" content="向下拖动当前页面，我们会看到页面右下角有个“返回顶部”按钮，其中有一个三角形。除了用图片，我们还可以用 css 来实现这种三角形效果，下面我们分析一下怎么利用 css 制作三角形。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/02/14/triangle/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/02/14/triangle/" data-id="cj1fz1ofz0029z0ba9igp91em" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/02/14/triangle/" data-id="cj1g2h2dw0028y4ba8odqqxw5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -194,24 +194,35 @@
 </code></pre><p><div style="border-radius:30px;border:30px solid;border-color:#f5f5f5 #f5f5f5 blue #f5f5f5;height:0;width:0;background:#f5f5f5;"><div></div></div></p>
 <p>我们看到，扇形左右两侧有蓝色的弧形，下面，我们把 3 个边框背景透明化：</p>
 <pre><code>.div { 
-    border-radius : 30px;
-    border : 30px solid;
-    border-color : transparent transparent blue transparent;
-    height : 0;
-    width : 0;
-    background : #f5f5f5;
+  border-radius : 30px;
+  border : 30px solid;
+  border-color:transparent transparent blue transparent;
+  height : 0;
+  width : 0;
+  background : #f5f5f5;
 }
 </code></pre><p><div style="border-radius:30px;border:30px solid;border-color:transparent transparent blue transparent;height :0;width:0;background:#f5f5f5;"><div></div></div></p>
 <p>于是，得到一个扇形，我们还可以将 div 背景色设为透明：</p>
 <pre><code>.div { 
-    border-radius : 30px;
-    border : 30px solid;
-    border-color : transparent transparent blue transparent;
-    height : 0;
-    width : 0;
-    background : transparent;
+  border-radius : 30px;
+  border : 30px solid;
+  border-color:transparent transparent blue transparent;
+  height : 0;
+  width : 0;
+  background : transparent;
 }
 </code></pre><p><div style="border-radius:30px;border:30px solid;border-color:transparent transparent blue transparent;height :0;width:0;background:transparent;"><div></div></div></p>
+<p><strong> 实时编辑 css</strong></p>
+<p>为了方便调试 css 代码，实时可视化编辑 css 代码是个不错的选择。给 style 标签加上 contentEditable 属性，并将 display 属性设为 block，可以让 style 标签处于可视可编辑状态，修改 css 代码内容，样式会实时地在页面呈现出来。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;style style=&quot;display:block&quot; contentEditable&gt;
+            body { color: blue }
+        &lt;/style&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/Wayou/p/things_you_dont_know_about_frontend.html" target="_blank" rel="external">http://www.cnblogs.com/Wayou/p/things_you_dont_know_about_frontend.html</a></p>
 
       
     </div><!-- .entry-content -->
