@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/07/data-type/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
-<meta property="og:updated_time" content="2017-04-13T05:28:44.697Z">
+<meta property="og:updated_time" content="2017-04-14T07:09:19.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 数据类型">
 <meta name="twitter:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/07/data-type/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj1g88sx6000n44baw8wukfry" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj1h7hq4u000zm8ba8rvkj844" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -148,7 +148,7 @@ oStringObject.toUpperCase();  // &quot;ENJOY JAVASCRIPT&quot;
 // 正确姿势
 (1).toString()
 // &quot;1&quot;
-</code></pre><p>这里提到 toString 方法，就多说两句。该方法属于 Object 对象，用于<strong>将当前对象以字符串形式返回</strong>。由于所有的对象都“继承”了 Object 对象，因此所有的实例对象都可以使用该方法。但是，Array、Boolean、Function、Number 以及其他内置对象都重写了该函数，以满足其自身需要。</p>
+</code></pre><p>这里提到 toString 方法，就多说两句。该方法属于 Object 对象，用于<strong>将当前对象以字符串形式返回</strong>。由于所有的对象都“继承”了 Object 对象，因此所有的实例对象都可以使用该方法。但是，Array、Boolean、Function、Number 以及其他本地对象都重写了该函数，以满足其自身需要。</p>
 <p>下面分别看看各类型数据的 toString 方法返回怎样的值（chrome 控制台执行以下代码）：</p>
 <pre><code>// 对象 Object
 var o = {site : &quot;Enjoy javascript&quot;};
@@ -420,6 +420,10 @@ null == false  // false，为什么?
       <ul>
         
           <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/07/variable/">JavaScript 变量</a>
           </li>
         
@@ -455,10 +459,6 @@ null == false  // false，为什么?
             <a href="/2017/03/23/click-me-to-hide/">关于 js 脚本位置</a>
           </li>
         
-          <li>
-            <a href="/2017/02/14/triangle/">css 三角形 扇形</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -468,7 +468,7 @@ null == false  // false，为什么?
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </aside>
 
