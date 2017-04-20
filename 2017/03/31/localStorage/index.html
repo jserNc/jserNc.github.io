@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/03/31/localStorage/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
-<meta property="og:updated_time" content="2017-04-13T07:27:43.967Z">
+<meta property="og:updated_time" content="2017-04-20T02:33:36.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器本地存储（一）">
 <meta name="twitter:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/31/localStorage/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj1pptwe6002ccwba4oj3okna" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj1psn5cl001dawbagk0anc0i" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -205,7 +205,7 @@
         +((expTime == null) ? &quot;&quot; : &quot;;expires=&quot; + t)
 }
 </code></pre><p><strong>(3) 清除 cookie</strong></p>
-<p>设置 cookie 的过期时间 expires 为 0，或者等于一个过去的日期，使之失效。</p>
+<p>设置 cookie 的过期时间 expires 为 0，或者等于一个过去的日期，使之失效。浏览器是根据本地时间来决定 cookie 是否过期，而本地时间是可以随意改动的，所以没办法保证 cookie 一定会在开发者指定的时间过期。</p>
 <p><strong>(4) cookie 个数限制</strong></p>
 <p>由于浏览器对 cookie 的个数又限制，每个域最多可以设置几十个。为了规避个数的限制，我们可以用一个 cookie 来存储多个键值对，如：name=a=b&amp;c=d&amp;e=f&amp;g=h 这样实际上只设置 1 个 cookie，cookie 值内部使用 &amp; 符号，隔开对个键值对。读取这个 cookie 的时候，我们自行解析，得到各个键值对。</p>
 <p><strong>(5) 同源政策</strong></p>
