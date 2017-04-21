@@ -11,11 +11,11 @@
   
   
   
-  <title>Archives: 2016 | 南潮的博客</title>
+  <title>Tag: grammar | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Enjoy javascript">
-<meta property="og:url" content="http://nanchao.win/archives/2016/page/4/index.html">
+<meta property="og:url" content="http://nanchao.win/tags/grammar/page/2/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Enjoy javascript">
@@ -94,51 +94,43 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
+    <article id="post-tostring" class="post-tostring post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
     <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/21/index/">pjax 应用 demo</a>
+      <a class="article-title" href="/2016/10/14/tostring/">toString.call() 引起的一些思考</a>
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/21/index/">
-    <time datetime="2016-10-21T08:24:36.000Z" class="entry-date">
-        2016-10-21
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/14/tostring/">toString.call() 引起的一些思考</a>
-    </h1>
-  
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cj1rlqrub002chgbatfgzd73l" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
 
-  </header>
-  <footer class="entry-meta">
+    
+
+    <div class="entry-content">
+      
+        <p>toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。</p>
+<p>为了方便下文的理解，在这里再强调一下原型链的作用：<strong>读取对象的某个属性时，JavaScript引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，直到顶层原型对象 Object.prototype。如果一层层回溯到最顶层还是找不到，则返回undefined。</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/14/tostring/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
     <a href="/2016/10/14/tostring/">
     <time datetime="2016-10-14T09:20:13.000Z" class="entry-date">
         2016-10-14
@@ -151,113 +143,22 @@
 
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/14/https/">https 本地环境搭建(windows)</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/14/https/">
-    <time datetime="2016-10-14T08:45:00.000Z" class="entry-date">
-        2016-10-14
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/14/point24/">JavaScript 24 点游戏算法</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/14/point24/">
-    <time datetime="2016-10-14T06:22:09.000Z" class="entry-date">
-        2016-10-14
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/13/sort/">JavaScript 排序算法</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/13/sort/">
-    <time datetime="2016-10-13T09:12:08.000Z" class="entry-date">
-        2016-10-13
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/13/document-write/">关于 document.write 引入第三方脚本</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/13/document-write/">
-    <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
-        2016-10-13
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
-    </footer>
-</article>
+
   
   
-    </div></section>
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/tags/grammar/">&laquo; Prev</a><a class="page-number" href="/tags/grammar/">1</a><span class="page-number current">2</span>
+      </nav>
+    </nav>
   
 
 </div></div>
