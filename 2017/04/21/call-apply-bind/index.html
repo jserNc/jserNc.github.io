@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
+  <meta name="description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。它们的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里不再赘述。本文更深入地讨论一下 call 和 bind方法。" />
+  
 
   
   
@@ -11,14 +13,18 @@
   
   
   
-  <title>Archives: 2016 | 南潮的博客</title>
+  <title>理解 call + bind | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Enjoy javascript">
-<meta property="og:url" content="http://nanchao.win/archives/2016/index.html">
+  <meta name="description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。它们的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里不再赘述。本文更深入地讨论一下 call 和 bind方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 call + bind">
+<meta property="og:url" content="http://nanchao.win/2017/04/21/call-apply-bind/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。它们的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里不再赘述。本文更深入地讨论一下 call 和 bind方">
+<meta property="og:updated_time" content="2017-04-21T08:10:38.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Enjoy javascript">
+<meta name="twitter:title" content="理解 call + bind">
+<meta name="twitter:description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。它们的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里不再赘述。本文更深入地讨论一下 call 和 bind方">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -92,176 +98,152 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-call-apply-bind" class="post-call-apply-bind post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/30/page-optimization/">网页性能优化建议</a>
+    <h1 class="entry-title article-title">
+      理解 call + bind
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/30/page-optimization/">
-    <time datetime="2016-12-30T01:42:26.000Z" class="entry-date">
-        2016-12-30
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/21/call-apply-bind/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/21/call-apply-bind/" data-id="cj1rayq27000by8ba5yjgl2mj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。它们的基本用法在 <a href="http://nanchao.win/2016/11/02/this/">理解 JavaScript 中 this</a> 一文已经做了介绍，这里不再赘述。本文更深入地讨论一下 call 和 bind方法。</p>
+<a id="more"></a>
+<p>我们的需求是：从原数组 [1,2,3] 中索引为 0 的位置开始，分隔出长度为 1 的新数组。</p>
+<pre><code>// 首先会想到这么写：
+[1,2,3].slice(0,1)
+// [1]
+
+// call 方法的作用是将一个方法的 this 
+// 绑定到一个新的对象
+
+// 所以，以上写法相当于：
+Array.prototype.slice.call([1,2,3],0,1)
+// [1]
+</code></pre><p>我们看到 call 方法的调用主体是 slice 方法，并且这时的 call 方法还是以前的样子。</p>
+<pre><code>Array.prototype.slice.call === Function.prototype.call
+</code></pre><p>换个角度看，只要 call 的调用主体是 slice 方法，那么实参为 [1,2,3],0,1 这种形式，就可以完成从一个数组中切分出一个新的数组的功能。那么，我们用 bind 方法，把 call 方法的调用主体绑定为 slice 方法会怎样呢？</p>
+<pre><code>var call = Function.prototype.call;
+var slice = Array.prototype.slice;
+
+var newCall = call.bind(slice);
+newCall([1,2,3],0,1);
+// [1]
+
+// 也就是说，以下两种方式等效：
+newCall([1,2,3],0,1);
+[1,2,3].slice(0,1);
+</code></pre><p>为了加深理解，我们再换个角度看以上写法：</p>
+<pre><code>var newCall = call.bind(slice);
+
+// 于是：
+newCall([1,2,3],0,1);
+// 相当于：
+call.bind(slice)([1,2,3],0,1);
+// [1]
+// 即 call 方法的 this 绑定为 slice，
+// 然后调用实参 [1,2,3],0,1
+
+// 等效于：
+call.call(slice,[1,2,3],0,1)
+// [1]
+
+// 也相当于在 slice 方法上调用 call 方法：
+slice.call([1,2,3],0,1);
+// [1]
+
+// 也相当于：
+[1,2,3].slice(0,1);
+// [1]
+</code></pre><p>也就是说，以下四种写法等效：</p>
+<pre><code>// 这里的定义会影响写法一二三：
+var call = Function.prototype.call;
+var slice = Array.prototype.slice;
+
+// 写法一：
+call.bind(slice)([1,2,3],0,1);
+
+// 写法二：
+call.call(slice,[1,2,3],0,1);
+
+// 写法三：
+slice.call([1,2,3],0,1);
+
+// 写法四：
+[1,2,3].slice(0,1);
+</code></pre><p>以上四种写法中，前提是将全局的 call、slice 方法都分别指向 Function.prototype.call、Array.prototype.slice 方法。当然了，我这么写是为了偷懒，完全没必要特地去新增加这两个全局变量的。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/this.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/this.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/21/call-apply-bind/">
+    <time datetime="2017-04-21T02:45:37.000Z" class="entry-date">
+        2017-04-21
     </time>
 </a>
     
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
-
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/28/jsonp-beacon/">JSONP 和图像灯塔</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/28/jsonp-beacon/">
-    <time datetime="2016-12-28T09:13:08.000Z" class="entry-date">
-        2016-12-28
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/26/css-vertical-centering/">css 垂直居中几种实现方法</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/26/css-vertical-centering/">
-    <time datetime="2016-12-26T10:07:32.000Z" class="entry-date">
-        2016-12-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/22/batch-processing/">windows 批处理脚本修改文件</a>
-    </h1>
-  
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/22/batch-processing/">
-    <time datetime="2016-12-22T03:46:32.000Z" class="entry-date">
-        2016-12-22
-    </time>
-</a>
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+        <p><span class="nav-next"><a href="/2017/04/14/some-javascript-functions/" rel="next"><span class="meta-nav">下一篇：</span>几个典型的 JavaScript 函数 </a></span></p>
+    
+</nav><!-- .nav-single -->
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/12/19/ajax-status/">关于 ajax 请求 status 值为 0</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/12/19/ajax-status/">
-    <time datetime="2016-12-19T01:44:25.000Z" class="entry-date">
-        2016-12-19
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/11/21/webpack/">前端模块化和打包工具 webpack</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/11/21/webpack/">
-    <time datetime="2016-11-21T03:57:27.000Z" class="entry-date">
-        2016-11-21
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
 
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
