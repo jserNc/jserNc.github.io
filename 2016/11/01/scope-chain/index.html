@@ -34,7 +34,7 @@
 
 作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。">
 <meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
-<meta property="og:updated_time" content="2017-04-06T09:07:44.527Z">
+<meta property="og:updated_time" content="2017-04-25T03:23:00.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 作用域链（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -133,7 +133,7 @@
             
             <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj1vxwnqy001urgbaifyr84tw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj1wykeln001uqoba5vnccprv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -193,6 +193,61 @@ function f2(){
 f2();
 // Uncaught ReferenceError: a is not defined
 </code></pre><p>我们看到，这里会报错，f1 根本不能取到 f2 内部定义的变量 a。</p>
+<p>再看：</p>
+<pre><code>// html
+&lt;p id=&quot;p1&quot;&gt;段落 1&lt;/p&gt;
+
+//js
+var f = function(){
+    console.log(&#39;f 函数的激活者：&#39;,this);
+},
+p1 = document.getElementById(&quot;p1&quot;),
+p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+p1.addEventListener(&quot;click&quot;,f,false);
+document.write(p2);        
+document.write(p3);
+</code></pre><p>点击段落 1、2、3，打印信息分别如下：</p>
+<p>段落 1：</p>
+<pre><code>f 函数的激活者： &lt;p id=​&quot;p1&quot;&gt;​段落1​&lt;/p&gt;​
+</code></pre><p>段落 2：</p>
+<pre><code>&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;
+</code></pre><p>段落 3：</p>
+<pre><code>f 函数的激活者：Window {stop: function, open: function,…}
+</code></pre><p>下面把上面的 js 代码用自执行函数包围起来：</p>
+<pre><code>(function(){
+  var f = function(){
+      console.log(&#39;f 函数的激活者：&#39;,this);
+  },
+  p1 = document.getElementById(&quot;p1&quot;),
+  p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+  p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+  p1.addEventListener(&quot;click&quot;,f,false);
+  document.write(p2);        
+  document.write(p3);
+})();
+</code></pre><p>这时再点击段落1、2 打印的信息和以上一样，但是点击段落3 时报错了：</p>
+<pre><code>Uncaught ReferenceError: f is not defined
+</code></pre><p>把 f 函数定义在全局环境下：</p>
+<pre><code>var f = function(){
+      console.log(&#39;f 函数的激活者：&#39;,this);
+};
+(function(){
+  var p1 = document.getElementById(&quot;p1&quot;),
+  p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+  p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+  p1.addEventListener(&quot;click&quot;,f,false);
+  document.write(p2);        
+  document.write(p3);
+})();
+</code></pre><p>这时点击段落3 的打印信息又和之前一样了：</p>
+<pre><code>f 函数的激活者：Window {stop: function, open: function,…}
+</code></pre><p>其实，如果我们把回调函数部署在节点元素的 on- 属性上，回调函数内的 this 就不会再指向该节点元素了，而是指向全局对象 window，回调函数由 window 对象触发。这里 p3 正是这种方式绑定点击回调函数：</p>
+<pre><code>onclick=&quot;f()&quot;
+</code></pre><p>这里的 f 函数是由 window 对象触发的，若 f 是定义在自定义函数内部的函数，全局环境 window 找不到它那是必然的，所以才有了以上的报错。</p>
 <p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
