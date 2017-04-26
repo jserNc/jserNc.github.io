@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2017-04-26T09:56:08.781Z">
+<meta property="og:updated_time" content="2017-04-26T10:01:05.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 执行上下文（译）">
 <meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj1ypwdtd000qm8baye1qv457" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj1yta1e4000ns8bavjucxeh4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -228,32 +228,32 @@ fn();   // 进入 fn 函数上下文
 <p>一行一行地执行函数体内代码，给 variableObject 中的变量属性赋值。</p>
 <p><strong>为了验证函数声明的优先级高于变量声明，我们验证如下：</strong></p>
 <pre><code>(function(){
-    console.log(&#39;① &#39;,typeof f);
+    console.log(&#39;1. &#39;,typeof f);
     function f(){
         console.log(&quot;I&#39;m function f&quot;)
     }
 
     var f = 666;
 
-    console.log(&#39;② &#39;,typeof f);
+    console.log(&#39;2. &#39;,typeof f);
 })();
 
-// ① function
-// ② number
+// 1. function
+// 2. number
 </code></pre><p>我们将函数声明和变量声明换个位置，不出意外，执行结果应该不变。</p>
 <pre><code>(function(){
-    console.log(&#39;① &#39;,typeof f);
+    console.log(&#39;1. &#39;,typeof f);
 
     var f = 666;
     function f(){
         console.log(&quot;I&#39;m function f&quot;)
     }
 
-    console.log(&#39;② &#39;,typeof f);
+    console.log(&#39;2. &#39;,typeof f);
 })();
 
-// ① function
-// ② number
+// 1. function
+// 2. number
 </code></pre><p>用 function 关键词声明的函数，在上下文建立阶段就确定了其属性值就是指向该函数在内存中的地址的一个引用，虽然在建立阶段该函数变量不会被普通变量覆盖，但是在代码执行阶段该变量属性值是可以被覆盖的。所以，以上代码段执行结束后，最后变量 f 都是数字 666。</p>
 <p>下面再看个例子：</p>
 <pre><code>function foo(i) {
