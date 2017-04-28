@@ -34,7 +34,7 @@
 
 作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。">
 <meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
-<meta property="og:updated_time" content="2017-04-25T03:23:00.263Z">
+<meta property="og:updated_time" content="2017-04-28T09:36:28.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 作用域链（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -133,7 +133,7 @@
             
             <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj21ip0y1001w7sbaf6026ywx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj21n9ha4001wx0ban172qfda" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -193,6 +193,22 @@ function f2(){
 f2();
 // Uncaught ReferenceError: a is not defined
 </code></pre><p>我们看到，这里会报错，f1 根本不能取到 f2 内部定义的变量 a。</p>
+<p>下面再看一个“惰性函数/自定义函数”：</p>
+<pre><code>var v = 1;
+var f = function(){
+    var v = 2;
+    console.log(&#39;第一次出现&#39;);
+    f = function(){
+        console.log(v);
+    }
+}
+
+f()
+// 第一次出现
+
+f()
+// 2
+</code></pre><p>当函数有一些初始化准备工作要做，并且仅需执行一次，这种模式就很有用了。同时，我们也看到，虽然函数 f 是全局变量，但它第二次执行的时候，变量 v 取值是 2，而不是 1。</p>
 <p>再看：</p>
 <pre><code>// html
 &lt;p id=&quot;p1&quot;&gt;段落 1&lt;/p&gt;
