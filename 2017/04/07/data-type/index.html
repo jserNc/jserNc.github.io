@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。" />
+  <meta name="description" content="JavaScript 数据类型共有 6 种（es6 又新增第 7 种 symbol）：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>JavaScript 数据类型 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+  <meta name="description" content="JavaScript 数据类型共有 6 种（es6 又新增第 7 种 symbol）：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 数据类型">
 <meta property="og:url" content="http://nanchao.win/2017/04/07/data-type/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
-<meta property="og:updated_time" content="2017-04-14T07:09:19.406Z">
+<meta property="og:description" content="JavaScript 数据类型共有 6 种（es6 又新增第 7 种 symbol）：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+<meta property="og:updated_time" content="2017-04-28T06:26:49.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 数据类型">
-<meta name="twitter:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+<meta name="twitter:description" content="JavaScript 数据类型共有 6 种（es6 又新增第 7 种 symbol）：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/07/data-type/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj21b2td9000rx8ba8evgmflf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/data-type/" data-id="cj21ghjqb000rz4baawiu00l0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,11 +123,11 @@
 
     <div class="entry-content">
       
-        <p>JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。</p>
+        <p>JavaScript 数据类型共有 6 种（es6 又新增第 7 种 symbol）：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。</p>
 <a id="more"></a>
 <p>按照数据存储方式，JavaScript 数据可以分为两大类：</p>
 <blockquote>
-<p>（1）<strong>基本类型：</strong> number、string、boolean、null、undefined<br>（2）<strong>引用类型：</strong> object、array、function</p>
+<p>（1）<strong>基本类型：</strong> number、string、boolean<br>（2）<strong>引用类型：</strong> object、array、function<br>（2）<strong>特殊类型：</strong> null、undefined</p>
 </blockquote>
 <p>js 标识符是严格区分大小写的，所以必须注意 null、undefined 等关键词全为小写字母构成。</p>
 <p><strong>那么，基本类型数据怎么能调用方法呢？</strong></p>
