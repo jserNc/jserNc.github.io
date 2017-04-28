@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/14/some-javascript-functions/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
-<meta property="og:updated_time" content="2017-04-14T09:24:25.927Z">
+<meta property="og:updated_time" content="2017-04-28T07:44:36.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几个典型的 JavaScript 函数">
 <meta name="twitter:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/14/some-javascript-functions/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj21h7ega0022u4bawys0hgm5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj21ip0yw00247sba1vcqx4b9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -154,12 +154,19 @@ Math
 </code></pre><blockquote>
 <p><strong>宿主对象</strong></p>
 </blockquote>
-<p>由 ECMAScript 实现的宿主环境提供的对象。对于浏览器环境，宿主对象就是浏览器提供的对象，例如 document 对象。</p>
+<p>由 ECMAScript 实现的宿主环境提供的对象。对于浏览器环境，宿主对象就是浏览器提供的对象，所有 DOM 和 BOM 对象都是宿主对象。</p>
+<pre><code>// 文档对象
+document
+
+// 窗口
+window
+</code></pre><p>BOM 的核心是 window，而 window 对象又具有双重角色，它既是通过 js 访问浏览器窗口的一个接口，又是一个 Global（全局）对象。这意味着在网页中定义的任何对象，变量和函数，都以 window 作为其 Global 对象。</p>
 <blockquote>
 <p><strong>自定义对象</strong></p>
 </blockquote>
 <p>开发者自行定义的对象。</p>
-<p>下面，我们讨论一下 sort、replace、match 等 3 个方法。</p>
+<pre><code>var o = {};
+</code></pre><p>下面，我们讨论一下 sort、replace、match 等 3 个方法。</p>
 <p><strong>(1) Array.prototype.sort</strong></p>
 <p>我们都知道这个方法用于对数组元素进行排序。好，那么看一个例子：</p>
 <pre><code>var arr = [6,1,10];
@@ -343,7 +350,7 @@ var nums = str.match(/\d+/g)
 
 nums
 // [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
-</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html" target="_blank" rel="external">http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html</a><br>[2] <a href="http://www.w3school.com.cn/jsref/" target="_blank" rel="external">http://www.w3school.com.cn/jsref/</a><br>[3] <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/</a><br>[4] <a href="http://mao.li/javascript/javascript-sort/" target="_blank" rel="external">http://mao.li/javascript/javascript-sort/</a></p>
+</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html" target="_blank" rel="external">http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html</a><br>[2] <a href="http://www.w3school.com.cn/jsref/" target="_blank" rel="external">http://www.w3school.com.cn/jsref/</a><br>[3] <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/</a><br>[4] <a href="http://mao.li/javascript/javascript-sort/" target="_blank" rel="external">http://mao.li/javascript/javascript-sort/</a><br>[5] <a href="https://segmentfault.com/a/1190000000654274" target="_blank" rel="external">https://segmentfault.com/a/1190000000654274</a></p>
 
       
     </div><!-- .entry-content -->
