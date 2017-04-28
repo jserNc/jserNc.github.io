@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/06/jsfuck/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
-<meta property="og:updated_time" content="2017-04-28T06:37:44.156Z">
+<meta property="og:updated_time" content="2017-04-28T06:47:11.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（一）">
 <meta name="twitter:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj21gviua0013vsbaozcbirql" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj21h7ees001hu4baabafgfnk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -174,7 +174,7 @@ Number({
 <blockquote>
 <p><strong> 【1】运算子之中存在字符串 </strong><br>只要两个运算子中有一个是字符串，则不管另一个什么类型，都会被自动转换为字符串，然后执行字符串的连接运算；</p>
 <p><strong> 【2】运算子均为数值或布尔值 </strong><br>两个运算子都是数值或者布尔值，布尔值转换为数值（true 为 1，false 为 0），然后执行加法运算;</p>
-<p><strong> 【3】运算子中存在对象 </strong><br>两个运算子中存在对象（非原始类型数据），先调用该对象的 valueOf 方法，如果返回值为原始类型，然后按上面2条规则执行；否则调用该对象的 toString 方法，然后按上面2条规则执行。</p>
+<p><strong> 【3】运算子中存在对象 </strong><br>两个运算子中存在对象（非原始类型数据），先调用该对象的 valueOf 方法，如果返回值为原始类型，然后按上面 2 条规则执行；否则调用该对象的 toString 方法，然后按上面 2 条规则执行。</p>
 </blockquote>
 <p>那么，如果一个运算子是字符串，一个运算子是对象，怎么处理呢？</p>
 <pre><code>&#39;a&#39; + {
