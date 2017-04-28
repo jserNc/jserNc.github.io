@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/06/jsfuck/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
-<meta property="og:updated_time" content="2017-03-31T02:10:55.786Z">
+<meta property="og:updated_time" content="2017-04-28T06:37:44.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（一）">
 <meta name="twitter:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj21ghjrn0016z4ba2eygtswv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj21gviua0013vsbaozcbirql" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -189,7 +189,7 @@ Number({
 </code></pre><p>我们看到，对象是采用了 valueOf 方法的返回值，所以，以上规则 【3】 优先级高于规则 【1】。</p>
 <p>说到这里，<strong> 我们需要记住 valueOf 和 toString 方法的区别：</strong></p>
 <blockquote>
-<p>数值运算中优先调用 valueOf()，如 Number() 函数优先调用对象的 valueOf()；<br>字符串运算中优先调用 toString()，如 String() 函数优先调用对象的 toString()；<br>valueOf() 返回对象的原始值；toString() 返回对象的原始字符串表示。</p>
+<p>① 数值运算中优先调用 valueOf()，如 Number() 函数优先调用对象的 valueOf()；<br>② 字符串运算中优先调用 toString()，如 String() 函数优先调用对象的 toString()；<br>③ valueOf() 返回对象的原始值；toString() 返回对象的原始字符串表示。</p>
 </blockquote>
 <p>有了以上的理论基础，下面看4个特殊的表达式，小试牛刀。</p>
 <p><strong> (1) 空数组 + 空数组 </strong></p>
