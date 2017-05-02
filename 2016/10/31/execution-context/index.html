@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2017-04-28T03:55:20.329Z">
+<meta property="og:updated_time" content="2017-05-02T02:57:25.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 执行上下文（译）">
 <meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj21n9h67000ux0baisr97dgy" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj26yu2if000s20bapk4asz4c" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -362,6 +362,27 @@ if (false){
 }
 f();
 </code></pre><p>以上代码执行结果就不写了，对于新版的 chrome，以上两种写法都会报错。但是，在 ie 和其他较旧的浏览器下，代码段 1 中的函数 f 是可以正常执行的。这是因为，JavaScript 是不存在块级作用域，这种 if 语句包含的变量（var）和函数声明（function）也是会提升到代码头部的。</p>
+<p>最后，注意一下变量声明语句的方式：</p>
+<pre><code>// 片段 1
+var result = function(){
+    return 2 + 2;
+}
+
+// 片段 2
+var result = function(){
+    return 2 + 2;
+}();
+
+// 片段 3
+var result = (function(){
+    return 2 + 2;
+})();
+
+// 片段 4
+var result = (function(){
+    return 2 + 2;
+}());
+</code></pre><p>其中片段 1 变量 result 是一个函数，片段 2/3/4 变量 result 是一个数值变量。这些细微差别得注意。</p>
 <p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br>[3] <a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>
 
       
