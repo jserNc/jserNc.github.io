@@ -111,7 +111,7 @@
             
             <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj26yu2lw002020basalhtd45" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj26zdm8i001wywbaagmiqtol" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -170,7 +170,7 @@
             
             <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cj26yu2lg001y20ba8je8mlt3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cj26zdm8i001uywbaougbknmh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -228,7 +228,7 @@
             
             <a href="/2016/10/25/chain-call/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cj26yu2hk000d20bar05srmxf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cj26zdm46000eywbaui8dsg9y" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -286,7 +286,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj26yu2kl001n20ba25a4wu9q" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj26zdm7n001nywbavpu3e43o" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -344,7 +344,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj26yu2i0000q20ba2z1byfkg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj26zdm5h000oywba3cmc38cc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -387,7 +387,7 @@
 
 
   
-    <article id="post-index" class="post-index post type-post status-publish format-standard hentry">
+    <article id="post-tostring" class="post-tostring post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -395,16 +395,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/21/index/">pjax 应用 demo</a>
+      <a class="article-title" href="/2016/10/14/tostring/">toString.call() 引起的一些思考</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/10/21/index/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/21/index/" data-id="cj26yu2ja001120batx8cf066" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cj26zdm9d0026ywbabgibtybv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -412,19 +412,28 @@
 
     <div class="entry-content">
       
+        <p>toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。</p>
+<p>为了方便下文的理解，在这里再强调一下原型链的作用：<strong>读取对象的某个属性时，JavaScript引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，直到顶层原型对象 Object.prototype。如果一层层回溯到最顶层还是找不到，则返回undefined。</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/14/tostring/#more" class="more-link">More</a>
+          </p>
         
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2016/10/21/index/">
-    <time datetime="2016-10-21T08:24:36.000Z" class="entry-date">
-        2016-10-21
+    <a href="/2016/10/14/tostring/">
+    <time datetime="2016-10-14T09:20:13.000Z" class="entry-date">
+        2016-10-14
     </time>
 </a>
     
     
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
     </footer>
 </article>
 
