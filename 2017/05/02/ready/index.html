@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。window.onload 事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完显然是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。" />
+  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>ready 方法的实现 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。window.onload 事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完显然是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ready 方法的实现">
 <meta property="og:url" content="http://nanchao.win/2017/05/02/ready/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。window.onload 事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完显然是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
-<meta property="og:updated_time" content="2017-05-02T09:29:34.499Z">
+<meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta property="og:updated_time" content="2017-05-02T09:54:31.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ready 方法的实现">
-<meta name="twitter:description" content="很多时候，我们需要在页面加载完成后执行某些方法。window.onload 事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完显然是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta name="twitter:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/05/02/ready/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cj27bn8ti001lnobadt4h2uw4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cj27dnuq1001pm0ba816v86ds" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,7 +123,7 @@
 
     <div class="entry-content">
       
-        <p>很多时候，我们需要在页面加载完成后执行某些方法。window.onload 事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完显然是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。</p>
+        <p>很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。</p>
 <a id="more"></a>
 <p>为了判断 dom 是否加载完成，对于一般主流浏览器我们可以利用 DOMContentLoaded 事件。而对于部分不支持 DOMContentLoaded 事件的 ie 浏览器，我们可以通过 document.readyState 的状态值来判断（看其是否为 loaded|complete）。如果页面包含 iframe 的话，ie6~8 等浏览器还会等 iframe 资源加载完才会更新状态值，可能会导致等待时间比较长，这不是我们想要的。</p>
 <p>不过，办法还是有的。ie 下页面元素会有个 doScroll 方法，如果 dom 没有加载完成调用该方法会报错，也就是说，我们可以循环调用该方法，只要它不报错了就表示 dom 已加载完成。</p>
