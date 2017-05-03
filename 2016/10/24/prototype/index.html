@@ -23,7 +23,7 @@
 <meta property="og:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 protot">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2017-05-03T10:49:02.953Z">
+<meta property="og:updated_time" content="2017-05-03T10:51:03.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 原型链">
 <meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象，后者称为“原型对象”。原型对象的所有属性和方法都可以被派生对象共享，这是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 protot">
@@ -118,7 +118,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj28v1pyl001k1obaf9puqt8a" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cj28v497r001pd0bagoozrq1i" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -406,7 +406,7 @@ var o1 = new Singleton();
 </code></pre><p>这两句代码的执行过程是：<br>（1）创建一个新的空对象 o, o 对象的原型对象（__proto__）为 Singleton.prototype （包括这里的属性 attr1），然后将 Singleton 函数内的 this 指向对象 o；<br>（2）接着执行构造函数 Singleton；<br>（3） 声明一个局部变量 instance，初始值为 undefined；<br>（4）将 Singleton 变量指向新的函数，新函数返回值为刚才的局部变量 instance；<br>（5）将新的 Singleton 函数的 prototype 指向 this，即对象 o；<br>（6）实例化新的构造函数 Singleton，即：创建一个新的对象 oNew，oNew 对象的原型对象为对象 o，因为此时的返回值 instance 值为 undefined，不是对象，所以，返回值为对象 oNew；<br>（7）将 instance 指向对象 oNew；<br>（8）为 instance 对象添加各种属性；<br>（9）返回对象 instance，即变量 o1 指向对象 instance。</p>
 <pre><code>Singleton.prototype.attr2 = &#39;attr2&#39;;
 var o2 = new Singleton();
-</code></pre><p>这两句代码的执行过程是：<br>（1）上面提到新的 Singleton 的 prototype 指向对象 o，这里修改 Singleton.prototype 即是修改对象 o；对象 o 的所有属性都会被其实例对象继承，包括之前创建的实例对象 oNew，亦 instance；<br>（2）实例化新的构造函数 Singleton，这次返回值 instance 不再是 undefined 了，而是一个对象，所以，返回 instance，即变量 o2 指向对象 instance。</p>
+</code></pre><p>这两句代码的执行过程是：<br>（1）上面提到新的 Singleton 的 prototype 指向对象 o，这里修改 Singleton.prototype 即是修改对象 o，对象 o 的所有属性都会被其实例对象继承，包括之前创建的实例对象 oNew，亦 instance；<br>（2）实例化新的构造函数 Singleton，这次返回值 instance 不再是 undefined 了，而是一个对象，所以，返回 instance，即变量 o2 指向对象 instance。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a><br>[2] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 
       
