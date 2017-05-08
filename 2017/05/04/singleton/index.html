@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以对象字面量创建单例对象。" />
+  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>JavaScript 单例模式 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以对象字面量创建单例对象。">
+  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 单例模式">
 <meta property="og:url" content="http://nanchao.win/2017/05/04/singleton/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以对象字面量创建单例对象。">
-<meta property="og:updated_time" content="2017-05-04T06:17:14.594Z">
+<meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
+<meta property="og:updated_time" content="2017-05-08T01:37:12.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 单例模式">
-<meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以对象字面量创建单例对象。">
+<meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj29t357o0024y0ba52u6mhtc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj2fgk5k2001z64ba1dcdgy22" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,7 +123,7 @@
 
     <div class="entry-content">
       
-        <p>单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以对象字面量创建单例对象。</p>
+        <p>单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。</p>
 <a id="more"></a>
 <pre><code>var o1 = {name : &#39;singleton&#39;};
 var o2 = {name : &#39;singleton&#39;};
