@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/05/04/singleton/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
-<meta property="og:updated_time" content="2017-05-08T01:37:12.130Z">
+<meta property="og:updated_time" content="2017-05-12T01:37:38.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 单例模式">
 <meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj2fgr31s002128baslcofu9f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj2l7koj30023t0bafgqtl9z0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -245,10 +245,10 @@ o1.constructor === Singleton
 </code></pre><p>得到了和上面截然不同的结果。仔细分析一下：</p>
 <pre><code>Singleton.prototype.attr1 = &#39;attr1&#39;;
 var o1 = new Singleton();
-</code></pre><p>这两句代码的执行过程是：<br>【1】创建一个新的空对象 o, o 对象的原型对象（__proto__）为 Singleton.prototype （该对象包含这里的属性 attr1），然后将 Singleton 函数内的 this 指向对象 o；<br>【2】接着执行构造函数 Singleton；<br>【3】声明一个局部变量 instance，初始值为 undefined；<br>【4】将 Singleton 变量指向新的函数，新函数返回值为刚才的局部变量 instance；<br>【5】将新的 Singleton 函数的 prototype 指向 this，即对象 o；<br>【6】实例化新的构造函数 Singleton，即：创建一个新的对象 oNew，oNew 对象的原型对象为对象 o，因为此时的返回值 instance 值为 undefined，不是对象，所以，返回值为对象 oNew；<br>【7】将 instance 指向对象 oNew；<br>【8】为 instance 对象添加各种属性；<br>【9】 返回对象 instance，即变量 o1 指向对象 instance。</p>
+</code></pre><p>这两句代码的执行过程是：<br>(1) 创建一个新的空对象 o, o 对象的原型对象（__proto__）为 Singleton.prototype （该对象包含这里的属性 attr1），然后将 Singleton 函数内的 this 指向对象 o；<br>(2) 接着执行构造函数 Singleton；<br>(3) 声明一个局部变量 instance，初始值为 undefined；<br>(4) 将 Singleton 变量指向新的函数，新函数返回值为刚才的局部变量 instance；<br>(5) 将新的 Singleton 函数的 prototype 指向 this，即对象 o；<br>(6) 实例化新的构造函数 Singleton，即：创建一个新的对象 oNew，oNew 对象的原型对象为对象 o，因为此时的返回值 instance 值为 undefined，不是对象，所以，返回值为对象 oNew；<br>(7) 将 instance 指向对象 oNew；<br>(8) 为 instance 对象添加各种属性；<br>(9) 返回对象 instance，即变量 o1 指向对象 instance。</p>
 <pre><code>Singleton.prototype.attr2 = &#39;attr2&#39;;
 var o2 = new Singleton();
-</code></pre><p>这两句代码的执行过程是：<br>【1】上面提到新的 Singleton 的 prototype 指向对象 o，这里修改 Singleton.prototype 即是修改对象 o，对象 o 的所有属性都会被其实例对象继承，包括之前创建的实例对象 oNew，亦 instance；<br>【2】实例化新的构造函数 Singleton，创建一个新的空对象 {}，不过，由于这次函数返回值 instance 不再是 undefined 了，而是一个对象，所以，返回会返回 instance，而不是空对象 {}，即变量 o2 指向对象 instance。</p>
+</code></pre><p>这两句代码的执行过程是：<br>(1) 上面提到新的 Singleton 的 prototype 指向对象 o，这里修改 Singleton.prototype 即是修改对象 o，对象 o 的所有属性都会被其实例对象继承，包括之前创建的实例对象 oNew，亦 instance；<br>(2) 实例化新的构造函数 Singleton，创建一个新的空对象 {}，不过，由于这次函数返回值 instance 不再是 undefined 了，而是一个对象，所以，返回会返回 instance，而不是空对象 {}，即变量 o2 指向对象 instance。</p>
 <p>换一种写法：</p>
 <pre><code>var Singleton;
 (function(){
@@ -285,10 +285,11 @@ o1.constructor === Singleton
 </code></pre><p>下面分析一下执行过程：</p>
 <pre><code>Singleton.prototype.attr1 = &#39;attr1&#39;;
 var o1 = new Singleton();
-</code></pre><p>【1】新建全局变量 Singleton，执行匿名函数，将 Singleton 指向一个闭包函数；<br>【2】为构造函数 Singleton 的 prototype 对象添加新的属性 attr1；<br>【3】实例化构造函数 Singleton，创建一个空对象 o，此时，变量 instance 值为 undefined，不返回，继续往下走；<br>【4】this 指向对象 o，instance 指向 对象 o；<br>【5】给对象 o 添加属性，返回对象 o，即变量 o1 指向对象 o。</p>
+</code></pre><p>(1) 新建全局变量 Singleton，执行匿名函数，将 Singleton 指向一个闭包函数；<br>(2) 为构造函数 Singleton 的 prototype 对象添加新的属性 attr1；<br>(3) 实例化构造函数 Singleton，创建一个空对象 o，此时，变量 instance 值为 undefined，不返回，继续往下走；<br>(4) this 指向对象 o，instance 指向 对象 o；<br>(5) 给对象 o 添加属性，返回对象 o，即变量 o1 指向对象 o。</p>
 <pre><code>Singleton.prototype.attr2 = &#39;attr2&#39;;
 var o2 = new Singleton();
-</code></pre><p>【1】全局变量 Singleton，指向函数后，其指向一直不变，所以，prototype 对象的修改，都可以反映在实例对象上；<br>【2】实例化构造函数 Singleton，创建一个新的空对象 {}，不过，由于这次函数返回值 instance 不再是 undefined 了，而是一个对象，所以，返回会返回 instance，而不是空对象 {}，即变量 o2 指向对象 instance。</p>
+</code></pre><p>(1) 全局变量 Singleton，指向函数后，其指向一直不变，所以，prototype 对象的修改，都可以反映在实例对象上；<br>(2) 实例化构造函数 Singleton，创建一个新的空对象 {}，不过，由于这次函数返回值 instance 不再是 undefined 了，而是一个对象，所以，返回会返回 instance，而不是空对象 {}，即变量 o2 指向对象 instance。</p>
+<p>参考：<br>[1] 《JavaScript 模式》</p>
 
       
     </div><!-- .entry-content -->
@@ -303,7 +304,7 @@ var o2 = new Singleton();
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
     </footer>
 </article>
@@ -320,6 +321,8 @@ var o2 = new Singleton();
 
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/05/12/observer/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 观察者模式</a></span></p>
     
     
         <p><span class="nav-next"><a href="/2017/05/02/ready/" rel="next"><span class="meta-nav">下一篇：</span>ready 方法的实现 </a></span></p>
@@ -362,6 +365,10 @@ var o2 = new Singleton();
       <ul>
         
           <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
           </li>
         
@@ -397,10 +404,6 @@ var o2 = new Singleton();
             <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
           </li>
         
-          <li>
-            <a href="/2017/03/31/localStorage/">浏览器本地存储（一）</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -410,7 +413,7 @@ var o2 = new Singleton();
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </aside>
 
@@ -419,7 +422,7 @@ var o2 = new Singleton();
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 13.33px;">grammar</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 16.67px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
     </div>
   </aside>
 
