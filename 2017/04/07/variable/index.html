@@ -23,7 +23,7 @@
 <meta property="og:description" content="JavaScript 变量分为两种：基本类型和引用类型。6 种数据类型里，除了对象是引用类型变量，其他的都是基本类型变量。引用类型的变量由多个值构成。当然了，每种基本类型（null 和 undefined 除外）都有与其对应的引用类型，在必要时候，基本类型变量也会自动转换成对应引用类型变量，然后再继续运算。">
 <meta property="og:image" content="http://nanchao.win/css/images/variable/basic-type.png">
 <meta property="og:image" content="http://nanchao.win/css/images/variable/reference-type.png">
-<meta property="og:updated_time" content="2017-04-13T09:52:10.147Z">
+<meta property="og:updated_time" content="2017-05-15T07:18:46.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 变量">
 <meta name="twitter:description" content="JavaScript 变量分为两种：基本类型和引用类型。6 种数据类型里，除了对象是引用类型变量，其他的都是基本类型变量。引用类型的变量由多个值构成。当然了，每种基本类型（null 和 undefined 除外）都有与其对应的引用类型，在必要时候，基本类型变量也会自动转换成对应引用类型变量，然后再继续运算。">
@@ -227,17 +227,51 @@ console.log(arr1);
 console.log(arr2);
 // [100,1,2]
 </code></pre><p>② 对象深拷贝：</p>
-<pre><code>var deepCopy= function(source) { 
-    var result={};
-    for (var key in source) {
-        if (typeof source[key] === &#39;object&#39;){
-            result[key] = deepCoyp(source[key]);
-        } else {
-            result[key] = source[key];
+<pre><code>function deepCopy(parent,child){
+    var i,
+        toStr = Object.prototype.toString,
+        astr = &quot;[object Array]&quot;;
+
+    child = child || {};
+
+    for (i in parent){
+        if (parent.hasOwnProperty(i)){
+            if (typeof parent[i] === &quot;object&quot;){
+                child[i] = (toStr.call(parent[i]) === astr) ? [] : {},
+                deepCopy(parent[i],child[i]);
+            } else {
+                child[i] = parent[i];
+            }
         }
-    } 
-    return result; 
+    }
+
+    return child;
 }
+
+// eg:
+var dad = {
+    counts : [1,2,3],
+    reads : {paper : true}
+};
+
+var kid = deepCopy(dad);
+kid.counts.push(4);
+
+kid.counts.toString();
+// &#39;1,2,3,4&#39;
+dad.counts.toString();
+// &#39;1,2,3&#39;
+
+// 因为 typeof 运算符对 null 运算返回也是 &quot;object&quot;
+typeof null   // &quot;object&quot;
+
+// 所以，当父对象包含属性 null 时会有偏差
+
+var o1 = {prop : null};
+var o2 = deepCopy(o1);
+
+o1.prop  // null
+o2.prop  // Object {}
 </code></pre><p><strong>JavaScript 函数传参</strong></p>
 <p>看一个简单例子：</p>
 <pre><code>function f(str,obj){
