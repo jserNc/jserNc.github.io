@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Tag: grammar | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Enjoy javascript">
+<meta property="og:url" content="http://nanchao.win/tags/grammar/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enjoy javascript">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-call-apply-bind" class="post-call-apply-bind post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/21/call-apply-bind/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/21/call-apply-bind/" data-id="cj2px24sa000df50btl6c4yn9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数调用时其内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果该参数设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。这三个方法的基本用法在 <a href="http://nanchao.win/2016/11/02/this/">理解 JavaScript 中 this</a> 一文已经做了介绍，这里就不再赘述。下面更深入地讨论一下 call 和 bind 方法。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/21/call-apply-bind/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/21/call-apply-bind/">
+    <time datetime="2017-04-21T02:45:37.000Z" class="entry-date">
+        2017-04-21
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-some-javascript-functions" class="post-some-javascript-functions post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/14/some-javascript-functions/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj2px24tn0028f50bss5z0jld" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/14/some-javascript-functions/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/14/some-javascript-functions/">
+    <time datetime="2017-04-14T01:33:53.000Z" class="entry-date">
+        2017-04-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jsfuck03" class="post-jsfuck03 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/13/jsfuck03/">jsfuck 6 个字符写 js 代码（四）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/13/jsfuck03/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cj2px24t6001cf50ben8otah0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>前文我们说 JavaScript 语言中所有的字符都可以用<strong> [，]，(，)，!，+ </strong>等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/13/jsfuck03/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/13/jsfuck03/">
+    <time datetime="2017-01-13T01:45:15.000Z" class="entry-date">
+        2017-01-13
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jsfuck02" class="post-jsfuck02 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/11/jsfuck02/">jsfuck 6 个字符写 js 代码（三）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cj2px24t4001af50bllsufyms" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js">JSFuck源码</a> ，我们发现，之所以能用<strong> [，]，(，)，!，+  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/11/jsfuck02/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/11/jsfuck02/">
+    <time datetime="2017-01-11T01:49:12.000Z" class="entry-date">
+        2017-01-11
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jsfuck01" class="post-jsfuck01 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/09/jsfuck01/">jsfuck 6 个字符写 js 代码（二）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/09/jsfuck01/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cj2px24t30018f50bsi7apfym" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/09/jsfuck01/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/09/jsfuck01/">
+    <time datetime="2017-01-09T08:51:17.000Z" class="entry-date">
+        2017-01-09
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jsfuck" class="post-jsfuck post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/06/jsfuck/">jsfuck 6 个字符写 js 代码（一）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj2px24t20015f50bz0i3jg8n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用<strong> [，]，(，)，!，+ </strong>等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/06/jsfuck/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/06/jsfuck/">
+    <time datetime="2017-01-06T08:15:14.000Z" class="entry-date">
+        2017-01-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/grammar/page/2/">2</a><a class="extend next" rel="next" href="/tags/grammar/page/2/">Next &raquo;</a>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

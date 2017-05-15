@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 执行上下文（译） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 执行上下文（译）">
+<meta property="og:url" content="http://nanchao.win/2016/10/31/execution-context/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+<meta property="og:image" content="http://nanchao.win/css/images/execution-context/context1.png">
+<meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
+<meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
+<meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 执行上下文（译）">
+<meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+<meta name="twitter:image" content="http://nanchao.win/css/images/execution-context/context1.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-execution-context" class="post-execution-context post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 执行上下文（译）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj2px24sr000vf50bdis19ykw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" rel="external">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
+<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
+<a id="more"></a>
+<pre><code>var v = 1;
+(function(){
+    console.log(&#39;v:&#39;,v);
+    var v = 2;
+})();
+
+//v: undefined
+</code></pre><p>变量 v 明明在调用之前就已经在全局环境中定义过，可打印结果还是 undefined，为什么？</p>
+<p>这里涉及到了“变量作用域”和“变量提升”两个概念。后续会对“变量作用域”做一个详细介绍，这里先简单说下变量提升。</p>
+<p>不管全局环境中，还是函数调用时，JavaScript 引擎都先获取当前环境下用 var，function 等关键词声明的变量，然后再一行一行地执行代码。这样的结果就是所有的变量的声明语句，都会被提升到当前环境（全局环境或者函数内部）的头部，这就叫做“变量提升”（hoisting）。</p>
+<p>以上代码的执行过程是：首先定义了一个全局变量 v，并对其赋值；然后定义了一个匿名函数，定义了同名的局部变量 v；最后自执行该匿名函数。因为函数内部用关键词 var 定义变量 v，所以函数执行时会将该变量声明（只是声明，不包括赋值）提升到函数内代码的头部，而不会去全局作用域中去取变量 v。整个过程相当于：</p>
+<pre><code>var v = 1;
+(function(){
+    var v;  //v = undefined
+    console.log(&#39;v1:&#39;,v);
+    v = 2;
+    console.log(&#39;v2:&#39;,v);
+})();
+console.log(&#39;v3:&#39;,v);
+
+//输出：
+//v1: undefined
+//v2: 2
+//v3: 1
+</code></pre><p>以上描述可能还不能够说清楚“变量提升”这个概念，相信看完后面关于执行上下文的内容，就会明白了。</p>
+<h2 id="JavaScript-执行上下文"><a href="#JavaScript-执行上下文" class="headerlink" title="JavaScript 执行上下文"></a>JavaScript 执行上下文</h2><p>JavaScript代码有以下三种：</p>
+<blockquote>
+<p><strong> 1.全局代码 </strong> 代码载入后，js引擎首先执行这里的代码；<br><strong> 2.函数代码 </strong> 函数调用时执行的代码；<br><strong> 3.eval代码 </strong> eval函数内运行的代码。</p>
+</blockquote>
+<p>以上每种代码都是在其执行上下文中执行的，我们可以将“执行上下文”理解为当前代码运行的环境。全局上下文只有一个。函数执行上下文可以有多个。函数的每次调用（即便是这个函数递归调用自身）都会进入到一个新的函数执行上下文，也就是是说，同一个函数也可能会创建多个上下文。</p>
+<p>例如：</p>
+<p><img src="/css/images/execution-context/context1.png" alt="执行上下文"></p>
+<p>以上代码一共有 4 个执行上下文。最外层是全局上下文，其余 3 个为函数上下文。再强调一下：<strong>函数上下文的个数是没有限制的，函数每次被调用时，引擎都会自动创建一个函数上下文。</strong></p>
+<p>一个执行上下文可能会触发另一个上下文。比如，在全局上下文中调用一个函数或者一个函数调用另一个函数。这种关系是以栈的形式实现的，我们把它叫做“执行上下文栈”。</p>
+<p>一个触发其他上下文的上下文叫作 caller。被触发的上下文叫作 callee。callee 同时也可能是一些其他 callee 的 caller（比如，一个在全局上下文中被调用的函数，在执行过程中又调用了其他函数）。</p>
+<p>当一个 caller 触发（调用）了一个 callee，这个 caller 会暂停自身的执行，然后把控制权传递给 callee。这个 callee 被 push 到栈顶，并成为一个运行中（活动的）执行上下文。在 callee 的上下文结束后，它会把控制权返回给 caller，然后 caller 的上下文继续执行（它可能继续触发其他上下文）直到它结束，以此类推。</p>
+<p>也就是说：JavaScript 程序运行时可以用“执行上下文栈”来表示，栈顶是当前“活跃上下文”。某个时刻只有唯一的一个上下文是激活（活跃）状态。</p>
+<p><img src="/css/images/execution-context/stack.png" alt="执行上下文栈"></p>
+<p>当程序开始的时候它会进入全局执行上下文，此上下文位于栈底并且是栈中的第一个元素。当在全局上下文中调用执行一个函数时，程序流就进入该被调用函数内，此时引擎就会为该函数创建一个新的执行上下文，并且将其压入到执行上下文堆栈的顶部。浏览器总是执行当前在堆栈顶部的上下文，一旦执行完毕，该上下文就会从堆栈顶部被弹出，然后，进入其下的上下文执行代码。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
+<p>例如：</p>
+<pre><code>//进入全局上下文
+var a = 10;
+
+function fn(){
+    var b = 20;
+    return a + b;
+}
+
+fn();   // 进入 fn 函数上下文
+</code></pre><p>运行上述代码，执行上下文的压栈、出栈过程如下图：</p>
+<p><img src="/css/images/execution-context/stack1.png" alt="执行上下文栈"></p>
+<p>（其中：EC 指 Execution Context，执行上下文）：</p>
+<p>为了理解执行上下文这个抽象概念，有几点再强调一下：<strong>单线程同步执行、唯一的一个全局上下文、函数上下文个数没限制，只要函数被调用就会创建一个新的上下文！</strong></p>
+<p>其实执行上下文可以看作一个对象。该对象有三个必需属性: <strong>变量对象、作用域链以及 this 对象：</strong></p>
+<p><img src="/css/images/execution-context/context-object.png" alt="执行上下文栈"></p>
+<p>用对象表示为：</p>
+<pre><code>executionContextObj = {
+    variableObject : { 
+    /*函数的arguments对象, 参数, 内部的变量以及函数声明*/ 
+    },
+    scopeChain : { 
+    /*variableObject以及所有父执行上下文中的variableObject*/ 
+    },
+    this : {}
+}
+</code></pre><p>在 js 引擎解释执行代码时，执行上下文的创建过程分为两个阶段：</p>
+<p><strong>1.建立阶段（发生在函数调用时，但是在函数内具体代码执行以前）</strong>：</p>
+<blockquote>
+<p>① 建立 variableObject 对象（建立变量、函数、arguments 对象、函数参数）；<br>② 建立作用域链；<br>③ 确定 this。</p>
+</blockquote>
+<p><strong>2.代码执行阶段</strong>：</p>
+<blockquote>
+<p>① 变量赋值；<br>② 执行代码。</p>
+</blockquote>
+<p>下面具体地说明一下建立阶段和代码执行阶段细节问题：</p>
+<p><strong>1.建立阶段</strong></p>
+<p>确切地说，执行上下文对象是在函数被调用时，但是在函数体被真正执行以前所创建的。函数被调用的时候，在上述的两个阶段中的第一个阶段（建立阶段），js 引擎会检查函数中的参数，声明的变量以及内部函数，然后基于这些信息建立执行上下文对象。在这个阶段，variableObject 对象，作用域链，以及 this 所指向的对象都会被确定。</p>
+<p>建立阶段又可细化为<strong>建立 variableObject 对象</strong>、<strong>初始化作用域链</strong>以及<strong>确定 this 指向</strong>等三个环节。</p>
+<p>① 建立 variableObject 对象</p>
+<p>步骤 1. 检查当前上下文中的参数，建立 arguments 对象，。</p>
+<p>步骤 2. 检查当前上下文中的函数声明：每找到一个函数声明，就在 variableObject 下面用函数名建立一个属性，属性值就是指向该函数在内存中的地址的一个引用。如果上述函数名已经存在于 variableObject 下，那么对应的属性值会被新的引用所覆盖。</p>
+<p>步骤 3. 检查当前上下文中的变量声明：每找到一个变量的声明，就在 variableObject 下，用变量名建立一个属性，属性值为 undefined。<strong>如果该变量名已经存在于 variableObject 属性中，直接跳过，原属性值不会被修改。这么做也是为了防止指向函数的属性的值会被变量属性覆盖，所以，从这里可以看出函数声明相对于变量声明有较高的优先级。</strong></p>
+<p>② 初始化作用域链</p>
+<p>③ 确定 this 指向</p>
+<p><strong>2.代码执行阶段</strong></p>
+<p>一行一行地执行函数体内代码，给 variableObject 中的变量属性赋值。</p>
+<p><strong>为了验证函数声明的优先级高于变量声明，我们验证如下：</strong></p>
+<pre><code>(function(){
+    console.log(&#39;1. &#39;,typeof f);
+    function f(){
+        console.log(&quot;I&#39;m function f&quot;)
+    }
+
+    var f = 666;
+
+    console.log(&#39;2. &#39;,typeof f);
+})();
+
+// 1. function
+// 2. number
+</code></pre><p>我们将函数声明和变量声明换个位置，不出意外，执行结果应该不变。</p>
+<pre><code>(function(){
+    console.log(&#39;1. &#39;,typeof f);
+
+    var f = 666;
+    function f(){
+        console.log(&quot;I&#39;m function f&quot;)
+    }
+
+    console.log(&#39;2. &#39;,typeof f);
+})();
+
+// 1. function
+// 2. number
+</code></pre><p>用 function 关键词声明的函数，在上下文建立阶段就确定了其属性值就是指向该函数在内存中的地址的一个引用，虽然在建立阶段该函数变量不会被普通变量覆盖，但是在代码执行阶段该变量属性值是可以被覆盖的。所以，以上代码段执行结束后，最后变量 f 都是数字 666。</p>
+<p>下面再看个例子：</p>
+<pre><code>function foo(i) {
+   var a = &#39;hello&#39;;
+   var b = function(){};
+   function c(){}
+}
+
+foo(22);
+</code></pre><p>当执行到 foo(22) 时，函数上下文进入建立阶段（第一个阶段）：</p>
+<pre><code>fooExecutionContext = {
+   variableObject: {
+       arguments: {
+           0: 22,
+           length: 1
+       },
+       i: 22,
+       c: pointer to function c()
+       a: undefined,
+       b: undefined
+   },
+   scopeChain: { ... },
+   this: { ... }
+}
+</code></pre><p>我们看到，在建立阶段，除了 arguments，函数的声明，以及参数被赋予了具体的属性值，其它的变量属性默认的都是 undefined。一旦上述建立阶段结束，引擎就会进入代码执行阶段，这个阶段完成后，上述执行上下文对象如下:</p>
+<pre><code>fooExecutionContext = {
+   variableObject: {
+       arguments: {
+           0: 22,
+           length: 1
+       },
+       i: 22,
+       c: pointer to function c()
+       a: &#39;hello&#39;,
+       b: pointer to function privateB()
+   },
+   scopeChain: { ... },
+   this: { ... }
+}
+</code></pre><p>我们再回过头来看看上文提到的变量提升：<strong>在函数中声明的变量以及函数，其作用域提升到函数顶部，换句话说，就是一进入函数体，就可以访问到其中声明的变量以及函数</strong>。</p>
+<pre><code>(function() {
+
+   console.log(typeof foo); // function
+   console.log(typeof bar); // undefined
+
+   var foo = &#39;hello&#39;,
+       bar = function() {
+           return &#39;world&#39;;
+       };
+
+   function foo() {
+       return &#39;hello&#39;;
+   }
+
+}());
+</code></pre><p>上面定义了一个自执行函数。函数执行时就有个上下文被创建，然后我们打印 foo 和 bar 的值并没有显示未定义错误。这里有两个问题：</p>
+<p><strong> 1.为什么 foo 类型是 function，而不是 string 或者 undefined？</strong></p>
+<p>因为在上下文的建立阶段，<strong>先是处理 arguments, 参数，接着是函数的声明，最后是变量的声明</strong>。那么，发现 foo 函数的声明后，就会在 variableObject 下面建立一个 foo 属性，其值是一个指向函数的引用。当处理变量声明的时候，发现有 var foo 的声明，但是 variableObject 已经具有了 foo 属性，所以直接跳过。当进入代码执行阶段的时候，就可以通过访问到 foo 属性了，因为它已经就存在，并且是一个函数引用。</p>
+<p><strong> 2.为什么 bar 类型是 undefined？</strong></p>
+<p>因为 bar 是变量的声明，在建立阶段的时候，被赋予的默认的值为 undefined。由于它只会在后续代码执行过程中才会被赋予具体的值，所以，当调用 typeof(bar) 的时候输出的值为 undefined。</p>
+<p><strong>函数声明和函数表达式，都是定义函数的方式，它们的差异体现如下：</strong></p>
+<pre><code>// 代码段 1
+f1();
+// function f1
+function f1(){
+    console.log(&#39;function f1&#39;);
+}
+
+// 代码段 2
+f2();
+// Uncaught TypeError: f2 is not a function
+var f2 = function(){
+    console.log(&#39;function f2&#39;);
+}
+</code></pre><p>函数声明会提升到代码头部，所以，函数 f1 可以顺利执行；而变量 f2 的值开始只是 undefined，只有执行完变量 f2 的赋值语句，它才是指向一个函数，所以先于它的赋值语句执行 f2() 必然会报错。</p>
+<p>如果用函数声明和函数表达式方式声明同名函数会怎样呢？</p>
+<pre><code>// 代码段 1
+var f = function(){
+    console.log(&#39;函数表达式&#39;);
+}
+function f(){
+    console.log(&#39;函数声明&#39;);
+}
+f();
+// 函数表达式
+
+// 代码段 2
+function f(){
+    console.log(&#39;函数声明&#39;);
+}
+var f = function(){
+    console.log(&#39;函数表达式&#39;);
+}
+f();
+// 函数表达式
+</code></pre><p>我们看到，不管是函数声明在先还是函数表达式在先，最后函数都是采用函数表达式的定义。这样的结果并不应该意外，这和上文变量提到的“函数声明的优先级高于变量声明”，但在“代码执行阶段”，变量属性值是可以被覆盖的道理是一样的。</p>
+<p>if、try 等代码块中的函数声明和函数表达式也会不一样：</p>
+<pre><code>// 代码段 1
+if (false){
+    function f(){
+        console.log(&#39;函数声明&#39;)
+    }
+}
+f(); 
+
+// 代码段 2
+if (false){
+    var f = function(){
+        console.log(&#39;函数表达式&#39;);
+    }
+}
+f();
+</code></pre><p>以上代码执行结果就不写了，对于新版的 chrome，以上两种写法都会报错。但是，在 ie 和其他较旧的浏览器下，代码段 1 中的函数 f 是可以正常执行的。这是因为，JavaScript 是不存在块级作用域，这种 if 语句包含的变量（var）和函数声明（function）也是会提升到代码头部的。</p>
+<p>最后，注意一下变量声明语句的方式：</p>
+<pre><code>// 片段 1
+var result = function(){
+    return 2 + 2;
+}
+
+// 片段 2
+var result = function(){
+    return 2 + 2;
+}();
+
+// 片段 3
+var result = (function(){
+    return 2 + 2;
+})();
+
+// 片段 4
+var result = (function(){
+    return 2 + 2;
+}());
+</code></pre><p>其中片段 1 变量 result 是一个函数，片段 2/3/4 变量 result 是一个数值变量。这些细微差别得注意。</p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br>[3] <a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/31/execution-context/">
+    <time datetime="2016-10-31T02:23:26.000Z" class="entry-date">
+        2016-10-31
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/11/01/scope-chain/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 作用域链（译）</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/28/script/" rel="next"><span class="meta-nav">下一篇：</span>关于 script 脚本加载方式（译） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

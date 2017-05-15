@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>关于 document.write 引入第三方脚本 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 document.write 引入第三方脚本">
+<meta property="og:url" content="http://nanchao.win/2016/10/13/document-write/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。">
+<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 document.write 引入第三方脚本">
+<meta name="twitter:description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-document-write" class="post-document-write post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      关于 document.write 引入第三方脚本
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="cj2px24sm000qf50bxm6u40tf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。</p>
+<a id="more"></a>
+<p>最近，可能也有人像我一样，看某些网页的时候，chrome 控制台出现了下面的警告：</p>
+<pre><code>A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.
+</code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a> 指出chrome 即将干预通过 document.write 引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
+<pre><code>document.write(&#39;&lt;scri&#39;+&#39;pt  src = &quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/scri&#39;+&#39;pt&gt;&#39;);
+</code></pre><p>注意，以上代码中 script 关键字需要拆开，否则会和前面或者后面的 script 配对，从而造成代码块提前结束，出现错误。</p>
+<p>那么，使用 document.write 会有什么问题？</p>
+<p>在浏览器渲染页面之前，它会先解析 html 标签来构建 dom 树。每当解析器遇到了一个脚本，它就会暂停解析 html，下载并解析执行这个脚本，脚本执行完再继续解析 dom，如果，这个脚本又动态注入另一个或多个脚本，那解析器还得等待更长时间才能继续往下走，这会明显拖慢网页渲染速度。</p>
+<p>chrome 测试发现，使用 2g 这种网络速度缓慢的用户，通过 document.write 动态注入的脚本可能会使得页面显示延迟数十秒，甚至加载失败。另外，在 2g 网络上，使用 document.write 插入第三方脚本的网页通常比其他网页加载慢两倍。</p>
+<p>于是，chrome 决定，当满足以下所有条件时，chrome 就不会执行通过 document.write 注入的script 脚本：</p>
+<p>1.用户网络缓慢，特别是 2g 网络（不过，以后可能会包括比较缓慢的 3g，wifi 网络）；</p>
+<p>2.document.write 用在顶级文档中（之所以不包括 iframe 页面，是因其不会阻止主页面的渲染）；</p>
+<p>3.document.write 引入的同步脚本（具有 async 或 defer 等属性的异步脚本不会阻塞页面渲染）；</p>
+<p>4.该脚本不在浏览器缓存中（缓存了的脚本并不会产生网络延迟，所以仍会执行）；</p>
+<p>5.页面不是重新加载（如果用户主动重新加载该页面，chrome 就不会干预，并正常执行该网页）。</p>
+<p>自 chrome 53 开始，如果 document.write 请求符合以上的条件 2-5,chrome 就会发出上文的警告。自 2016 年 10 月中旬发布的 chrome 54 开始 2g 用户的注入脚本将被干预，以后，任何连接缓慢的用户（即缓慢的 3g 或 WiFi）都可能被干预。</p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/13/document-write/">
+    <time datetime="2016-10-13T08:10:38.000Z" class="entry-date">
+        2016-10-13
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/10/13/sort/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 排序算法</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/09/30/hello-world/" rel="next"><span class="meta-nav">下一篇：</span>hexo 新建博文操作指南 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

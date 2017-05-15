@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>网页性能优化建议 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网页性能优化建议">
+<meta property="og:url" content="http://nanchao.win/2016/12/30/page-optimization/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网页性能优化建议">
+<meta name="twitter:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-page-optimization" class="post-page-optimization post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      网页性能优化建议
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/30/page-optimization/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cj2px24tc001nf50btuq4pwpn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。</p>
+<a id="more"></a>
+<p>下面简单的罗列一下网页性能优化的几点建议：</p>
+<blockquote>
+<h2 id="加载优化"><a href="#加载优化" class="headerlink" title="加载优化"></a>加载优化</h2></blockquote>
+<h3 id="·-减少-http-请求数"><a href="#·-减少-http-请求数" class="headerlink" title="· 减少 http 请求数"></a>· 减少 http 请求数</h3><p>​合并图片（css sprites）,尽可能地合并 css 和 js 文件。css sprites 是指只用将页面上的背景元素合并成一张图，然后通过调整 css 的 background-position 属性获取对应的背景图。</p>
+<h3 id="·-css-文件放在页面头部，js文件放置页面底部"><a href="#·-css-文件放在页面头部，js文件放置页面底部" class="headerlink" title="· css 文件放在页面头部，js文件放置页面底部"></a>· css 文件放在页面头部，js文件放置页面底部</h3><p>ie，firefox 等浏览器在 css 全部传输完全之前不会去渲染任何的东西。css 的全称是 Cascading Style Sheets（层叠样式表），层叠，顾名思义，后面的样式可以覆盖前面的样式，优先级高的样式可以覆盖优先级低的样式，所以为了避免页面加载过程中重画某些页面元素，导致闪烁和性能问题，浏览器这么做也是合理的。</p>
+<p>不带特殊属性的 script 标签。当 html 页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析 html 文档。如果该脚本中有耗时任务，那么页面视觉上加载就比较慢了。考虑到页面内容和脚本之间的依赖关系，我们并不能做到把所有脚本放置页面底部，所以，还是尽可能地往后放吧。</p>
+<h3 id="·-精简-css-和-js-文件，即压缩文件体积"><a href="#·-精简-css-和-js-文件，即压缩文件体积" class="headerlink" title="· 精简 css 和 js 文件，即压缩文件体积"></a>· 精简 css 和 js 文件，即压缩文件体积</h3><h3 id="·-使用-cdn，图片、css、js等静态资源使用-cdn-分发"><a href="#·-使用-cdn，图片、css、js等静态资源使用-cdn-分发" class="headerlink" title="· 使用 cdn，图片、css、js等静态资源使用 cdn 分发"></a>· 使用 cdn，图片、css、js等静态资源使用 cdn 分发</h3><h3 id="·-避免空的-href-和-src-等属性值为空"><a href="#·-避免空的-href-和-src-等属性值为空" class="headerlink" title="· 避免空的 href 和 src 等属性值为空"></a>· 避免空的 href 和 src 等属性值为空</h3><p>当 link 标签的 href 属性为空、script 标签的 src 属性为空的时候，浏览器渲染的时候会把当前页面的 URL 作为它们的属性值，从而把页面的内容加载进来作为它们的值。</p>
+<h3 id="·-合理利用缓存（Expires-或者-Cache-Control）"><a href="#·-合理利用缓存（Expires-或者-Cache-Control）" class="headerlink" title="· 合理利用缓存（Expires 或者 Cache-Control）"></a>· 合理利用缓存（Expires 或者 Cache-Control）</h3><p>前提是 css 和 js 写在外部文件中。例如，用 Exipres 是用来设置 css、js、图片资源文件的过期时间，可以使这些内容在指定时间内具有缓存性，这样下回再访问同样的资源时就通过浏览器缓存区读取，不需要再发出 http 请求（用户强制刷新页面除外）。不过哪些文件应该缓存，哪些文件应该实时更新给用户还是应该斟酌一下。</p>
+<h3 id="·-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#·-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="· 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>· 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>比如外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间,在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
+<p>另外，确保网站根目录下有 favicon.ico 文件。即使网页中根本不包括这个文件，浏览器每次打开我们的站点也会发起对这个文件的请求。所以，如果这个文件不存在，就会产生 404 错误，消耗资源。</p>
+<h3 id="·-避免重定向"><a href="#·-避免重定向" class="headerlink" title="· 避免重定向"></a>· 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="external">http://baidu.com/</a> 。</p>
+<h3 id="·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量"><a href="#·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量" class="headerlink" title="· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量"></a>· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量</h3><p>域名之下如果有 cookie，那么客户端每次向该域名发出 http 请求，都会附上 cookie 的内容，这会影响加载速度，所以静态资源域名不使用 cookie。</p>
+<h3 id="·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”"><a href="#·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”" class="headerlink" title="· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”"></a>· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”</h3><p>首屏一定要快！能不加载的先不加载，能不执行的先不执行！</p>
+<blockquote>
+<h2 id="js-代码优化"><a href="#js-代码优化" class="headerlink" title="js 代码优化"></a>js 代码优化</h2></blockquote>
+<h3 id="·-减少重绘和回流"><a href="#·-减少重绘和回流" class="headerlink" title="· 减少重绘和回流"></a>· 减少重绘和回流</h3><p>详细内容参见 <a href="http://nanchao.win/2017/03/30/repaint-and-reflow/">重绘和回流（repaint &amp; reflow）</a></p>
+<h3 id="·-缓存-dom，缓存-array-length"><a href="#·-缓存-dom，缓存-array-length" class="headerlink" title="· 缓存 dom，缓存 array.length"></a>· 缓存 dom，缓存 array.length</h3><p>dom 访问代价挺高的，尽量减少</p>
+<h3 id="·-尽量使用事件代理，避免批量绑定事件"><a href="#·-尽量使用事件代理，避免批量绑定事件" class="headerlink" title="· 尽量使用事件代理，避免批量绑定事件"></a>· 尽量使用事件代理，避免批量绑定事件</h3><p>逻辑更清晰，性能更优</p>
+<h3 id="·-尽量使用-id-选择器"><a href="#·-尽量使用-id-选择器" class="headerlink" title="· 尽量使用 id 选择器"></a>· 尽量使用 id 选择器</h3><p>id 选择器速度快</p>
+<blockquote>
+<h2 id="css-代码优化"><a href="#css-代码优化" class="headerlink" title="css 代码优化"></a>css 代码优化</h2></blockquote>
+<h3 id="·-尽量避免写在-html-标签中写-style-属性"><a href="#·-尽量避免写在-html-标签中写-style-属性" class="headerlink" title="· 尽量避免写在 html 标签中写 style 属性"></a>· 尽量避免写在 html 标签中写 style 属性</h3><p>这样写维护性差</p>
+<h3 id="·-正确使用-display-的属性"><a href="#·-正确使用-display-的属性" class="headerlink" title="· 正确使用 display 的属性"></a>· 正确使用 display 的属性</h3><p>display 属性会影响页面的渲染，因此请合理使用<br>1) display:inline 后不应该再使用 width、height、margin、padding 以及 float<br>2) display:inline-block 后不应该再使用 float<br>3) display:block 后不应该再使用 vertical-align<br>4) display:table-* 后不应该再使用 margin 或者 float</p>
+<h3 id="·-不滥用-float"><a href="#·-不滥用-float" class="headerlink" title="· 不滥用 float"></a>· 不滥用 float</h3><p>float 在渲染时计算量比较大，尽量减少使用</p>
+<h3 id="·-值为-0-时不需要任何单位"><a href="#·-值为-0-时不需要任何单位" class="headerlink" title="· 值为 0 时不需要任何单位"></a>· 值为 0 时不需要任何单位</h3><p>为了浏览器的兼容性和性能，值为 0 时不要带单位</p>
+<p>参考：<br>[1] <a href="http://developer.51cto.com/art/201207/347525_all.htm" target="_blank" rel="external">http://developer.51cto.com/art/201207/347525_all.htm</a><br>[2] <a href="http://div.io/topic/371" target="_blank" rel="external">http://div.io/topic/371</a><br>[3] <a href="https://isux.tencent.com/h5-performance.html" target="_blank" rel="external">https://isux.tencent.com/h5-performance.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/30/page-optimization/">
+    <time datetime="2016-12-30T01:42:26.000Z" class="entry-date">
+        2016-12-30
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/01/06/throttle-debounce/" rel="prev"><span class="meta-nav">上一篇：</span>去抖和节流（debounce &amp; throttle）</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/12/28/jsonp-beacon/" rel="next"><span class="meta-nav">下一篇：</span>JSONP 和图像灯塔 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+作用域（scope）控制着变量和参数的可见性及生命周期。
+通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 作用域链（译） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+作用域（scope）控制着变量和参数的可见性及生命周期。
+通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 作用域链（译）">
+<meta property="og:url" content="http://nanchao.win/2016/11/01/scope-chain/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+作用域（scope）控制着变量和参数的可见性及生命周期。
+通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。">
+<meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 作用域链（译）">
+<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+作用域（scope）控制着变量和参数的可见性及生命周期。
+通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
+
+作用域链是一个对象列表，执行上下文中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。">
+<meta name="twitter:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-scope-chain" class="post-scope-chain post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 作用域链（译）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj2px24ti001yf50bx45w7ddv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+<p><strong>作用域</strong>（scope）控制着变量和参数的<strong>可见性</strong>及<strong>生命周期</strong>。</p>
+<p>通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。</p>
+<blockquote>
+<p><strong>作用域链</strong>是一个对象列表，<strong>执行上下文</strong>中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。</p>
+</blockquote>
+<a id="more"></a>
+<p>作用域链和原型链类似：如果一个变量在函数自身的作用域（自身的变量对象）中没有找到，那么将会查找它的父函数（外层函数）的变量对象，以此类推！</p>
+<p>给作用域链下个定义：<strong>当前执行上下文的变量对象（variableObject，包括函数的arguments对象, 参数, 内部的变量以及函数声明等）和其所有父执行上下文的变量对象组成的集合。</strong></p>
+<p>举个例子：</p>
+<pre><code>var x = 10;
+
+(function foo() {
+  var y = 20;
+  (function bar() {
+    var z = 30;
+
+    console.log(x + y + z);     //60
+  })();
+})();
+</code></pre><p>我们看到最内层函数 bar 能读到其外层函数 foo 以及全局作用域中的变量。</p>
+<p>我们可以假设通过隐式的 __parent__ 属性来和作用域链对象进行关联，这个属性指向作用域链中的下一个对象。利用 __parent__ 概念，我们可以用下面的图来表现上面的例子（并且父变量对象存储在函数的 [[Scope]] 属性中）：</p>
+<p><img src="/css/images/scope-chain/scope-chain.png" alt="作用域链"></p>
+<p>（另外，作用域链可以通过使用 with 语句和 catch 从句对象来增强，这里就不讨论了。）</p>
+<p>在 js 语言里，全局作用域可以理解为 window 对象，记住 window 是对象而不是构造函数或类，也就是说 window 是被实例化的对象，这个实例化过程是在页面加载时由 js 引擎完成的。虽然我们在开发过程中不能控制这个实例化过程，但是我们不要忽略这个事实。</p>
+<p>另外，在 js 语言里，任何匿名函数都是属于 window 对象，它们也都是在全局作用域构造时候完成定义和赋值的。但是匿名函数是没有名字的函数变量，只是在定义匿名函数时会返回其内存地址，如果此时有个变量接受了这个内存地址，那么这个匿名函数就能在其他地方调用了。</p>
+<p>最后，说明一点：<strong> 函数本身也是一个值，它的作用域绑定函数声明时所在的环境。</strong></p>
+<pre><code>var a = 1;
+var f1 = function(){
+    console.log(a);
+}
+
+function f2(){
+    var a = 2;
+    f1();
+}
+
+f2();
+// 1
+</code></pre><p>以上打印结果是 1，而不是 2。函数 f1 是在 f2 外部的全局环境中声明的，f1 的作用域绑定全局环境，取不到 f2 内部的a。鉴于这点，有个容易犯的错误：<strong> 函数 A 调用函数 B，却没有考虑到 B 并不会调用函数 A 内部定义的变量。</strong> 还是上面的例子，做点修改：</p>
+<pre><code>var f1 = function(){
+    console.log(a);
+}
+
+function f2(){
+    var a = 2;
+    f1();
+}
+
+f2();
+// Uncaught ReferenceError: a is not defined
+</code></pre><p>我们看到，这里会报错，f1 根本不能取到 f2 内部定义的变量 a。</p>
+<p>下面再看一个“惰性函数/自定义函数”：</p>
+<pre><code>var v = 1;
+var f = function(){
+    var v = 2;
+    console.log(&#39;第一次出现&#39;);
+    f = function(){
+        console.log(v);
+    }
+}
+
+f()
+// 第一次出现
+
+f()
+// 2
+</code></pre><p>当函数有一些初始化准备工作要做，并且仅需执行一次，这种模式就很有用了。同时，我们也看到，虽然函数 f 是全局变量，但它第二次执行的时候，变量 v 取值是 2，而不是 1。</p>
+<p>再看：</p>
+<pre><code>// html
+&lt;p id=&quot;p1&quot;&gt;段落 1&lt;/p&gt;
+
+//js
+var f = function(){
+    console.log(&#39;f 函数的激活者：&#39;,this);
+},
+p1 = document.getElementById(&quot;p1&quot;),
+p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+p1.addEventListener(&quot;click&quot;,f,false);
+document.write(p2);        
+document.write(p3);
+</code></pre><p>点击段落 1、2、3，打印信息分别如下：</p>
+<p>段落 1：</p>
+<pre><code>f 函数的激活者： &lt;p id=​&quot;p1&quot;&gt;​段落1​&lt;/p&gt;​
+</code></pre><p>段落 2：</p>
+<pre><code>&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;
+</code></pre><p>段落 3：</p>
+<pre><code>f 函数的激活者：Window {stop: function, open: function,…}
+</code></pre><p>下面把上面的 js 代码用自执行函数包围起来：</p>
+<pre><code>(function(){
+  var f = function(){
+      console.log(&#39;f 函数的激活者：&#39;,this);
+  },
+  p1 = document.getElementById(&quot;p1&quot;),
+  p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+  p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+  p1.addEventListener(&quot;click&quot;,f,false);
+  document.write(p2);        
+  document.write(p3);
+})();
+</code></pre><p>这时再点击段落1、2 打印的信息和以上一样，但是点击段落3 时报错了：</p>
+<pre><code>Uncaught ReferenceError: f is not defined
+</code></pre><p>把 f 函数定义在全局环境下：</p>
+<pre><code>var f = function(){
+      console.log(&#39;f 函数的激活者：&#39;,this);
+};
+(function(){
+  var p1 = document.getElementById(&quot;p1&quot;),
+  p2 = &#39;&lt;p id=&quot;p2&quot; onclick=&quot;console.log(this)&quot;&gt;段落2&lt;/p&gt;&#39;,
+  p3 = &#39;&lt;p id=&quot;p3&quot; onclick=&quot;f()&quot;&gt;段落3&lt;/p&gt;&#39;;
+
+  p1.addEventListener(&quot;click&quot;,f,false);
+  document.write(p2);        
+  document.write(p3);
+})();
+</code></pre><p>这时点击段落3 的打印信息又和之前一样了：</p>
+<pre><code>f 函数的激活者：Window {stop: function, open: function,…}
+</code></pre><p>其实，如果我们把回调函数部署在节点元素的 on- 属性上，回调函数内的 this 就不会再指向该节点元素了，而是指向全局对象 window，回调函数由 window 对象触发。这里 p3 正是这种方式绑定点击回调函数：</p>
+<pre><code>onclick=&quot;f()&quot;
+</code></pre><p>这里的 f 函数是由 window 对象触发的，若 f 是定义在自定义函数内部的函数，全局环境 window 找不到它那是必然的，所以才有了以上的报错。</p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/01/scope-chain/">
+    <time datetime="2016-11-01T01:46:50.000Z" class="entry-date">
+        2016-11-01
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/11/01/closures/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 闭包（译）</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/31/execution-context/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 执行上下文（译） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

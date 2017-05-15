@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Enjoy javascript">
+<meta property="og:url" content="http://nanchao.win/page/6/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enjoy javascript">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-closures" class="post-closures post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/11/01/closures/">JavaScript 闭包（译）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cj2px24se000kf50b01j1hex6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+<p><strong>在ECMAScript中，函数是第一级（first-class）对象。</strong>这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作<strong>高阶函数</strong>。同样函数也可以从其他函数中返回。返回其他函数的函数叫作<strong>以函数为值的函数</strong>。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/11/01/closures/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/01/closures/">
+    <time datetime="2016-11-01T07:55:44.000Z" class="entry-date">
+        2016-11-01
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-scope-chain" class="post-scope-chain post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/11/01/scope-chain/">JavaScript 作用域链（译）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj2px24ti001yf50bx45w7ddv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+<p><strong>作用域</strong>（scope）控制着变量和参数的<strong>可见性</strong>及<strong>生命周期</strong>。</p>
+<p>通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。</p>
+<blockquote>
+<p><strong>作用域链</strong>是一个对象列表，<strong>执行上下文</strong>中出现的标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2016/11/01/scope-chain/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/01/scope-chain/">
+    <time datetime="2016-11-01T01:46:50.000Z" class="entry-date">
+        2016-11-01
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-execution-context" class="post-execution-context post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/31/execution-context/">JavaScript 执行上下文（译）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj2px24sr000vf50bdis19ykw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
+<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/31/execution-context/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/31/execution-context/">
+    <time datetime="2016-10-31T02:23:26.000Z" class="entry-date">
+        2016-10-31
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-script" class="post-script post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/28/script/">关于 script 脚本加载方式（译）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj2px24tk0022f50b1v10uwqo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>原文： <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a></p>
+<p>我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/28/script/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/28/script/">
+    <time datetime="2016-10-28T06:10:12.000Z" class="entry-date">
+        2016-10-28
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-script-error" class="post-script-error post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/27/script-error/">script.onerror 的兼容写法</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cj2px24tj0020f50b3i0nwcn7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>script 的 onerror 事件 IE6~8 与 opera11 都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/27/script-error/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/27/script-error/">
+    <time datetime="2016-10-27T10:26:33.000Z" class="entry-date">
+        2016-10-27
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-chain-call" class="post-chain-call post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/25/chain-call/">浅谈 JavaScript 链式调用</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/25/chain-call/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cj2px24s9000bf50bxsfsgaf6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>函数链式调用是 jQuery 等框架中经常出现的一种函数调用方式，在面向对象编程中用得尤其多。JavaScript 的灵活性，使得实现链式调用的方式多种多样，下面，我们简单地实现一下链式调用，以展示其原理。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/25/chain-call/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/25/chain-call/">
+    <time datetime="2016-10-25T08:34:44.000Z" class="entry-date">
+        2016-10-25
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

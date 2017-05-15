@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>关于 ajax 请求 status 值为 0 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 ajax 请求 status 值为 0">
+<meta property="og:url" content="http://nanchao.win/2016/12/19/ajax-status/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 ajax 请求 status 值为 0">
+<meta name="twitter:description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-ajax-status" class="post-ajax-status post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      关于 ajax 请求 status 值为 0
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/19/ajax-status/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cj2px24s10006f50bjgy5pcls" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：</p>
+<a id="more"></a>
+<blockquote>
+<p>0 (UNSENT)：初始化，XMLHttpRequest 对象还没有完成初始化<br>1 (OPENED)：载入，XMLHttpRequest 对象开始发送请求<br>2 (HEADERS_RECEIVED)：载入完成，XMLHttpRequest 对象的请求发送完成<br>3 (LOADING)：解析，XMLHttpRequest 对象开始读取服务器的响应<br>4 (DONE)：数据传输已完成或传输过程中出现问题（例如无限重定向、跨域等）。</p>
+</blockquote>
+<p>status 表示响应的 HTTP 状态码。在 HTTP1.1 协议下，HTTP 状态码总共可分为 5 大类:</p>
+<blockquote>
+<p>1xx：信息响应类，表示接收到请求并且继续处理<br>2xx：处理成功响应类，表示动作被成功接收、理解和接受<br>3xx：重定向响应类，为了完成指定的动作，必须接受进一步处理<br>4xx：客户端错误，客户请求包含语法错误或者是不能正确执行<br>5xx：服务端错误，服务器不能正确执行一个正确的请求</p>
+</blockquote>
+<p>一般情况下，对于一个异步的 ajax 请求，如需响应成功后执行某操作，我们会这样写：</p>
+<pre><code>function getResource(url){
+    var xhr;
+    if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    } else {
+        //code for IE5, IE6
+        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    }
+    xhr.onreadystatechange = function (){
+        if (xhr.readyState == 4 &amp;&amp; xhr.status == 200){
+            //doSomething();
+        }
+    };
+    xhr.open(&#39;GET&#39;, url, true);
+    xhr.send(null); 
+}
+</code></pre><p>即满足 xhr.readyState == 4 &amp;&amp; xhr.status == 200，才能表示请求成功！</p>
+<p>我们把以上代码稍微改写一下,打印每次 ajax 请求返回的状态码：</p>
+<pre><code>function getStatus(url){
+    var xhr;
+    if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    } else {
+        //code for IE5, IE6
+        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    }
+    xhr.onreadystatechange = function (){
+        if (xhr.readyState == 4) {
+            console.log(&#39;status:&#39;,xhr.status);
+        }
+    };
+    xhr.open(&#39;GET&#39;, url, true);
+    xhr.send(null); 
+}
+</code></pre><p>实际应用中，会发现存在少量用户打印出的 xhr.status 值为0。这就奇怪了，http 状态码也没有值为 0 的场景，这里的 0 又是怎么来的？</p>
+<p><a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="external">官方文档https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a>  指出：</p>
+<p>status 值会由以下几个步骤确定：</p>
+<blockquote>
+<p>1.If the state is UNSENT or OPENED, return 0.</p>
+<p>2.If the error flag is set, return 0.</p>
+<p>3.Return the HTTP status code.</p>
+</blockquote>
+<p>也就是说，如果 readyState 是 UNSENT（0）或 OPENED（1）状态，status 返回值为 0；如果出现某种网络错误或者请求终止，error flag 就会由 unset 变为 set，status 返回值也为 0；否则，返回 http 状态码。</p>
+<p>例如，我们调取跨域资源或本地文件都会报跨域错误，同时 status 返回 0：</p>
+<pre><code>getStatus(&#39;https://www.baidu.com&#39;);
+</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load <a href="https://www.baidu.com/" target="_blank" rel="external">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://www.nc.com" target="_blank" rel="external">http://www.nc.com</a>‘ is therefore not allowed access.</p>
+<p>调取本地文件，同样会返回 0：</p>
+<pre><code>getStatus(&#39;file:///E:/www/www.nc.com/index.html&#39;);
+</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load file:///D:/www/www.nc.com/index.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https, chrome-extension-resource.</p>
+<p>参考：<br>[1] <a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="external">https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a><br>[2] <a href="http://www.w3school.com.cn/ajax/" target="_blank" rel="external">http://www.w3school.com.cn/ajax/</a><br>[3] <a href="http://www.cnblogs.com/liu-fei-fei/p/5618782.html" target="_blank" rel="external">http://www.cnblogs.com/liu-fei-fei/p/5618782.html</a><br>[4] <a href="http://blog.csdn.net/iaiti/article/details/42192659" target="_blank" rel="external">http://blog.csdn.net/iaiti/article/details/42192659</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/19/ajax-status/">
+    <time datetime="2016-12-19T01:44:25.000Z" class="entry-date">
+        2016-12-19
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/12/22/batch-processing/" rel="prev"><span class="meta-nav">上一篇：</span>windows 批处理脚本修改文件</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/21/webpack/" rel="next"><span class="meta-nav">下一篇：</span>前端模块化和打包工具 webpack </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 事件代理（委托） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 事件代理（委托）">
+<meta property="og:url" content="http://nanchao.win/2016/10/24/event-delegation/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 事件代理（委托）">
+<meta name="twitter:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-event-delegation" class="post-event-delegation post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 事件代理（委托）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj2px24sq000tf50bvaob6wct" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？</p>
+<a id="more"></a>
+<p>举个例子：当你点击了一个按钮，你确实是点击了这个按钮，但同时你实际上也点击了按钮所在的 div 区域，body 元素以及 html 元素等等，浏览器怎么知道你想点的到底是哪个元素呢？</p>
+<p>对此，dom 标准事件流规定：当一个事件发生后，会经过 3 个传播阶段：</p>
+<p><strong>第一阶段：从顶层 window 对象传播到最深层节点（目标节点），称为：捕获阶段</strong><br><strong>第二阶段：事件到达最深层的目标节点，称为：处于目标阶段</strong><br><strong>第三阶段：事件从目标节点传播回 window 对象，称为：冒泡阶段</strong></p>
+<p>以下面这段 dom 结构为例：</p>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+    ...
+    &lt;/head&gt;
+    &lt;body&gt;
+        ...
+        &lt;div&gt;
+            &lt;p&gt;点击这里&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>假设我们点击了 p 标签，事件传播会经过以下 3 个阶段：</p>
+<p>① 事件捕获 </p>
+<p>事件从最外层元素依次向深层次元素传播，直到最深层元素。捕获事件的触发顺序是：<br>window -&gt; document -&gt; body -&gt; div -&gt; p；</p>
+<p>② 目标节点</p>
+<p>事件到达最深层的节点，这个节点称为<strong>目标节点</strong>，在这里是 p 节点；</p>
+<p>③ 事件冒泡</p>
+<p>与事件捕获相反，事件从最深层元素依次向外层元素传播，直到最外层元素。冒泡事件的触发顺序是：<br>p -&gt; div -&gt; body -&gt; document -&gt; window。</p>
+<p><strong>注意：尽管事件发生后，会在多个节点之间传播、轮流触发，但是，可以确定的是，浏览器认定的事件目标节点只有一个：那就是嵌套最深的那个节点。在这里，就是 p 节点。</strong></p>
+<p>有了上面的分析，我们知道，子节点的事件总是会经过父节点。当需要监听的元素数量较多时，相对于每个节点单独的事件绑定，我们把所有子节点的监听函数定义在某个祖先节点上是一种比较好的方法。这种方法叫做<strong>事件代理（委托）</strong>。</p>
+<p>一个简单的例子:</p>
+<pre><code>document.onclick = function(event){
+
+    //IE doesn&#39;t pass in the event object
+    var event = event || window.event;
+
+    //IE uses srcElement as the target
+    var target = event.target || event.srcElement;
+
+    switch(target.id){
+        case &quot;help-btn&quot;:
+                openHelp();
+                break;
+        case &quot;save-btn&quot;:
+                saveDocument();
+                break;
+        case &quot;undo-btn&quot;:
+                undoChanges();
+                break;
+    }
+};
+</code></pre><p>可以看到，我们是通过 target 这个变量来区分不同的子节点，来做到事件分发的。这个 target 变量就是我们上边说的<strong>目标节点</strong>，我们可以将其看作“事件源”。</p>
+<p>另外，关于以上代码：</p>
+<p>ie8 及其以下版本，事件对象不作为参数传递，而是通过 window 对象的 event 属性读取，并且事件对象的 target 属性叫做 srcElement 属性。所以，以前获取事件信息，往往要写成下面这样。</p>
+<pre><code>function handler(event) {
+  var event = event || window.event;
+  var target = event.target || event.srcElement;
+  // ...
+}
+</code></pre><p>再注意一下 event.target，将其和 event.currentTarget 对比一下：</p>
+<p><strong>event.currentTarget</strong>：返回事件当前所在的节点，会随着事件捕获和事件冒泡改变。也就是事件监听函数中的 this。</p>
+<p><strong>event.target</strong>：返回目标节点（最深层节点），固定的。正是这个属性使得事件代理成为可能。</p>
+<p>有时候，为了阻止事件冒泡和事件默认操作，我们还会采取以下事件处理方法：</p>
+<pre><code>function myHandler(e){
+    var e = e || window.event;
+    var src = e.target || e.srcElement;
+
+    //do something
+
+    //无冒泡
+    if (typeof e.stopPropagation === &#39;function&#39;){
+        e.stopPropagation();    //w3c
+    }
+
+    if (typeof e.cancelBubble !== &#39;undefined&#39;){
+        e.cancelBubble = true;  //ie
+    }
+
+    //阻止默认操作
+    if (typeof e.preventDefault === &#39;function&#39;){
+        e.preventDefault();     //w3c
+    }
+
+    if (typeof e.returnValue !== &#39;undefined&#39;){
+        e.returnValue = false;  //ie
+    }
+}
+</code></pre><p>以上代码中取消了事件的传播，这个处理不是必须的，可以省略。但是如果不这样，会导致事件传播到最顶层元素，甚至是 window 对象。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/24/event-delegation/">
+    <time datetime="2016-10-24T05:09:38.000Z" class="entry-date">
+        2016-10-24
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/10/24/prototype/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 原型链</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/14/tostring/" rel="next"><span class="meta-nav">下一篇：</span>toString.call() 引起的一些思考 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

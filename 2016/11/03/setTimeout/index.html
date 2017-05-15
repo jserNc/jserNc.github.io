@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>理解 JavaScript 中 setTimeout | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 JavaScript 中 setTimeout">
+<meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
+<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 JavaScript 中 setTimeout">
+<meta name="twitter:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-setTimeout" class="post-setTimeout post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      理解 JavaScript 中 setTimeout
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cj2px24tm0024f50bmsj8w4h1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。</p>
+<a id="more"></a>
+<p>我们先看一个简单的例子：</p>
+<pre><code>var timer = setTimeout(&quot;console.log(1)&quot;,3000);
+</code></pre><p>3000 毫秒（3 秒）后，会在控制台输出 1。</p>
+<p>setTimeout 方法第 1 个参数可以是引号包含的代码、待执行的函数名或者匿名方法等，第 2 个参数是延迟执行的毫秒数，下面两种写法和上面实现同样的效果：</p>
+<pre><code>//写法一
+function f(){
+    console.log(1);
+}
+var timer = setTimeout(f,3000);
+
+//写法二
+var timer = setTimeout(function(){
+    console.log(1);
+}, 3000);
+</code></pre><p>定时任务执行之前，我们可以用 clearTimeout() 来取消该定时器：</p>
+<pre><code>var timer = setTimeout(function(){
+    console.log(1);
+}, 3000);
+
+clearTimeout(timer);
+</code></pre><p>这样 3 秒之后就不会再输出 1 了。</p>
+<p>setTimeout 基本用法就是这样，下面我们再来看看它的其他作用。看一个小例子：</p>
+<pre><code>var startTime = new Date();
+setTimeout(function(){
+    console.log(&#39;延时：&#39;,new Date() - startTime);
+}, 200);
+</code></pre><p>执行以上代码，会输出多少呢？</p>
+<p>chrome控制台下连续执行 3 次，结果依次是：{ 延时：201,201,202 }。下面对以上代码稍作修改：</p>
+<pre><code>var startTime = new Date();
+
+setTimeout(function(){
+    console.log(&#39;延时：&#39;,new Date() - startTime);
+}, 200);
+
+while((+new Date() - startTime) &lt; 1000){
+    console.log(&#39;...&#39;);
+}
+</code></pre><p>再次执行 3 次，结果依次是  { 延时：1001,1000,1000 }。</p>
+<p>根据以上对比，我们可以断定，上述打印结果 res 取决于后面的同步任务执行时间（忽略延时代码执行的几毫秒的误差），即 res 是“同步任务执行时间”和“指定的延迟时间”直接的较大者：</p>
+<blockquote>
+<p><strong>res = max(同步任务执行时间，200)</strong></p>
+</blockquote>
+<p>好，再看：</p>
+<pre><code>setTimeout(function(){
+    console.log(1);
+}, 0);
+console.log(2);
+</code></pre><p>以上代码，我们写的延迟时间是 0，我们期待的是立刻输出 1。然而，执行以后我们发现，先输出 2，然后才输出 1。为什么会这样呢？</p>
+<p>首先，我们明确一个概念：<strong>JavaScript 是单线程的语言，在执行时必须等前面的任务处理完以后才会处理后面的。JavaScript 中的任务分为同步任务和异步任务，同步任务就是主线程上一个个排队执行的任务；异步任务则不进入主线任务而是被加入到任务队列中，任务队列的任务只有在主线任务执行完成之后才去处理任务队列中的任务。</strong></p>
+<p>setTimeout 方法中待执行的代码就是异步任务。延时参数设为 0，仅仅表示同步任务执行完后尽可能早地执行该异步任务。0 毫秒的延迟在实际中也不存在的。为了防止多个 setTimeout(f,0) 连续执行造成性能问题，html5 规定，setTimeout 方法指定的时间最少是 4 毫秒。如果小于这个值，会自动增加到 4 毫秒。当然了，设置的延迟时间太长也不行。setTimeout 最多只能延迟 24.8 天（ 即 2147483647 毫秒，因为浏览器内部使用 32 位带符号的整数，来储存推迟执行的时间），超过这个时间，等同于延迟时间设为 0，即 setTimeout(f,0)。</p>
+<p>由于要等到本次 Event Loop 的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照 setTimeout 方法指定的延迟时间执行。</p>
+<pre><code>setTimeout(someTask,100);
+veryLongTask();
+</code></pre><p>上面代码指定 100 毫秒后运行一个任务。但是，如果后面立即执行的任务（当前脚本的同步任务）非常耗时，运行超过 100 毫秒无法结束。那么，推迟的 someTask 只有等着，等到前面的 veryLongTask 运行结束才开始执行。</p>
+<p>实际应用中，为了防止阻塞，我们可以把耗时的大块任务分成一个个小块，每个小块用 setTimeout(f,0) 方法调用，即将大任务分成一个个小任务，让浏览器在空余时间尽早执行。</p>
+<p>假如有三个函数处理时间都很长</p>
+<pre><code>longTask1();
+longTask2();
+longTask3();
+</code></pre><p>可以用 setTimeout 把这些大任务拆开。这样就可以优先来响应其他小任务了，不至于堵在这种耗时大任务这里。</p>
+<pre><code>var arr = [longTask1, longTask2, longTask3],
+    len = arr.length,
+    i = 0;
+for(; i &lt; len; i++){
+    setTimeout(arr[i], 0);
+}
+</code></pre><p>再看：</p>
+<pre><code>var div = document.getElementsByTagName(&#39;div&#39;)[0];
+
+// 写法一
+for (var i = 0xA00000; i &lt; 0xFFFFFF; i++) {
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+}
+
+// 写法二
+var timer;
+var i = 0x100000;
+
+function func() {
+  timer = setTimeout(func, 0);
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+  if (i++ === 0xFFFFFF) {
+      clearTimeout(timer);
+  } 
+}
+
+timer = setTimeout(func, 0);
+</code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 DOM 操作消耗较大，这种连续的 DOM 操作会造成大量 DOM 操作“堆积”，浏览器卡顿。而写法二将任务分散在空余时间执行，就不会造成“堵塞”，这就是 setTimeout(f, 0) 的好处。</p>
+<p>setTimeout 和 setInterval 的运行机制是：将指定的代码移除本次执行队列，等到下一轮 Event Loop 时，再检查是否到了指定的延迟时间。如果到了，就执行指定的代码；否则在下一轮 Event Loop 时重新判断。</p>
+<p>每一轮 Event Loop，都会将“任务队列”中需要执行的代码一次执行完。setTimeout 和 setInterval 都是把任务添加到“任务队列”的尾部。因此它们要等到当前脚本的所有同步任务执行完，然后再等到本次 Event Loop 中的“任务队列”中的所有任务执行完，才开始执行。由于前面的任务到底要多久才能执行完，是不确定的，所以，不能够保证 setTimeout 和 setInterval 指定的任务一定会按照预定时间执行。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/advanced/timer.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/03/setTimeout/">
+    <time datetime="2016-11-03T06:46:59.000Z" class="entry-date">
+        2016-11-03
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/11/15/chrome-extension/" rel="prev"><span class="meta-nav">上一篇：</span>chrome 扩展开发</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/02/this/" rel="next"><span class="meta-nav">下一篇：</span>理解 JavaScript 中 this </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

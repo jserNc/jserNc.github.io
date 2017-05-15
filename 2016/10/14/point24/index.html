@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="24 点：棋牌类益智游戏，要求 4 个数字运算结果等于 24。这个游戏用扑克牌很容易开展，拿一副牌，抽去大小王后以及 J/Q/K 后，剩下 1～10 这 40 张牌(以下用 1 代替 A)。任意抽取4张牌(称为牌组)，用加、减、乘、除(可加括号，高级玩家也可用乘方开方运算)把牌面上的数算成 24。每张牌必须且只能用一次。比如抽出的牌是 3、8、8、9，那么算式可以为 (9-8)×8×3=24。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 24 点游戏算法 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="24 点：棋牌类益智游戏，要求 4 个数字运算结果等于 24。这个游戏用扑克牌很容易开展，拿一副牌，抽去大小王后以及 J/Q/K 后，剩下 1～10 这 40 张牌(以下用 1 代替 A)。任意抽取4张牌(称为牌组)，用加、减、乘、除(可加括号，高级玩家也可用乘方开方运算)把牌面上的数算成 24。每张牌必须且只能用一次。比如抽出的牌是 3、8、8、9，那么算式可以为 (9-8)×8×3=24。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 24 点游戏算法">
+<meta property="og:url" content="http://nanchao.win/2016/10/14/point24/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="24 点：棋牌类益智游戏，要求 4 个数字运算结果等于 24。这个游戏用扑克牌很容易开展，拿一副牌，抽去大小王后以及 J/Q/K 后，剩下 1～10 这 40 张牌(以下用 1 代替 A)。任意抽取4张牌(称为牌组)，用加、减、乘、除(可加括号，高级玩家也可用乘方开方运算)把牌面上的数算成 24。每张牌必须且只能用一次。比如抽出的牌是 3、8、8、9，那么算式可以为 (9-8)×8×3=24。">
+<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 24 点游戏算法">
+<meta name="twitter:description" content="24 点：棋牌类益智游戏，要求 4 个数字运算结果等于 24。这个游戏用扑克牌很容易开展，拿一副牌，抽去大小王后以及 J/Q/K 后，剩下 1～10 这 40 张牌(以下用 1 代替 A)。任意抽取4张牌(称为牌组)，用加、减、乘、除(可加括号，高级玩家也可用乘方开方运算)把牌面上的数算成 24。每张牌必须且只能用一次。比如抽出的牌是 3、8、8、9，那么算式可以为 (9-8)×8×3=24。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-point24" class="post-point24 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 24 点游戏算法
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/14/point24/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/point24/" data-id="cj2px24td001pf50byb5rrv96" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>24 点：棋牌类益智游戏，要求 4 个数字运算结果等于 24。这个游戏用扑克牌很容易开展，拿一副牌，抽去大小王后以及 J/Q/K 后，剩下 1～10 这 40 张牌(以下用 1 代替 A)。任意抽取4张牌(称为牌组)，用加、减、乘、除(可加括号，高级玩家也可用乘方开方运算)把牌面上的数算成 24。每张牌必须且只能用一次。比如抽出的牌是 3、8、8、9，那么算式可以为 (9-8)×8×3=24。</p>
+<a id="more"></a>
+<p>下面用 js 实现任意 4 个整数的 24 算法：</p>
+<pre><code>function point24(input){
+
+    var index = [[0,1,2,3],[0,1,3,2],[0,2,1,3],
+                 [0,2,3,1],[0,3,1,2],[0,3,2,1],
+                 [1,2,0,3],[1,2,3,0],[1,3,0,2],
+                 [1,3,2,0],[2,3,0,1],[2,3,1,0]],
+        times = index.length;
+
+    var success = false,
+        finalArr = [],
+        originArr = [],    
+        is31 = false,
+        is22 = false,
+        temp31Arr = [],
+        res = &quot;&quot;;
+
+    function twoRes(arr){
+        if (success &amp;&amp; !arguments[2]){
+            return [];
+        }
+        var res0 = arr[0] + arr[1],
+            res1 = arr[0] - arr[1],
+            res2 = arr[0] * arr[1],
+            res3 = arr[0] / arr[1],
+            res4 = arr[1] - arr[0],
+            res5 = arr[1] / arr[0],
+            isN = false,
+            num = arguments[2] || 24;
+
+        isN = isInArr(num,[res0,res1,res2,res3,res4,res5]);
+        if ((isN !== false) &amp;&amp; arguments[1]){
+            switch (isN){
+                case 0: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[0] + &quot;+&quot; + arr[1],num];
+                    }
+                    break;
+                case 1: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[0] + &quot;-&quot; + arr[1],num];
+                    }
+                    break;
+                case 2: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[0] + &quot;*&quot; + arr[1],num];
+                    }
+                    break;
+                case 3: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[0] + &quot;/&quot; + arr[1],num];
+                    }
+                    break;
+                case 4: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[1] + &quot;-&quot; + arr[0],num];
+                    }
+                    break;
+                case 5: 
+                    if (!arguments[2]){
+                        finalArr = [arr[0],arr[1]];
+                    } else {
+                        return [arr[1] + &quot;/&quot; + arr[0],num];
+                    }
+                    break;
+                default :
+            }
+            return [[res0,res1,res2,res3,res4,res5][isN]];
+        }
+        return [res0,res1,res2,res3,res4,res5];
+    }
+
+    function threeRes(arr){
+        var arrRes = [],
+            len = 0,
+            res = [],
+            temp = [],
+            n = arguments[1];
+
+        arrRes = (n === undefined ? twoRes([arr[0],arr[1]]) : twoRes([arr[0],arr[1]],true,true));
+        len = arrRes.length;
+
+        for (var i = 0;i &lt; len;i++){
+            temp = (n === undefined ? twoRes([arrRes[i],arr[2]]) : twoRes([arrRes[i],arr[2]],true,true));
+            res = res.concat(temp);
+
+            if (n !== undefined){
+                if (isInArr(n,temp) !== false){
+                    temp31Arr = [arrRes[i],arr[2]];
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+
+    function fourRes1(arr){
+        var arrRes = threeRes([arr[0],arr[1],arr[2]]),
+            len = arrRes.length,
+            res = [],
+            temp = [];
+
+        for (var i = 0;i &lt; len;i++){
+            temp = twoRes([arrRes[i],arr[3]],true);
+            res = res.concat(temp);
+            if (isInArr(24,temp) !== false){
+                success = true;
+                is31 = true;
+                return res;
+            }
+        }
+        return res;
+    }
+
+    function fourRes2(arr){
+        var arr1 = twoRes([arr[0],arr[1]]),
+            len1 = arr1.length,
+            arr2 = twoRes([arr[2],arr[3]]),
+            len2 = arr2.length,
+            res = [],
+            temp = [];
+
+        for (var i = 0;i &lt; len1;i++){
+            for (var j = 0;j &lt; len2;j++){
+                temp = twoRes([arr1[i],arr2[j]],true);
+                res = res.concat(temp);
+                if (isInArr(24,temp) !== false){
+                    success = true;
+                    is22 = true;
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+
+    function fourRes(arr){
+        var res1 = [],
+            res2 = [],
+            res = [];
+
+        res1 = fourRes1([arr[0],arr[1],arr[2],arr[3]]);
+        res2 = fourRes2([arr[0],arr[1],arr[2],arr[3]]);
+        res = res1.concat(res2);
+        return res;
+    }
+
+    function isInArr(n,arr){
+        var len = arr.length;
+        for (var i = 0;i &lt; len;i++){
+            if (n === arr[i]){
+                return i;
+            }
+        }
+        return false;
+    }
+
+    function get24(){
+        var num0 = 0,num1 = 0,num2 = 0,num3 = 0;
+        for (var i = 0;i &lt; times;i++){
+            originArr = [input[index[i][0]],input[index[i][1]],input[index[i][2]],input[index[i][3]]]
+            if (isInArr(24,fourRes(originArr)) !== false){
+                return;
+            }
+        }
+        return;
+    }
+
+    get24();
+
+    if (is22){
+        var tempArr1 = originArr.slice(0,2),
+            tempArr2 = originArr.slice(2,4),
+            tempRes1 = &quot;&quot;,
+            tempRes2 = &quot;&quot;,
+            operator = &quot;&quot;;
+
+
+        tempRes1 = twoRes(tempArr1,true,finalArr[0])[0];
+        tempRes2 = twoRes(tempArr2,true,finalArr[1])[0];
+
+        if (finalArr[0] &gt;= 0){
+            operator = twoRes(finalArr,true,24)[0].match(/[^\d\.\s]/)[0];
+        } else {
+            operator = twoRes(finalArr,true,24)[0].match(/[^\d\.\s]/g)[1]
+        }
+
+        if (operator == &quot;-&quot;){
+            if ((finalArr[0] - finalArr[1]) === 24){
+                res = &quot;(&quot; + tempRes1 + &quot;)-&quot; + &quot;(&quot; + tempRes2 + &quot;) =24&quot;;
+            } else {
+                res = &quot;(&quot; + tempRes2 + &quot;)-&quot; + &quot;(&quot; + tempRes1 + &quot;) =24&quot;;
+            }
+        } else if (operator == &quot;/&quot;){
+            if ((finalArr[0] / finalArr[1]) === 24){
+                res = &quot;(&quot; + tempRes1 + &quot;)/&quot; + &quot;(&quot; + tempRes2 + &quot;) =24&quot;;
+            } else {
+                res = &quot;(&quot; + tempRes2 + &quot;)/&quot; + &quot;(&quot; + tempRes1 + &quot;) =24&quot;;
+            }
+        } else {
+            res = &quot;(&quot; + tempRes1 + &quot;)&quot; + operator + &quot;(&quot; + tempRes2 + &quot;) =24&quot;;
+        }
+    }
+
+    if (is31){
+        var tempArr1 = originArr.slice(0,3),
+            tempArr2 = originArr.slice(3,4),
+            tempArr3 = originArr.slice(0,2),
+            tempRes1 = &quot;&quot;,
+            operator1 = &quot;&quot;,
+            operator2 = &quot;&quot;;
+
+        threeRes(tempArr1,finalArr[0]);
+        tempRes1 = twoRes(tempArr3,true,temp31Arr[0])[0];
+        if (temp31Arr[0] &gt;= 0){
+            operator1 = twoRes([temp31Arr[0],temp31Arr[1]],true,finalArr[0])[0].match(/[^\d\.\s]/)[0];
+        } else {
+            operator1 = twoRes([temp31Arr[0],temp31Arr[1]],true,finalArr[0])[0].match(/[^\d\.\s]/g)[1];
+        }
+
+        if (operator1 == &quot;-&quot;){
+            if ((temp31Arr[0] - temp31Arr[1]) === finalArr[0]){
+                res = &quot;(&quot; + tempRes1 + &quot;)-&quot;  + temp31Arr[1];
+            } else {
+                res = temp31Arr[1] + &quot;-(&quot; + tempRes1 + &quot;)&quot;;
+            }
+        } else if (operator1 == &quot;/&quot;){
+            if ((temp31Arr[0] / temp31Arr[1]) === finalArr[0]){
+                res = &quot;(&quot; + tempRes1 + &quot;)/&quot;  + temp31Arr[1];
+            } else {
+                res = temp31Arr[1] + &quot;/(&quot; + tempRes1 + &quot;)&quot;;
+            }
+        } else {
+            res = &quot;(&quot; + tempRes1 + &quot;)&quot; + operator1  + temp31Arr[1];
+        }
+
+        if (finalArr[0] &gt;= 0){
+            operator2 = twoRes(finalArr,true,24)[0].match(/[^\d\.\s]/)[0];
+        } else {
+            operator2 = twoRes(finalArr,true,24)[0].match(/[^\d\.\s]/g)[1];
+        }
+        if (operator2 == &quot;-&quot;){
+            if (finalArr[0] - finalArr[1] === 24){
+                res = &quot;(&quot; + res + &quot;)-&quot; + finalArr[1];
+            } else {
+                res = finalArr[1] + &quot;-(&quot; + res + &quot;)&quot;;
+            }
+        } else if (operator2 == &quot;/&quot;){
+            if (finalArr[0] / finalArr[1] === 24){
+                res = &quot;(&quot; + res + &quot;)/&quot; + finalArr[1];
+            } else {
+                res = finalArr[1] + &quot;/(&quot; + res + &quot;)&quot;;
+            }
+        } else {
+            res = &quot;(&quot; + res + &quot;)&quot; + operator2 + finalArr[1] + &quot;=24&quot;;
+        }
+    }
+    return res;
+}
+</code></pre><p>以上 point24 方法的实参是一个长度为 4 的一维数组，例如：</p>
+<pre><code>point24([1,2,3,4]);
+
+// 结果：
+// &quot;((1+2)+3)*4=24&quot;
+</code></pre>
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/14/point24/">
+    <time datetime="2016-10-14T06:22:09.000Z" class="entry-date">
+        2016-10-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/10/14/https/" rel="prev"><span class="meta-nav">上一篇：</span>https 本地环境搭建(windows)</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/13/sort/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 排序算法 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

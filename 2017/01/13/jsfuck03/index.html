@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>jsfuck 6 个字符写 js 代码（四） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsfuck 6 个字符写 js 代码（四）">
+<meta property="og:url" content="http://nanchao.win/2017/01/13/jsfuck03/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。">
+<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（四）">
+<meta name="twitter:description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-jsfuck03" class="post-jsfuck03 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      jsfuck 6 个字符写 js 代码（四）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/13/jsfuck03/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cj2px24t6001cf50ben8otah0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>前文我们说 JavaScript 语言中所有的字符都可以用<strong> [，]，(，)，!，+ </strong>等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。</p>
+<a id="more"></a>
+<p><strong> 标点符号 </strong></p>
+<pre><code>// 空格字符&#39; &#39;，而不是空字符&#39;&#39;
+&#39;&#39; === &#39;&#39;   // true
+&#39;&#39; === &#39; &#39;  // false
+&#39; &#39; === (NaN+[][&quot;filter&quot;])[11]
+-&gt; &quot;NaNfunction filter() { [native code] }&quot;[11]
+-&gt; &#39; &#39;
+
+&#39;&quot;&#39; === (&quot;&quot;)[&quot;fontcolor&quot;]()[12]
+-&gt; (&quot;&quot;).fontcolor()[12]
+-&gt; &#39;&lt;font color=&quot;undefined&quot;&gt;&lt;/font&gt;&#39;[12]
+-&gt; &#39;&quot;&#39;
+// 对字符串调用fontcolor()函数，
+// 会用font标签将font标签将字符串包围，并且加color属性
+&#39;str&#39;.fontcolor(&#39;red&#39;) 
+-&gt; &#39;&lt;font color=&quot;red&quot;&gt;str&lt;/font&gt;&#39;
+
+&#39;%&#39; === Function(&quot;return escape&quot;)()([][&quot;filter&quot;])[20]
+-&gt; escape(String([][&quot;filter&quot;]))[20]
+-&gt; escape(&quot;function filter() { [native code] }&quot;)[20]
+-&gt; &quot;function%20filter%28%29%20%7B%20%5Bnative%20code%5D%20%7D&quot;[20]
+-&gt; &#39;%&#39;
+
+&#39;(&#39; === (false+[][&quot;filter&quot;])[20]
+-&gt; &quot;falsefunction filter() { [native code] }&quot;[20]
+-&gt; &#39;(&#39;
+
+&#39;)&#39; === (true+[][&quot;filter&quot;])[20]
+-&gt; &quot;truefunction filter() { [native code] }&quot;[20]
+-&gt; &#39;)&#39;
+
+// + 作为一元运算符，强制转换数字时，优先级高于 !
+// + 作为二元运算符（加法或字符串连接），优先级低于 !
+// !+[]
+-&gt; true
+// +[]
+-&gt; 0
+// 左边是字符 &#39;+&#39;，右边是一元（二元）运算符 +
+&#39;+&#39; === (+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+!+[]]+[+[]]+[+[]])+[])[2]
+-&gt; (+(+true+(true+[])[true+true+true]+[+true]+[0]+[0])+[])[2]
+-&gt; (+(+true+(&quot;true&quot;)[3]+[1]+[0]+[0])+[])[2]
+-&gt; (+(1+&quot;e&quot;+[1]+[0]+[0])+[])[2]
+-&gt; (+&quot;1e100&quot;+[])[2]
+-&gt; (1e+100+[])[2]
+-&gt; &quot;1e+100&quot;[2]
+-&gt; &#39;+&#39;
+
+// 如果call方法的参数是一个原始值，
+// 那么这个原始值会自动转成对应的包装对象
+&#39;,&#39; === ([][&quot;slice&quot;][&quot;call&quot;](false+&quot;&quot;)+&quot;&quot;)[1]
+-&gt; ([][&quot;slice&quot;][&quot;call&quot;](&quot;false&quot;)+&quot;&quot;)[1]
+-&gt; (Array.prototype.slice.call(&quot;false&quot;)+&quot;&quot;)[1]
+-&gt; ([&quot;f&quot;, &quot;a&quot;, &quot;l&quot;, &quot;s&quot;, &quot;e&quot;]+&quot;&quot;)[1]
+-&gt; &quot;f,a,l,s,e&quot;[1]
+-&gt; &#39;,&#39;
+
+&#39;.&#39; === (+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+[]+!+[]]+[+[]])+[])[+!+[]]
+-&gt; (+(+true+[+true]+(!![]+[])[true+true+true]+[true+true]+[+[]])+[])[+true]
+-&gt; (+(1+[1]+(!![]+[])[3]+[2]+[+[]])+[])[1]
+-&gt; (+(1+[1]+(true+[])[3]+[2]+[0])+[])[1]
+-&gt; (+(1+[1]+(&quot;true&quot;)[3]+[2]+[0])+[])[1]
+-&gt; (+(1+[1]+&quot;e&quot;+[2]+[0])+[])[1]
+-&gt; (+(&quot;11e20&quot;)+[])[1]
+-&gt; (1.1e+21+[])[1]
+-&gt; &quot;1.1e+21&quot;[1]
+-&gt; &#39;.&#39;
+
+&#39;/&#39; === (false+[0])[&quot;italics&quot;]()[10]
+-&gt; &quot;false0&quot;.italics()[10]
+-&gt; &quot;&lt;i&gt;false0&lt;/i&gt;&quot;[10]
+-&gt; &#39;/&#39;
+
+&#39;:&#39; === (RegExp()+&quot;&quot;)[3]
+-&gt; (/(?:)/+&quot;&quot;)[3]
+-&gt; &quot;/(?:)/&quot;[3]
+-&gt; &#39;:&#39;
+
+&#39;&lt;&#39; === (&quot;&quot;)[&quot;italics&quot;]()[0]
+-&gt; &quot;&lt;i&gt;&lt;/i&gt;&quot;[0]
+-&gt; &#39;&lt;&#39;
+
+&#39;=&#39; === (&quot;&quot;)[&quot;fontcolor&quot;]()[11]
+-&gt; &quot;&lt;font color=&quot;undefined&quot;&gt;&lt;/font&gt;&quot;[11]
+-&gt; &#39;=&#39;
+
+&#39;&gt;&#39; === (&quot;&quot;)[&quot;italics&quot;]()[2]
+-&gt; &quot;&lt;i&gt;&lt;/i&gt;&quot;[2]
+-&gt; &#39;&gt;&#39;
+
+&#39;?&#39; === (RegExp()+&quot;&quot;)[2]
+-&gt; &quot;/(?:)/&quot;[2]
+-&gt; &#39;?&#39;
+
+&#39;[&#39; === (Function(&quot;return{}&quot;)()+&quot;&quot;)[0]
+-&gt; ({} + &quot;&quot;)[0]
+-&gt; &quot;[object Object]&quot;[0]
+-&gt; &#39;[&#39;
+
+&#39;]&#39; === (Function(&quot;return{}&quot;)()+&quot;&quot;)[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; ({} + &quot;&quot;).slice(-1)
+-&gt; &quot;[object Object]&quot;.slice(-1)
+-&gt; &#39;]&#39;
+
+&#39;{&#39; === (NaN+[][&quot;filter&quot;])[21]
+-&gt; &quot;NaNfunction filter() { [native code] }&quot;[21]
+-&gt; &quot;{&quot;
+
+&#39;}&#39; === ([][&quot;filter&quot;]+&quot;&quot;)[&quot;slice&quot;](&quot;-1&quot;)
+-&gt; &quot;function filter() { [native code] }&quot;.slice(-1)
+-&gt; &#39;}&#39;
+</code></pre><p>仔细看完前文，我们会发现有一部分大写字母（H、J、K…）和符号（#、$…）并没有出现在以上的映射表里。</p>
+<p><strong> 下面我们补全这部分字符：</strong></p>
+<pre><code>&#39;Function(&quot;return unescape&quot;)()(&quot;%&quot;&#39;+ key.charCodeAt(0).toString(16).replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
+
+// 假如其中的 key 为 &#39;H&#39;
+
+&#39;Function(&quot;return unescape&quot;)()(&quot;%&quot;&#39;+ &quot;H&quot;.charCodeAt(0).toString(16).replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
+-&gt; &#39;unescape(&quot;%&quot;&#39;+ &quot;H&quot;.charCodeAt(0).toString(16).replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
+-&gt; &#39;unescape(&quot;%&quot;&#39;+ (72).toString(16).replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
+-&gt; &#39;unescape(&quot;%&quot;&#39;+ &quot;48&quot;.replace(/(\d+)/g, &quot;+($1)+\&quot;&quot;) + &#39;&quot;)&#39;
+-&gt; &#39;unescape(&quot;%&quot;&#39;+ &#39;+(48)+&quot;&#39; + &#39;&quot;)&#39;
+-&gt; &#39;unescape(&quot;%&quot;+(48)+&quot;&quot;)&#39;
+
+&#39;H&#39; === unescape(&quot;%&quot;+(48)+&quot;&quot;)
+-&gt; unescape(&quot;%48&quot;)
+-&gt; &#39;H&#39;
+</code></pre><p>以上代码中的 key 换成 J、K 等其他字符，以上表达式都能获得该字符本身。</p>
+<p><strong> 数字 0~9 </strong></p>
+<pre><code>0 === +[]
+
+1 === +!+[]
+-&gt; +!0
+-&gt; +1
+-&gt; 1
+
+2 === 1 + 1
+2 === +!+[] + +!+[]
+
+3 = 1 + 2
+3 === +!+[] + +!+[] + +!+[]
+//当然了，最前面的 + 是可以不要的
+3 === !+[] + +!+[] + +!+[]
+
+// “一生二，二生三，三生无穷”，其他数字都可以这样得到
+</code></pre><p>好了，暂时到这里，下篇我们继续。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://github.com/aemkei/jsfuck" target="_blank" rel="external">https://github.com/aemkei/jsfuck</a><br>[4] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/13/jsfuck03/">
+    <time datetime="2017-01-13T01:45:15.000Z" class="entry-date">
+        2017-01-13
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/02/14/triangle/" rel="prev"><span class="meta-nav">上一篇：</span>css 三角形 扇形</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/01/11/jsfuck02/" rel="next"><span class="meta-nav">下一篇：</span>jsfuck 6 个字符写 js 代码（三） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

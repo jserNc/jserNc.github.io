@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>浏览器本地存储（一） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器本地存储（一）">
+<meta property="og:url" content="http://nanchao.win/2017/03/31/localStorage/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器本地存储（一）">
+<meta name="twitter:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-localStorage" class="post-localStorage post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      浏览器本地存储（一）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/03/31/localStorage/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj2px24t8001hf50b1vfytnzw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。</p>
+<a id="more"></a>
+<p>目前，主流的本地存储技术有，cookie、localStorage、Session Storage、IndexedDB 以及 Web SQL，这里主要讨论一下 cookie 和 localStorage 两种本地存储方式。</p>
+<h2 id="cookie："><a href="#cookie：" class="headerlink" title="cookie："></a>cookie：</h2><p>cookie 原意小甜点。这里指保存在用户浏览器中的一段文本信息。每个 cookie 大小一般不能超过 4KB。每个域名下最多只能存储几十个 cookie，具体个数因浏览器而异。</p>
+<p>打开 chrome 开发者工具 Application 标签下的 Cookies 列表，可以看到所有 cookie 按域名分类。每个 cookie 包含 cookie 名（<strong>Name</strong>）、cookie 值（<strong>Value</strong>）、有效时间（<strong>Expires/Max-Age</strong>）、所属域名（<strong>Domain</strong>）、有效路径（<strong>Path</strong>）、安全（<strong>Secure</strong>）、是否能被 JavaScript 读取（<strong>HttpOnly</strong>）等属性。</p>
+<p><strong>(1) 读取 cookie：（一次可以读出全部）</strong></p>
+<p>document.cookie 属性会返回当前页面的所有 cookie，并以分号（;）隔开。</p>
+<pre><code>document.cookie
+// &quot;lc=58362; uUiD=88888; game_played=1; mail_index=2;&quot;
+</code></pre><p><strong>如需读取特定名称的 cookie，比如取出名为 game_played 的 cookie 的值，这里给出两种参考方法（其中的解码函数需要和设置 cookie 是用的编码函数对应）：</strong></p>
+<p><strong>方法一：</strong><br>split 以上字符串，得到 cookie 数组，然后 split 该数组各个元素，循环匹配出对应的 value。</p>
+<pre><code>function getCookie(_name){
+    var h = document.cookie.split(&#39;; &#39;),
+      g = h.length,
+      e = [];
+
+    for (var j = 0; j &lt; g; j++) {
+      e = h[j].split(&#39;=&#39;);
+      if (_name === e[0] &amp;&amp; e[1]) {
+          try{
+            return decodeURIComponent(e[1]);
+          }catch(e){
+            return unescape(e[1]);
+          }
+      }
+    }
+    return null;
+}
+</code></pre><p><strong>方法二：</strong><br>检查 document.cookie 对象中是否存有 cookie。如果存在，那么继续检查我们指定的 cookie 是否已储存。如果找到了我们要的 cookie，就返回值，否则返回空字符串。</p>
+<pre><code>function getCookie(c_name){
+    var cookies = document.cookie;
+    if (cookies.length&gt;0){
+        idx = cookies.indexOf(c_name + &quot;=&quot;)
+        if (idx != -1){ 
+            idx = idx + c_name.length+1; 
+            end = cookies.indexOf(&quot;;&quot;,idx);
+            if (end == -1){
+                end = cookies.length;
+            }
+            return unescape(cookies.substring(idx,end));
+        } 
+    }
+    return &quot;&quot;
+}
+</code></pre><p><strong>(2) 写入 cookie：（一次只能写入 1 个）</strong></p>
+<p>document.cookie = “name=value[; expires=date][; domain=domain][; path=path][; secure]”</p>
+<pre><code>document.cookie = &quot;name=nanc&quot;;
+</code></pre><p>以上属性字段，除了 name 和 value 是必须的，其他的都可选（如不设置，则分别取其默认值）。例如，如果不设置过期时间，则该 cookie 只在当前会话（session）有效，一旦浏览器关闭，这个 cookie 就会失效。</p>
+<p>这种设置 cookie 的写法看似会覆盖原来的所有 cookie，其实不然，只是添加一个“新”的 cookie 而已。“新”字加引号，是因为未必真的是新的，也可能只是覆盖原先的同名 cookie。<strong>如果这里设置的 cookie 的 name、domain、path 和 secure 等四个属性都和先前已经存在的某个 cookie 一样，则会覆盖原先同名的 cookie，更新该 cookie 值。</strong></p>
+<pre><code>document.cookie = &#39;name=nanc; &#39;
+            + &#39;expires=&#39; + someDate.toGMTString() + &#39;; &#39;
+            + &#39;path=/subdirectory; &#39;
+            + &#39;domain=*.example.com&#39;;
+</code></pre><p>封装成与上面读取 cookie 对应的设置 cookie 方法：</p>
+<p><strong>方法一：</strong></p>
+<pre><code>function setCookie(_para){
+    var _last = new Date();
+    var _name = _para.name,
+        _val = _para.val,
+        _exps = _para.exps,
+        _domain = _para.domain,
+        _path = _para.path || &quot;/&quot;,
+        _secure= _para.secure;
+    _last.setDate(_last.getDate()+_exps);
+    var _cookieVal = _name+&quot;=&quot;+escape(_val)
+        +(_exps?&quot;;expires=&quot;
+        +_last.toUTCString():&quot;&quot;)
+        +(&quot;;path=&quot;+_path)
+        +(&quot;;domain=&quot;+_domain)
+        +(&quot;;secure=&quot;+_secure);
+    document.cookie = _cookieVal;
+}
+</code></pre><p><strong>方法二：</strong></p>
+<pre><code>function setCookie(c_name,value,expTime){
+    var exp = new Date();
+    exp.setDate(exp.getDate() + expTime);
+    var t = exp.toGMTString();
+    document.cookie = c_name+ &quot;=&quot; 
+        +escape(value)
+        +((expTime == null) ? &quot;&quot; : &quot;;expires=&quot; + t)
+}
+</code></pre><p><strong>(3) 清除 cookie</strong></p>
+<p>设置 cookie 的过期时间 expires 为 0，或者等于一个过去的日期，使之失效。浏览器是根据本地时间来决定 cookie 是否过期，而本地时间是可以随意改动的，所以没办法保证 cookie 一定会在开发者指定的时间过期。</p>
+<p><strong>(4) cookie 个数限制</strong></p>
+<p>由于浏览器对 cookie 的个数又限制，每个域最多可以设置几十个。为了规避个数的限制，我们可以用一个 cookie 来存储多个键值对，如：name=a=b&amp;c=d&amp;e=f&amp;g=h 这样实际上只设置 1 个 cookie，cookie 值内部使用 &amp; 符号，隔开对个键值对。读取这个 cookie 的时候，我们自行解析，得到各个键值对。</p>
+<p><strong>(5) 同源政策</strong></p>
+<p>同源政策规定，两个网址只要域名和端口相同就可以共享 cookie，也即是说，它不要求协议相同，同域下 http 和 https 共享 cookie。即 <a href="http://a.com" target="_blank" rel="external">http://a.com</a> 下设置的 cookie，可以被 <a href="https://a.com" target="_blank" rel="external">https://a.com</a> 读取。</p>
+<p><strong>(5) 无法被 JavaScript  读取的 cookie</strong></p>
+<p>服务器端设置 cookie的时候，如果加上了 HttpOnly 属性，则这个 cookie 无法被 JavaScript 读取。即 document.cookie 不会返回这个 cookie 的值，但是这个 cookie 会跟随 http 请求发送至服务端。</p>
+<p>对于 chrome 等浏览器，或者说是正常人使用的浏览器，我们通过浏览器自带的开发者工具的控制台（Console）、网络（Network）等面板可以很方便地打印或者直接查看 cookie 信息；而对于 ie6 等浏览器，我们怎么快速地查看 cookie 信息呢？</p>
+<blockquote>
+<p><strong>浏览器地址栏运行 JavaScript 代码</strong></p>
+</blockquote>
+<pre><code>javascript:alert(document.cookie)
+</code></pre><p>打开一个网页，在浏览器地址栏输入以上代码，回车。我们会看到一个弹窗，内容为当前页面下的 cookie 内容。</p>
+<p>当然了，你也可以运行其他 JavaScript 代码，格式为：</p>
+<pre><code>javascript:your_code_here
+</code></pre><p>需要注意的是：不是所有浏览器都支持地址栏运行代码，例如，Firefox 就不支持。另外，如果通过复制以上语句然后粘贴到地址栏，某些浏览器也不一定会执行，所以，尽量手动输入以上代码吧。</p>
+<p>这里提到了 alert，顺便总结一下 alert 和 console.log 方法的不同的。</p>
+<blockquote>
+<p><strong>alert</strong></p>
+</blockquote>
+<p>【1】有阻塞作用，不关闭弹窗，后续代码不能继续执行；<br>【2】只能输出字符串（string），不是字符串的参数，自动调用其 toString 方法；<br>【3】只能接收一个参数，即每次输出一个字符串。</p>
+<blockquote>
+<p><strong>console.log</strong></p>
+</blockquote>
+<p>【1】用于在浏览器开发者工具 console 窗口输出信息，不阻塞后续代码；<br>【2】可以打印任何类型数据，可以接受多个参数（包括格式化字符串）；<br>【3】支持以下占位符</p>
+<pre><code>%s 字符串
+%d 整数
+%i 整数
+%f 浮点数
+%o 对象的链接
+%c CSS格式字符串
+</code></pre><p>例如：</p>
+<pre><code>var num = 1316;
+var suffix = &#39;days&#39;;
+
+console.log(&#39;We know each other for %d %s&#39;,num,suffix);
+// We know each other for 1316 days
+</code></pre><p>使用 %c 占位符，还可以对输出内容添加样式：</p>
+<pre><code>console.log(
+  &#39;%c这段文字是红色的，背景黄色&#39;,
+  &#39;color: red; background: yellow; font-size: 24px;&#39;
+)
+</code></pre><p>执行以上代码，将会以第二个参数指定的样式输出第一个参数内容。</p>
+<p>扯远了，下篇继续本地存储这个话题。</p>
+<p>参考：<br>[1] <a href="http://www.w3school.com.cn/js/js_cookies.asp" target="_blank" rel="external">http://www.w3school.com.cn/js/js_cookies.asp</a><br>[2] <a href="http://javascript.ruanyifeng.com/bom/cookie.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/cookie.html</a><br>[3] <a href="http://jerryzou.com/posts/cookie-and-web-storage/" target="_blank" rel="external">http://jerryzou.com/posts/cookie-and-web-storage/</a><br>[4] <a href="http://www.jb51.net/article/71547.htm" target="_blank" rel="external">http://www.jb51.net/article/71547.htm</a><br>[5] <a href="http://javascript.ruanyifeng.com/stdlib/console.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/stdlib/console.html</a><br>[6] <a href="http://www.cnblogs.com/iyangyuan/p/4493322.html" target="_blank" rel="external">http://www.cnblogs.com/iyangyuan/p/4493322.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/03/31/localStorage/">
+    <time datetime="2017-03-31T06:18:14.000Z" class="entry-date">
+        2017-03-31
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/04/05/localStorage01/" rel="prev"><span class="meta-nav">上一篇：</span>浏览器本地存储（二）</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/03/30/repaint-and-reflow/" rel="next"><span class="meta-nav">下一篇：</span>重绘和回流（repaint &amp; reflow） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

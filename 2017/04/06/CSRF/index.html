@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>CSRF 攻击原理 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSRF 攻击原理">
+<meta property="og:url" content="http://nanchao.win/2017/04/06/CSRF/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……">
+<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSRF 攻击原理">
+<meta name="twitter:description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-CSRF" class="post-CSRF post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      CSRF 攻击原理
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/06/CSRF/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/06/CSRF/" data-id="cj2px24rm0002f50b0ry9p5fy" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……</p>
+<a id="more"></a>
+<p>网站一般通过 cookie 来标识用户。用户在网站上登录成功后浏览器会得到一个标识其身份的 cookie，在当前登录会话期间（不关闭浏览器且不退出登录），用户再打开这个网站的页面都会带上这个身份标识 cookie。如果，在这个有效会话期间，攻击者控制用户浏览器访问了这个网站的 url，就可能执行一些用户不想做的操作（比如退出登录，修改会员资料……），由于这些操作并不是用户自己真正想做的，这就是请求伪造。</p>
+<p><strong>场景一：</strong></p>
+<p>某个 bbs 可以贴图，攻击者在贴图的 url 中写入的是退出登录的链接。 当后续用户浏览到这个帖子时，就会退出登录了，因为用户是以自己的身份访问了这个退出登录的链接，虽然他自己可能并不知道怎么回事。在用户看来，帖子里有一张图片（其实是“有问题”的图片），并没有想要退出登录，但是网页程序会认为用户要求退出登录，从而销毁其登录会话。</p>
+<p><strong>CSRF 攻击流程如下：</strong></p>
+<blockquote>
+<p>① 用户登录漏洞网站 A，用户浏览器存储身份 cookie；<br>② 用户没有退出登录 A 网站的情况下，被攻击者利用，使其向 A 网站发出了请求；<br>③ A 网站并不知道请求是用户主动还是被动发出的，由于请求带有身份标识 cookie，所以 A 网站还是会根据用户的权限来处理这个请求。</p>
+</blockquote>
+<p>那么问题的关键就是攻击者如何让用户发出请求。上面场景一说明了其中一种请求伪造方式。下面再看一个场景。</p>
+<p><strong>场景二：</strong></p>
+<p>银行网站 A，它以 get 请求来完成转账操作，地址为：</p>
+<pre><code>http://A.com/t.php?toId=id&amp;money=num
+</code></pre><p>攻击者网站 B，里面有一段代码：</p>
+<pre><code>&lt;img src = &quot;http://A.com/t.php?toId=11&amp;money=1000&quot;&gt;
+</code></pre><p>如果你登录了 A 网站后，然后访问网站 B，然后你的账户就少了 1000 块……</p>
+<p>因为你在 A 网站登录状态下访问网站 B，网站 B 中有指向 A 网站的图片资源，这使得你又向 A 网站发出了请求（带有你的登录身份标识），A 网站受到这个请求后，发现是一个转账请求，于是，便在你的账户上划走了 1000 块。</p>
+<p>以上 get 请求来更新资源是极不安全的，为了防止以上问题，银行改用 post 请求来执行转账操作。银行网站 A 的表单代码：</p>
+<pre><code>&lt;form action=&quot;t.php&quot; method=&quot;POST&quot;&gt;
+　　&lt;p&gt;ToBankId: &lt;input type=&quot;text&quot; name=&quot;toId&quot; /&gt;&lt;/p&gt;
+　　&lt;p&gt;Money: &lt;input type=&quot;text&quot; name=&quot;money&quot; /&gt;&lt;/p&gt;
+　　&lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;转账&quot; /&gt;&lt;/p&gt;
+&lt;/form&gt;
+</code></pre><p>t.php 代码：</p>
+<pre><code>&lt;?php
+　　session_start();
+　　if (isset($_POST[&#39;toId&#39;] &amp;&amp; isset($_POST[&#39;money&#39;])){
+　　　　buy_stocks($_POST[&#39;toId&#39;],$_POST[&#39;money&#39;]);
+　　}
+?&gt;
+</code></pre><p>B 网站也更新了代码：</p>
+<pre><code>&lt;html&gt;
+　　&lt;head&gt;
+　　　　&lt;script type=&quot;text/javascript&quot;&gt;
+　　　　　　function steal(){
+          　　　iframe = document.frames[&quot;steal&quot;];
+　　     　　   iframe.document.Submit(&quot;t&quot;);
+　　　　　　}
+　　　　&lt;/script&gt;
+　　&lt;/head&gt;
+
+　&lt;body onload=&quot;steal()&quot;&gt;
+　　&lt;iframe name=&quot;steal&quot; display=&quot;none&quot;&gt;
+　　 &lt;form method=&quot;post&quot; name=&quot;t&quot; action=&quot;A.com/t.php&quot;&gt;
+　　　　&lt;input type=&quot;hidden&quot; name=&quot;toId&quot; value=&quot;11&quot;&gt;
+　　　　&lt;input type=&quot;hidden&quot; name=&quot;money&quot; value=&quot;1000&quot;&gt;
+　　 &lt;/form&gt;
+　　&lt;/iframe&gt;
+　&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>同样操作，还是被转走 1000 块……</p>
+<blockquote>
+<p><strong>以上 CSRF 攻击的根本原因：WEB的身份验证机制虽然可以保证一个请求是来自于用户的浏览器（用户身份），但却无法保证该请求是用户主动发送的！</strong></p>
+</blockquote>
+<p><strong>CSRF 防御：</strong></p>
+<p>鉴于以上攻击手段的特点，从用户和网站开发人员角度都可以做一些事情来降低受到 CSRF 攻击的可能性。</p>
+<p><strong>（1）从用户角度：</strong></p>
+<p>· 在使用完某网站之后，应该立即退出登录；<br>· 尽量不要让浏览器记住用户名密码；<br>· 陌生的链接不要轻易去点，尤其是邮件里的链接。</p>
+<p><strong>（2）从开发人员角度：</strong></p>
+<p>· url 添加会话相关信息，而不是仅仅将 cookie 作为会话唯一标识；<br>· 尽量不要是用 get 等明文请求；<br>· 用户提交表单时加入验证码、伪随机值等。</p>
+<p>参考：<br>[1] <a href="https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="external">https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a><br>[2] <a href="http://netsecurity.51cto.com/art/200811/97281.htm" target="_blank" rel="external">http://netsecurity.51cto.com/art/200811/97281.htm</a><br>[3] <a href="https://blog.tonyseek.com/post/introduce-to-xss-and-csrf/" target="_blank" rel="external">https://blog.tonyseek.com/post/introduce-to-xss-and-csrf/</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/06/CSRF/">
+    <time datetime="2017-04-06T01:40:53.000Z" class="entry-date">
+        2017-04-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/04/07/data-type/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 数据类型</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/04/05/XSS/" rel="next"><span class="meta-nav">下一篇：</span>XSS 攻击原理 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

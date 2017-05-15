@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="（注：这里以 www.nc.com 域名为例）
+1. 安装支持 ssl 功能的 apache这里采用版本：
+httpd-2.2.21-win32-x86-openssl-0.9.8r.msi" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>https 本地环境搭建(windows) | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="（注：这里以 www.nc.com 域名为例）
+1. 安装支持 ssl 功能的 apache这里采用版本：
+httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="https 本地环境搭建(windows)">
+<meta property="og:url" content="http://nanchao.win/2016/10/14/https/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="（注：这里以 www.nc.com 域名为例）
+1. 安装支持 ssl 功能的 apache这里采用版本：
+httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="https 本地环境搭建(windows)">
+<meta name="twitter:description" content="（注：这里以 www.nc.com 域名为例）
+1. 安装支持 ssl 功能的 apache这里采用版本：
+httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-https" class="post-https post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      https 本地环境搭建(windows)
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/10/14/https/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="cj2px24t00013f50bm9weeoek" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p><em>（注：这里以 www.nc.com 域名为例）</em></p>
+<h3 id="1-安装支持-ssl-功能的-apache"><a href="#1-安装支持-ssl-功能的-apache" class="headerlink" title="1. 安装支持 ssl 功能的 apache"></a>1. 安装支持 ssl 功能的 apache</h3><p><strong>这里采用版本：</strong></p>
+<p>httpd-2.2.21-win32-x86-openssl-0.9.8r.msi</p>
+<a id="more"></a>
+<p><strong>a) 配置 apache（conf/httpd.conf）使其支持 ssl</strong></p>
+<pre><code>LoadModule ssl_module modules/mod_ssl.so
+</code></pre><pre><code>Include conf/extra/httpd-ssl.conf
+</code></pre><p><strong>b) 修改 conf/extra/httpd-ssl.conf 文件</strong></p>
+<pre><code>SSLCertificateFile &quot;D:/WAMP/Apache/conf/server.crt&quot;
+</code></pre><pre><code>SSLCertificateKeyFile &quot;D:/WAMP/Apache/conf/server.key&quot;
+</code></pre><pre><code>DocumentRoot &quot;D:/www/www.nc.com&quot;
+</code></pre><h3 id="2-为网站生成证书和私钥"><a href="#2-为网站生成证书和私钥" class="headerlink" title="2. 为网站生成证书和私钥"></a>2. 为网站生成证书和私钥</h3><p><strong>a) 生成私钥server.key</strong></p>
+<p>cmd 进入 Apache/bin 目录，输入：</p>
+<pre><code>openssl genrsa -out server.key 1024
+</code></pre><p><strong>b) 生成签署申请</strong></p>
+<p>用上一步的密钥生成证书请求文件 server.csr：</p>
+<pre><code>openssl req -new –out server.csr -key server.key -config ..\conf\openssl.cnf
+</code></pre><p>这里有一系列参数需要输入：</p>
+<pre><code>Country Name (2 letter code) [AU]: CN　国家代码
+</code></pre><pre><code>State or Province Name (full name) [Some-State]: SH　省份
+</code></pre><pre><code>Locality Name (eg, city) []: SH　城市
+</code></pre><pre><code>Organization Name (eg, company): nc　公司名称
+</code></pre><pre><code>Organizational Unit Name (eg, section) []: nc　部门名称
+</code></pre><pre><code>Common Name (eg, YOUR name) []: nc.com　申请证书的域名
+</code></pre><pre><code>Email Address []: nanc@nc.com　邮箱
+</code></pre><pre><code>A challenge password []　(可不输入，直接回车)
+</code></pre><pre><code>An optional company name []　(可不输入，直接回车)
+</code></pre><p><em>（注：Common Name和httpd.conf中的server name要一致）</em></p>
+<h3 id="3-通过-CA-为网站服务器签署证书"><a href="#3-通过-CA-为网站服务器签署证书" class="headerlink" title="3. 通过 CA 为网站服务器签署证书"></a>3. 通过 CA 为网站服务器签署证书</h3><p><strong>a) 生成 CA 私钥</strong></p>
+<pre><code>openssl genrsa -out ca.key 1024
+</code></pre><p><strong>b) 利用 CA 的私钥产生 CA 的自签署证书</strong></p>
+<pre><code>openssl req -new -x509 -days 365 -key ca.key -out ca.crt -config ..\conf\openssl.cnf
+</code></pre><p><em>（注：这里需要输入的一系列参数同上，Common Name为服务器域名，如果在本机，为本机IP）</em></p>
+<p><strong>c) CA 为网站签署证书</strong></p>
+<p>bin 目录下创建 demoCA 目录，包含：index.txt、serial（内容为01）、空文件夹 newcerts，然后执行：</p>
+<pre><code>openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key -config ..\conf\openssl.cnf
+</code></pre><h3 id="4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache"><a href="#4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache" class="headerlink" title="4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache"></a>4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache</h3><h3 id="5-访问-https-www-nc-com"><a href="#5-访问-https-www-nc-com" class="headerlink" title="5. 访问 https://www.nc.com"></a>5. 访问 <a href="https://www.nc.com" target="_blank" rel="external">https://www.nc.com</a></h3>
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/10/14/https/">
+    <time datetime="2016-10-14T08:45:00.000Z" class="entry-date">
+        2016-10-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/10/14/tostring/" rel="prev"><span class="meta-nav">上一篇：</span>toString.call() 引起的一些思考</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/10/14/point24/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 24 点游戏算法 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

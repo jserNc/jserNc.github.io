@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>jsfuck 6 个字符写 js 代码（一） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsfuck 6 个字符写 js 代码（一）">
+<meta property="og:url" content="http://nanchao.win/2017/01/06/jsfuck/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（一）">
+<meta name="twitter:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-jsfuck" class="post-jsfuck post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      jsfuck 6 个字符写 js 代码（一）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj2px24t20015f50bz0i3jg8n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用<strong> [，]，(，)，!，+ </strong>等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。</p>
+<a id="more"></a>
+<p>例如：</p>
+<pre><code>alert(1)
+</code></pre><p>以上代码，用这 6 个字符，可以这么写：</p>
+<pre><code>[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]][([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]]((![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]]+[+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]])()
+</code></pre><p>打开浏览器控制台（console），复制粘贴以上代码，就可以看到弹出一个内容为‘1’的对话框。现在看起来好像挺不可思议的，但是看完下文以及后面几篇文章的分析后，我们就能理解上面的写法了。</p>
+<p>那我们就从 JavaScript 类型转换说起吧。</p>
+<p>JavaScript 变量数据可以发生类型转换。类型转换又分为“强制转换”和“自动转换”两种。“强制转换”主要指使用 Number、String 和 Boolean 等三个构造函数手动将各种类型的值，转换成数字、字符串或者布尔值。“自动转换”是指预期什么类型的值，就调用该类型对应的强制转换函数，自动完成转换过程。</p>
+<p>为了更加直观地说明数据转换的过程。我们以 + 运算符为例展开讨论：</p>
+<p><strong> 1. + 作为一元运算符</strong></p>
+<p>这时候，会自动调用 Number 函数，将运算子转成数值。Number 函数的返回值分为以下几种情况：</p>
+<p>（1） 参数是数值，返回还是原来的数值；<br>（2） 参数是字符串，除整个非字符串能被解析成对应的数值，否则返回 NaN；<br>（3） 参数是布尔值，true 转成 1，false 转成 0；<br>（4） undefined 转成 NaN，null 转成 0；<br>（5） 参数是对象，处理流程如下：</p>
+<blockquote>
+<p><strong> 【1】调用 valueOf 方法 </strong><br>调用对象自身的 valueOf 方法。如果返回前 4 种类型的值，则对该值使用 Number 函数，不再进行后续步骤;</p>
+<p><strong> 【2】调用 toString 方法 </strong><br>如果 valueOf 方法返回的还是对象，则改为调用对象自身的 toString 方法。如果返回前 4 种类型的值，则对该值使用 Number 函数，不再进行后续步骤。</p>
+<p><strong> 【3】报错 </strong><br>如果 toString 方法返回的是也是对象，就报错。</p>
+</blockquote>
+<pre><code>+ &#39;abc&#39;        // NaN
++ &#39;324&#39;        // 324
++ &#39;324abc&#39;     // NaN
++ true         // 1
++ undefined    // NaN
++ null         // 0
+
++ (&quot;1e1000&quot;)
+-&gt; 1e1000
+-&gt; Infinity
+
+// 空字符串转为0
++ &#39;&#39;           // 0
+
++ {a: 1}       // NaN
+// 默认情况下，
+// 对象的 valueOf 方法返回对象本身，
+// 对象的 toString 方法返回字符串 &quot;[object Object]&quot;
+
+Number({
+  valueOf: function () {
+    return 2;
+  },
+  toString: function () {
+    return 3;
+  }
+})
+// 2
+</code></pre><p><strong> 1. + 作为二元运算符</strong></p>
+<p>分以下几种情况：</p>
+<blockquote>
+<p><strong> 【1】运算子之中存在字符串 </strong><br>只要两个运算子中有一个是字符串，则不管另一个什么类型，都会被自动转换为字符串，然后执行字符串的连接运算；</p>
+<p><strong> 【2】运算子均为数值或布尔值 </strong><br>两个运算子都是数值或者布尔值，布尔值转换为数值（true 为 1，false 为 0），然后执行加法运算;</p>
+<p><strong> 【3】运算子中存在对象 </strong><br>两个运算子中存在对象（非原始类型数据），先调用该对象的 valueOf 方法，如果返回值为原始类型，然后按上面 2 条规则执行；否则调用该对象的 toString 方法，然后按上面 2 条规则执行。</p>
+</blockquote>
+<p>那么，如果一个运算子是字符串，一个运算子是对象，怎么处理呢？</p>
+<pre><code>&#39;a&#39; + {
+  valueOf: function () {
+    return 2;
+  },
+  toString: function () {
+    return 3;
+  }
+}
+// &quot;a2&quot;
+</code></pre><p>我们看到，对象是采用了 valueOf 方法的返回值，所以，以上规则 【3】 优先级高于规则 【1】。</p>
+<p>说到这里，<strong> 我们需要记住 valueOf 和 toString 方法的区别：</strong></p>
+<blockquote>
+<p>① 数值运算中优先调用 valueOf()，如 Number() 函数优先调用对象的 valueOf()；<br>② 字符串运算中优先调用 toString()，如 String() 函数优先调用对象的 toString()；<br>③ valueOf() 返回对象的原始值；toString() 返回对象的原始字符串表示。</p>
+</blockquote>
+<p>有了以上的理论基础，下面看4个特殊的表达式，小试牛刀。</p>
+<p><strong> (1) 空数组 + 空数组 </strong></p>
+<pre><code>[] + []
+</code></pre><p>两个运算子都是非原始类型的数据（数组对象），先对两个 [] 均执行 valueOf 方法，返回该 [] 本身（其实，默认情况下，对象的 valueOf 方法都返回该对象本身），然后对 [] 调用 toString 方法方法（数组执行 toString 方法一般返回数组的字符串形式，如 [1,2,3].toString() 返回 “1,2,3”），返回 “”，所以相当于 “” + “”，最终结果为 “”，空字符串。</p>
+<p><strong> (2) 空数组 + 空对象 </strong></p>
+<pre><code>[] + {}
+</code></pre><p>分析方法同上，不过默认情况下，对象的 toString 方法，返回 “[object Object]”，所以，以上表达式相当于 “” + “[object Object]”，最终结果为 “[object Object]”。</p>
+<p><strong> (3) 空对象 + 空对象 </strong></p>
+<pre><code>{} + {}
+({}) + {}
+</code></pre><p>首先看 {} + {}，JavaScript 引擎将第一个空对象视为一个空代码块，忽略，变成了 +{}，这里的 + 为一元运算符，它相当于调用 Number 方法，强制将运算子转为数值。而这里的运算子是对象 {}，+{} 相当于，先对 {} 调用 valueOf 方法得到其自身，然后调用 toString 方法，得到 “[object Object]”，最后相当于 +”[object Object]”，这个字符串转换为数值为 NaN，即最终结果是 NaN。</p>
+<p>再看 ({}) + {}，两个 {} 均调用 toString 方法，相当于 “[object Object]” + “[object Object]”，最终结果是 “[object Object][object Object]”。</p>
+<p><strong> (4) 空对象 + 空数组 </strong></p>
+<pre><code>{} + []
+({}) + []
+</code></pre><p>先看 {} + []，{} 视作空代码块被忽略，相对于 +[] ，[] 也是对象的一种，所以调用 toString 方法，相当 +””，最终结果为 0。</p>
+<p>再看  ({}) + []，两个运算子均为对象，分别调用 toString 方法，相当于 “[object Object]” + “”，最终结果为 “[object Object]”。</p>
+<p>以上是最基本的数组类型转换，也是 jsFuck 的基本原理之一。暂时先到这里，后面我们会继续探讨这个话题。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/06/jsfuck/">
+    <time datetime="2017-01-06T08:15:14.000Z" class="entry-date">
+        2017-01-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/01/09/jsfuck01/" rel="prev"><span class="meta-nav">上一篇：</span>jsfuck 6 个字符写 js 代码（二）</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/01/06/throttle-debounce/" rel="next"><span class="meta-nav">下一篇：</span>去抖和节流（debounce &amp; throttle） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>几个典型的 JavaScript 函数 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几个典型的 JavaScript 函数">
+<meta property="og:url" content="http://nanchao.win/2017/04/14/some-javascript-functions/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="几个典型的 JavaScript 函数">
+<meta name="twitter:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-some-javascript-functions" class="post-some-javascript-functions post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      几个典型的 JavaScript 函数
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/14/some-javascript-functions/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj2px24tn0028f50bss5z0jld" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。</p>
+<a id="more"></a>
+<p>JavaScript 对象细分一下，包括本地对象（native object）、内置对象（built-in object）、宿主对象以及自定义对象等四类。</p>
+<blockquote>
+<p><strong>本地对象（native object）</strong></p>
+</blockquote>
+<p>独立于宿主环境的 ECMAScript 实现提供的对象。这里提到的 ECMAScript 实现，JavaScript 就是其中一种。ECMAScript 本地对象有：</p>
+<pre><code>Object   // 对象
+Function // 函数
+Array    // 数组
+String   // 字符串
+Boolean  // 布尔值
+Number   // 数值
+Date     // 日期
+RegExp   // 正则
+Error    // 错误
+// 各种错误
+EvalError RangeError ReferenceError 
+SyntaxError TypeError URIError
+</code></pre><blockquote>
+<p><strong>内置对象（built-in object）</strong></p>
+</blockquote>
+<p>由 ECMAScript 实现提供的、独立于宿主环境的所有对象，在 ECMAScript 程序开始执行时出现。按照定义，内置对象也属于本地对象。ECMAScript 内置对象有两个：</p>
+<pre><code>// 全局对象
+Global
+
+// 算数对象
+Math
+</code></pre><blockquote>
+<p><strong>宿主对象</strong></p>
+</blockquote>
+<p>由 ECMAScript 实现的宿主环境提供的对象。对于浏览器环境，宿主对象就是浏览器提供的对象，所有 DOM 和 BOM 对象都是宿主对象。</p>
+<pre><code>// 文档对象
+document
+
+// 窗口
+window
+</code></pre><p>BOM 的核心是 window，而 window 对象又具有双重角色，它既是通过 js 访问浏览器窗口的一个接口，又是一个 Global（全局）对象。这意味着在网页中定义的任何对象，变量和函数，都以 window 作为其 Global 对象。</p>
+<blockquote>
+<p><strong>自定义对象</strong></p>
+</blockquote>
+<p>开发者自行定义的对象。</p>
+<pre><code>var o = {};
+</code></pre><p>下面，我们讨论一下 sort、replace、match 等 3 个方法。</p>
+<p><strong>(1) Array.prototype.sort</strong></p>
+<p>我们都知道这个方法用于对数组元素进行排序。好，那么看一个例子：</p>
+<pre><code>var arr = [6,1,10];
+arr.sort()
+// [1, 10, 6]
+
+arr
+// [1, 10, 6]
+// 排序后，原数组改变了
+</code></pre><p>以上数组排序后，元素并没有按照升序排列，对这个结果是否感到意外呢？</p>
+<p>实际上，调用该方法时，如果没有传入参数，默认根据字符串 Unicode 码点排序顺序。简单地说是按照「字典顺序」对数组元素进行排序。所谓字典顺序，即从字符串的第一个字母开始比较，第一个字母不同立即得出顺序，相同则继续比较下一个字母，以此类推。所以 10 排在 6 前面。</p>
+<pre><code>var fruit = [&#39;cherries&#39;, &#39;apples&#39;, &#39;bananas&#39;];
+fruit.sort(); 
+// [&#39;apples&#39;, &#39;bananas&#39;, &#39;cherries&#39;]
+
+var scores = [1, 10, 21, 2]; 
+scores.sort(); 
+// [1, 10, 2, 21]
+// 字符串 &#39;10&#39; 比字符串 &#39;2&#39; 字典序靠前.
+
+var things = [&#39;word&#39;, &#39;Word&#39;, &#39;1 Word&#39;, &#39;2 Words&#39;];
+things.sort(); 
+// [&#39;1 Word&#39;, &#39;2 Words&#39;, &#39;Word&#39;, &#39;word&#39;]
+// 在 Unicode 码点中，数字比大写字母靠前
+// 大写字母比小写字母靠前
+</code></pre><p>如果想按照其他标准进行排序，就需要提供比较函数 compareFunction，然后数组按照调用这个函数的返回值进行排序。参数 a 和 b 是被比较的俩元素：</p>
+<blockquote>
+<p>如果 compareFunction(a, b) &lt; 0 ，那么 a 会被排列到 b 之前；<br>如果 compareFunction(a, b) === 0 ， a 和 b 的相对位置不变；<br>如果 compareFunction(a, b) &gt; 0 ， b 会被排列到 a 之前。</p>
+</blockquote>
+<p>compareFunction 函数格式如下：</p>
+<pre><code>function compareFunction(a, b) {
+    if (根据某种排序标准 a &lt; b) {
+        return -1;
+    }
+    if (根据某种排序标准 a &gt; b) {
+        return 1;
+    }
+    // a === b
+    return 0;
+}
+</code></pre><p>所以，如果需要对数字数组排序，可以这样：</p>
+<pre><code>var arr = [1, 10, 21, 2]; 
+function compareFunction(a, b) {
+    // a &lt; b 的时候 a 在前
+    if (a - b &lt; 0) {
+        return -1;
+    }
+    // a &gt; b 的时候 a 在后
+    if (a - b &gt; 0) {
+        return 1;
+    }
+    return 0;
+}
+arr.sort(compareFunction);
+// [1, 2, 10, 21]
+
+// 简化一下写法实现同样的功能：
+var arr = [1, 10, 21, 2]; 
+arr.sort(function(a,b){
+    a - b;
+});
+// [1, 10, 21, 2] 为什么会这样？？？
+// 这是我敲这段代码的时候犯的一个错误
+// 比较函数少些了 return 关键字
+
+// 稍微晦涩一点的写法实现同样的功能：
+var arr = [1, 10, 21, 2]; 
+arr.sort(function(a,b){
+    return +(a &gt; b) || +(a === b) - 1;
+});
+// [1, 2, 10, 21]
+
+// 对于表达式
+var result = +(a &gt; b) || +(a === b) - 1;
+// a &gt; b
+return = +(true) -&gt; 1
+// a === b
+return = +(false) || +(true) - 1 -&gt; 1 - 1 -&gt; 0
+// a &lt; b
+return = +(false) || +(false) - 1 -&gt; 0 - 1 -&gt; -1
+</code></pre><p>数字数组排序：</p>
+<pre><code>// 升序：
+var arr = [1, 10, 21, 2]; 
+arr.sort(function(a,b){
+    return a - b;
+});
+// [1, 2, 10, 21]
+
+// 降序：
+var arr = [1, 10, 21, 2]; 
+arr.sort(function(a,b){
+    return b - a;
+});
+
+// 乱序，结果随机：
+var arr = [1, 10, 21, 2]; 
+arr.sort(function(a,b){
+    return Math.random() &gt; 0.5 ? -1 : 1;
+});
+// [10, 1, 2, 21]
+</code></pre><p>对象按照某个属性排序：</p>
+<pre><code>var persons = [
+  { name: &#39;Edward&#39;, age: 21 },
+  { name: &#39;Sharpe&#39;, age: 18 },
+  { name: &#39;And&#39;, age: 27 },
+];
+
+persons.sort(function (a, b) {
+    if (a.age &gt; b.age) {
+        return 1;
+    }
+    if (a.age &lt; b.age) {
+        return -1;
+    }
+    return 0;
+});
+</code></pre><p><strong>(2) String.prototype.replace</strong></p>
+<pre><code>stringObject.replace(regexp|substr,replacement)
+</code></pre><p>其中，第一个参数可以是字符串或者正则对象；第二个参数可以是字符串或者函数。返回值是一个新的字符串，也就是说不改变原字符串。</p>
+<p><strong>（1）replacement 是字符串</strong></p>
+<blockquote>
+<p>① 如果第一个参数是字符串 substr，用字符串 replacement 替换它；<br>② 如果第一个参数是正则对象 regexp，它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</p>
+</blockquote>
+<p>replacement 中的 $ 字符具有特定的含义：</p>
+<pre><code>$$ // 插入一个 &quot;$&quot;
+
+$&amp; // 插入与 regexp 匹配的子串
+
+$` // 插入当前匹配的子串左边的内容
+
+$&#39; // 插入当前匹配的子串右边的内容
+
+$1、$2、...、$99
+// 与 regexp 中的第 1 到第 99 个子表达式相匹配的文本
+</code></pre><p>交换两个单词</p>
+<pre><code>var re = /(\w+)\s(\w+)/;
+var str = &quot;Enjoy javascript&quot;;
+var newstr = str.replace(re, &quot;$2,$1&quot;);
+
+newstr
+// &quot;javascript,Enjoy&quot;
+</code></pre><p><strong>（2）replacement 是函数</strong></p>
+<p>每个匹配都调用该函数，它返回的字符串将作为替换文本使用。</p>
+<p>该函数的第一个参数是匹配模式的字符串。接下来的参数是与模式中的子表达式匹配的字符串，可以有 0 个或多个这样的参数。接下来的参数是一个整数，声明了匹配在 stringObject 中出现的位置。最后一个参数是 stringObject 本身。</p>
+<pre><code>function change(match, p1, p2, p3, offset, string){
+    // p1 非数字
+    // p2 数字
+    // p3 非字母(a-z,A-Z) 非数字(0-9) 非下划线 非汉字
+    return [p1, p2, p3].join(&#39;-&#39;);  
+}
+var str = &#39;abc12345#$*%&#39;;
+var newStr = str.replace(/([^\d]*)(\d*)([^\w]*)/,change);
+
+str
+// &quot;abc12345#$*%&quot;  原字符串不变
+
+newStr
+// &quot;abc-12345-#$*%&quot;
+</code></pre><p>单词的首字母都转换为大写</p>
+<pre><code>var str = &#39;aaa bbb ccc&#39;;
+var newStr = str.replace(/\b\w+\b/g, function(s){
+  return s.substring(0,1).toUpperCase() + s.substring(1);
+});
+</code></pre><p><strong>(3) String.prototype.match</strong></p>
+<pre><code>// regexp 要匹配的模式的 RegExp 对象
+stringObject.match(regexp)
+</code></pre><p>如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。</p>
+<p>返回值为存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
+<p><strong>（1）regexp 没有标志 g</strong></p>
+<p>match() 方法就只能在 stringObject 中执行一次匹配。如果没有找到任何匹配的文本， match() 将返回 null。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的子表达式匹配的文本。除了这些常规的数组元素之外，返回的数组还含有两个对象属性。index 属性声明的是匹配文本的起始字符在 stringObject 中的位置，input 属性声明的是对 stringObject 的引用。</p>
+<pre><code>var str = &#39;t 17:3:28&#39;;
+var res = str.match(/t (\d+?(:\d)+?)/i);
+
+res
+[&quot;t 17:3&quot;, &quot;17:3&quot;, &quot;:3&quot;, index: 0, input: &quot;t 17:3:28&quot;]
+</code></pre><p><strong>（2）regexp 有标志 g</strong></p>
+<p>match() 方法将执行全局检索，找到 stringObject 中的所有匹配子字符串。若没有找到任何匹配的子串，则返回 null。如果找到了一个或多个匹配子串，则返回一个数组。不过全局匹配返回的数组的内容与前者大不相同，它的数组元素中存放的是 stringObject 中所有的匹配子串，而且也没有 index 属性或 input 属性。</p>
+<p>检索字符串中的所有数字</p>
+<pre><code>var str = &quot;1 plus 2 equal 3&quot;;
+var nums = str.match(/\d+/g)
+
+nums
+// [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
+</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html" target="_blank" rel="external">http://www.cnblogs.com/fanhc/archive/2013/04/09/3011354.html</a><br>[2] <a href="http://www.w3school.com.cn/jsref/" target="_blank" rel="external">http://www.w3school.com.cn/jsref/</a><br>[3] <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/</a><br>[4] <a href="http://mao.li/javascript/javascript-sort/" target="_blank" rel="external">http://mao.li/javascript/javascript-sort/</a><br>[5] <a href="https://segmentfault.com/a/1190000000654274" target="_blank" rel="external">https://segmentfault.com/a/1190000000654274</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/14/some-javascript-functions/">
+    <time datetime="2017-04-14T01:33:53.000Z" class="entry-date">
+        2017-04-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/04/21/call-apply-bind/" rel="prev"><span class="meta-nav">上一篇：</span>理解 call + bind</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/04/07/variable/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 变量 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

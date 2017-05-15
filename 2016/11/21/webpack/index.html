@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>前端模块化和打包工具 webpack | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端模块化和打包工具 webpack">
+<meta property="og:url" content="http://nanchao.win/2016/11/21/webpack/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
+<meta property="og:image" content="http://nanchao.win/css/images/webpack/webpack.png">
+<meta property="og:updated_time" content="2017-03-02T11:53:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端模块化和打包工具 webpack">
+<meta name="twitter:description" content="Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。">
+<meta name="twitter:image" content="http://nanchao.win/css/images/webpack/webpack.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-webpack" class="post-webpack post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      前端模块化和打包工具 webpack
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/21/webpack/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="cj2px24tt002mf50b2lw52jpa" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅只是 JavaScript 模块化，还有 CSS、图片、字体等也需要模块化。</p>
+<a id="more"></a>
+<p><img src="/css/images/webpack/webpack.png" alt="作用域链"></p>
+<p>互相依赖的模块，经过 webpack 的处理，生成相应的静态资源。webpack 在这里起到模块定义、依赖和导出的作用。</p>
+<h3 id="为什么要模块化加载？"><a href="#为什么要模块化加载？" class="headerlink" title="为什么要模块化加载？"></a>为什么要模块化加载？</h3><p>目前，越来越多的网站已经从网页模式进化到了 webapp 模式，页面需要的 JavaScript、css、图片等等各种资源也越来越多，特别是大量的 js 代码会给前端开发流程和资源组织带来巨大挑战。</p>
+<p><strong> 前端资源是通过增量加载的方式在浏览器端运行，如何组织好前端代码和资源，使它们能够快速、优雅地加载和更新，是一个模块化系统需要解决的问题。</strong></p>
+<p>前端模块需要增量加载到用户浏览器中执行。关于这个过程，我们设想两种极端的方式：一种是每个模块都单独请求；另一种是把所有文件打包成一个文件，然后请求一次。很明显，这两种方式简单粗暴的方式都不够好，第一种方式请求数太多，网页响应速度太慢；第二种会导致流量浪费、初始化过程慢。</p>
+<h3 id="分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。"><a href="#分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。" class="headerlink" title="分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。"></a>分块传输，按需进行懒加载，在实际用到某些模块的时候再增量更新，才是较为合理的模块加载方案。</h3><p>要实现模块的按需加载，就需要一个对整个代码库中的模块进行静态分析、编译打包的过程。这就是 webpack 要做的工作。</p>
+<p>下面，就以一个简单实例介绍 webpack 的使用流程。</p>
+<h3 id="1-安装-webpack"><a href="#1-安装-webpack" class="headerlink" title="1.安装 webpack"></a>1.安装 webpack</h3><p>首先，得具备 node 环境。安装 node 会顺带安装包管理器 npm，我们用 npm 全局安装 webpack。</p>
+<pre><code>npm install webpack -g
+</code></pre><p>然后，我们新建一个项目目录 myWebpack。项目本地安装 webpack。</p>
+<pre><code># 进入项目目录
+# 确定已经有 package.json，没有就通过 npm init 创建
+# 安装 webpack 依赖
+npm install webpack --save-dev
+</code></pre><h3 id="2-小试牛刀"><a href="#2-小试牛刀" class="headerlink" title="2.小试牛刀"></a>2.小试牛刀</h3><p>首先新建 index.html 页面：</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>然后，新建 entry.js 文件：</p>
+<pre><code>document.write(&#39;It works.&#39;);
+</code></pre><p>最后，使用 webpack 编译 entry.js 并打包到 bundle.js：</p>
+<pre><code>webpack entry.js bundle.js
+</code></pre><p>用浏览器直接打开 index.html(不需要web服务器)，我们会看到页面显示：It works.</p>
+<p>这是没有文件依赖的情况。下面我们新增一个模块 module.js：</p>
+<pre><code>module.exports = &#39;It works from module.js.&#39;
+</code></pre><p>同时，修改 entry.js：</p>
+<pre><code>document.write(&#39;It works.&#39;)
+document.write(require(&#39;./module.js&#39;))
+</code></pre><p>重新执行：</p>
+<pre><code>webpack entry.js bundle.js
+</code></pre><p>刷新 index.html,页面显示为：It works.It works from module.js.</p>
+<h3 id="3-loader"><a href="#3-loader" class="headerlink" title="3.loader"></a>3.loader</h3><p>以上我们打包的模块都是 js 文件，实际上，webpack 本身也只能处理 JavaScript 模块。如果要处理 css、图片等非 js 文件，就需要使用 loader 进行转换。在这里，loader 充当一个模块和资源之间的转换器。我们用 npm 来安装 loader：</p>
+<pre><code>npm install css-loader style-loader
+</code></pre><p>我们需要两种 loader 来转换 css 文件。css-loader 用来读取 css 文件，style-loader 用来将 style 标签插入html页面。</p>
+<p>新建一个 style.css 文件：</p>
+<pre><code>body { background: yellow; }
+</code></pre><p>修改 entry.js：</p>
+<pre><code>// 载入 style.css
+require(&quot;!style-loader!css-loader!./style.css&quot;) 
+
+document.write(&#39;It works.&#39;)
+document.write(require(&#39;./module.js&#39;))
+</code></pre><p>重新编译，打包资源：</p>
+<pre><code>webpack entry.js bundle.js
+</code></pre><p>刷新 index.html 页面，我们看到，背景已经变成样式里写的黄色了。</p>
+<p>如果觉得 entry.js 中加载 style.css 的方式比较冗长，我们可以将 entry.js 中的 style.css 加载方式改为：</p>
+<pre><code>require(&quot;./style.css&quot;)
+</code></pre><p>相应地，编译打包方式修改为：</p>
+<pre><code>webpack entry.js bundle.js --module-bind &#39;css=style-loader!css-loader&#39;
+</code></pre><h3 id="4-配置文件"><a href="#4-配置文件" class="headerlink" title="4.配置文件"></a>4.配置文件</h3><p>如果我们向通过一个简单的</p>
+<pre><code>webpack
+</code></pre><p>命令来实现编译，打包过程。我们只需要事先准备好一个配置文件 webpack.config.js。</p>
+<p>首先，我们更改 package.json，添加 webpack 所需的依赖：</p>
+<pre><code>{
+    &quot;name&quot;: &quot;webpack-example&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;A simple webpack example.&quot;,
+    &quot;main&quot;: &quot;bundle.js&quot;,
+    &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+    },
+    &quot;keywords&quot;: [
+    &quot;webpack&quot;
+    ],
+    &quot;author&quot;: &quot;yourself&quot;,
+    &quot;license&quot;: &quot;MIT&quot;,
+    &quot;devDependencies&quot;: {
+    &quot;css-loader&quot;: &quot;^0.21.0&quot;,
+    &quot;style-loader&quot;: &quot;^0.13.0&quot;,
+    &quot;webpack&quot;: &quot;^2.2.1&quot;
+    }
+}
+</code></pre><p>然后执行：</p>
+<pre><code>npm install
+</code></pre><p>安装依赖。新建 webpack.config.js 配置文件：</p>
+<pre><code>module.exports = {
+  entry: &#39;./entry.js&#39;,
+  output: {
+    path: __dirname,
+    filename: &#39;bundle.js&#39;
+  },
+  module: {
+    loaders: [
+      {test: /\.css$/, loader: &#39;style-loader!css-loader&#39;}
+    ]
+  }
+}
+</code></pre><p>不同的 loader 用感叹号（!）分隔，上面的 style 和 css 分别指 Style-loader 和 CSS-loader。</p>
+<p>同时简化 entry.js 中的 style.css 加载方式：</p>
+<pre><code>require(&#39;./style.css&#39;)
+</code></pre><p>最后运行 webpack 编译打包，刷新页面，就可以看到之前的效果了。</p>
+<pre><code>webpack
+</code></pre><p>参考:<br>[1] <a href="http://webpackdoc.com/" target="_blank" rel="external">http://webpackdoc.com/</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/21/webpack/">
+    <time datetime="2016-11-21T03:57:27.000Z" class="entry-date">
+        2016-11-21
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/12/19/ajax-status/" rel="prev"><span class="meta-nav">上一篇：</span>关于 ajax 请求 status 值为 0</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/17/gulp/" rel="next"><span class="meta-nav">下一篇：</span>前端构建工具 gulp </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

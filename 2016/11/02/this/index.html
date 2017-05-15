@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文对象）。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>理解 JavaScript 中 this | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 JavaScript 中 this">
+<meta property="og:url" content="http://nanchao.win/2016/11/02/this/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，">
+<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 JavaScript 中 this">
+<meta name="twitter:description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-this" class="post-this post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      理解 JavaScript 中 this
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/02/this/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="cj2px24tp002cf50b0ac8n5eb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p><strong>this 出现的地方无非两种：全局环境中和函数中。</strong>不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。<strong>（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。</strong>不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文对象）。</p>
+<a id="more"></a>
+<p>下面我们分别探讨这两种情况：</p>
+<p><strong>1.全局环境中 this</strong></p>
+<p>全局环境中的 this 就是 window 对象</p>
+<pre><code>this === window;    //true
+//这里特指浏览器,只有浏览器中全局对象是window
+
+var x = 10;
+console.log(
+    x,          // 10
+    this.x,     // 10
+    window.x    // 10
+);
+</code></pre><p><strong>2.函数中 this</strong></p>
+<ul>
+<li><p>js 语言有一个特点，就是允许“动态绑定”，即某些属性和方法到底属于哪一个对象不是在编译时确定的，而是在运行时确定的。</p>
+</li>
+<li><p>this 是在函数调用的时候确定，指向的是函数此次调用的“所有者，owner”，例如，函数被哪个对象调用，this 就自动绑定到该对象。</p>
+</li>
+<li><p>this 是在该函数上下文建立阶段确定的，每次调用该函数产生新的上下文的时候 this 值都不尽相同。一旦进入了函数内代码执行阶段，this 值就不能改变了。这时，想要给 this 赋一个新值是不可以的。</p>
+</li>
+<li><p>如果没有通过 new（包括对象字面量定义）、call、apply 和 bind 等改变函数的 this 对象，那么函数内的 this 都是指向 window。</p>
+</li>
+</ul>
+<p><strong>本质上讲，this 都是指向实例化对象。</strong>貌似前面讲了很多情况 this 都指向了 window。这只是因为这时候仅做了一次实例化操作，即实例化 window 对象，于是 this 就是指向 window。如果我们要把 this 指向从 window 变成别的对象，就需要实例化，也就是执行 new 运算符。</p>
+<pre><code>function f(){
+    return this;
+}
+</code></pre><p>如果函数 f 在全局环境中执行，f() 或者 window.f()，返回 window；如果 f 在对象上调用，如 obj.f()，返回的是 obj。</p>
+<p>再次强调一下 this 的特殊性：<strong>与变量不同，this 从不会参与到标识符的解析过程。</strong>换句话说，在代码中访问 this 的时候，它的值是直接从执行上下文中获取的。this 的值在进入上下文的时候一次确定，并不需要在任何作用域链中查找！</p>
+<p>举个例子：</p>
+<pre><code>var aa = &quot;AAAAA&quot;;
+var obj = {
+    aa : &#39;objAAA&#39;,
+    &#39;pointer&#39; : this,
+    f : function(){
+        return this;
+    },
+    oo : {
+        &#39;a&#39; : this.aa,
+        &#39;pointer&#39; : this,
+        f : function(){
+            return this;
+        }
+    }
+};
+
+obj.aa  // &quot;objAAA&quot;
+obj.pointer === window  // true
+obj.f() === obj // true
+
+obj.oo.a    // &quot;AAAAA&quot;
+obj.oo.pointer === window   // true
+obj.oo.f() === obj.oo   // true
+</code></pre><p>我们看到，对象中的 this 变量（非函数中）也是默认为 window。这里有个问题值得注意：如果全局的 aa 变量是在 obj 对象之后定义，以上打印结果会不一样。</p>
+<pre><code>var obj = {
+    aa : &#39;objAAA&#39;,
+    &#39;pointer&#39; : this,
+    f : function(){
+        return this;
+    },
+    oo : {
+        &#39;a&#39; : this.aa,
+        &#39;b&#39; : this.bb,
+        &#39;pointer&#39; : this,
+        f : function(){
+            return this;
+        }
+    }
+},
+aa = &quot;AAAAA&quot;;
+
+obj.aa  // &quot;objAAA&quot;
+obj.obj.pointer === window  // true
+obj.f() === obj  // true
+
+obj.oo.a    // undefined，这里和上面不一样
+
+obj.oo.pointer.aa    // &quot;AAAAA&quot;
+window.aa   // &quot;AAAAA&quot;
+
+obj.oo.pointer === window   // true
+obj.oo.f() === obj.oo   // true
+</code></pre><p>obj.oo.a 打印出来竟然是 undefined，这是因为 window 对象的 aa 属性是在字面量 obj 之后定义的，window.aa 值修改已经不能影响 obj.oo 对象的 a 属性了。于是，我们推断，字面量变量定义的时候，其静态属性就已确定了。例如，字面量对象 o2 的属性 att2 指向另一个对象 o1 的属性 att1，后期再修改 o1 的属性 att1，o2 的 att2 属性不会跟着变。下面我们来验证一下这个问题：</p>
+<pre><code>var o1 = {
+    att1 : &#39;aaa&#39;
+};
+
+var o2 = {
+    att2 : o1.att1
+};
+
+o2.att2     // &quot;aaa&quot;
+
+o1.att1 = &#39;bbb&#39;
+o2.att2     // &quot;aaa&quot;
+</code></pre><p>果然如此。<strong>定义字面量变量的时候，其静态属性就已确定了。</strong>这么规定是有道理的，如果字面量对象的属性还是一个变量，那就失去字面量的“本义”了。</p>
+<p>下面我们看看 this 出现的另几个场景：</p>
+<p><strong>（1）对象中拆出来的方法中的 this</strong></p>
+<pre><code>var car = {
+    brand : &#39;bmw&#39;,
+    getBrand : function(){
+        console.log(this.brand);
+    }
+};
+
+var getCarBrand = car.getBrand;
+
+getCarBrand();      //undefined
+
+window.getCarBrand();    //undefined
+
+car.getBrand();     //bmw
+</code></pre><p>我们看到，如果从对象中拆取出某个函数，那么这个方法就会变成一个普通的函数，它和原来对象之间的联系就不存在了。换句话说，一个拆取出来的函数就不再绑定到原来对象了。</p>
+<p><strong>（2）函数内定义的函数中的 this</strong></p>
+<pre><code>var o = {
+    f1 : function(){
+        var f2 = function(){
+            console.log(this === window);
+        }
+        f2();
+    }
+};
+
+o.f1()  // true
+</code></pre><p>还是上面那句话，如果没有通过 new（包括对象字面量定义）、call、apply 和 bind 等改变函数的 this 对象，那么函数内的 this 都是指向 window。</p>
+<p><strong>（3）回调函数中的 this</strong></p>
+<pre><code>var el = document.getElementById(&quot;btn&quot;);
+el.addEventListener(&quot;click&quot;,car.getBrand,false);
+</code></pre><p>虽然使用的是 car.getBrand 方法，但是实际上是将 getBrand 方法关联到 el 对象。换句话讲：当我们在某个对象上执行一个方法，虽然这个方法之前是在其他对象里定义的，但是此时 this 已经不再指向原来的对象了，而是指向此时调用该方法的对象。</p>
+<p>下面我们看个更详细的例子：</p>
+<pre><code>function hello(){
+    console.log(this.id);
+}
+
+var id = &quot;doc&quot;;
+var para = document.getElementById(&quot;para&quot;);
+
+para.addEventListener(&quot;click&quot;,hello,false);
+//点击para之后，输出para
+</code></pre><p>如此，hello 方法内的 this 指向了绑定的 para 对象。以上绑定方式类似于：</p>
+<pre><code>para.onclick = hello;
+</code></pre><p>如果我们把回调函数部署在节点元素的 on- 属性上，回调函数内的 this 就不会再指向该节点元素了。</p>
+<pre><code>&lt;p id=&#39;para&#39; onclick=&#39;hello()&#39;&gt;Hello&lt;/p&gt;
+//点击p节点，输出doc
+</code></pre><p>这种绑定方式相当于：</p>
+<pre><code>para.onclick = function(){
+    hello();
+}
+</code></pre><p>所以，不难理解函数 hello 中 this 会指向 window 了。其实，想输出 para 也可以做到，稍做修改：</p>
+<pre><code>&lt;p id=&quot;para&quot; onclick=&quot;console.log(this.id)&quot;&gt;Hello&lt;/p&gt;
+//点击p节点，输出para
+</code></pre><p>这种方式，this 又指向 para 节点了。相当于：</p>
+<pre><code>para.onclick = function(){
+    console.log(this.id);
+}
+</code></pre><p>总结一下，以下几种写法中 doSomething 中 this 均指向 window。</p>
+<pre><code>//写法一
+element.onclick = function(){
+    doSomething();    
+}
+
+//写法二
+element.setAttribute(&#39;onclick&#39;,&#39;doSomething()&#39;)
+
+//写法三
+&lt;element onclick=&quot;doSomething()&quot;&gt;
+</code></pre><p><strong> 固定 this 指向： </strong></p>
+<p>函数中 this 指向的多变，在某些场景下可能使问题复杂化，不过，这种灵活语法不正是 JavaScript 的趣味性所在吗？</p>
+<p>有时候我们想明确地知名函数执行时其内部 this 的指向。为此，JavaScript 提供了 call、apply、bind 等 3 个方法来切换/固定 this 的指向。这 3 个方法均是 Function 构造函数的原型方法，即定义于 Function.prototype 对象上。</p>
+<p><strong>(1) Function.prototype.call</strong></p>
+<p>将函数内部 this 指向 call 方法的第一个实参（一般为对象。如果不是对象的原始类型数据则强制转换成对应的包装对象），call 方法的其余参数作为函数的参数传入。</p>
+<pre><code>var o = {};
+var f = function(a,b){
+    console.log(&#39;a:&#39;,a,&#39;b:&#39;,b);
+    return this;
+}
+f() === window   
+// a: undefined b: undefined
+// true
+
+f.call(o,1,2) === o;
+// a: 1 b: 2
+// true
+</code></pre><p>函数 f 内部的 this 指向 call 方法第一个实参 o，其余参数（ 1 , 2 ）分别作为函数 f 执行时的实参。</p>
+<p><strong>(2) Function.prototype.apply</strong></p>
+<p>apply 方法和 call 方法作用和用法几乎一样，都是改变函数内部的 this 指向，然后执行该函数。唯一的区别就是接收的参数格式不一样。</p>
+<pre><code>f.call(thisValue,arg1,arg2,arg3...);
+// 各个参数以逗号 , 分隔
+f.apply(thisValue,[arg1,arg2,arg3...]);
+// 第二个参数为数组，包含函数执行时的参数。
+</code></pre><p>JavaScript 没有提供获取数组中最大值的原生 api，我们可以利用 apply 方法来获取数组的最大值。</p>
+<pre><code>Math.max(x...)
+// 可返回多个指定的数中最大的那个数
+// 在 ECMASCript v3 之前，该方法只有两个参数
+
+var a = [10,2,3,45,5,66,20];
+Math.max.apply(null,a);
+// 66
+</code></pre><p>如果 call / apply 方法的第一个参数为空、null 或者 undefined，则将函数内部 this 指向全局对象 window。</p>
+<p><strong>(3) Function.prototype.bind</strong></p>
+<p>将函数内部的 this 绑定到 bind 方法指定的第一个参数，然后返回一个新的函数。</p>
+<pre><code>var d = new Date();
+d.getTime()
+// 1490857265085
+
+var print = d.getTime;
+print();
+// Uncaught TypeError: this is not a Date object.
+</code></pre><p>全局函数 print 执行时，其内部的 this 指向全局函数 window（不是 Date 的实例对象），导致函数执行出错。可以使用 bind 方法，将 print 函数内部 this 指向 Date 实例对象 d。</p>
+<pre><code>var print = d.getTime.bind(d);
+print()
+// 1490857265085
+</code></pre><p>对于不支持 bind 方法的 ie8 以下浏览器，自行定义 bind 方法：</p>
+<pre><code>if(!(&#39;bind&#39; in Function.prototype)){
+  Function.prototype.bind = function(){
+    var fn = this;
+    var context = arguments[0];
+    var args = Array.prototype.slice.call(arguments,1);
+    return function(){
+      return fn.apply(context,args);
+    }
+  }
+}
+</code></pre><p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/this.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/this.html</a><br>[2] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/02/this/">
+    <time datetime="2016-11-02T01:53:32.000Z" class="entry-date">
+        2016-11-02
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/11/03/setTimeout/" rel="prev"><span class="meta-nav">上一篇：</span>理解 JavaScript 中 setTimeout</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/01/closures/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 闭包（译） </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

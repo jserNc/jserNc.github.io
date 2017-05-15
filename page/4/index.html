@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Enjoy javascript">
+<meta property="og:url" content="http://nanchao.win/page/4/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enjoy javascript">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-jsfuck" class="post-jsfuck post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/06/jsfuck/">jsfuck 6 个字符写 js 代码（一）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cj2px24t20015f50bz0i3jg8n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用<strong> [，]，(，)，!，+ </strong>等 6 个字符来写 JavaScript 代码。虽然实际应用中根本不会有人这么写代码，但是这种做法很有趣，对其原理的探讨也很有助于加深我们对 JavaScript 基础知识的理解。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/06/jsfuck/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/06/jsfuck/">
+    <time datetime="2017-01-06T08:15:14.000Z" class="entry-date">
+        2017-01-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-throttle-debounce" class="post-throttle-debounce post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2017/01/06/throttle-debounce/">去抖和节流（debounce &amp; throttle）</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cj2px24tq002ef50bdgzvpxhb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/06/throttle-debounce/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/01/06/throttle-debounce/">
+    <time datetime="2017-01-06T01:43:00.000Z" class="entry-date">
+        2017-01-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-page-optimization" class="post-page-optimization post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/12/30/page-optimization/">网页性能优化建议</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/30/page-optimization/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cj2px24tc001nf50btuq4pwpn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/30/page-optimization/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/30/page-optimization/">
+    <time datetime="2016-12-30T01:42:26.000Z" class="entry-date">
+        2016-12-30
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jsonp-beacon" class="post-jsonp-beacon post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/12/28/jsonp-beacon/">JSONP 和图像灯塔</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/28/jsonp-beacon/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/28/jsonp-beacon/" data-id="cj2px24t7001ff50ba203a0y6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>当我们需要和服务器交换数据并更新网页部分内容的时候，我们很容易想到用 ajax。即通过原生的 XMLHttpRequest 对象（ IE5 和 IE6 使用 ActiveXObject）发出 HTTP 请求，得到服务器返回的数据后，再进行处理。不过，遗憾的是：受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/28/jsonp-beacon/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/28/jsonp-beacon/">
+    <time datetime="2016-12-28T09:13:08.000Z" class="entry-date">
+        2016-12-28
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-css-vertical-centering" class="post-css-vertical-centering post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/12/26/css-vertical-centering/">css 垂直居中几种实现方法</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/26/css-vertical-centering/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cj2px24sf000mf50bzds4szhc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能断定某种方法就是最好的，我们应该根据应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/26/css-vertical-centering/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/26/css-vertical-centering/">
+    <time datetime="2016-12-26T10:07:32.000Z" class="entry-date">
+        2016-12-26
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-batch-processing" class="post-batch-processing post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/12/22/batch-processing/">windows 批处理脚本修改文件</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/12/22/batch-processing/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cj2px24s30007f50bjorrvv87" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/22/batch-processing/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/12/22/batch-processing/">
+    <time datetime="2016-12-22T03:46:32.000Z" class="entry-date">
+        2016-12-22
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="pagination">
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      </nav>
+    </nav>
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

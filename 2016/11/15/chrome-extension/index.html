@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>chrome 扩展开发 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chrome 扩展开发">
+<meta property="og:url" content="http://nanchao.win/2016/11/15/chrome-extension/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。">
+<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chrome 扩展开发">
+<meta name="twitter:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-chrome-extension" class="post-chrome-extension post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      chrome 扩展开发
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/15/chrome-extension/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="cj2px24sb000gf50beid0z3rh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。</p>
+<a id="more"></a>
+<p>一个 chrome 扩展就是一个配置文件 manifest.json 和一系列 html、css、js、图片文件的集合，即一个包含这些文件的目录。发布的时候，把这个目录的所有文件打包到一个扩展名为 .crx 的压缩文件中即可。然后，打开 chrome://extensions/ 页面，把 .crx 文件拖进来，即可安装该扩展。（该页面还提供“加载已解压的扩展程序”和“打包扩展程序”功能）</p>
+<p>chrome 扩展本质上就是 web 应用，它可以使用浏览器提供的所有 api（如 XMLHttpRequest），还可以访问浏览器的内部功能（如书签）。实际过程中，借助这些 api，再加上一些前端基础知识（主要是 JavaScript），就可以完成一个简单的 chrome 扩展的开发。</p>
+<p>一般情况下，扩展会是 browser action 或 page action 两者中的一种。browser action 扩展图标会显示在 chrome 工具栏上（地址栏之外），并且一直都显示；而 page action 图标会显示在工具栏地址栏内部右边，特定页面才有。所以，实际开发中，如果不是全部页面都使用的功能应使用 page action 方式。</p>
+<p>下面，我们跟着 <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">谷歌官网教程</a> 做一个获取图片的小插件。</p>
+<p>首先新建一个文件夹 getPic。</p>
+<h3 id="1-创建-manifest-json-配置文件"><a href="#1-创建-manifest-json-配置文件" class="headerlink" title="1.创建 manifest.json 配置文件"></a>1.创建 manifest.json 配置文件</h3><p>文件夹 getPic 内创建一个名为 manifest.json 的配置文件。这个文件以 json 格式声明扩展程序的基本信息。如扩展程序名、版本号、功能描述等。更高级点的扩展还会声明这个扩展要做什么以及需要什么样的权限等信息。下面 manifest.json 文件中，我们声明一个 browser action。其中包括 activeTab（获取当前 tab 的 url）和 host 权限(获取外部的谷歌图片搜索 api)。</p>
+<pre><code class="json">{
+    &quot;manifest_version&quot;: 2,
+    &quot;name&quot;: &quot;Getting started example&quot;,
+    &quot;description&quot;: &quot;Shows a Image for the current page&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;browser_action&quot;: {
+    &quot;default_icon&quot;: &quot;icon.png&quot;,
+    &quot;default_popup&quot;: &quot;popup.html&quot;
+    },
+    &quot;permissions&quot;: [
+    &quot;activeTab&quot;,
+    &quot;https://ajax.googleapis.com/&quot;
+    ]
+}
+</code></pre>
+<h3 id="2-创建资源文件"><a href="#2-创建资源文件" class="headerlink" title="2.创建资源文件"></a>2.创建资源文件</h3><p>我们看到 manifest.json 中声明了该扩展的两个资源文件（icon.png 和 popup.html）,下面我们在文件夹 getPic 中创建这两个文件。</p>
+<ul>
+<li><p>icon.png</p>
+<p>这个图片就是该扩展显示在 chrome 工具栏的小图标。我们可以从网上下载或者自己制作一张自定义的小图标（19px * 19px）。</p>
+</li>
+<li><p>popup.html</p>
+<p>这个页面在用户点击上面工具栏的 icon 图标时弹出来。这是一个标准的 html 文件，就跟我们普通的 web 页面一样。下面我们创建该文件，代码如下：</p>
+</li>
+</ul>
+<pre><code class="html">&lt;!doctype html&gt;
+ &lt;html&gt;
+   &lt;head&gt;
+     &lt;title&gt;Getting Started Extension&#39;s Popup&lt;/title&gt;
+     &lt;style&gt;
+       body {
+         font-family: &quot;Segoe UI&quot;,Tahoma, sans-serif;
+         font-size: 100%;
+       }
+       #status {
+         /* avoid an excessively wide status text */
+         white-space: pre;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         max-width: 400px;
+       }
+     &lt;/style&gt;
+     &lt;script src=&quot;popup.js&quot;&gt;&lt;/script&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+     &lt;div id=&quot;status&quot;&gt;&lt;/div&gt;
+     &lt;img id=&quot;image-result&quot; hidden&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>我们看到页面里好像也没写什么实质性内容。实际上，这个页面的主体内容是由 popup.js 渲染完成的。下面，我们再来看看核心的 popup.js 代码。</p>
+<pre><code class="javascript">function getCurrentTabUrl(callback) {
+   var queryInfo = {
+        active: true,
+        currentWindow: true
+   };
+
+   chrome.tabs.query(queryInfo, function(tabs) {
+        var tab = tabs[0];
+        var url = tab.url;
+        console.assert(typeof url == &#39;string&#39;, 
+        &#39;tab.url should be a string&#39;);
+
+        callback(url);
+   });
+ }
+
+function getImageUrl(searchTerm, callback, errorCallback) {
+   var sUrl = &#39;https://ajax.googleapis.com/ajax/services/search/images&#39;;
+   sUrl = sUrl + &#39;?v=1.0&amp;q=&#39; + encodeURIComponent(searchTerm);
+
+   var x = new XMLHttpRequest();
+   x.open(&#39;GET&#39;, sUrl);
+   x.responseType = &#39;json&#39;;
+   x.onload = function() {
+
+     var response = x.response;
+     if (!response || !response.responseData || !response.responseData.results ||response.responseData.results.length === 0) {
+        errorCallback(&#39;No response from Google Image search!&#39;);
+        return;
+     }
+     var firstResult = response.responseData.results[0];
+
+     var imageUrl = firstResult.tbUrl;
+     var width = parseInt(firstResult.tbWidth);
+     var height = parseInt(firstResult.tbHeight);
+     console.assert(typeof imageUrl == &#39;string&#39; &amp;&amp; !isNaN(width) &amp;&amp; !isNaN(height),&#39;Unexpected respose from the Google Image Search API!&#39;);
+     callback(imageUrl, width, height);
+   };
+   x.onerror = function() {
+     errorCallback(&#39;Network error.&#39;);
+   };
+   x.send();
+ }
+
+function renderStatus(statusText) {
+   document.getElementById(&#39;status&#39;).textContent = statusText;
+}
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+   getCurrentTabUrl(function(url) {
+
+     renderStatus(&#39;Performing Google Image search for &#39; + url);
+
+     getImageUrl(url, function(imageUrl, width, height) {
+        renderStatus(&#39;term: &#39; + url + &#39;\n&#39; + &#39;result: &#39; + imageUrl);
+
+        var imageResult = document.getElementById(&#39;image-result&#39;);
+        imageResult.width = width;
+        imageResult.height = height;
+        imageResult.src = imageUrl;
+        imageResult.hidden = false;
+     }, function(errorMessage) {
+        renderStatus(&#39;Cannot display image. &#39; + errorMessage);
+     });
+   });
+});
+</code></pre>
+<p>getCurrentTabUrl 方法获取当前 tab 标签的 url，获取到 url 后触发 callback 回调方法；getImageUrl 方法获取图片，并填充 popup.html 主体内容。该方法第一个参数为查询关键字，第二个参数是成功取回图片后的回调方法，第三个参数是图片请求失败的错误处理方法。</p>
+<h3 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h3><p>安装该插件。以上步骤操作完毕后，文件夹 getPic 内应该有 manifest.json,icon.png, popup.html, popup.js 等4个文件。下面我们需要把文件夹 getPic 打包成 .crx 文件。打开 chrome，更多工具-&gt;扩展程序(或者输入地址：chrome://extensions/)打开 chrome 扩展页面。勾选页面上方的“开发者模式”。点击“打包扩展程序…”按钮，在弹窗里选中文件夹 getPic，点击“打包扩展程序”。打包完毕后，我们可以在 getPic 的父级文件夹里找到打包好的 crx 文件。然后把这个 crx 文件拖拽到刚才打开的 chrome 扩展页面即可安装。如果不能安装该 crx 文件，可以点击“加载已解压的扩展程序…”直接选择文件夹 getPic。</p>
+<p>注：以上谷歌接口可能已经废弃，所以我们看不到谷歌返回的图片。但是以上开发流程是值得参考的。以后，还会有更详细的实例介绍。</p>
+<p>参考：<br>[1] <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">https://developer.chrome.com/extensions/getstarted</a><br>[2] <a href="http://open.chrome.360.cn/extension_dev/overview.html" target="_blank" rel="external">http://open.chrome.360.cn/extension_dev/overview.html</a><br>[3] <a href="http://www.cnblogs.com/guogangj/p/3235703.html" target="_blank" rel="external">http://www.cnblogs.com/guogangj/p/3235703.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/15/chrome-extension/">
+    <time datetime="2016-11-15T09:32:59.000Z" class="entry-date">
+        2016-11-15
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2016/11/17/gulp/" rel="prev"><span class="meta-nav">上一篇：</span>前端构建工具 gulp</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2016/11/03/setTimeout/" rel="next"><span class="meta-nav">下一篇：</span>理解 JavaScript 中 setTimeout </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
