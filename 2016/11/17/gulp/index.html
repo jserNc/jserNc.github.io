@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/17/gulp/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
-<meta property="og:updated_time" content="2017-02-24T09:23:24.538Z">
+<meta property="og:updated_time" content="2017-05-19T09:29:07.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具 gulp">
 <meta name="twitter:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cj2vmno1z000rgcba22cleak7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cj2vn8m9j000xvkba2hbknt5a" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -175,7 +175,8 @@ gulp.task(&#39;minify&#39;, function () {
 <p>参数为待写入文件名，将上一级的输出数据流写入该文件。还可以接收第二个参数表示配置对象。</p>
 <pre><code>gulp.dest(&#39;build&#39;, {
   cwd: &#39;./app&#39;,
-  mode: &#39;0644&#39;  // 用户具有读写权限，组用户和其它用户具有只读权限；
+  mode: &#39;0644&#39;  
+  // 用户具有读写权限，组用户和其它用户具有只读权限；
 })
 </code></pre><p>配置对象有两个字段。cwd 字段指定写入路径的基准目录，默认是当前目录；mode 字段指定写入文件的权限，默认是 0777（用户可读可写可执行）。</p>
 <blockquote>
