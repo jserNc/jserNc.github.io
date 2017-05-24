@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？" />
+  <meta name="description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。" />
   
 
   
@@ -13,18 +13,18 @@
   
   
   
-  <title>JavaScript 事件代理（委托） | 南潮的博客</title>
+  <title>跨域解决方案 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+  <meta name="description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 事件代理（委托）">
-<meta property="og:url" content="http://nanchao.win/2016/10/24/event-delegation/index.html">
+<meta property="og:title" content="跨域解决方案">
+<meta property="og:url" content="http://nanchao.win/2017/05/24/cross-origin/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
-<meta property="og:updated_time" content="2017-05-02T03:18:45.119Z">
+<meta property="og:description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。">
+<meta property="og:updated_time" content="2017-05-24T02:24:40.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 事件代理（委托）">
-<meta name="twitter:description" content="在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+<meta name="twitter:title" content="跨域解决方案">
+<meta name="twitter:description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -98,7 +98,7 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-event-delegation" class="post-event-delegation post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-cross-origin" class="post-cross-origin post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -106,16 +106,16 @@
         
   
     <h1 class="entry-title article-title">
-      JavaScript 事件代理（委托）
+      跨域解决方案
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/05/24/cross-origin/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj32b33ac000oykbaorsdf57m" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cj32b3393000bykba6iidg2iu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,100 +123,71 @@
 
     <div class="entry-content">
       
-        <p>在浏览器设计过程中，关于交互，会面临一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？</p>
+        <p>受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。</p>
 <a id="more"></a>
-<p>举个例子：当你点击了一个按钮，你确实是点击了这个按钮，但同时你实际上也点击了按钮所在的 div 区域，body 元素以及 html 元素等等，浏览器怎么知道你想点的到底是哪个元素呢？</p>
-<p>对此，dom 标准事件流规定：当一个事件发生后，会经过 3 个传播阶段：</p>
-<p><strong>第一阶段：从顶层 window 对象传播到最深层节点（目标节点），称为：捕获阶段</strong><br><strong>第二阶段：事件到达最深层的目标节点，称为：处于目标阶段</strong><br><strong>第三阶段：事件从目标节点传播回 window 对象，称为：冒泡阶段</strong></p>
-<p>以下面这段 dom 结构为例：</p>
-<pre><code>&lt;html&gt;
-    &lt;head&gt;
-    ...
-    &lt;/head&gt;
-    &lt;body&gt;
-        ...
-        &lt;div&gt;
-            &lt;p&gt;点击这里&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre><p>假设我们点击了 p 标签，事件传播会经过以下 3 个阶段：</p>
-<p>① 事件捕获 </p>
-<p>事件从最外层元素依次向深层次元素传播，直到最深层元素。捕获事件的触发顺序是：<br>window -&gt; document -&gt; body -&gt; div -&gt; p；</p>
-<p>② 目标节点</p>
-<p>事件到达最深层的节点，这个节点称为<strong>目标节点</strong>，在这里是 p 节点；</p>
-<p>③ 事件冒泡</p>
-<p>与事件捕获相反，事件从最深层元素依次向外层元素传播，直到最外层元素。冒泡事件的触发顺序是：<br>p -&gt; div -&gt; body -&gt; document -&gt; window。</p>
-<p><strong>注意：尽管事件发生后，会在多个节点之间传播、轮流触发，但是，可以确定的是，浏览器认定的事件目标节点只有一个：那就是嵌套最深的那个节点。在这里，就是 p 节点。</strong></p>
-<p>有了上面的分析，我们知道，子节点的事件总是会经过父节点。当需要监听的元素数量较多时，相对于每个节点单独的事件绑定，我们把所有子节点的监听函数定义在某个祖先节点上是一种比较好的方法。这种方法叫做<strong>事件代理（委托）</strong>。</p>
-<p>一个简单的例子:</p>
-<pre><code>document.onclick = function(event){
+<h3 id="①-jsonp"><a href="#①-jsonp" class="headerlink" title="① jsonp"></a>① jsonp</h3><p>该方案的局限性在于其只支持 GET 请求，其优点是兼容性好，支持所有浏览器。一般场景下首推这种方案，其详细介绍见 <a href="http://nanchao.win/2016/12/28/jsonp-beacon/">JSONP 和图像灯塔</a> 。</p>
+<h3 id="②-修改-window-name-跨域"><a href="#②-修改-window-name-跨域" class="headerlink" title="② 修改 window.name 跨域"></a>② 修改 window.name 跨域</h3><p>window 对象有个 name 属性，用于设置当前浏览器窗口的名字。只要是在本窗口打开过的网页都能读写这个窗口的 window.name 属性，而不管这些网页是否属于同一个网站。</p>
+<p>也就是说：即在一个窗口（window）的生命周期内，在该窗口载入的所有的页面都是共享同一个 window.name，并且这些页面对 window.name 都有读写的权限。window.name 是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而被重置。</p>
+<p>该属性只能保持字符串，并且当前窗口关闭以后这个值就会消失，但是与 iframe 结合使用还是挺有用的。</p>
+<p>例如，A 域下有一个页面 a.htm，想要获取 B 域下的 b.htm 中的数据。</p>
+<p>子页面 B.com/b.htm 代码：</p>
+<pre><code>&lt;script&gt;
+ window.name = &#39;a.htm想要获取的数据&#39;;
+&lt;/script&gt;
+</code></pre><p>我们可以在 a.htm 页面中设置一个隐藏的 iframe，iframe 地址指向 b.htm，等到 b.htm 加载完毕，再将 iframe 地址替换成 A 域下的 a1.htm，然后就可以通过该 iframe 的 contentWindow.name 属性获取到想要的数据。</p>
+<p>父页面 A.com/a.htm 代码：</p>
+<pre><code>&lt;iframe id=&quot;ifr&quot; src=&quot;http://www.B.com/b.htm&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+    var flag = 0,
+        frame = document.getElementById(&quot;ifr&quot;);
 
-    //IE doesn&#39;t pass in the event object
-    var event = event || window.event;
-
-    //IE uses srcElement as the target
-    var target = event.target || event.srcElement;
-
-    switch(target.id){
-        case &quot;help-btn&quot;:
-                openHelp();
-                break;
-        case &quot;save-btn&quot;:
-                saveDocument();
-                break;
-        case &quot;undo-btn&quot;:
-                undoChanges();
-                break;
+    frame.onload = function(){
+        if (flag === 1){
+            console.log(frame.contentWindow.name);
+        } else if (flag === 0){
+            flag = 1;
+            frame.contentWindow.location = &#39;A.com/a1.htm&#39;
+        }
     }
-};
-</code></pre><p>可以看到，我们是通过 target 这个变量来区分不同的子节点，来做到事件分发的。这个 target 变量就是我们上边说的<strong>目标节点</strong>，我们可以将其看作“事件源”。</p>
-<p>另外，关于以上代码：</p>
-<p>ie8 及其以下版本，事件对象不作为参数传递，而是通过 window 对象的 event 属性读取，并且事件对象的 target 属性叫做 srcElement 属性。所以，以前获取事件信息，往往要写成下面这样。</p>
-<pre><code>function handler(event) {
-  var event = event || window.event;
-  var target = event.target || event.srcElement;
-  // ...
-}
-</code></pre><p>再注意一下 event.target，将其和 event.currentTarget 对比一下：</p>
-<p><strong>event.currentTarget</strong>：返回事件当前所在的节点，会随着事件捕获和事件冒泡改变。也就是事件监听函数中的 this。</p>
-<p><strong>event.target</strong>：返回目标节点（最深层节点），固定的。正是这个属性使得事件代理成为可能。</p>
-<p>有时候，为了阻止事件冒泡和事件默认操作，我们还会采取以下事件处理方法：</p>
-<pre><code>function myHandler(e){
-    var e = e || window.event;
-    var src = e.target || e.srcElement;
-
-    //do something
-
-    //无冒泡
-    if (typeof e.stopPropagation === &#39;function&#39;){
-        e.stopPropagation();    //w3c
+&lt;/script&gt;
+</code></pre><h3 id="③-修改-document-domain-跨子域"><a href="#③-修改-document-domain-跨子域" class="headerlink" title="③ 修改 document.domain 跨子域"></a>③ 修改 document.domain 跨子域</h3><p>该方法只适用于不同子域的框架间的交互</p>
+<p>不同的框架之间（父子或同辈），是能够获取到彼此的 window 对象的，但是你却不能使用获取到的 window 对象的属性和方法（html5 中的 postMessage 方法是一个例外，还有些浏览器比如 ie6 也可以使用 top、parent 等少数几个属性），总之，你可以当做是只能获取到一个几乎无用的 window 对象。</p>
+<p>如有一个页面，它的地址是 www.example.com/a.html  ， 在这个页面里面有一个 iframe，它的 src 是 example.com/b.html, 很显然，这个页面与它里面的 iframe 框架是不同域的</p>
+<p>我们将 a.html 和 b.html 都设置成：</p>
+<pre><code>document.domain = &#39;example.com&#39;
+</code></pre><p>这样我们就可以通过 js 来访问 iframe 中各种属性和对象了</p>
+<h3 id="④-使用-h5-中的-window-postMessage-方法"><a href="#④-使用-h5-中的-window-postMessage-方法" class="headerlink" title="④ 使用 h5 中的 window.postMessage 方法"></a>④ 使用 h5 中的 window.postMessage 方法</h3><pre><code>window.postMessage(message,targetOrigin)
+</code></pre><p>该方法可以向其他的 window 对象发送消息，无论这个对象属于同源或是不同源。</p>
+<p>向其他 window 对象发送消息，是指一个页面有几个框架的情况下，每一个框架都有一个 window 对象，框架之间可以互发消息。这里发送消息不受同源政策限制，即不同域的框架之间也可以获取到对方的 window 对象，然后用 window.postMessage 方法发送消息。</p>
+<p>需要接收消息的 window 对象，可是通过监听自身的 message 事件来获取传过来的消息，消息内容储存在该事件对象的 data 属性中。举例如下：</p>
+<p>www.a.com/a.htm 代码:</p>
+<pre><code>&lt;iframe id=&quot;ifr&quot; src=&quot;http://www.b.com/b.htm&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+    document.getElementById(&quot;ifr&quot;).onload = function(){
+        var win = this.contentWindow;
+        win.postMessage(&#39;来自a页面的消息&#39;)
     }
-
-    if (typeof e.cancelBubble !== &#39;undefined&#39;){
-        e.cancelBubble = true;  //ie
+&lt;/script&gt;
+</code></pre><p>www.b.com/b.htm 代码:</p>
+<pre><code>&lt;script&gt;
+    window.onmessage = function(e){
+        e = e || event;
+        console.log(e.data)
     }
-
-    //阻止默认操作
-    if (typeof e.preventDefault === &#39;function&#39;){
-        e.preventDefault();     //w3c
-    }
-
-    if (typeof e.returnValue !== &#39;undefined&#39;){
-        e.returnValue = false;  //ie
-    }
-}
-</code></pre><p>以上代码中取消了事件的传播，这个处理不是必须的，可以省略。但是如果不这样，会导致事件传播到最顶层元素，甚至是 window 对象。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
+&lt;/script&gt;
+</code></pre><p>使用 postMessage 来跨域传送数据还是比较直观和方便的，缺点是 IE6、IE7 等浏览器不支持，所以用不用还得根据实际需求来决定。</p>
+<h3 id="⑤-CORS-跨源资源分享（Cross-Origin-Resource-Sharing）"><a href="#⑤-CORS-跨源资源分享（Cross-Origin-Resource-Sharing）" class="headerlink" title="⑤ CORS 跨源资源分享（Cross-Origin Resource Sharing）"></a>⑤ CORS 跨源资源分享（Cross-Origin Resource Sharing）</h3><p>它是 w3c 标准，是跨源 AJAX 请求的根本解决方法。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。实现 CORS 通信的关键是服务器,只要服务器实现了 CORS 接口，就可以跨源通信。</p>
+<p>相比 jsonp 只能发 GET 请求，CORS 允许任何类型的请求。对开发者来说，CORS 通信与同源的 AJAX 通信没有差别，代码完全一样。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/bom/cors.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/cors.html</a></p>
 
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2016/10/24/event-delegation/">
-    <time datetime="2016-10-24T05:09:38.000Z" class="entry-date">
-        2016-10-24
+    <a href="/2017/05/24/cross-origin/">
+    <time datetime="2017-05-24T01:17:21.000Z" class="entry-date">
+        2017-05-24
     </time>
 </a>
     
@@ -240,10 +211,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2016/10/24/prototype/" rel="prev"><span class="meta-nav">上一篇：</span>JavaScript 原型链</a></span></p>
     
-    
-        <p><span class="nav-next"><a href="/2016/10/14/tostring/" rel="next"><span class="meta-nav">下一篇：</span>toString.call() 引起的一些思考 </a></span></p>
+        <p><span class="nav-next"><a href="/2017/05/12/observer/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 观察者模式 </a></span></p>
     
 </nav><!-- .nav-single -->
 
