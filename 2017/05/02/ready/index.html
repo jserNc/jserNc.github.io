@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/05/02/ready/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
-<meta property="og:updated_time" content="2017-05-25T01:25:53.488Z">
+<meta property="og:updated_time" content="2017-05-25T01:39:26.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ready 方法的实现">
 <meta name="twitter:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/05/02/ready/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cj33qmixr001nn8baf89urz3u" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cj33r3s6h001x9cba3oziywct" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -138,7 +138,7 @@
 
    // 全局方法
    ready = function(fn) {
-      if (isReady ){
+      if (isReady){
           // 函数队列已销毁，直接执行新的函数
           fn.call(document);
       } else {
@@ -152,7 +152,7 @@
    }
    var onDOMReady = function(){
         // 依次执行队列中函数
-        for(var i=0;i&lt;readyList.length;i++){
+        for(var i=0; i&lt;readyList.length; i++){
             readyList[i].apply(document);
         }
         // 销毁函数队列
@@ -205,7 +205,7 @@
       if(window == window.top){
           timer = setInterval(function(){
               try{
-                  //判断 dom 是否加载完毕，没完成会报错
+                  //判断 dom 是否加载完毕，没加载完会报错
                   isReady || html.doScroll(&#39;left&#39;);
               }catch(e){
                   // 报错就在这里返回
