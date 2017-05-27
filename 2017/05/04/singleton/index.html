@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/05/04/singleton/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
-<meta property="og:updated_time" content="2017-05-12T01:37:38.037Z">
+<meta property="og:updated_time" content="2017-05-27T02:36:18.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 单例模式">
 <meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj33srqeh0026gobalashqgx3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj36o13e20024ggbafmodywsg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -200,7 +200,7 @@ o1.attr2
 o2.attr2
 // undefined
 </code></pre><p>为什么这里的 attr2 不被实例对象继承呢？</p>
-<p>第一次用 new 运算符执行该构造函数之前，加到 Singleton.prototype 对象上的属性是会被实例对象继承的，这理所当然。这次执行会导致 Singleton 被重写，指向了新的函数。所以，第二次向 Singleton.prototype 上添加属性是不会被实例对象继承的，因为新的 Singleton 函数会返回第一次执行时返回的那个实例对象。</p>
+<p>第一次用 new 运算符执行该构造函数之前，加到 Singleton.prototype 对象上的属性是会被实例对象继承的，这理所当然。但这次执行 new 运算会导致 Singleton 被重写，指向了新的函数。所以，第二次向 Singleton.prototype 上添加属性是不会被旧的 Singleton 构造函数的实例对象继承的。因为新的 Singleton 函数返回时一个对象，所以对该函数进行 new 运算返回的就是这个对象，也就是第一次执行 new 运算时返回的那个实例对象。</p>
 <pre><code>o1.constructor === Singleton
 // false
 </code></pre><p>o1.constructor 指向的是重定义之前的 Singleton 函数，所以这里结果为 false。</p>
