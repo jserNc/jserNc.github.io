@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/09/jsfuck01/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
-<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta property="og:updated_time" content="2017-05-27T14:43:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（二）">
 <meta name="twitter:description" content="前文我们讨论了一下 JavaScript 数据类型转换的原理和几个基础的实例。下面，我们接着看一些 JavaScript 表达式实例，增强理解，为我们理解 JSFuck 的原理打下基础。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/09/jsfuck01/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cj35zohw3001a1z0bse2awkcu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/09/jsfuck01/" data-id="cj37ei22h00152h0b26l8bsfi" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -150,7 +150,7 @@
 -&gt; false + &quot;&quot;
 -&gt; &quot;false&quot;
 </code></pre><p><strong>(2) ~[3]</strong></p>
-<p>对字符串进行否运算 ~，JavaScript引擎会先调用Number函数，将字符串转为数值。<br>有个规律：<strong> 一个数与自身的取反值相加，等于-1 </strong></p>
+<p>对运算子进行否运算 ~，JavaScript引擎会先调用Number函数，将运算子转为数值。<br>有个规律：<strong> 一个数与自身的取反值相加，等于-1 </strong></p>
 <pre><code>~[3]
 -&gt; ~(Number([3]))
 -&gt; ~(Number(&#39;3&#39;))

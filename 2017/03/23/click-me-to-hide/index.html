@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/03/23/click-me-to-hide/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="html 文档中可以放入不限数量的脚本，脚本可以位于 html 的 &amp;lt;head&amp;gt; 或 &amp;lt;body&amp;gt; 部分中，或者同时存在于这两个部分中，当然，也可以把脚本保存在外部的扩展名为 .js 的文件中。这么说，好像我们可以随意选择脚本出现的位置，看完下面的例子，我们就知道，并不是这样。">
-<meta property="og:updated_time" content="2017-03-28T13:51:23.000Z">
+<meta property="og:updated_time" content="2017-05-27T14:09:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 js 脚本位置">
 <meta name="twitter:description" content="html 文档中可以放入不限数量的脚本，脚本可以位于 html 的 &amp;lt;head&amp;gt; 或 &amp;lt;body&amp;gt; 部分中，或者同时存在于这两个部分中，当然，也可以把脚本保存在外部的扩展名为 .js 的文件中。这么说，好像我们可以随意选择脚本出现的位置，看完下面的例子，我们就知道，并不是这样。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/23/click-me-to-hide/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/23/click-me-to-hide/" data-id="cj35zohvg000k1z0bvnur3f15" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/23/click-me-to-hide/" data-id="cj37ei21u000k2h0bxrhee7hk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -143,7 +143,7 @@
 <p></p><p><br>这是在页面加载过程中的报错。</p>
 <p>理论上，网页加载脚本的流程一般是这样的：</p>
 <blockquote>
-<p>① 浏览器一边下载 html 代码，一边开始解析；<br>② 解析过程中，发现了 script 标签；<br>③ 暂停解析，如果是外部脚本，下载该脚本；<br>④ 执行该脚本；<br>⑤ 继续往下解析 html 代码。</p>
+<p>① 浏览器一边下载 html 代码，一边开始解析；<br>② 解析过程中，发现了 script 标签；<br>③ 暂停解析，如果是外部脚本，下载该脚本；<br>④ 下载完立即执行该脚本；<br>⑤ 继续往下解析 html 代码。</p>
 </blockquote>
 <p>也就是说，如果在页面解析过程中，遇到了 script 标签（加了特殊属性的除外，参见 <a href="http://nanchao.win/2016/10/28/script/">关于 script 脚本加载方式（译）</a> ）就会暂停页面的渲染，等脚本下载并执行完成后再继续渲染。所以，遇到加载较长时间的脚本，网页可能会暂时失去响应，出现“假死”状态。当然了，这么设计存在其合理性的，因为 JavaScript 代码是可以操作 dom 修改页面元素的，有必要等它执行完再接着渲染。</p>
 <p>那么，上面报错的原因就是，<strong> 在同步脚本执行过程中调用了并未渲染生成的 dom 元素。</strong>所以，一般情况下，我们会将脚本放在页面底部，在页面 dom 元素生成完成后执行脚本，就可以避免上面的错误了。比如像这样：</p>
@@ -159,8 +159,8 @@
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>这么做确实达到了效果。但是，我就是想要把这些操作 dom 元素的脚本放在页面顶部，行不行？</p>
-<p>当然行！我们这样写：</p>
+</code></pre><p>这么做确实达到了效果。但是，任性的我就是想要把这些操作 dom 元素的脚本放在页面顶部，行不行？</p>
+<p>当然行！那就这样写：</p>
 <pre><code>&lt;html&gt;
     &lt;head&gt;
         &lt;script&gt;

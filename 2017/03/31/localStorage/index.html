@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/03/31/localStorage/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
-<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta property="og:updated_time" content="2017-05-27T13:23:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器本地存储（一）">
 <meta name="twitter:description" content="有时候需要将一些数据存储在用户浏览器本地，下次用户访问我们的页面的时候，我们就能根据存储在用户浏览器的本地数据，做一些针对当前用户的个性化操作。例如，用户访问我们页面的时候，也许会填写用户名，可以将用户名（userName）存储在用户的浏览器中，下次用户再访问我们页面的时候，弹出一个“欢迎你，{userName}” 的欢迎词。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/03/31/localStorage/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj35zohw9001k1z0bb57towze" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/31/localStorage/" data-id="cj37ei22n001j2h0b6eqj4uao" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -136,18 +136,18 @@
 <p><strong>方法一：</strong><br>split 以上字符串，得到 cookie 数组，然后 split 该数组各个元素，循环匹配出对应的 value。</p>
 <pre><code>function getCookie(_name){
     var h = document.cookie.split(&#39;; &#39;),
-      g = h.length,
-      e = [];
+        g = h.length,
+        e = [];
 
     for (var j = 0; j &lt; g; j++) {
-      e = h[j].split(&#39;=&#39;);
-      if (_name === e[0] &amp;&amp; e[1]) {
-          try{
-            return decodeURIComponent(e[1]);
-          }catch(e){
-            return unescape(e[1]);
-          }
-      }
+        e = h[j].split(&#39;=&#39;);
+        if (_name === e[0] &amp;&amp; e[1]) {
+            try {
+                return decodeURIComponent(e[1]);
+            } catch(e) {
+                return unescape(e[1]);
+            }
+        }
     }
     return null;
 }
