@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/14/some-javascript-functions/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
-<meta property="og:updated_time" content="2017-04-28T07:44:36.836Z">
+<meta property="og:updated_time" content="2017-05-27T06:41:14.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几个典型的 JavaScript 函数">
 <meta name="twitter:description" content="ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/04/14/some-javascript-functions/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj36us0ih0024xkbacnkbpwuo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj36wa9y5002algbams3ui08f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,7 +129,7 @@
 <blockquote>
 <p><strong>本地对象（native object）</strong></p>
 </blockquote>
-<p>独立于宿主环境的 ECMAScript 实现提供的对象。这里提到的 ECMAScript 实现，JavaScript 就是其中一种。ECMAScript 本地对象有：</p>
+<p>本地对象是指独立于宿主环境的 ECMAScript 实现提供的对象。JavaScript 就是一种 ECMAScript 实现。ECMAScript 本地对象有：</p>
 <pre><code>Object   // 对象
 Function // 函数
 Array    // 数组
@@ -145,7 +145,7 @@ SyntaxError TypeError URIError
 </code></pre><blockquote>
 <p><strong>内置对象（built-in object）</strong></p>
 </blockquote>
-<p>由 ECMAScript 实现提供的、独立于宿主环境的所有对象，在 ECMAScript 程序开始执行时出现。按照定义，内置对象也属于本地对象。ECMAScript 内置对象有两个：</p>
+<p>内置对象是指由 ECMAScript 实现提供的、独立于宿主环境的所有对象，在 ECMAScript 程序开始执行时出现。按照定义，内置对象也属于本地对象。ECMAScript 内置对象有两个：</p>
 <pre><code>// 全局对象
 Global
 
@@ -166,8 +166,7 @@ window
 </blockquote>
 <p>开发者自行定义的对象。</p>
 <pre><code>var o = {};
-</code></pre><p>下面，我们讨论一下 sort、replace、match 等 3 个方法。</p>
-<p><strong>(1) Array.prototype.sort</strong></p>
+</code></pre><h3 id="下面回到主题，讨论一下-sort、replace、match-等-3-个方法。"><a href="#下面回到主题，讨论一下-sort、replace、match-等-3-个方法。" class="headerlink" title="下面回到主题，讨论一下 sort、replace、match 等 3 个方法。"></a>下面回到主题，讨论一下 sort、replace、match 等 3 个方法。</h3><p><strong>(1) Array.prototype.sort</strong></p>
 <p>我们都知道这个方法用于对数组元素进行排序。好，那么看一个例子：</p>
 <pre><code>var arr = [6,1,10];
 arr.sort()
@@ -177,7 +176,7 @@ arr
 // [1, 10, 6]
 // 排序后，原数组改变了
 </code></pre><p>以上数组排序后，元素并没有按照升序排列，对这个结果是否感到意外呢？</p>
-<p>实际上，调用该方法时，如果没有传入参数，默认根据字符串 Unicode 码点排序顺序。简单地说是按照「字典顺序」对数组元素进行排序。所谓字典顺序，即从字符串的第一个字母开始比较，第一个字母不同立即得出顺序，相同则继续比较下一个字母，以此类推。所以 10 排在 6 前面。</p>
+<p>实际上，调用该方法时，如果没有传入参数，默认根据字符串 Unicode 码点排序顺序。简单地说是按照「字典顺序」对数组元素进行排序。所谓字典顺序，即从字符串的第一个字母开始比较，如果第一个字母不同，以第一个字母的码点顺序为准；如果第一个字母相同则继续比较下一个字母，以此类推，直到比出结果。所以 10 排在 6 前面（因为 10 的第一个字符 1 在 6 前面）。</p>
 <pre><code>var fruit = [&#39;cherries&#39;, &#39;apples&#39;, &#39;bananas&#39;];
 fruit.sort(); 
 // [&#39;apples&#39;, &#39;bananas&#39;, &#39;cherries&#39;]
@@ -228,9 +227,14 @@ var arr = [1, 10, 21, 2];
 arr.sort(function(a,b){
     a - b;
 });
-// [1, 10, 21, 2] 为什么会这样？？？
+
+arr
+// [1, 10, 21, 2] 
+//为什么会这样？？？
+
+
 // 这是我敲这段代码的时候犯的一个错误
-// 比较函数少些了 return 关键字
+// 比较函数少写了 return 关键字
 
 // 稍微晦涩一点的写法实现同样的功能：
 var arr = [1, 10, 21, 2]; 
