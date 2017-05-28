@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。" />
+  <meta name="description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>去抖和节流（debounce &amp; throttle） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
+  <meta name="description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="去抖和节流（debounce & throttle）">
 <meta property="og:url" content="http://nanchao.win/2017/01/06/throttle-debounce/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
-<meta property="og:updated_time" content="2017-03-02T11:53:44.000Z">
+<meta property="og:description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
+<meta property="og:updated_time" content="2017-05-27T23:46:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="去抖和节流（debounce & throttle）">
-<meta name="twitter:description" content="关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
+<meta name="twitter:description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cj37eo0zr002hko0be39w74kf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cj37yke23002a7w0b0mkeyd7d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,13 +123,13 @@
 
     <div class="entry-content">
       
-        <p>关于函数去抖和节流，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。</p>
+        <p>函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。</p>
 <a id="more"></a>
 <p>举两个例子：</p>
 <p><strong> 场景一：</strong></p>
 <p>窗口的 resize 事件会在改变浏览器大小事连续触发； onmousemove 事件会在鼠标移动时被连续触发。如果这些事件的回调函数过重，而不采取节流处理，可能会使浏览器崩溃。</p>
 <p><strong> 场景二：</strong></p>
-<p>年会现场，主持人邀请嘉宾抽取 1 位特等奖幸运小伙伴，如果嘉宾不小心连续点击了两次【特等奖】按钮，而没有采取去抖处理，可能会连续触发两次抽取程序，然后出现 2 位获奖小伙伴，这就尴尬了。</p>
+<p>年会现场，主持人邀请嘉宾抽取 1 位特等奖幸运小伙伴，如果嘉宾不小心连续点击了两次【特等奖】按钮，而没有采取去抖处理，可能会连续触发两次抽取程序，然后出现了 2 位获奖小伙伴，那就尴尬了。</p>
 <p>下面详细地阐述一下去抖和节流的概念以及实现。</p>
 <h3 id="去抖（debounce）"><a href="#去抖（debounce）" class="headerlink" title="去抖（debounce）"></a>去抖（debounce）</h3><p>如果用手指一直按住一个弹簧，虽然它有弹起的趋势，但是只要你按住不放（保持对它施力），它将不会弹起直到你松手为止。</p>
 <p>换个角度，假定事件 A 会触发回调函数 callback，当事件 A 连续发生时，理论上会连续触发回调函数 callback。但是，只要短时间内连续触发的 callback 我们就不让其执行，直到时间 A 发生超过指定时间后，我们才调用一次 callback。即：<strong>当调用动作 n 毫秒后，才会执行该动作，若在这 n 毫秒内又调用此动作则将重新计算执行时间。</strong></p>

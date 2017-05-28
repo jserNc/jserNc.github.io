@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/11/jsfuck02/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
-<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta property="og:updated_time" content="2017-05-27T23:31:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（三）">
 <meta name="twitter:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cj37eo0za001cko0bw3pops1r" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cj37yke1k00157w0bk652l7mx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -125,7 +125,7 @@
       
         <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="external">JSFuck源码</a> ，我们发现，之所以能用<strong> [，]，(，)，!，+  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
 <a id="more"></a>
-<p><strong> [，]，(，)，!，+ 等6个字符表示的基本数据 </strong></p>
+<p><strong> 关键字 </strong></p>
 <pre><code>false === ![]
 
 true === !![]
@@ -134,7 +134,7 @@ undefined === [][[]]
 
 +[![]]
 -&gt; NaN
-//NaN不等于其自身，所以，此处不能像上面那样用 === 表示
+//NaN不等于其自身，所以，不能像上面那样用 === 表示
 
 Infinity === +(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+
              [+!+[]]+[+[]]+[+[]]+[+[]])
