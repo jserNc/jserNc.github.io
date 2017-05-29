@@ -5,7 +5,7 @@
   <base target="_blank" />
   
   <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：" />
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：" />
   
 
   
@@ -17,22 +17,22 @@
   <title>JavaScript 执行上下文（译） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 执行上下文（译）">
 <meta property="og:url" content="http://nanchao.win/2016/10/31/execution-context/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta property="og:updated_time" content="2017-05-29T03:35:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 执行上下文（译）">
 <meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta name="twitter:image" content="http://nanchao.win/css/images/execution-context/context1.png">
   
   
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj39hma93000zmx0b3jrnm0ub" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj39kbx31000z6c0bd745teso" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,7 +133,7 @@
     <div class="entry-content">
       
         <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" rel="external">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
-<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 指针，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
+<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
 <a id="more"></a>
 <pre><code>var v = 1;
 (function(){
@@ -143,12 +143,12 @@
 
 //v: undefined
 </code></pre><p>变量 v 明明在调用之前就已经在全局环境中定义过，可打印结果还是 undefined，为什么？</p>
-<p>这里涉及到了“变量作用域”和“变量提升”两个概念。后续会对“变量作用域”做一个详细介绍，这里先简单说下变量提升。</p>
+<p>这里涉及到了“变量作用域”和“变量提升”等概念。后续会对“变量作用域”做一个详细介绍，这里先简单说下变量提升。</p>
 <p>不管全局环境中，还是函数调用时，JavaScript 引擎都先获取当前环境下用 var，function 等关键词声明的变量，然后再一行一行地执行代码。这样的结果就是所有的变量的声明语句，都会被提升到当前环境（全局环境或者函数内部）的头部，这就叫做“变量提升”（hoisting）。</p>
 <p>以上代码的执行过程是：首先定义了一个全局变量 v，并对其赋值；然后定义了一个匿名函数，定义了同名的局部变量 v；最后自执行该匿名函数。因为函数内部用关键词 var 定义变量 v，所以函数执行时会将该变量声明（只是声明，不包括赋值）提升到函数内代码的头部，而不会去全局作用域中去取变量 v。整个过程相当于：</p>
 <pre><code>var v = 1;
 (function(){
-    var v;  //v = undefined
+    var v;  // v = undefined
     console.log(&#39;v1:&#39;,v);
     v = 2;
     console.log(&#39;v2:&#39;,v);
@@ -159,21 +159,21 @@ console.log(&#39;v3:&#39;,v);
 //v1: undefined
 //v2: 2
 //v3: 1
-</code></pre><p>以上描述可能还不能够说清楚“变量提升”这个概念，相信看完后面关于执行上下文的内容，就会明白了。</p>
-<h2 id="JavaScript-执行上下文"><a href="#JavaScript-执行上下文" class="headerlink" title="JavaScript 执行上下文"></a>JavaScript 执行上下文</h2><p>JavaScript代码有以下三种：</p>
+</code></pre><p>以上描述可能还不能够说清楚“变量提升”这个概念，看完下文关于执行上下文的内容，就会明白了。</p>
+<h2 id="JavaScript-执行上下文"><a href="#JavaScript-执行上下文" class="headerlink" title="JavaScript 执行上下文"></a>JavaScript 执行上下文</h2><p>JavaScript 代码有以下三种：</p>
 <blockquote>
-<p><strong> 1.全局代码 </strong> 代码载入后，js引擎首先执行这里的代码；<br><strong> 2.函数代码 </strong> 函数调用时执行的代码；<br><strong> 3.eval代码 </strong> eval函数内运行的代码。</p>
+<p><strong> 1.全局代码 </strong> 代码载入后，js 引擎首先执行这里的代码；<br><strong> 2.函数代码 </strong> 函数调用时执行的代码；<br><strong> 3.eval代码 </strong> eval 函数内运行的代码。</p>
 </blockquote>
 <p>以上每种代码都是在其执行上下文中执行的，我们可以将“执行上下文”理解为当前代码运行的环境。全局上下文只有一个。函数执行上下文可以有多个。函数的每次调用（即便是这个函数递归调用自身）都会进入到一个新的函数执行上下文，也就是是说，同一个函数也可能会创建多个上下文。</p>
 <p>例如：</p>
 <p><img src="/css/images/execution-context/context1.png" alt="执行上下文"></p>
 <p>以上代码一共有 4 个执行上下文。最外层是全局上下文，其余 3 个为函数上下文。再强调一下：<strong>函数上下文的个数是没有限制的，函数每次被调用时，引擎都会自动创建一个函数上下文。</strong></p>
-<p>一个执行上下文可能会触发另一个上下文。比如，在全局上下文中调用一个函数或者一个函数调用另一个函数。这种关系是以栈的形式实现的，我们把它叫做“执行上下文栈”。</p>
-<p>一个触发其他上下文的上下文叫作 caller。被触发的上下文叫作 callee。callee 同时也可能是一些其他 callee 的 caller（比如，一个在全局上下文中被调用的函数，在执行过程中又调用了其他函数）。</p>
-<p>当一个 caller 触发（调用）了一个 callee，这个 caller 会暂停自身的执行，然后把控制权传递给 callee。这个 callee 被 push 到栈顶，并成为一个运行中（活动的）执行上下文。在 callee 的上下文结束后，它会把控制权返回给 caller，然后 caller 的上下文继续执行（它可能继续触发其他上下文）直到它结束，以此类推。</p>
-<p>也就是说：JavaScript 程序运行时可以用“执行上下文栈”来表示，栈顶是当前“活跃上下文”。某个时刻只有唯一的一个上下文是激活（活跃）状态。</p>
+<p>一个执行上下文可能会触发另一个上下文。比如，在全局上下文中调用函数或者函数调用另一个函数。这种关系是以栈的形式实现的，我们把它叫做“执行上下文栈”。</p>
+<p>一个主动触发其他上下文的上下文叫作 caller。被触发的上下文叫作 callee。callee 本身也可能作为 caller 再触发其他的 callee（比如，一个在全局上下文中调用的函数，在执行过程中又调用了其他函数）。</p>
+<p>当一个 caller 触发（调用）了一个 callee，这个 caller 会暂停自身的执行，然后把控制权传递给 callee。于是，这个 callee 被 push 到栈顶，并成为一个运行中（活动的）执行上下文。在 callee 的上下文结束后，它又会把控制权重新返回给 caller，然后 caller 的上下文继续执行（它可能继续触发其他上下文）直到它结束，以此类推。</p>
+<p>JavaScript 程序运行时可以用“执行上下文栈”来表示，栈顶是当前“活跃上下文”。某个时刻只有唯一的上下文处于激活（活跃）状态。</p>
 <p><img src="/css/images/execution-context/stack.png" alt="执行上下文栈"></p>
-<p>当程序开始的时候它会进入全局执行上下文，此上下文位于栈底并且是栈中的第一个元素。当在全局上下文中调用执行一个函数时，程序流就进入该被调用函数内，此时引擎就会为该函数创建一个新的执行上下文，并且将其压入到执行上下文堆栈的顶部。浏览器总是执行当前在堆栈顶部的上下文，一旦执行完毕，该上下文就会从堆栈顶部被弹出，然后，进入其下的上下文执行代码。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
+<p>当程序开始的时候进入全局执行上下文，此时，全局上下文位于栈底并且是栈中的第一个元素。当在全局上下文中调用一个函数时，程序流就进入该被调用函数内，引擎就会为该函数创建一个新的执行上下文，并且将其压入到执行上下文堆栈的顶部。浏览器总是执行堆栈顶部的上下文，一旦执行完毕，该上下文就会从堆栈顶部被弹出，然后，继续执行新的栈顶执行上下文。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到重新回到全局的上下文。</p>
 <p>例如：</p>
 <pre><code>//进入全局上下文
 var a = 10;
