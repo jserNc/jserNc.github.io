@@ -5,7 +5,7 @@
   <base target="_blank" />
   
   <meta name="description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
-我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。" />
+我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。" />
   
 
   
@@ -17,22 +17,22 @@
   <title>关于 script 脚本加载方式（译） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
-我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 script 脚本加载方式（译）">
 <meta property="og:url" content="http://nanchao.win/2016/10/28/script/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
-我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。">
 <meta property="og:image" content="http://nanchao.win/css/images/script/legend.svg">
 <meta property="og:image" content="http://nanchao.win/css/images/script/script.svg">
 <meta property="og:image" content="http://nanchao.win/css/images/script/script-async.svg">
 <meta property="og:image" content="http://nanchao.win/css/images/script/script-defer.svg">
-<meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
+<meta property="og:updated_time" content="2017-05-29T05:47:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 script 脚本加载方式（译）">
 <meta name="twitter:description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
-我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。">
+我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。">
 <meta name="twitter:image" content="http://nanchao.win/css/images/script/legend.svg">
   
   
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj39kbx3o00256c0b21vnmmk4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj39pdy5z0022uh0b7wgocyu1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,12 +133,12 @@
     <div class="entry-content">
       
         <p>原文： <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html" target="_blank" rel="external">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a></p>
-<p>我们知道，js 同步脚本加载会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出 document 内容、修改 dom、重定向等行为，所以默认同步执行脚本才是安全的。</p>
+<p>我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。</p>
 <a id="more"></a>
 <p>下面我们对比一下 <strong>&lt;script&gt;</strong>、<strong>&lt;script async&gt;</strong>、<strong>&lt;script defer&gt;</strong> 等三种脚本加载方式：</p>
 <p>图例：<br><img src="/css/images/script/legend.svg" alt="图例"></p>
 <p><strong>&lt;script&gt;</strong></p>
-<p>不带任何特殊属性的 &lt;script&gt; 标签。当 html 页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析 html 文档。</p>
+<p>不带特殊属性的 &lt;script&gt; 标签。当 html 页面解析到该标签时会停止解析，然后浏览器发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，立即解析执行该脚本。等到脚本执行完毕再接着解析 html 文档。</p>
 <p><img src="/css/images/script/script.svg" width="700" alt="script"></p>
 <p><strong>&lt;script async&gt;</strong></p>
 <p>有 async 属性的 script 脚本下载过程并不会阻塞页面继续解析，但是，等到脚本下载完成后，会暂停页面解析并立即执行该脚本。脚本执行完毕再接着解析 html 文档。由于脚本下载完成时刻不可控，所以，无法确定该脚本和其他代码执行顺序。</p>
@@ -146,8 +146,8 @@
 <p><strong>&lt;script defer&gt;</strong></p>
 <p>有 defer 属性的 script 脚本下载过程也不会阻塞页面继续解析，它会等到这个页面解析完成后再执行，而且多个带 defer 的脚本会按其在页面中出现的顺序依次执行。</p>
 <p><img src="/css/images/script/script-defer.svg" width="700" alt="script-defer"></p>
-<p>那么，我们该如何选择呢？</p>
-<p>一般说来，首选 async,其次是 defer,最后是不带属性。具体规则如下：</p>
+<p>那么，实际应用中，我们该如何选择呢？</p>
+<p>一般说来，首选 async，其次是 defer，最后是不带属性。具体规则如下：</p>
 <ul>
 <li><p>如果是模块化的脚本，并且不依赖于其他脚本，用 async 属性。</p>
 </li>
