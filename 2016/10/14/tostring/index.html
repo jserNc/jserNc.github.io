@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。" />
+  <meta name="description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。" />
   
 
   
@@ -15,16 +15,16 @@
   
   <title>toString.call() 引起的一些思考 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。">
+  <meta name="description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="toString.call() 引起的一些思考">
 <meta property="og:url" content="http://nanchao.win/2016/10/14/tostring/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。">
-<meta property="og:updated_time" content="2017-05-02T03:18:02.694Z">
+<meta property="og:description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。">
+<meta property="og:updated_time" content="2017-06-07T03:51:37.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="toString.call() 引起的一些思考">
-<meta name="twitter:description" content="toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。">
+<meta name="twitter:description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -115,7 +115,7 @@
             
             <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cj370m81h002kr8bap1j573db" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cj3mgk15g002goobalo8lpqxb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,13 +123,15 @@
 
     <div class="entry-content">
       
-        <p>toString 作为全局方法时，挂载于window全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的toString 是同一方法），另外，一些内置构造函数Array、String、Boolean、Function、Date等也都分别部署了自己的toString方法。</p>
+        <p>toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。</p>
 <a id="more"></a>
-<p>为了方便下文的理解，在这里再强调一下原型链的作用：<strong>读取对象的某个属性时，JavaScript引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，直到顶层原型对象 Object.prototype。如果一层层回溯到最顶层还是找不到，则返回undefined。</strong></p>
-<p>所有全局方法均挂载于window对象，所有对象都继承自Object对象（即，Object.prototype 存在于所有对象的原型链上，并且处于原型链的最末端）。</p>
+<pre><code>Object.prototype.toString === toString
+// true
+</code></pre><p>为了更好地理解下文，在这里再强调一下原型链的作用：<strong>读取对象的某个属性时，JavaScript 引擎先寻找该对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找，层层上溯，直到顶层原型对象 Object.prototype。如果回溯到最顶层还是找不到，则返回 undefined。</strong></p>
+<p>所有全局方法均挂载于 window 对象，所有对象都继承自 Object 对象（即，Object.prototype 存在于所有对象的原型链上，并且处于原型链的最末端）。</p>
 <pre><code>toString === window.toString  //true
 window instanceof Object      //true
-</code></pre><p>window是个对象，不是构造函数，其构造函数是Window</p>
+</code></pre><p>window 是个对象，不是构造函数，其构造函数是 Window</p>
 <pre><code>window.prototype              //undefined
 </code></pre><pre><code>window instanceof Window              //true
 window.constructor === Window         //true
@@ -138,13 +140,13 @@ window.__proto__ === Window.prototype //true
 </code></pre><p>对象的静态方法和原型方法不同，静态方法一般自行定义(优先级更高)，原型方法来自对象的原型 prototype，供该对象的子对象继承。</p>
 <pre><code>Object.prototype.toString === Object.toString //false
 ({}).toString === Object.prototype.toString   //true
-</code></pre><p>Object的原型部署了toString方法，在其原型对象上调用该方法，始终返回”[object Object]”。换句话讲，Object.prototype.toString方法本不需要传参，传参也被忽视。字符串[object Object]本身没有太大的用处，并且其继承对象可以自定义该方法。</p>
+</code></pre><p>Object 的原型部署了 toString 方法，在其原型对象上调用该方法，始终返回 “[object Object]”。换句话讲，Object.prototype.toString 方法本不需要传参，传参也被忽视。字符串 “[object Object]” 本身没有太大的用处，继承对象可以自定义该方法。</p>
 <pre><code>Object.toString()                
 //&quot;function Object() { [native code] }&quot;
 </code></pre><pre><code>Object.prototype.toString()      //&quot;[object Object]&quot;
 Object.prototype.toString([])    //&quot;[object Object]&quot;
 Object.prototype.toString(true)  //&quot;[object Object]&quot;
-</code></pre><p>window.toString()也不需要传参，传参会被忽视</p>
+</code></pre><p>window.toString() 也不需要传参，传参会被忽视</p>
 <pre><code>window.toString(1)      //&quot;[object Window]&quot;
 toString(1)             //&quot;[object Undefined]&quot;
 window.toString([])     //&quot;[object Window]&quot;
@@ -161,7 +163,7 @@ window.toString.call(1)               //&quot;[object Number]&quot;
 Array.prototype.toString.call([1,2,3])         //&quot;1,2,3&quot;
 
 Array.prototype.toString([1,2,3])              //&quot;&quot;
-</code></pre><p><strong> 同一个方法在不同的方式下（执行上下文，this等不一样）调用，产生的结果可能不一样</strong>。和toString类似，直接给Array.prototype.toString传参返回值都是””</p>
+</code></pre><p><strong> 同一个方法在不同的方式下（执行上下文，this 等不一样）调用，产生的结果可能不一样</strong>。和 toString 类似，直接给 Array.prototype.toString 传参返回值都是””</p>
 <pre><code>Array.prototype.toString()    //&quot;&quot;
 Array.prototype.toString.call(Array.prototype)  //&quot;&quot;
 [1,2,3].toString.call(Array.prototype)  //&quot;&quot;
@@ -173,18 +175,18 @@ Array.prototype.toString.call(Array.prototype,1)  //&quot;&quot;
 Array.prototype.toString([])  //&quot;&quot;
 Array.prototype.toString.call(Array.prototype,[])  //&quot;&quot;
 [1,2,3].toString.call(Array.prototype,[])  //&quot;&quot;
-</code></pre><p>通过call调用，就完全不一样了，数组参数会格式化为字符串：</p>
+</code></pre><p>通过 call 调用，就完全不一样了，数组参数会格式化为字符串：</p>
 <pre><code>Array.prototype.toString.call([1,2,3])  //&quot;1,2,3&quot;
-</code></pre><p>非数组参数返回结果同window.toString.call()</p>
+</code></pre><p>非数组参数返回结果同 window.toString.call()</p>
 <pre><code>Array.prototype.toString.call(1)    //&quot;[object Number]&quot;
 Array.prototype.toString.call({})   //&quot;[object Object]&quot;
-</code></pre><p>再看布尔型构造函数原型方法Boolean.prototype.toString</p>
+</code></pre><p>再看布尔型构造函数原型方法 Boolean.prototype.toString</p>
 <pre><code>true.toString === Boolean.prototype.toString   //true
 true.toString()                                //&quot;true&quot;
 false.toString()                               //&quot;false&quot;
 Boolean.prototype.toString(true)               //&quot;false&quot;
 Boolean.prototype.toString(false)              //&quot;false&quot;
-</code></pre><p>同样，直接给Boolean.prototype.toString传参返回值都是”false”</p>
+</code></pre><p>同样，直接给 Boolean.prototype.toString 传参返回值都是 “false”</p>
 <pre><code>Boolean.prototype.toString([])   
 //&quot;false&quot;
 Boolean.prototype.toString.call(Boolean.prototype,[])  
@@ -207,7 +209,7 @@ Boolean.prototype.toString.call(Boolean.prototype,{})
 //&quot;false&quot;
 true.toString.call(Boolean.prototype,{})  
 //&quot;false&quot;
-</code></pre><p>通过call调用,布尔型参数会格式化为字符串</p>
+</code></pre><p>通过 call 调用,布尔型参数会格式化为字符串</p>
 <pre><code>Boolean.prototype.toString.call(true)   //&quot;true&quot;
 Boolean.prototype.toString.call(false)  //&quot;false&quot;
 </code></pre><p>非布尔型实参会怎样？报错！！（该方法不通用）</p>
@@ -223,7 +225,7 @@ Boolean.prototype.toString.call({})
 Array.prototype                  //[]
 [].__proto__ === []              //false
 // 实际上，实例对象之间都是不相等的
-</code></pre><p>Array的原型属性不等于其原型对象!</p>
+</code></pre><p>Array 的原型属性不等于其原型对象!</p>
 <pre><code>Array.prototype === Array.__proto__    //false
 Array.__proto__ === Function.prototype //true
 </code></pre><p>Funtion的原型属性等于其原型对象!!（Function 构造函数也是其自身的实例）</p>
@@ -236,7 +238,7 @@ Function.constructor === Function
 //true
 Function.prototype === Function.constructor.prototype
 //true
-</code></pre><p>Function构造函数的原型是Object的实例,但是其原型的原型的构造函数就是Object!但是，Function的原型的原型却不是Object的实例！！</p>
+</code></pre><p>Function 构造函数的原型是 Object 的实例，其原型的原型的构造函数就是 Object! 但是，Function 的原型的原型却不是 Object 的实例！！</p>
 <pre><code>Function.__proto__
 //function Empty() {}
 Function.__proto__  instanceof Object
@@ -290,17 +292,17 @@ p.__proto__ === p.constructor.prototype   //true
 <pre><code>function Person(name) {
     this.name = name
 }
-</code></pre><p>下面我们重写Person对象的原型：</p>
+</code></pre><p>下面我们重写 Person 对象的原型：</p>
 <pre><code>Person.prototype = {
     getName: function() {}
 }
 var p = new Person(&#39;jack&#39;);
 p.__proto__ === Person.prototype         //true
 p.__proto__ === p.constructor.prototype  //false 为什么？？
-</code></pre><p>其实也很好理解,p.constructor不再指向Person了</p>
+</code></pre><p>其实也很好理解，p.constructor 不再指向 Person 了</p>
 <pre><code>p.constructor === Person                        //false
 p.constructor === Person.prototype.constructor  //true
-</code></pre><p>目前JS内置的构造函数有12个，全局环境下可以访问的有8个。所有构造函数都继承了Function.prototype的属性及方法，当然了，也包括Function自己和Object。</p>
+</code></pre><p>目前JS内置的构造函数有 12 个，全局环境下可以访问的有8个。所有构造函数都继承了 Function.prototype 的属性及方法，当然了，也包括 Function 自己和 Object。</p>
 <pre><code>Number.__proto__ === Function.prototype  // true
 Boolean.__proto__ === Function.prototype // true
 String.__proto__ === Function.prototype  // true
@@ -310,7 +312,7 @@ Array.__proto__ === Function.prototype   // true
 //function Empty() {}
 Empty                                    
 //ReferenceError: Empty is not defined
-</code></pre><p>以上Empty不是全局构造方法，但是，Number、Function、Array等是全局构造方法</p>
+</code></pre><p>以上 Empty 不是全局构造方法，但是，Number、Function、Array 等是全局构造方法</p>
 <pre><code>Number === window.Number   //true
 </code></pre><p>当然了，“所有构造函数”也包括自定义的构造函数</p>
 <pre><code>var MyArray = function () {};
@@ -326,8 +328,8 @@ Function.constructor.prototype === Function.__proto__
 //true
 </code></pre><p><strong>函数也是一等公民</strong></p>
 <pre><code>Function.prototype.__proto__ === Object.prototype
-</code></pre><p>说明了所有的构造器也是一个普通的对象，继承了Object.prototype所有的方法</p>
-<p>可以先new一个对象，然后修改该对象的prototype属性,例如:</p>
+</code></pre><p>说明了所有的构造器也是一个普通的对象，继承了 Object.prototype 所有的方法</p>
+<p>可以先 new 一个对象，然后修改该对象的 prototype 属性,例如:</p>
 <pre><code>var MyArray = function () {};
 MyArray.prototype                        
 //Object {}
@@ -337,12 +339,12 @@ MyArray.__proto__
 MyArray.__proto__  === Object.__proto__  //true
 MyArray.prototype = new Array();
 MyArray.prototype.constructor = MyArray;
-</code></pre><p>instanceof运算符的实质，检查右边构造函数的prototype属性是否在左边的实例对象的原型链上。只要有一个符合就返回true，否则返回false。</p>
+</code></pre><p>instanceof 运算符的实质，检查右边构造函数的 prototype 属性是否在左边的实例对象的原型链上。只要有一个符合就返回 true，否则返回 false。</p>
 <pre><code>var mine = new MyArray();
 </code></pre><p>于是：</p>
 <pre><code>mine instanceof Array                //true
-</code></pre><p>再回到toString(),以下都很好理解了</p>
-<pre><code>toString([])             //&quot;[object Window]&quot;
+</code></pre><p>再回到 toString(),以下都很好理解了</p>
+<pre><code>toString([])             //&quot;[object Undefined]&quot;
 toString.call(window,[]) //&quot;[object Window]&quot;
 window.toString([])      //&quot;[object Window]&quot;
 window.toString()        //&quot;[object Window]&quot;
@@ -356,14 +358,13 @@ true.toString()     //&quot;true&quot;
 (function(){}).toString()   //&quot;function (){}&quot;
 </code></pre><pre><code>toString.call(1) //&quot;[object Number]&quot;
 (1).toString()   //&quot;1&quot;
-</code></pre><pre><code>toString.call(null)//&quot;[object Window]&quot;
+</code></pre><pre><code>toString.call(null) //&quot;[object Null]&quot;
 null.toString()
 //TypeError: Cannot read property &#39;toString&#39; of null
-</code></pre><pre><code>toString.call(undefined) //&quot;[object Window]&quot;
+</code></pre><pre><code>toString.call(undefined) //&quot;[object Undefined]&quot;
 undefined.toString()     
 //TypeError: Cannot read property &#39;toString&#39; of undefined
-</code></pre><p>call方法的第一个参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象window。</p>
-
+</code></pre>
       
     </div><!-- .entry-content -->
 

@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/15/chrome-extension/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。">
-<meta property="og:updated_time" content="2017-03-10T08:18:51.399Z">
+<meta property="og:updated_time" content="2017-06-07T03:51:37.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chrome 扩展开发">
 <meta name="twitter:description" content="浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/15/chrome-extension/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="cj370m7wq000gr8bal1pc2oqw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="cj3mgk0uj0008oobai80fi50u" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -249,7 +249,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
 });
 </code></pre>
 <p>getCurrentTabUrl 方法获取当前 tab 标签的 url，获取到 url 后触发 callback 回调方法；getImageUrl 方法获取图片，并填充 popup.html 主体内容。该方法第一个参数为查询关键字，第二个参数是成功取回图片后的回调方法，第三个参数是图片请求失败的错误处理方法。</p>
-<h3 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h3><p>安装该插件。以上步骤操作完毕后，文件夹 getPic 内应该有 manifest.json,icon.png, popup.html, popup.js 等4个文件。下面我们需要把文件夹 getPic 打包成 .crx 文件。打开 chrome，更多工具-&gt;扩展程序(或者输入地址：chrome://extensions/)打开 chrome 扩展页面。勾选页面上方的“开发者模式”。点击“打包扩展程序…”按钮，在弹窗里选中文件夹 getPic，点击“打包扩展程序”。打包完毕后，我们可以在 getPic 的父级文件夹里找到打包好的 crx 文件。然后把这个 crx 文件拖拽到刚才打开的 chrome 扩展页面即可安装。如果不能安装该 crx 文件，可以点击“加载已解压的扩展程序…”直接选择文件夹 getPic。</p>
+<h3 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h3><p>安装该插件。以上步骤操作完毕后，文件夹 getPic 内应该有 manifest.json、icon.png、popup.html、popup.js 等4个文件。下面我们需要把文件夹 getPic 打包成 .crx 文件。打开 chrome，更多工具-&gt;扩展程序(或者输入地址：chrome://extensions/)打开 chrome 扩展页面。勾选页面上方的“开发者模式”。点击“打包扩展程序…”按钮，在弹窗里选中文件夹 getPic，点击“打包扩展程序”。打包完毕后，我们可以在 getPic 的父级文件夹里找到打包好的 crx 文件。然后把这个 crx 文件拖拽到刚才打开的 chrome 扩展页面即可安装。如果不能安装该 crx 文件，可以点击“加载已解压的扩展程序…”直接选择文件夹 getPic。</p>
 <p>注：以上谷歌接口可能已经废弃，所以我们看不到谷歌返回的图片。但是以上开发流程是值得参考的。以后，还会有更详细的实例介绍。</p>
 <p>参考：<br>[1] <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">https://developer.chrome.com/extensions/getstarted</a><br>[2] <a href="http://open.chrome.360.cn/extension_dev/overview.html" target="_blank" rel="external">http://open.chrome.360.cn/extension_dev/overview.html</a><br>[3] <a href="http://www.cnblogs.com/guogangj/p/3235703.html" target="_blank" rel="external">http://www.cnblogs.com/guogangj/p/3235703.html</a></p>
 
