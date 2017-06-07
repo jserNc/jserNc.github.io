@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 数据类型 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 数据类型">
+<meta property="og:url" content="http://nanchao.win/2017/04/07/javascript-variable/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+<meta property="og:updated_time" content="2017-04-07T08:04:13.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 数据类型">
+<meta name="twitter:description" content="JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-javascript-variable" class="post-javascript-variable post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 数据类型
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/04/07/javascript-variable/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/javascript-variable/" data-id="cj17jpkwz0012wwbatx30gqv1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 数据类型共有 6 种：数值（number）、字符串（string）、布尔值（boolean）、null、undefined、对象（object）。对象又可以分为 3 个子类型：狭义的对象（object）、数组（array）、函数（function）。</p>
+<a id="more"></a>
+<p>按照数据存储方式，JavaScript 数据可以分为两大类：</p>
+<blockquote>
+<p>（1）<strong>基本类型：</strong> number、string、boolean、null、undefined<br>（2）<strong>引用类型：</strong> object</p>
+</blockquote>
+<p>js 标识符是严格区分大小写的，所以必须注意 null、undefined 等关键词全为小写字母构成。</p>
+<p><strong>那么，基本类型数据怎么能调用方法呢？</strong></p>
+<p>5 种基本类型，除了 null 和 undefined 以外，其他 3 种都有与之对应的特殊的引用类型——包装类型。当代码被解释执行时，底层会对基本类型做一个类型转换，转换成相应的引用类型，然后就可以调用相应引用类型有权访问的方法（或属性）了。</p>
+<pre><code>&quot;enjoy javascript&quot;.length;  // 16
+&quot;enjoy javascript&quot;.toUpperCase();  // &quot;ENJOY JAVASCRIPT&quot;
+
+// 相当于：
+var oStringObject = new String(&quot;enjoy javascript&quot;);
+oStringObject.length  // 16
+oStringObject.toUpperCase();  // &quot;ENJOY JAVASCRIPT&quot;
+</code></pre><p><strong>JavaScript 有 3 种方法，可以确定一个值到底什么类型：</strong></p>
+<blockquote>
+<p>① typeof 运算符<br>② instanceof 运算符<br>③ Object.prototype.toString 方法</p>
+</blockquote>
+<p><strong>① typeof 运算符</strong></p>
+<p>数值、字符串、布尔值分别返回 “number”、”string”、”boolean”</p>
+<pre><code>typeof 123         // &quot;number&quot;
+typeof &#39;123&#39;       // &quot;string&quot;
+typeof false       // &quot;boolean&quot;
+</code></pre><p>函数返回 “function”</p>
+<pre><code>function f() {}
+typeof f           // &quot;function&quot;
+</code></pre><p>undefined 返回 “undefined”</p>
+<pre><code>typeof undefined   // &quot;undefined&quot;
+</code></pre><p>其余都返回返回 “object”</p>
+<pre><code>typeof window      // &quot;object&quot;
+typeof {}          // &quot;object&quot;
+typeof []          // &quot;object&quot;
+typeof null        // &quot;object&quot;
+</code></pre><p><strong>② instanceof 运算符</strong></p>
+<p>instanceof 运算的实质是：检查运算符右边的构造函数的 prototype 属性是否在左边的实例对象的原型链上。</p>
+<p>那么，对以下结果我们应该也不意外：</p>
+<pre><code>var arr = [];
+arr instanceof Array;        //true
+arr instanceof Object;        //true
+
+arr.__proto__ === Array.prototype  //true
+Array.prototype.__proto__ === Object.prototype //true
+</code></pre><p>所有对象（除了null）的原型链的顶层对象就是 Object.prototype，所以，任何对象对 Object 进行 instanceof 运算都会返回 true。</p>
+<p><strong>③ Object.prototype.toString 方法</strong></p>
+<p>该方法返回值为 “[object 参数的构造函数]”</p>
+<pre><code>Object.prototype.toString.call(2) 
+// &quot;[object Number]&quot;
+
+Object.prototype.toString.call(&#39;&#39;) 
+// &quot;[object String]&quot;
+
+Object.prototype.toString.call(true) 
+// &quot;[object Boolean]&quot;
+
+Object.prototype.toString.call(undefined) 
+// &quot;[object Undefined]&quot;
+
+Object.prototype.toString.call(null) 
+// &quot;[object Null]&quot;
+
+Object.prototype.toString.call(Math) 
+// &quot;[object Math]&quot;
+
+Object.prototype.toString.call({}) 
+// &quot;[object Object]&quot;
+
+Object.prototype.toString.call([]) 
+// &quot;[object Array]&quot;
+</code></pre><p>于是，可以写一个准确的判断数据类型的方法：</p>
+<pre><code>var type = function (o){
+    var s = Object.prototype.toString.call(o);
+    return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+};
+type([]); // &quot;array&quot;
+</code></pre><p><strong>null 和 undefined 区别：</strong></p>
+<p>将一个变量赋值为 undefined 或 null，语法效果几乎没区别。</p>
+<pre><code>// 分别与自身严格相等
+undefined === undefined  // true
+null === null  // true
+
+// 相互之间相等，严格不相等
+undefined == null  // true
+undefined !== null // true
+undefined === null // false
+</code></pre><p>null 是一个表示“无”的对象，转为数值时为 0；<br>undefined 是一个表示“无”的原始值，转为数值时为 NaN。</p>
+<pre><code>Number(null)   // 0
+Number(undefined)   // NaN
+</code></pre><p>null 的特殊之处在于，JavaScript 把它包含在对象类型（object）之中。</p>
+<pre><code>typeof null   // &quot;object&quot;
+typeof undefined   // &quot;undefined&quot;
+</code></pre><p>这里还有一点需要注意：</p>
+<pre><code>undefined == true     // false
+undefined == false    // false
+
+null == true     // false
+null == false    // false
+</code></pre><p>undefined 和 null 既不等于 true 也不等于 false，奇怪吗？</p>
+<p>我们知道布尔值强制转换有个转换规则，以下 5 个值转换为 false，其他的值全部转为 true：</p>
+<pre><code>undefined  
+null  
+0  
+NaN  
+&#39;&#39;(空字符串)
+</code></pre><p>相等运算符 == 的实质是：比较相同类型的数据时，与【严格相等运算符】完全一样。比较不同类型的数据时，先将数据进行【类型转换】，然后再用严格相等运算符比较。</p>
+<p>严格相等运算符 === 实质是：如果两个值的类型不同，直接返回 false；同一类型的原始类型的值（数值、字符串、布尔值）比较时，值相同就返回 true，值不同就返回 false；两个复合类型（对象、数组、函数）的数据比较时，不是比较它们的值是否相等，而是比较它们是否指向同一个内存地址，两个对象对象引用同一个对象时，就返回 true。</p>
+<p>既然相等运算符 == 会进行“类型转换”，根据布尔值强制转换规则，undefined == false 不应该返回 true 吗？并不是。原来这里的“类型转换”并不同于布尔值转换规则：</p>
+<p><strong>这里的“类型转换”将 == 左右两边的运算子都转换为数值，然后再进行比较。也就是说，不管 == 两边的值是什么类型，最后统统转换为数值，而不会进行其他类型（如转为布尔型）的转换。</strong></p>
+<p>有了以上理论是不是可以解释上面的 undefined 和 null 既不等于 true 也不等于 false 的现象了？</p>
+<pre><code>Number(undefined);
+// NaN
+
+Number(true);
+// 1
+
+Number(false);
+// 0
+
+NaN == 1;   // false
+NaN == 0;   // false
+
+// 事实上 NaN 跟自身都不相等，这也是 js 语言中唯一不等于自身的值
+NaN === NaN   // false
+NaN == NaN    // false
+</code></pre><p>这种分析方式也许是有理的，但是，我们把再来把 null 与 false 比较就知道有问题了： </p>
+<pre><code>Number(null);
+// 0
+
+Number(false);
+// 0
+
+null == false  // false，为什么?
+</code></pre><p>其实，以上关于相等运算符 == 的比较规则在比较其他值的时候都适用，唯独不适用于 null。那我们把 null 和 undefined 单独分出来，记住一个事实，<strong>null 和 undefined 之间相等，它们与其他值比较都不相等。</strong></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/types.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/types.html</a><br>[2] <a href="http://www.cnblogs.com/sharpxiajun/p/4133462.html" target="_blank" rel="external">http://www.cnblogs.com/sharpxiajun/p/4133462.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/04/07/javascript-variable/">
+    <time datetime="2017-04-07T01:25:30.000Z" class="entry-date">
+        2017-04-07
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/04/06/CSRF/" rel="next"><span class="meta-nav">下一篇：</span>CSRF 攻击原理 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/07/javascript-variable/">JavaScript 数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/05/localStorage01/">浏览器本地存储（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/31/localStorage/">浏览器本地存储（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/repaint-and-reflow/">重绘和回流（repaint &amp; reflow）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/28/cache/">浏览器缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/click-me-to-hide/">关于 js 脚本位置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/14/triangle/">css 三角形 扇形</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/13/jsfuck03/">jsfuck 6 个字符写 js 代码（四）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 15px;">grammar</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 20px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
