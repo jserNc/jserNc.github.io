@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2017-06-07T03:51:37.489Z">
+<meta property="og:updated_time" content="2017-06-09T01:22:10.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 执行上下文（译）">
 <meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
@@ -124,7 +124,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj3mgk0ws000qooba59xodduy" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj3p69cfi000t94ba4ecl1zag" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -309,80 +309,6 @@ foo(22);
 <p>因为在上下文的建立阶段，<strong>先是处理 arguments, 参数，接着是函数的声明，最后是变量的声明</strong>。那么，发现 foo 函数的声明后，就会在 variableObject 下面建立一个 foo 属性，其值是一个指向函数的引用。当处理变量声明的时候，发现有 var foo 的声明，但是 variableObject 已经具有了 foo 属性，所以直接跳过。当进入代码执行阶段的时候，就可以通过访问到 foo 属性了，因为它已经就存在，并且是一个函数引用。</p>
 <p><strong> 2.为什么 bar 类型是 undefined？</strong></p>
 <p>因为 bar 是变量的声明，在建立阶段的时候，被赋予的默认的值为 undefined。由于它只会在后续代码执行过程中才会被赋予具体的值，所以，当调用 typeof(bar) 的时候输出的值为 undefined。</p>
-<p><strong>函数声明和函数表达式，都是定义函数的方式，它们的差异体现如下：</strong></p>
-<pre><code>// 代码段 1
-f1();
-// function f1
-function f1(){
-    console.log(&#39;function f1&#39;);
-}
-
-// 代码段 2
-f2();
-// Uncaught TypeError: f2 is not a function
-var f2 = function(){
-    console.log(&#39;function f2&#39;);
-}
-</code></pre><p>函数声明会提升到代码头部，所以，函数 f1 可以顺利执行；而变量 f2 的值开始只是 undefined，只有执行完变量 f2 的赋值语句，它才是指向一个函数，所以先于它的赋值语句执行 f2() 必然会报错。</p>
-<p>如果用函数声明和函数表达式方式声明同名函数会怎样呢？</p>
-<pre><code>// 代码段 1
-var f = function(){
-    console.log(&#39;函数表达式&#39;);
-}
-function f(){
-    console.log(&#39;函数声明&#39;);
-}
-f();
-// 函数表达式
-
-// 代码段 2
-function f(){
-    console.log(&#39;函数声明&#39;);
-}
-var f = function(){
-    console.log(&#39;函数表达式&#39;);
-}
-f();
-// 函数表达式
-</code></pre><p>我们看到，不管是函数声明在先还是函数表达式在先，最后函数都是采用函数表达式的定义。这样的结果并不应该意外，这和上文变量提到的“函数声明的优先级高于变量声明”，但在“代码执行阶段”，变量属性值是可以被覆盖的道理是一样的。</p>
-<p>if、try 等代码块中的函数声明和函数表达式也会不一样：</p>
-<pre><code>// 代码段 1
-if (false){
-    function f(){
-        console.log(&#39;函数声明&#39;)
-    }
-}
-f(); 
-
-// 代码段 2
-if (false){
-    var f = function(){
-        console.log(&#39;函数表达式&#39;);
-    }
-}
-f();
-</code></pre><p>以上代码执行结果就不写了，对于新版的 chrome，以上两种写法都会报错。但是，在 ie 和其他较旧的浏览器下，代码段 1 中的函数 f 是可以正常执行的。这是因为，JavaScript 是不存在块级作用域，这种 if 语句包含的变量（var）和函数声明（function）也是会提升到代码头部的。</p>
-<p>最后，注意一下变量声明语句的方式：</p>
-<pre><code>// 片段 1
-var result = function(){
-    return 2 + 2;
-}
-
-// 片段 2
-var result = function(){
-    return 2 + 2;
-}();
-
-// 片段 3
-var result = (function(){
-    return 2 + 2;
-})();
-
-// 片段 4
-var result = (function(){
-    return 2 + 2;
-}());
-</code></pre><p>其中片段 1 变量 result 是一个函数，片段 2/3/4 变量 result 是一个数值变量。这些细微差别得注意。</p>
 <p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br>[3] <a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>
 
       
@@ -459,6 +385,10 @@ var result = (function(){
       <ul>
         
           <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
@@ -492,10 +422,6 @@ var result = (function(){
         
           <li>
             <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
           </li>
         
       </ul>
