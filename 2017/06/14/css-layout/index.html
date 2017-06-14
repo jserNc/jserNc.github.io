@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/14/css-layout/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。">
-<meta property="og:updated_time" content="2017-06-14T08:41:19.538Z">
+<meta property="og:updated_time" content="2017-06-14T09:02:02.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css 多列布局">
 <meta name="twitter:description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/06/14/css-layout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/14/css-layout/" data-id="cj3wgwghd000oysba8o49bxpd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/14/css-layout/" data-id="cj3wrsh3e000p2cbahneywmjs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -271,7 +271,9 @@
     width:150px;
     margin-left:-150px;
 }
-</code></pre><p>双飞翼布局和圣杯布局很相似。只不过双飞翼在主栏外套了一层 div，该 div 两边被两侧栏覆盖后，可以设置主栏左右外边距使得主栏不被覆盖就行了。所以不必再给侧栏设置相对定位偏移位置。</p>
+</code></pre><p>主栏外套了一层 div，该 div 两边被两侧栏覆盖后，可以设置主栏左右外边距使得主栏不被覆盖就行了。所以不必再给侧栏设置相对定位偏移位置。</p>
+<p>圣杯布局和双飞翼布局解决的问题是一样的，就是两边定宽，中间自适应的三栏布局，中间栏要在放在文档流前面以优先渲染。</p>
+<p>圣杯布局和双飞翼布局解决问题的方案在前一半是相同的，也就是三栏全部左 float，在左右两栏分别加上负 margin 让其跟中间栏 div 并排，以形成三栏布局。不同点在于解决”中间栏 div 内容不被遮挡“问题的思路不一样：圣杯布局，为了中间 div 内容不被遮挡，将外层父元素设置了 padding-left 和 padding-right ，并将左右两个 div 用相对布局 position: relative 并分别配合 right 和 left 属性，以便左右两栏 div 移动后不遮挡中间 div。双飞翼布局，为了中间 div 内容不被遮挡，直接在中间 div 内部创建子div 用于放置内容，在该子 div 里用 margin-left 和 margin-right 为左右两栏 div 留出位置。</p>
 <p><strong> 5.flex 布局</strong></p>
 <div style="display:flex;margin-bottom:20px;"><aside style="background-color:#ff0;height:100px;width:200px;
 ">左侧边栏宽度固定</aside><div style="flex:1;height:100px;background-color:#0ff;
@@ -324,7 +326,7 @@
     height:100px;
     background-color:#0ff;
 }
-</code></pre><p>参考：<br>[1] <a href="http://web.jobbole.com/90844/" target="_blank" rel="external">http://web.jobbole.com/90844/</a><br>[2] <a href="http://zh.learnlayout.com/" target="_blank" rel="external">http://zh.learnlayout.com/</a><br>[3] <a href="http://www.cnblogs.com/imwtr/p/4441741.html" target="_blank" rel="external">http://www.cnblogs.com/imwtr/p/4441741.html</a></p>
+</code></pre><p>参考：<br>[1] <a href="http://web.jobbole.com/90844/" target="_blank" rel="external">http://web.jobbole.com/90844/</a><br>[2] <a href="http://zh.learnlayout.com/" target="_blank" rel="external">http://zh.learnlayout.com/</a><br>[3] <a href="http://www.cnblogs.com/imwtr/p/4441741.html" target="_blank" rel="external">http://www.cnblogs.com/imwtr/p/4441741.html</a><br>[4] <a href="https://www.zhihu.com/question/21504052" target="_blank" rel="external">https://www.zhihu.com/question/21504052</a></p>
 
       
     </div><!-- .entry-content -->
