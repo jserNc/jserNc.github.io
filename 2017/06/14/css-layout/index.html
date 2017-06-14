@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>css 多列布局 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css 多列布局">
+<meta property="og:url" content="http://nanchao.win/2017/06/14/css-layout/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。">
+<meta property="og:updated_time" content="2017-06-14T08:41:19.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css 多列布局">
+<meta name="twitter:description" content="二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-css-layout" class="post-css-layout post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      css 多列布局
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/06/14/css-layout/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/14/css-layout/" data-id="cj3wgwghd000oysba8o49bxpd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。</p>
+<a id="more"></a>
+<p><strong> 1.左栏左浮动 右栏右浮动 主栏设置 margin </strong></p>
+<div style="margin-bottom:20px;"><div style="float:left;height:100px;width:120px;background-color:#ff0;">左侧栏固定宽度 120px，左浮动。</div><div style="float:right;height:100px;width:150px;background-color:#f0f;">右侧栏固定宽度 150px，右浮动。</div><div style="margin-left:120px;margin-right:150px;height:100px;background-color:#0ff;">主栏宽度自适应。margin-left 为左栏宽度，margin-right 为右栏宽度。</div></div>
+
+<p>dom 结构及样式：</p>
+<pre><code>// dom:
+&lt;div id=&quot;content&quot;&gt;
+    &lt;div class=&quot;sub&quot;&gt;左侧栏固定宽度&lt;/div&gt;
+    &lt;div class=&quot;extra&quot;&gt;右侧栏固定宽度&lt;/div&gt;
+    &lt;div class=&quot;main&quot;&gt;主栏宽度自适应&lt;/div&gt;
+&lt;/div&gt;
+
+// css:
+.sub {
+    float:left;
+    width:120px;
+    height:100px;
+    background-color:#ff0;
+}
+.extra {
+    float:right;
+    width:150px;
+    height:100px;
+    background-color:#f0f;
+}
+.main {
+    height:100px;
+    background-color:#0ff;
+    margin-left:120px;
+    margin-right:150px;
+}
+</code></pre><p>注意 dom 结构顺序，先写两边侧栏，再写主栏。如果主栏写在前面，侧栏会出现在主栏下一行，这不是我们想要的。这样的缺点是渲染的时候先渲染两边侧栏，而不是主栏。</p>
+<p><strong> 2.两个侧栏绝对定位 主栏设置 margin </strong></p>
+<div style="position:relative;margin-bottom:20px;"><div style="position:absolute;left:0;top:0;height:100px;width:120px;background-color:#ff0;">左侧栏固定宽度 120px，绝对定位，left、top 均为 0。</div><div style="margin-left:120px;margin-right:150px;height:100px;background-color:#0ff;">主栏宽度自适应。margin-left 为左栏宽度，margin-right 为右栏宽度。</div><div style="position:absolute;right:0;top:0;height:100px;width:150px;background-color:#f0f;">左侧栏固定宽度 150px，绝对定位，right、top 均为 0。</div></div>
+
+<p>dom 结构及样式：</p>
+<pre><code>// dom:
+&lt;div id=&quot;content&quot;&gt;
+    &lt;div class=&quot;sub&quot;&gt;左侧栏固定宽度&lt;/div&gt;
+    &lt;div class=&quot;main&quot;&gt;主栏宽度自适应&lt;/div&gt;
+    &lt;div class=&quot;extra&quot;&gt;右侧栏固定宽度&lt;/div&gt;
+&lt;/div&gt;
+
+// css:
+.sub,.extra {
+    position:absolute;
+    top:0;
+}
+.main {
+    height:100px;
+    background-color:#0ff;
+    margin-left:120px;
+    margin-right:150px;
+}
+.sub {
+    left:0;
+    width:120px;
+    height:100px;
+    background-color:#ff0;
+}
+.extra {
+    right:0;
+    width:150px;
+    height:100px;
+    background-color:#f0f;
+}
+#content {
+    position:relative;
+}
+</code></pre><p><strong> 3.圣杯布局<br>（三栏都左浮动，两侧栏相对定位，左栏左移，右栏右移。两侧栏都负左边距，外层设置左右内边距）</strong></p>
+<div class="clear" style="padding:0 150px 0 120px;margin-bottom:20px;"><div style="float:left;background-color:#0ff;height:100px;width:100%;min-width:200px;">主栏宽 100%，左浮动。</div><div style="float:left;position:relative;left:-120px;background-color:#ff0;height:100px;width:120px;margin-left:-100%;">宽度 120px，左浮动；相对定位，左移自身宽度；负左边距 100%。</div><div style="float:left;position:relative;right:-150px;background-color:#f0f;height:100px;width:150px;margin-left:-150px;">宽度 150px，左浮动；相对定位，右移自身宽度；负左边距自身宽度。</div></div>
+
+<p>dom 结构及样式：</p>
+<pre><code>// dom:
+&lt;div id=&quot;bd&quot;&gt;
+    &lt;div class=&quot;main&quot;&gt;主栏宽 100%&lt;/div&gt;
+    &lt;div class=&quot;sub&quot;&gt;左栏定宽&lt;/div&gt;
+    &lt;div class=&quot;extra&quot;&gt;右栏定宽&lt;/div&gt;
+&lt;/div&gt;
+
+// css:
+.main,.sub,.extra {
+    float:left;
+}
+.main {
+    background-color:#0ff;
+    height:100px;
+    width:100%;
+    min-width:200px;
+}
+.sub {
+    position:relative;
+    left:-120px;
+    background-color:#ff0;
+    height:100px;
+    width:120px;
+    margin-left:-100%;
+}
+.extra {
+    position:relative;
+    right:-150px;
+    background-color:#f0f;
+    height:100px;
+    width:150px;
+    margin-left:-150px;
+}
+
+#bd {
+    padding:0 150px 0 120px;
+}
+</code></pre><p>注意，以上主侧栏的 dom 顺序不能改变。</p>
+<p><strong>主要思路为：</strong>三栏都左浮动，主栏在最前，并且宽度 100%，所以，两个侧栏都会被挤到下一行；设置两侧栏负左边距可以将两个侧栏变成和主栏同一行，要想两侧栏分别与主栏左右两侧对齐，故左栏负左边距为 100%，右栏负左边距为自身宽度；此时，主栏左右两侧分别被左栏和右栏覆盖，要想主栏不被遮挡，将两侧栏设置相对定位，左栏左移自身宽度，右栏右移自身宽度，两侧栏向两边“扩散”；这时候，整个父容器宽度会被撑开了，为了使总宽度恢复 100%，需要给父容器设置左右内边距，使得两侧栏向中间“靠拢”。</p>
+<p><strong> 4.双飞翼布局<br>（三栏都左浮动，主栏由外层宽度为 100% 元素包裹起来；两侧栏都负左边距，主栏设置左右外边距将侧栏撑开）</strong></p>
+<div style="float:left;width:100%;margin-bottom:20px;"><div style="background-color:#0ff;height:100px;margin:0 150px 0 120px;">由外层宽度为 100% 左浮动元素包裹起来,主栏设置左右外边距将两侧栏撑</div></div><div style="float:left;background-color:#ff0;height:100px;width:120px;margin-left:-100%;">左浮动，负左边距 100%</div><div style="float:left;background-color:#f0f;height:100px;width:150px;margin-left:-150px;">左浮动，负左边距自身宽度</div>
+
+<p>dom 结构及样式：</p>
+<pre><code>// dom:
+&lt;div class=&quot;main-wrap&quot;&gt;
+    &lt;div class=&quot;main&quot;&gt;主栏&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sub&quot;&gt;左栏&lt;/div&gt;
+&lt;div class=&quot;extra&quot;&gt;右栏&lt;/div&gt;
+
+// css:
+.main-wrap{
+    float:left;
+    width:100%;
+}
+.main {
+    background-color:#0ff;
+    height:100px;
+    margin:0 150px 0 120px;
+}
+.sub {
+    float:left;
+    background-color:#ff0;
+    height:100px;
+    width:120px;
+    margin-left:-100%;
+}
+.extra {
+    float:left;
+    background-color:#f0f;
+    height:100px;
+    width:150px;
+    margin-left:-150px;
+}
+</code></pre><p>双飞翼布局和圣杯布局很相似。只不过双飞翼在主栏外套了一层 div，该 div 两边被两侧栏覆盖后，可以设置主栏左右外边距使得主栏不被覆盖就行了。所以不必再给侧栏设置相对定位偏移位置。</p>
+<p><strong> 5.flex 布局</strong></p>
+<div style="display:flex;margin-bottom:20px;"><aside style="background-color:#ff0;height:100px;width:200px;
+">左侧边栏宽度固定</aside><div style="flex:1;height:100px;background-color:#0ff;
+">主内容栏宽度自适应</div><aside style="background-color:#ff0;height:100px;width:200px;
+">右侧边栏宽度固定</aside></div>
+
+<div style="display:flex;margin-bottom:20px;"><aside style="background-color:#ff0;height:100px;width:200px;
+">第一个侧边栏宽度固定</aside><aside style="background-color:#ff0;height:100px;width:200px;
+">第二个侧边栏宽度固定</aside><div style="flex:1;height:100px;background-color:#0ff;
+">主内容栏宽度自适应</div></div>
+
+<div style="display:flex;margin-bottom:20px;"><div style="flex:1;height:100px;background-color:#0ff;
+">主内容栏宽度自适应</div><aside style="background-color:#ff0;height:100px;width:200px;
+">第一个侧边栏宽度固定</aside><aside style="background-color:#ff0;height:100px;width:200px;
+">第二个侧边栏宽度固定</aside></div>
+
+<p>dom 结构及样式：</p>
+<pre><code>// dom:
+&lt;div class=&quot;layout&quot;&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;左侧边栏宽度固定&lt;/aside&gt;
+    &lt;div class=&quot;layout__main&quot;&gt;主内容栏宽度自适应&lt;/div&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;右侧边栏宽度固定&lt;/aside&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&quot;layout&quot;&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;第1个侧边栏宽度固定&lt;/aside&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;第2个侧边栏宽度固定&lt;/aside&gt;
+    &lt;div class=&quot;layout__main&quot;&gt;主内容栏宽度自适应&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&quot;layout&quot;&gt;
+    &lt;div class=&quot;layout__main&quot;&gt;主内容栏宽度自适应&lt;/div&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;第1个侧边栏宽度固定&lt;/aside&gt;
+    &lt;aside class=&quot;layout__aside&quot;&gt;第2个侧边栏宽度固定&lt;/aside&gt;
+&lt;/div&gt;
+
+// css:
+.layout {
+    display:flex;
+}
+.layout__aside {
+    background-color:#ff0;
+    height:100px;
+    width:200px;
+}
+.layout__main {
+    flex:1;
+    height:100px;
+    background-color:#0ff;
+}
+</code></pre><p>参考：<br>[1] <a href="http://web.jobbole.com/90844/" target="_blank" rel="external">http://web.jobbole.com/90844/</a><br>[2] <a href="http://zh.learnlayout.com/" target="_blank" rel="external">http://zh.learnlayout.com/</a><br>[3] <a href="http://www.cnblogs.com/imwtr/p/4441741.html" target="_blank" rel="external">http://www.cnblogs.com/imwtr/p/4441741.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/06/14/css-layout/">
+    <time datetime="2017-06-14T03:58:55.000Z" class="entry-date">
+        2017-06-14
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/06/09/function/" rel="next"><span class="meta-nav">下一篇：</span>JavaScript 函数 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/variable/">JavaScript 变量</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 12px;">css</a> <a href="/tags/grammar/" style="font-size: 14px;">grammar</a> <a href="/tags/js/" style="font-size: 18px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 16px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
