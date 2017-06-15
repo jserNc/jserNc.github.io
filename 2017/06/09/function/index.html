@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/09/function/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
-<meta property="og:updated_time" content="2017-06-09T03:40:18.335Z">
+<meta property="og:updated_time" content="2017-06-15T01:07:07.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 函数">
 <meta name="twitter:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/06/09/function/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/09/function/" data-id="cj3wrsh4400112cba07tx087p" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/09/function/" data-id="cj3xq885i000oawbajxetejhu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -132,7 +132,7 @@
 console.log(typeof f1); // function
 console.log(typeof f2); // undefined
 </code></pre><p>对以上代码执行结果有没有感到意外呢？<strong>其实，第一种方式就是【function 命令】定义函数；第二种方式是【函数表达式】，函数表达式中关键词 function 后的函数名只在函数内部有效，函数外无效。</strong></p>
-<p>注意：【function 命令】定义函数语句后面不能跟分号（;），函数表达式后最好跟分号（；）。</p>
+<p>注意：【function 命令】定义函数语句后面不能跟分号（;），函数表达式后最好跟分号（;）。</p>
 <p>一般情况下，我们以为的函数表达式都长这样：</p>
 <pre><code>var f = function() {};
 </code></pre><p>实际上，<strong>只要 function 关键词不在行首，就是函数表达式！</strong>这也是理解 JavaScript 中【立即调用函数】的关键。我们知道，在 JavaScript 中，() 也是一种运算符，跟在函数名后面表示调用该函数，如 f() 表示执行 f 函数。【立即调用函数】实质定义一个函数后，立即调用这个函数。很自然，我们会想到这么写：</p>
