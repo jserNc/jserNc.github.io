@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的经验。本文对这个项目做一个梳理，为以后的新项目开篇提供一个参考方案。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>h5 项目脚手架 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的经验。本文对这个项目做一个梳理，为以后的新项目开篇提供一个参考方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5 项目脚手架">
+<meta property="og:url" content="http://nanchao.win/2017/06/21/h5-boilerplate/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的经验。本文对这个项目做一个梳理，为以后的新项目开篇提供一个参考方案。">
+<meta property="og:updated_time" content="2017-06-22T02:17:30.445Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="h5 项目脚手架">
+<meta name="twitter:description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的经验。本文对这个项目做一个梳理，为以后的新项目开篇提供一个参考方案。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-h5-boilerplate" class="post-h5-boilerplate post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      h5 项目脚手架
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/06/21/h5-boilerplate/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/21/h5-boilerplate/" data-id="cj46dhk1g0013cgbaxc30menj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>开源项目 <a href="https://github.com/h5bp/html5-boilerplate" target="_blank" rel="external">HTML5 Boilerplate</a> 作为流行的前端项目模板，包含了百来位开发者的经验。本文对这个项目做一个梳理，为以后的新项目开篇提供一个参考方案。</p>
+<a id="more"></a>
+<p>首先看一下项目结构：</p>
+<pre><code>├── css
+│   ├── main.css
+│   └── normalize.css
+├── doc
+├── img
+├── js
+│   ├── main.js
+│   ├── plugins.js
+│   └── vendor
+│       ├── jquery.min.js
+│       └── modernizr.min.js
+├── .htaccess
+├── 404.html
+├── index.html
+├── humans.txt
+├── robots.txt
+├── crossdomain.xml
+├── favicon.ico
+└── [apple-touch-icons]
+</code></pre><p><strong>首先 index.html:</strong></p>
+<p><strong>① ie 条件注释：</strong></p>
+<pre><code>&lt;!--[if IE 8]&gt; &lt;html class=&quot;no-js lt-ie9&quot;&gt; &lt;![endif]--&gt;
+</code></pre><p>文档开头一系列的 ie 条件注释，针对不同版本的 ie 浏览器给 html 标签标记不同的 class。这样做的好处是：可以将 class 作为全局条件来兼容不同的浏览器；避免了 ie6 条件注释引起的高版本 ie 文件阻塞问题；与 Modernizr 等特征检测类库使用相同的 class，具备通用性。</p>
+<p>“no-js” class （表示禁用了 js）是需要与 Modernizr 等特征检测类库配合使用的，如果你不想在项目中引入Modernizr，需要在 head 部分加入脚本使 “no-js” class 变为 “js” class。</p>
+<pre><code>&lt;script&gt;
+(function(H){
+    H.className = H.className.replace(/\bno-js\b/,&#39;js&#39;);
+})(document.documentElement);
+&lt;/script&gt;
+</code></pre><p><strong>② meta、title 标签顺序有讲究</strong></p>
+<p>为了避免 ie 中潜在的编码相关的安全问题，meta charset 字符集声明应对尽量提前，保证其在最开始的 1024 个字节里；meta charset 还应该在 title 标签之前，以防止潜在的 XSS 攻击。兼容模式的 meta 标签需要在除 title 和 meta 之外的所有元素之前；</p>
+<p>模板里的代码顺序是：</p>
+<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot;content=&quot;IE=edge,chrome=1&quot;&gt;
+&lt;title&gt;&lt;/title&gt;
+</code></pre><p>这里的 X-UA-Compatible 属性，确保有多个渲染引擎的 ie 浏览器使用最新的版本渲染页面，可以提升用户体验。</p>
+<p><strong>③ Favicons 和 Touch Icons</strong></p>
+<p>快捷方式图标需要放在项目根目录下。如果在某个子目录中，需要在 head 头部中用 link 标签引用。</p>
+<p><strong>④ Modernizr</strong></p>
+<p>Modernizr 是一个浏览器特性检测的 js 工具库，它可以根据特性检测结果给 html 标签加上 class 属性。这使得所有浏览器可以支持 h5 元素。</p>
+<p>由于 js 脚本文本会阻塞页面渲染，一般会将 js 脚本请求放在页面底部。但是 Modernizr.js 是个例外，它会在页面开始渲染之前同步加载。因为这个脚本需要做浏览器特性检测，并某些不支持新的 h5 元素的浏览器做兼容处理。 </p>
+<p><strong>④ ie6 等浏览器升级提示</strong></p>
+<p>如果项目需要支持 ie6 浏览器，删除这个片段。</p>
+<p><strong>⑤ jQuery 和 Google 统计</strong></p>
+<p>默认去 Google cdn 取，如果 cdn 没取到，则用本地版本（离线开发时候也可以用）。文档最后是一段谷歌统计代码，虽然谷歌建议放在页面头部，如果放在头部，除了影响页面加载速度，还会多统计一些没有完全加载页面的用户，所以，还是放在底部比较好。</p>
+<p><strong>humans.txt</strong></p>
+<p>项目成员、项目技术等介绍。</p>
+<p><strong>robots.txt</strong></p>
+<p>可以编辑这个文件，来阻止搜索引擎蜘蛛对某些页面的抓取</p>
+<p><strong>.htaccess</strong></p>
+<p>服务器配置，这里默认服务器是 Apache。这里有很多最佳实践配置规则，使得页面更快更安全的展现给用户。</p>
+<p>这里需要打开以下模块：</p>
+<p><code>mod_setenvif.c</code> (setenvif_module)<br><code>mod_headers.c</code> (headers_module)<br><code>mod_deflate.c</code> (deflate_module)<br><code>mod_filter.c</code> (filter_module)<br><code>mod_expires.c</code> (expires_module)<br><code>mod_rewrite.c</code> (rewrite_module)</p>
+<p>以 linux 平台为例，如果 Apache 是 apt-get 方式安装的：</p>
+<p>1.打开终端，输入以下命令：</p>
+<p><code>sudo a2enmod setenvif headers deflate filter expires rewrite include</code></p>
+<p>2.重启 Apache，使修改生效：</p>
+<p><code>sudo /etc/init.d/apache2 restart</code></p>
+<p><strong>js 目录:</strong></p>
+<p><strong>① main.js</strong></p>
+<p>包含项目需要的 js 代码，对于较大的项目，还可以使用 Require.js 等模块加载器来加载其他脚本。</p>
+<p><strong>② plugins.js</strong></p>
+<p>这个文件用来包含所需的第三方插件。例如，我们可以这样用 jQuery 插件：</p>
+<pre><code>(function($){
+    // code here
+})(jQuery)
+</code></pre><p>以上闭包写法可以命名空间冲突。</p>
+<p><strong>③ vendor 目录</strong></p>
+<p>这个目录用来存放第三方工具库，例如上面提到的 jQuery 和 Modernizr 库文件就默认放在这里了。</p>
+<p><strong>css 目录:</strong></p>
+<p><strong>① Normalize.css</strong></p>
+<p>重置默认样式，针对特定元素（属性）使不同的浏览器表现统一，参考 <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="external"> Normalize.css</a> 。</p>
+<p><strong>② 常用 class</strong></p>
+<p>.ir（图像背景）、.hidden（隐藏元素，用户不可见）、.visuallyhidden（隐藏文本，用户可见）、.invisible（元素隐藏，但保留 dom）、.clearfix（闭合浮动） 等。</p>
+<p><strong>③ 媒体查询、打印样式，分页样式</strong></p>
+<!--
+[官网](https://html5boilerplate.com/) 对这个项目总结如下：
+
+① 一个干净、移动终端友好的 HTML 模版；优化过的 Google 统计代码；触摸屏设备上使用的图标（这个可以替换成你自己的）；还有丰富的文档、技巧、窍门。
+② 包含了 Normalize.css v1 版本 — 一个先进的、支持HTML5的CSS reset — 和基础样式、辅助功能、media queries、打印样式。
+③ 自带了两个优秀的Javascript工具库的最新版本： jQuery (默认链接到 Google的CDN, 如果CDN失效，本地文件作为后备) 和Modernizr 浏览器特性监测工具库。
+④ 我们提供了一组 Apache 配置参数，帮你提高网站的性能。 还有几个单独维护的项目：server configs, node build script, 和ant build script.
+-->
+<p>参考：<br>[1] <a href="http://www.bootcss.com/p/html5boilerplate/" target="_blank" rel="external">http://www.bootcss.com/p/html5boilerplate/</a><br>[2] <a href="https://github.com/h5bp/html5-boilerplate" target="_blank" rel="external">https://github.com/h5bp/html5-boilerplate</a><br>[3] <a href="http://www.cnblogs.com/koleyang/p/4602190.html" target="_blank" rel="external">http://www.cnblogs.com/koleyang/p/4602190.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/06/21/h5-boilerplate/">
+    <time datetime="2017-06-21T02:17:33.000Z" class="entry-date">
+        2017-06-21
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/h5/">h5</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/06/19/css-float/" rel="next"><span class="meta-nav">下一篇：</span>css 浮动及清理浮动 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/ready/">ready 方法的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/grammar/" style="font-size: 15px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 16.67px;">problem</a> <a href="/tags/tools/" style="font-size: 11.67px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
