@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。" />
+  <meta name="description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。" />
   
 
   
@@ -13,18 +13,18 @@
   
   
   
-  <title>去抖和节流（debounce &amp; throttle） | 南潮的博客</title>
+  <title>为什么函数形参设为 undefined | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
+  <meta name="description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="去抖和节流（debounce & throttle）">
-<meta property="og:url" content="http://nanchao.win/2017/01/06/throttle-debounce/index.html">
+<meta property="og:title" content="为什么函数形参设为 undefined">
+<meta property="og:url" content="http://nanchao.win/2017/07/03/argument-undefined/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.786Z">
+<meta property="og:description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
+<meta property="og:updated_time" content="2017-07-03T07:29:31.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="去抖和节流（debounce & throttle）">
-<meta name="twitter:description" content="函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。">
+<meta name="twitter:title" content="为什么函数形参设为 undefined">
+<meta name="twitter:description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -98,7 +98,7 @@
 
 </script>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-throttle-debounce" class="post-throttle-debounce post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-argument-undefined" class="post-argument-undefined post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -106,16 +106,16 @@
         
   
     <h1 class="entry-title article-title">
-      去抖和节流（debounce &amp; throttle）
+      为什么函数形参设为 undefined
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/07/03/argument-undefined/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cj4nqfyh7002pb0ba8k29y65k" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/07/03/argument-undefined/" data-id="cj4nqfxxp0000b0babw3fnck5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,81 +123,127 @@
 
     <div class="entry-content">
       
-        <p>函数去抖和节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如连续点击抽取特等奖按钮，抽出了多名特等奖；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条连续密集触发 scroll 事件，如果回调事件复杂，造成浏览器卡顿。</p>
+        <p>JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。</p>
 <a id="more"></a>
-<p>举两个例子：</p>
-<p><strong> 场景一：</strong></p>
-<p>窗口的 resize 事件会在改变浏览器大小事连续触发； onmousemove 事件会在鼠标移动时被连续触发。如果这些事件的回调函数过重，而不采取节流处理，可能会使浏览器崩溃。</p>
-<p><strong> 场景二：</strong></p>
-<p>年会现场，主持人邀请嘉宾抽取 1 位特等奖幸运小伙伴，如果嘉宾不小心连续点击了两次【特等奖】按钮，而没有采取去抖处理，可能会连续触发两次抽取程序，然后出现了 2 位获奖小伙伴，那就尴尬了。</p>
-<p>下面详细地阐述一下去抖和节流的概念以及实现。</p>
-<h3 id="去抖（debounce）"><a href="#去抖（debounce）" class="headerlink" title="去抖（debounce）"></a>去抖（debounce）</h3><p>如果用手指一直按住一个弹簧，虽然它有弹起的趋势，但是只要你按住不放（保持对它施力），它将不会弹起直到你松手为止。</p>
-<p>换个角度，假定事件 A 会触发回调函数 callback，当事件 A 连续发生时，理论上会连续触发回调函数 callback。但是，只要短时间内连续触发的 callback 我们就不让其执行，直到时间 A 发生超过指定时间后，我们才调用一次 callback。即：<strong>当调用动作 n 毫秒后，才会执行该动作，若在这 n 毫秒内又调用此动作则将重新计算执行时间。</strong></p>
-<p>debounce 函数简单实现如下：</p>
-<pre><code>/**
-* 空闲时间必须大于或等于 idle，action 才会执行
-* @param idle   {number}    空闲时间，单位毫秒
-* @param action {function}  实际执行的函数
-* @return {function}        返回事件需绑定的回调函数
-*/
-var debounce = function(idle, action){
-    var last = 0;
-    return function(){
-        var ctx = this, 
-            args = arguments;
+<pre><code>function f(a,b){
+    // 形参
+    console.log(&#39;形参个数：&#39;,f.length);
+    console.log(&#39;形参个数：&#39;,arguments.callee.length);
 
-        clearTimeout(last);
-
-        last = setTimeout(function(){
-            action.apply(ctx, args);
-        }, idle);
-    };
-};
-</code></pre><p>假如我们的需求是，拖动滚动条 2 秒后，打印“你拖动了滚动条”，如果持续拖动，则不打印。可以这么写：</p>
-<pre><code>var f = function (){
-    console.log(&#39;你拖动了滚动条&#39;);
-};
-window.addEventListener(&#39;scroll&#39;,debounce(2000,f),false);
-</code></pre><h3 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h3><p>如果将水龙头拧紧直到水是以水滴的形式流出，发现每隔一段时间，就会有一滴水流出。</p>
-<p>换个角度，假定事件 A 会触发回调函数 callback，当事件 A 连续发生时，理论上会连续触发回调函数 callback。但是，如果两次调用 callback 函数的事件间隔小于指定时间，就不让 callback 函数执行，当下次调用 callback 函数并且和上次调用时间间隔超过指定时间，再执行一次 callback。即：<strong>函数无法在很短的时间间隔内连续调用，当过了规定的时间间隔，才能进行该函数的下一次调用。</strong></p>
-<p>throttle 函数简单实现如下：</p>
-<pre><code>/**
-* 频率控制，action 执行频率限定为 1次 / delay
-* @param delay  {number}    延迟时间，单位毫秒
-* @param action {function}  实际执行的函数
-* @return {function}    返回事件需绑定的回调函数
-*/
-var throttle = function(delay, action){
-    var last = 0;
-    return function(){
-        var curr = +new Date();
-        if (curr - last &gt; delay){
-            action.apply(this, arguments);
-            last = curr;
-        }
-    };
+    //实参
+    console.log(&#39;实参个数：&#39;,arguments.length);
 }
-</code></pre><p>假如我们的需求是，拖动滚动条的时候，每隔最少 2 秒打印一次“你拖动了滚动条”。可以这么写：</p>
-<pre><code>var f = function (){
-    console.log(&#39;你拖动了滚动条&#39;);
-};
-window.addEventListener(&#39;scroll&#39;,throttle(2000,f),false);
-</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fsjohnhuang/p/4147810.html" target="_blank" rel="external">http://www.cnblogs.com/fsjohnhuang/p/4147810.html</a><br>[2] <a href="http://blog.csdn.net/dyllove98/article/details/9281507" target="_blank" rel="external">http://blog.csdn.net/dyllove98/article/details/9281507</a></p>
+
+// 形参个数： 2
+// 形参个数： 2
+// 实参个数： 1
+</code></pre><p>例如，函数定义 2 个形参，调用时可以随便传入任意个实参：</p>
+<pre><code>function f(a,b){
+    console.log(&#39;第一个参数：&#39;,a);
+}
+
+f()
+// 第一个参数： undefined
+
+f(1)
+// 第一个参数： 1
+
+f(1,2,3)
+// 第一个参数： 1
+</code></pre><p><strong>既然省略的参数默认是 undefined，那么 jQuery 源代码中为什么要传入形参 undefined 呢？</strong></p>
+<pre><code>// jQuery 源码用该匿名函数包围
+(function (window,undefined) {
+    // code here
+})(window);
+</code></pre><p>这绝不是多此一举。原来，在早期的 ECMAScript3 中，undefined 是可读可写的变量（ie8 及以下版本浏览器中验证），在 ECMAScript5 中才修正为只读变量。下面我们在 ie7 和 chrome 中分别运行以下代码：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+console.log(undefined);
+
+// ie7 下结果为：newUndefined
+// chrome 下结果为：undefined
+</code></pre><p>如果在运行 jQuery 代码之前，我们修改了全局的 undefined 变量，并且我们不像 jQuery 源码那样显示地传入 undefined 形参，在 ie7 下会怎样？</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+
+// newUndefined
+// string
+</code></pre><p>果然，函数里打印出来的值是 newUndefined。</p>
+<p>那我们和 jQuery 源码一样显示地传入 undefined 形参，在 ie7 下又会怎样？</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+
+// undefined
+// undefined
+</code></pre><p>确实不一样了，函数内部的 undefined 恢复成了它本来的样子。</p>
+<p><strong>所以，显示地传入 undefined 参数确实可以兼容低版本浏览器，使得函数内部代码运行的时候 undefined 就是 undefined，而不会是其他的值，毕竟函数内还有很多需要用到 undefined 的地方，如果它有新的含义，麻烦会不小。</strong></p>
+<p>说到这里，我们看到的这个现象该怎么来解释呢？下面按照 ECMAScript3 中规定来理解一下上面两段代码：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+</code></pre><p>这里，没有显示传入 undefined 参数。那么根据 JavaScript 中有关作用域的理论，函数内的变量如果在函数内找不到定义，会到父函数找，父函数还找不到，就会到全局环境中找，所以，函数里的 undefined 值为 newUndefined 也就没什么奇怪的了。</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+</code></pre><p>这里，显示地传入了 undefined 参数。undefined 作为函数的形参，内部 undefined 当然会优先取这个形参 undefined，而不是全局的 undefined。上面我们说到，<strong>当形参个数大于实参个数时，被省略的参数值为 undefined（货真价实的 undefined）</strong>。函数调用时，实参会复制给形参，所以，函数内部的 undefined 就会是最原始的 undefined 了。</p>
+<p>如果还有疑虑，我们再看：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(arguments[1]);
+})(window)
+
+// newUndefined 
+// undefined
+</code></pre><p>果然，不管 undefined 被重置为其他什么值，被省略的函数参数值就是最原始的 undefined。</p>
+<p><strong>理解的关键点是：在 ie7 等低级浏览器下把 undefined 当做可读可写的变量看。在其他高级正常浏览器下，手动忽略 undefined，因为它就是一个只读的变量的而已。</strong></p>
+<p>最后，我们用 uglify 压缩一下上段代码，对比一下：</p>
+<pre><code>// 源代码：
+undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(arguments[1]);
+})(window)
+
+// 压缩后（为了方便查看，格式化了）：
+undefined = &quot;newUndefined&quot;,
+function(n, o) {
+    n.num = 1,
+    console.log(o),
+    console.log(arguments[1])
+} (window);
+</code></pre><p>看压缩后的代码就比较明显了，形参 o 没有对应的实参，所以其值就是最原始的 undefined。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/function.html#toc15" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html#toc15</a><br>[2] <a href="http://www.cnblogs.com/SheilaSun/p/4779895.html" target="_blank" rel="external">http://www.cnblogs.com/SheilaSun/p/4779895.html</a><br>[3] <a href="http://thinking80s.iteye.com/blog/1113267" target="_blank" rel="external">http://thinking80s.iteye.com/blog/1113267</a></p>
 
       
     </div><!-- .entry-content -->
 
 
     <footer class="entry-meta">
-    <a href="/2017/01/06/throttle-debounce/">
-    <time datetime="2017-01-06T01:43:00.000Z" class="entry-date">
-        2017-01-06
+    <a href="/2017/07/03/argument-undefined/">
+    <time datetime="2017-07-03T05:55:19.000Z" class="entry-date">
+        2017-07-03
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
     </footer>
 </article>
@@ -215,10 +261,8 @@ window.addEventListener(&#39;scroll&#39;,throttle(2000,f),false);
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <p><span class="nav-previous"><a href="/2017/01/06/jsfuck/" rel="prev"><span class="meta-nav">上一篇：</span>jsfuck 6 个字符写 js 代码（一）</a></span></p>
     
-    
-        <p><span class="nav-next"><a href="/2016/12/30/page-optimization/" rel="next"><span class="meta-nav">下一篇：</span>网页性能优化建议 </a></span></p>
+        <p><span class="nav-next"><a href="/2017/06/29/grunt/" rel="next"><span class="meta-nav">下一篇：</span>前端构建工具 grunt </a></span></p>
     
 </nav><!-- .nav-single -->
 
