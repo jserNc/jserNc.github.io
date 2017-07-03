@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/25/chain-call/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="函数链式调用是 jQuery 等框架中经常出现的一种函数调用方式，在面向对象编程中用得尤其多。JavaScript 的灵活性，使得实现链式调用的方式多种多样，下面，我们简单地实现一下链式调用，以展示其原理。">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.317Z">
+<meta property="og:updated_time" content="2017-07-03T08:56:33.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 JavaScript 链式调用">
 <meta name="twitter:description" content="函数链式调用是 jQuery 等框架中经常出现的一种函数调用方式，在面向对象编程中用得尤其多。JavaScript 的灵活性，使得实现链式调用的方式多种多样，下面，我们简单地实现一下链式调用，以展示其原理。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/10/25/chain-call/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cj4nvwzu5000go0bal19n46bx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/25/chain-call/" data-id="cj4nwwvqt000jjkbax7vjvs7b" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -140,7 +140,9 @@ f()()();
 console.log(n);     // 5
 </code></pre><p>这里的函数 f 返回了它自身，无论其执行多少次返回的都是自己，所以，调用函数 f 时其后可以跟任意多个括号。</p>
 <p>函数返回自身还有个特殊的地方：</p>
-<pre><code>new f === f     //true
+<pre><code>(new f) instanceof f  // false
+
+new f === f     //true
 new f() === f   //true
 </code></pre><p>我们看到，对 f 进行 new 运算来新建实例对象也“失效”了，这是因为 f 函数返回的是 f 自身（<strong>如果构造函数中明确地用 return 返回了一个其他对象，那么这个对象会作为整个 new 运算的返回结果。否则，返回刚才 new 运算符创建的那个对象</strong>）。另外，当构造函数不带实参时，new 操作可以不带括号，所以以上两种写法等效。</p>
 <p>再来看一个基于对象实现链式调用的例子：</p>
