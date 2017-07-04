@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>JavaScript 函数 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 函数">
+<meta property="og:url" content="http://nanchao.win/2017/06/09/function/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+<meta property="og:updated_time" content="2017-06-17T07:06:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 函数">
+<meta name="twitter:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-function" class="post-function post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      JavaScript 函数
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/06/09/function/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/09/function/" data-id="cj40xwqdm000zol0b0wz6lzis" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。</p>
+<a id="more"></a>
+<p>首先看一个小例子：</p>
+<pre><code>function f1() {}
+(function f2() {});
+
+console.log(typeof f1); // function
+console.log(typeof f2); // undefined
+</code></pre><p>对以上代码执行结果有没有感到意外呢？<strong>其实，第一种方式就是【function 命令】定义函数；第二种方式是【函数表达式】，函数表达式中关键词 function 后的函数名只在函数内部有效，函数外无效。</strong></p>
+<p>注意：【function 命令】定义函数语句后面不能跟分号（;），函数表达式后最好跟分号（;）。</p>
+<p>一般情况下，我们以为的函数表达式都长这样：</p>
+<pre><code>var f = function() {};
+</code></pre><p>实际上，<strong>只要 function 关键词不在行首，就是函数表达式！</strong>这也是理解 JavaScript 中【立即调用函数】的关键。我们知道，在 JavaScript 中，() 也是一种运算符，跟在函数名后面表示调用该函数，如 f() 表示执行 f 函数。【立即调用函数】实质定义一个函数后，立即调用这个函数。很自然，我们会想到这么写：</p>
+<pre><code>function f(){}()
+// Uncaught SyntaxError: Unexpected token )
+</code></pre><p>很遗憾！这句代码报错了，语法错误。因为 function 关键词既可以出现在函数声明语句中，也可以出现在函数表达式中,这么写会让 JavaScript 引擎比较为难。</p>
+<p>于是，引擎规定：如果 function 关键词出现在行首，就是函数声明语句，其后是不可以跟 () 运算符的；其他情况下都是函数表达式，其后可以跟 ()，表示执行该函数。</p>
+<p>一般，立即调用函数两种写法：</p>
+<pre><code>(function(){ /* code */ }());
+// 或者
+(function(){ /* code */ })();
+</code></pre><p>如果你开心，以下方式也都可以的：</p>
+<pre><code>// 逗号，赋值、与等运算符
+var i = function () { return 10; } ();
+true &amp;&amp; function () { /* code */ } ();
+0, function () { /* code */ } ();
+
+// 一元运算符在前，function 不在行首
+!function () { /* code */ } ();
+~function () { /* code */ } ();
+-function () { /* code */ } ();
++function () { /* code */ } ();
+</code></pre><p>再回到开头的那句代码：</p>
+<pre><code>(function f2() {});
+</code></pre><p>现在不难理解它是函数表达式了吧。上面还说到函数表达式中的函数名只可以在函数内部使用，外部无法取到，所以，这里相当于声明一个匿名函数，然后也没调用这个函数就不管它了。</p>
+<pre><code>var f1 = function f2(){
+    console.log(&#39;函数内部：&#39;,typeof f2)
+};
+
+f1();
+// 函数内部： function
+
+console.log(&#39;函数外部：&#39;,typeof f2);
+// 函数外部： undefined
+</code></pre><p>不过，函数的 name 属性是可以取到 function 关键词后的函数名的。</p>
+<pre><code>var f = function myName() {};
+f.name 
+// &quot;myName&quot;
+
+(function f2() {}).name
+// &quot;f2&quot;
+</code></pre><p>再来看看两种函数定义在代码执行时的差异：</p>
+<pre><code>// 代码段 1
+f1();
+// function f1
+function f1(){
+    console.log(&#39;function f1&#39;);
+}
+
+// 代码段 2
+f2();
+// Uncaught TypeError: f2 is not a function
+var f2 = function(){
+    console.log(&#39;function f2&#39;);
+}
+</code></pre><p>function 命令声明函数会提升到代码头部，所以，函数 f1 可以顺利执行；而变量 f2 的值开始只是 undefined，只有执行完变量 f2 的赋值语句，它才是指向一个函数，所以先于它的赋值语句执行 f2() 必然会报错。</p>
+<p>如果用 function 命令和函数表达式方式声明同名函数会怎样呢？</p>
+<pre><code>// 代码段 1
+var f = function(){
+    console.log(&#39;函数表达式&#39;);
+}
+function f(){
+    console.log(&#39;函数声明&#39;);
+}
+f();
+// 函数表达式
+
+// 代码段 2
+function f(){
+    console.log(&#39;函数声明&#39;);
+}
+var f = function(){
+    console.log(&#39;函数表达式&#39;);
+}
+f();
+// 函数表达式
+</code></pre><p>我们看到，不管是 function 命令在先还是函数表达式在先，最后函数都是采用函数表达式的定义。这样的结果不应该意外，因为在“代码执行阶段”，变量属性值是可以被覆盖的。</p>
+<p>if、try 等代码块中的 function 命令和函数表达式也会不一样：</p>
+<pre><code>// 代码段 1
+if (false){
+    function f(){
+        console.log(&#39;函数声明&#39;)
+    }
+}
+f(); 
+
+// 代码段 2
+if (false){
+    var f = function(){
+        console.log(&#39;函数表达式&#39;);
+    }
+}
+f();
+</code></pre><p>以上代码执行结果就不写了，对于新版的 chrome，以上两种写法都会报错。但是，在 ie 和其他较旧的浏览器下，代码段 1 中的函数 f 是可以正常执行的。这是因为，JavaScript 是不存在块级作用域，这种 if 语句包含的变量（var）和 function 命令声明的函数也是会提升到代码头部的。</p>
+<p>最后，注意一下变量声明语句的方式：</p>
+<pre><code>// 片段 1
+var result = function(){
+    return 2 + 2;
+}
+
+// 片段 2
+var result = function(){
+    return 2 + 2;
+}();
+
+// 片段 3
+var result = (function(){
+    return 2 + 2;
+})();
+
+// 片段 4
+var result = (function(){
+    return 2 + 2;
+}());
+</code></pre><p>其中片段 1 变量 result 是一个函数，片段 2/3/4 变量 result 是一个数值变量。这些细微差别得注意。</p>
+<p>好，再看：</p>
+<pre><code>function f() {
+  if (this === window){
+      console.log(&quot;this 指向 window&quot;);
+  } else if (this === o){
+      console.log(&quot;this 指向 o&quot;);
+  }
+}
+
+f(); 
+// this 指向 window
+
+var o = {
+  f1: f
+};
+
+o.f1(); 
+// this 指向 o
+
+(o.f1)(); 
+// this 指向 o
+
+(o.f1 = o.f1)(); 
+// this 指向 window
+
+(o.f1, o.f1)(); 
+// this 指向 window
+
+(false || o.f1)(); 
+// this 指向 window
+
+var newf = o.f1;
+newf(); 
+// this 指向 window
+</code></pre><p>这里的赋值、逗号，非运算结果都是返回最后一个运算子的值，即 o.f1，相当于把 o.f1 这个函数返回给了一个新的变量 newf，然后调用这个新的变量函数 newf()。<strong>如果一个函数是类似于全局函数的方式调用，即函数执行时函数名前没有任何对象 f()，或者函数名前是 window 对象，window.f()，那么我们就认为这个函数内部 this 指向全局对象 window。</strong></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a><br>[3] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[4] <a href="http://www.cnblogs.com/TomXu/archive/2011/12/31/2289423.html" target="_blank" rel="external">http://www.cnblogs.com/TomXu/archive/2011/12/31/2289423.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/06/09/function/">
+    <time datetime="2017-06-09T01:13:08.000Z" class="entry-date">
+        2017-06-09
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/06/14/css-layout/" rel="prev"><span class="meta-nav">上一篇：</span>css 多列布局</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/05/24/cross-origin/" rel="next"><span class="meta-nav">下一篇：</span>跨域解决方案 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

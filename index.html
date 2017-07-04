@@ -94,7 +94,7 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
-    <article id="post-cross-origin" class="post-cross-origin post type-post status-publish format-standard hentry">
+    <article id="post-argument-undefined" class="post-argument-undefined post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -102,16 +102,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/05/24/cross-origin/">跨域解决方案</a>
+      <a class="article-title" href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/05/24/cross-origin/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/07/03/argument-undefined/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cj39pdy4v000ruh0b4yh8poa5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/07/03/argument-undefined/" data-id="cj4pleld900000z0bcedii0ft" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -119,10 +119,10 @@
 
     <div class="entry-content">
       
-        <p>受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体方案还需要根据实际应用场景来选择。</p>
+        <p>JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。</p>
         
           <p class="article-more-link">
-            <a href="/2017/05/24/cross-origin/#more" class="more-link">More</a>
+            <a href="/2017/07/03/argument-undefined/#more" class="more-link">More</a>
           </p>
         
       
@@ -130,15 +130,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/05/24/cross-origin/">
-    <time datetime="2017-05-24T01:17:21.000Z" class="entry-date">
-        2017-05-24
+    <a href="/2017/07/03/argument-undefined/">
+    <time datetime="2017-07-03T05:55:19.000Z" class="entry-date">
+        2017-07-03
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
 
     </footer>
 </article>
@@ -152,7 +152,7 @@
 
 
   
-    <article id="post-observer" class="post-observer post type-post status-publish format-standard hentry">
+    <article id="post-grunt" class="post-grunt post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -160,16 +160,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+      <a class="article-title" href="/2017/06/29/grunt/">前端构建工具 grunt</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/05/12/observer/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/06/29/grunt/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/12/observer/" data-id="cj39pdy5p001ruh0bnkv7f0sd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/29/grunt/" data-id="cj4pleldf00030z0bq1zqh97g" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -177,10 +177,10 @@
 
     <div class="entry-content">
       
-        <p>观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。</p>
+        <p>同样作为前端构建工具，grunt 和 gulp 的功能很类似，都可以帮助我们开发者进行代码检查、编译、单元测试、文件合并、压缩等任务。它们主要区别在于，grunt 在多个处理流程过程中会有多次 I/O 操作，并生成多个中间文件；而 gulp 只需要一次 I/O 操作，随后都是文件流式处理，效率较高。不过，grunt 生态系统非常庞大，有很多插件可供选择，jQuery、Bootstrap 等优秀项目都在使用 grunt，所以还是很有必要学习 grunt 的。</p>
         
           <p class="article-more-link">
-            <a href="/2017/05/12/observer/#more" class="more-link">More</a>
+            <a href="/2017/06/29/grunt/#more" class="more-link">More</a>
           </p>
         
       
@@ -188,15 +188,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/05/12/observer/">
-    <time datetime="2017-05-12T01:26:19.000Z" class="entry-date">
-        2017-05-12
+    <a href="/2017/06/29/grunt/">
+    <time datetime="2017-06-29T06:57:49.000Z" class="entry-date">
+        2017-06-29
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
 
     </footer>
 </article>
@@ -210,7 +210,7 @@
 
 
   
-    <article id="post-singleton" class="post-singleton post type-post status-publish format-standard hentry">
+    <article id="post-h5-boilerplate" class="post-h5-boilerplate post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -218,16 +218,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+      <a class="article-title" href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/06/21/h5-boilerplate/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cj39pdy64002auh0bqslg3y9h" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/21/h5-boilerplate/" data-id="cj4pleldf00050z0bwu3tcjpn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -235,10 +235,10 @@
 
     <div class="entry-content">
       
-        <p>单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。</p>
+        <p>开源项目 <a href="https://github.com/h5bp/html5-boilerplate">HTML5 Boilerplate</a> 作为流行的前端项目模板，包含了百来位开发者的优秀实战经验。本文对这个项目做一个简单梳理，为以后的新项目开篇提供一个参考方案。</p>
         
           <p class="article-more-link">
-            <a href="/2017/05/04/singleton/#more" class="more-link">More</a>
+            <a href="/2017/06/21/h5-boilerplate/#more" class="more-link">More</a>
           </p>
         
       
@@ -246,15 +246,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/05/04/singleton/">
-    <time datetime="2017-05-04T02:14:45.000Z" class="entry-date">
-        2017-05-04
+    <a href="/2017/06/21/h5-boilerplate/">
+    <time datetime="2017-06-21T02:17:33.000Z" class="entry-date">
+        2017-06-21
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/h5/">h5</a></li></ul>
 
     </footer>
 </article>
@@ -268,7 +268,7 @@
 
 
   
-    <article id="post-ready" class="post-ready post type-post status-publish format-standard hentry">
+    <article id="post-css-float" class="post-css-float post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -276,16 +276,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/05/02/ready/">ready 方法的实现</a>
+      <a class="article-title" href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/05/02/ready/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/06/19/css-float/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cj39pdy5r001tuh0bfv0qe4vj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/19/css-float/" data-id="cj4pleldd00010z0bqnf0nxd0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -293,10 +293,10 @@
 
     <div class="entry-content">
       
-        <p>很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。</p>
+        <p>默认情况下，元素处于普通流。给元素设置 float 属性后，可以使元素向左或向右浮动，直到它的外边缘碰到包含块或者另一个浮动框。当然了，如果元素 float 属性设为 none，那就表示不浮动，它还是出现在它原本应该出现的位置。</p>
         
           <p class="article-more-link">
-            <a href="/2017/05/02/ready/#more" class="more-link">More</a>
+            <a href="/2017/06/19/css-float/#more" class="more-link">More</a>
           </p>
         
       
@@ -304,15 +304,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/05/02/ready/">
-    <time datetime="2017-05-02T08:12:03.000Z" class="entry-date">
-        2017-05-02
+    <a href="/2017/06/19/css-float/">
+    <time datetime="2017-06-19T01:47:59.000Z" class="entry-date">
+        2017-06-19
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
 </article>
@@ -326,7 +326,7 @@
 
 
   
-    <article id="post-call-apply-bind" class="post-call-apply-bind post type-post status-publish format-standard hentry">
+    <article id="post-bfc" class="post-bfc post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -334,16 +334,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
+      <a class="article-title" href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/04/21/call-apply-bind/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/21/call-apply-bind/" data-id="cj39pdy4f0008uh0by06x0etz" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cj40xwqcu0004ol0b7x2p1vny" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -351,10 +351,10 @@
 
     <div class="entry-content">
       
-        <p>JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数调用时其内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果该参数设为 null 或 undefined，则指向全局对象（浏览器环境下，指 window）。这三个方法的基本用法在 <a href="http://nanchao.win/2016/11/02/this/">理解 JavaScript 中 this</a> 一文已经做了介绍，这里就不再赘述。下面更深入地讨论一下 call 和 bind 方法。</p>
+        <p>BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。</p>
         
           <p class="article-more-link">
-            <a href="/2017/04/21/call-apply-bind/#more" class="more-link">More</a>
+            <a href="/2017/06/15/bfc/#more" class="more-link">More</a>
           </p>
         
       
@@ -362,15 +362,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/04/21/call-apply-bind/">
-    <time datetime="2017-04-21T02:45:37.000Z" class="entry-date">
-        2017-04-21
+    <a href="/2017/06/15/bfc/">
+    <time datetime="2017-06-15T06:16:59.000Z" class="entry-date">
+        2017-06-15
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
 </article>
@@ -384,7 +384,7 @@
 
 
   
-    <article id="post-some-javascript-functions" class="post-some-javascript-functions post type-post status-publish format-standard hentry">
+    <article id="post-css-layout" class="post-css-layout post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -392,16 +392,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
+      <a class="article-title" href="/2017/06/14/css-layout/">css 多列布局</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2017/04/14/some-javascript-functions/#comments" class="leave-reply">Reply</a>
+            <a href="/2017/06/14/css-layout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/14/some-javascript-functions/" data-id="cj39pdy600024uh0bkooj888c" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/14/css-layout/" data-id="cj40xwqdc000kol0bj4fk93qt" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -409,10 +409,10 @@
 
     <div class="entry-content">
       
-        <p>ECMAScript 中，没有独立存在的函数，所有的函数都是依附于某个对象。isNaN()、parseInt() 等看起来独立的函数，实际上它们都属于全局对象。客户端 JavaScript 中，全局对象就是 window 对象。讲函数之前，先来说说 JavaScript 对象。</p>
+        <p>二列布局是指侧栏宽度固定，主栏宽度自适应；三列布局是指两侧栏宽度固定，中间主栏宽度自适应。二列布局和三列布局主要思想是类似的，将三列布局的其中一个侧栏去掉即变成二列布局。下面，我们就只讨论三列布局的几种实现方法。</p>
         
           <p class="article-more-link">
-            <a href="/2017/04/14/some-javascript-functions/#more" class="more-link">More</a>
+            <a href="/2017/06/14/css-layout/#more" class="more-link">More</a>
           </p>
         
       
@@ -420,15 +420,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2017/04/14/some-javascript-functions/">
-    <time datetime="2017-04-14T01:33:53.000Z" class="entry-date">
-        2017-04-14
+    <a href="/2017/06/14/css-layout/">
+    <time datetime="2017-06-14T03:58:55.000Z" class="entry-date">
+        2017-06-14
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grammar/">grammar</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
 </article>
@@ -445,7 +445,7 @@
   
     <nav id="pagination">
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </nav>
   
@@ -464,6 +464,34 @@
       <ul>
         
           <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
@@ -475,34 +503,6 @@
             <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
           </li>
         
-          <li>
-            <a href="/2017/05/02/ready/">ready 方法的实现</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/variable/">JavaScript 变量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -512,7 +512,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </aside>
 
@@ -521,7 +521,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
     </div>
   </aside>
 

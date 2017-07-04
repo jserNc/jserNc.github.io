@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>为什么函数形参设为 undefined | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么函数形参设为 undefined">
+<meta property="og:url" content="http://nanchao.win/2017/07/03/argument-undefined/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
+<meta property="og:updated_time" content="2017-07-04T13:10:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么函数形参设为 undefined">
+<meta name="twitter:description" content="JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-argument-undefined" class="post-argument-undefined post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      为什么函数形参设为 undefined
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/07/03/argument-undefined/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/07/03/argument-undefined/" data-id="cj4pleld900000z0bcedii0ft" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>JavaScript 中函数形参的个数和实参个数并不要求相等。函数的 length 属性返回形参个数，在函数内部 argument.length 返回实参个数。形参个数小于实参个数是允许的，不会报错；形参个数大于实参个数时，被省略的参数值为 undefined。</p>
+<a id="more"></a>
+<pre><code>function f(a,b){
+    // 形参
+    console.log(&#39;形参个数：&#39;,f.length);
+    console.log(&#39;形参个数：&#39;,arguments.callee.length);
+
+    //实参
+    console.log(&#39;实参个数：&#39;,arguments.length);
+}
+
+// 形参个数： 2
+// 形参个数： 2
+// 实参个数： 1
+</code></pre><p>例如，函数定义 2 个形参，调用时可以随便传入任意个实参：</p>
+<pre><code>function f(a,b){
+    console.log(&#39;第一个参数：&#39;,a);
+}
+
+f()
+// 第一个参数： undefined
+
+f(1)
+// 第一个参数： 1
+
+f(1,2,3)
+// 第一个参数： 1
+</code></pre><p><strong>既然省略的参数默认是 undefined，那么 jQuery 源代码中为什么要传入形参 undefined 呢？</strong></p>
+<pre><code>// jQuery 源码用该匿名函数包围
+(function (window,undefined) {
+    // code here
+})(window);
+</code></pre><p>这绝不是多此一举。原来，在早期的 ECMAScript3 中，undefined 是可读可写的变量（ie8 及以下版本浏览器中验证），在 ECMAScript5 中才修正为只读变量。下面我们在 ie7 和 chrome 中分别运行以下代码：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+console.log(undefined);
+
+// ie7 下结果为：newUndefined
+// chrome 下结果为：undefined
+</code></pre><p>如果在运行 jQuery 代码之前，我们修改了全局的 undefined 变量，并且我们不像 jQuery 源码那样显式地传入 undefined 形参，在 ie7 下会怎样？</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+
+// newUndefined
+// string
+</code></pre><p>果然，函数里打印出来的值是 newUndefined。其实，这样和显式地传入 undefined 实参得到同样的效果：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window,undefined)
+
+// newUndefined
+// string
+</code></pre><p>那我们和 jQuery 源码一样显式地传入 undefined 形参，在 ie7 下又会怎样？</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+
+// undefined
+// undefined
+</code></pre><p>确实不一样了，函数内部的 undefined 恢复成了它本来的样子。</p>
+<p><strong>所以，显式地传入 undefined 参数确实可以兼容低版本浏览器，使得函数内部代码运行的时候 undefined 就是 undefined，而不会是其他的值，毕竟函数内还有很多需要用到 undefined 的地方，如果它有新的含义，麻烦会不小。</strong></p>
+<p>说到这里，我们看到的这个现象该怎么来解释呢？下面按照 ECMAScript3 中规定来理解一下上面两段代码：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+</code></pre><p>这里，没有显式传入 undefined 参数。那么根据 JavaScript 中有关作用域的理论，函数内的变量如果在函数内找不到定义，会到父函数找，父函数还找不到，就会到全局环境中找，所以，函数里的 undefined 值为 newUndefined 也就没什么奇怪的了。</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(typeof undefined);
+})(window)
+</code></pre><p>这里，显式地传入了 undefined 参数。undefined 作为函数的形参，内部 undefined 当然会优先取这个形参 undefined，而不是全局的 undefined。上面我们说到，<strong>当形参个数大于实参个数时，被省略的参数值为 undefined（货真价实的 undefined）</strong>。函数调用时，实参会复制给形参，所以，函数内部的 undefined 就会是最原始的 undefined 了。</p>
+<p>如果还有疑虑，我们再看：</p>
+<pre><code>undefined = &#39;newUndefined&#39;;
+(function (window) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(arguments[1]);
+})(window)
+
+// newUndefined 
+// undefined
+</code></pre><p>果然，不管 undefined 被重置为其他什么值，被省略的函数参数值就是最原始的 undefined。</p>
+<p><strong>理解的关键点是：在 ie7 等低级浏览器下把 undefined 当做可读可写的变量看。在其他高级正常浏览器下，手动忽略 undefined，因为它就是一个只读的变量的而已。</strong></p>
+<p>最后，我们用 uglify 压缩一下上段代码，对比一下：</p>
+<pre><code>// 源代码：
+undefined = &#39;newUndefined&#39;;
+(function (window,undefined) {
+    window.num = 1;
+    console.log(undefined);
+    console.log(arguments[1]);
+})(window)
+
+// 压缩后（为了方便查看，格式化了）：
+undefined = &quot;newUndefined&quot;,
+function(n, o) {
+    n.num = 1,
+    console.log(o),
+    console.log(arguments[1])
+} (window);
+</code></pre><p>看压缩后的代码就比较明显了，形参 o 没有对应的实参，所以其值就是最原始的 undefined。<strong>另外，这里将 window 对象作为实参传给函数，可以减少查找提高效率。因为 window 对象处于作用域的顶端，如果函数里一层层向上回溯查找 window 对象，效率比较低。</strong></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/function.html#toc15" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html#toc15</a><br>[2] <a href="http://www.cnblogs.com/SheilaSun/p/4779895.html" target="_blank" rel="external">http://www.cnblogs.com/SheilaSun/p/4779895.html</a><br>[3] <a href="http://thinking80s.iteye.com/blog/1113267" target="_blank" rel="external">http://thinking80s.iteye.com/blog/1113267</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/07/03/argument-undefined/">
+    <time datetime="2017-07-03T05:55:19.000Z" class="entry-date">
+        2017-07-03
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/06/29/grunt/" rel="next"><span class="meta-nav">下一篇：</span>前端构建工具 grunt </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

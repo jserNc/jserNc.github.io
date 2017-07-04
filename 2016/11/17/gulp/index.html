@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/17/gulp/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
-<meta property="og:updated_time" content="2017-05-26T13:16:51.000Z">
+<meta property="og:updated_time" content="2017-07-04T13:03:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具 gulp">
 <meta name="twitter:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cj39pdy510010uh0bsjpoth7y" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cj40xwqdv0018ol0bzxs6rchq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,13 +126,16 @@
         <p><strong>前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。</strong>gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。</p>
 <a id="more"></a>
 <p>讲 gulp 之前先说一下 node。node 是 JavaScript 语言的服务器运行环境，与之相对的是浏览器环境。也就是说，除了浏览器，JavaScript 也可以在 node 环境里运行，node 提供了大量的库供 JavaScript 调用。node 和 chrome 浏览器的 JavaScript 解释器一样，都是 google 公司的 V8 引擎。</p>
-<p>gulp 是基于 node 的一个工具。<strong>gulp 借鉴了 Unix 操作系统的管道（pipe）思想（前一级的输出即是后一级的输入，以下实例中的 pipe()方法会体现这种思想），其处理过程比较清晰高效。</strong></p>
+<p>gulp 是基于 node 的一个工具。<strong>gulp 借鉴了 Unix 操作系统的管道（pipe）思想（前一级的输出即是后一级的输入，以下实例中的 pipe() 方法会体现这种思想），其处理过程比较清晰高效。</strong></p>
 <p>gulp 的使用流程比较简单：首先需要具备 node 环境；其次我们需要安装 gulp（以及 gulp 所需的插件）；然后编写 gulp 配置文件 gulpfile.js，定义 gulp 任务；最后通过 OS X 系统的终端（Terminal）或者 windows 系统的命令提示符（Command Prompt）即可运行gulp任务。</p>
 <p>下面简单概括一下 gulp 的使用流程：</p>
 <h3 id="1-安装node环境；"><a href="#1-安装node环境；" class="headerlink" title="1. 安装node环境；"></a>1. 安装node环境；</h3><p>详细安装步骤见<a href="https://nodejs.org/en/" target="_blank" rel="external"> node 官网</a></p>
 <h3 id="2-全局安装-gulp；"><a href="#2-全局安装-gulp；" class="headerlink" title="2. 全局安装 gulp；"></a>2. 全局安装 gulp；</h3><pre><code>npm install -g gulp
 </code></pre><p>其中 npm 是随 node 一起安装的 node 模块管理工具，用来安装、卸载、管理 node 插件（模块）。</p>
-<h3 id="3-项目本地安装-gulp-及-gulp-插件；"><a href="#3-项目本地安装-gulp-及-gulp-插件；" class="headerlink" title="3. 项目本地安装 gulp 及 gulp 插件；"></a>3. 项目本地安装 gulp 及 gulp 插件；</h3><pre><code>npm install --save-dev gulp
+<h3 id="3-项目本地安装-gulp-及-gulp-插件；"><a href="#3-项目本地安装-gulp-及-gulp-插件；" class="headerlink" title="3. 项目本地安装 gulp 及 gulp 插件；"></a>3. 项目本地安装 gulp 及 gulp 插件；</h3><pre><code># 进入项目目录
+# 确定已经有 package.json，没有就通过 npm init 创建
+# 安装 gulp 依赖
+npm install --save-dev gulp
 </code></pre><p>如果 gulpfile.js 文件还调用了其他 gulp 插件，那我们需要安装每个插件。例如，如果需要对代码进行压缩，就安装 gulp-uglify 插件，执行命令：</p>
 <pre><code>npm install --save-dev gulp-uglify
 </code></pre><p>值得注意的是：虽然前面已经全局安装了 gulp，这里在项目本地也是需要局部安装 gulp 的。</p>
@@ -181,7 +184,7 @@ gulp.task(&#39;minify&#39;, function () {
 </code></pre><p>配置对象有两个字段。cwd 字段指定写入路径的基准目录，默认是当前目录；mode 字段指定写入文件的权限，默认是 0777（用户可读可写可执行）。</p>
 <blockquote>
 <h3 id="gulp-watch-glob-opts-tasks-或-gulp-watch-glob-opts-cb"><a href="#gulp-watch-glob-opts-tasks-或-gulp-watch-glob-opts-cb" class="headerlink" title="gulp.watch(glob [, opts], tasks) 或 gulp.watch(glob [, opts, cb])"></a>gulp.watch(glob [, opts], tasks) 或 gulp.watch(glob [, opts, cb])</h3></blockquote>
-<p>监视特定文件，当文件发生改动，就执行指定任务或方法。当 glob 内容发生改变时，执行 tasks</p>
+<p>监视特定文件，当文件发生改动，就执行指定任务或方法。当 glob 内容发生改变时，执行 tasks：</p>
 <pre><code>gulp.task(&#39;watch&#39;, function () {
    gulp.watch(&#39;js/app.js&#39;, [&#39;build&#39;]);
 });
@@ -293,6 +296,34 @@ gulp.task(&#39;default&#39;, [&#39;jshint&#39;, &#39;minify&#39;, &#39;watch&#39
       <ul>
         
           <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
@@ -304,34 +335,6 @@ gulp.task(&#39;default&#39;, [&#39;jshint&#39;, &#39;minify&#39;, &#39;watch&#39
             <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
           </li>
         
-          <li>
-            <a href="/2017/05/02/ready/">ready 方法的实现</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/variable/">JavaScript 变量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -341,7 +344,7 @@ gulp.task(&#39;default&#39;, [&#39;jshint&#39;, &#39;minify&#39;, &#39;watch&#39
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </aside>
 
@@ -350,7 +353,7 @@ gulp.task(&#39;default&#39;, [&#39;jshint&#39;, &#39;minify&#39;, &#39;watch&#39
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
     </div>
   </aside>
 

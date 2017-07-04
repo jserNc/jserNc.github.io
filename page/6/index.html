@@ -94,7 +94,7 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
-    <article id="post-this" class="post-this post type-post status-publish format-standard hentry">
+    <article id="post-css-vertical-centering" class="post-css-vertical-centering post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -102,16 +102,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2016/11/02/this/">理解 JavaScript 中 this</a>
+      <a class="article-title" href="/2016/12/26/css-vertical-centering/">css 居中</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/11/02/this/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/12/26/css-vertical-centering/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="cj39pdy65002cuh0bmacum2es" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cj40xwqdd000mol0bfykvq3vp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -119,10 +119,10 @@
 
     <div class="entry-content">
       
-        <p><strong>this 出现的地方无非两种：全局环境中和函数中。</strong>不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。<strong>（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。</strong>不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，再比如调用该函数的外层上下文对象）。</p>
+        <p>利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。</p>
         
           <p class="article-more-link">
-            <a href="/2016/11/02/this/#more" class="more-link">More</a>
+            <a href="/2016/12/26/css-vertical-centering/#more" class="more-link">More</a>
           </p>
         
       
@@ -130,15 +130,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2016/11/02/this/">
-    <time datetime="2016-11-02T01:53:32.000Z" class="entry-date">
-        2016-11-02
+    <a href="/2016/12/26/css-vertical-centering/">
+    <time datetime="2016-12-26T10:07:32.000Z" class="entry-date">
+        2016-12-26
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
 </article>
@@ -152,7 +152,7 @@
 
 
   
-    <article id="post-closures" class="post-closures post type-post status-publish format-standard hentry">
+    <article id="post-batch-processing" class="post-batch-processing post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -160,16 +160,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2016/11/01/closures/">JavaScript 闭包（译）</a>
+      <a class="article-title" href="/2016/12/22/batch-processing/">windows 批处理脚本修改文件</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/12/22/batch-processing/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cj39pdy4j000duh0btewus4h3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/22/batch-processing/" data-id="cj40xwqd10007ol0b8901qb09" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -177,11 +177,10 @@
 
     <div class="entry-content">
       
-        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
-<p><strong>在ECMAScript中，函数是第一级（first-class）对象。</strong>这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作<strong>高阶函数</strong>。同样函数也可以从其他函数中返回。返回其他函数的函数叫作<strong>以函数为值的函数</strong>。</p>
+        <p>有时候，我们可能需要在一个文件的基础上复制出很多新文件，并针对每个文件做出指定的修改。若不想手工复制一个个文件、逐个打开文件进行修改，可以用批处理脚本进行处理。如果这批文件只生成一次，编辑脚本的时间相对手工一个个编辑文件并没有多大优势，但是如果需要多次生成这批文件，脚本的优势就很明显了。</p>
         
           <p class="article-more-link">
-            <a href="/2016/11/01/closures/#more" class="more-link">More</a>
+            <a href="/2016/12/22/batch-processing/#more" class="more-link">More</a>
           </p>
         
       
@@ -189,15 +188,15 @@
 
 
     <footer class="entry-meta">
-    <a href="/2016/11/01/closures/">
-    <time datetime="2016-11-01T07:55:44.000Z" class="entry-date">
-        2016-11-01
+    <a href="/2016/12/22/batch-processing/">
+    <time datetime="2016-12-22T03:46:32.000Z" class="entry-date">
+        2016-12-22
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
     </footer>
 </article>
@@ -211,7 +210,7 @@
 
 
   
-    <article id="post-scope-chain" class="post-scope-chain post type-post status-publish format-standard hentry">
+    <article id="post-ajax-status" class="post-ajax-status post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -219,16 +218,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2016/11/01/scope-chain/">JavaScript 作用域链（译）</a>
+      <a class="article-title" href="/2016/12/19/ajax-status/">关于 ajax 请求 status 值为 0</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/12/19/ajax-status/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cj39pdy6i002luh0bnky6jnh7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cj40xwqd30008ol0byx85l8rn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -236,15 +235,10 @@
 
     <div class="entry-content">
       
-        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
-<p><strong>作用域</strong>（scope）控制着变量和参数的<strong>可见性</strong>及<strong>生命周期</strong>。</p>
-<p>通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。</p>
-<blockquote>
-<p><strong>作用域链</strong>是一个对象列表，<strong>执行上下文</strong>中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域链。</p>
-</blockquote>
+        <p>一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：</p>
         
           <p class="article-more-link">
-            <a href="/2016/11/01/scope-chain/#more" class="more-link">More</a>
+            <a href="/2016/12/19/ajax-status/#more" class="more-link">More</a>
           </p>
         
       
@@ -252,127 +246,9 @@
 
 
     <footer class="entry-meta">
-    <a href="/2016/11/01/scope-chain/">
-    <time datetime="2016-11-01T01:46:50.000Z" class="entry-date">
-        2016-11-01
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-execution-context" class="post-execution-context post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/31/execution-context/">JavaScript 执行上下文（译）</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cj39pdy50000yuh0bpeuzxilb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    
-
-    <div class="entry-content">
-      
-        <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
-<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/10/31/execution-context/#more" class="more-link">More</a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-
-    <footer class="entry-meta">
-    <a href="/2016/10/31/execution-context/">
-    <time datetime="2016-10-31T02:23:26.000Z" class="entry-date">
-        2016-10-31
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-script" class="post-script post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/28/script/">关于 script 脚本加载方式（译）</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj39pdy5z0022uh0b7wgocyu1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    
-
-    <div class="entry-content">
-      
-        <p>原文： <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html">http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</a></p>
-<p>我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/10/28/script/#more" class="more-link">More</a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-
-    <footer class="entry-meta">
-    <a href="/2016/10/28/script/">
-    <time datetime="2016-10-28T06:10:12.000Z" class="entry-date">
-        2016-10-28
+    <a href="/2016/12/19/ajax-status/">
+    <time datetime="2016-12-19T01:44:25.000Z" class="entry-date">
+        2016-12-19
     </time>
 </a>
     
@@ -392,7 +268,7 @@
 
 
   
-    <article id="post-script-error" class="post-script-error post type-post status-publish format-standard hentry">
+    <article id="post-webpack" class="post-webpack post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -400,16 +276,16 @@
         
   
     <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/27/script-error/">script.onerror 的兼容写法</a>
+      <a class="article-title" href="/2016/11/21/webpack/">前端模块化和打包工具 webpack</a>
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/11/21/webpack/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cj39pdy630028uh0bfam3eakw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/21/webpack/" data-id="cj40xwqep002vol0blzrmuzuc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -417,10 +293,10 @@
 
     <div class="entry-content">
       
-        <p>script 的 onerror 事件 IE6~8 与 opera11 都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：</p>
+        <p>Webpack 是一个模块打包器。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。这里说的模块不仅仅指 JavaScript 模块，CSS、图片、字体等也是模块化。</p>
         
           <p class="article-more-link">
-            <a href="/2016/10/27/script-error/#more" class="more-link">More</a>
+            <a href="/2016/11/21/webpack/#more" class="more-link">More</a>
           </p>
         
       
@@ -428,15 +304,131 @@
 
 
     <footer class="entry-meta">
-    <a href="/2016/10/27/script-error/">
-    <time datetime="2016-10-27T10:26:33.000Z" class="entry-date">
-        2016-10-27
+    <a href="/2016/11/21/webpack/">
+    <time datetime="2016-11-21T03:57:27.000Z" class="entry-date">
+        2016-11-21
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/problem/">problem</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-gulp" class="post-gulp post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/11/17/gulp/">前端构建工具 gulp</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cj40xwqdv0018ol0bzxs6rchq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p><strong>前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。</strong>gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/11/17/gulp/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/17/gulp/">
+    <time datetime="2016-11-17T01:58:52.000Z" class="entry-date">
+        2016-11-17
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-chrome-extension" class="post-chrome-extension post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/11/15/chrome-extension/">chrome 扩展开发</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/11/15/chrome-extension/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/15/chrome-extension/" data-id="cj40xwqd6000dol0bgl9ra4is" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>浏览器扩展可以大大地增强我们浏览器的功能。比如捕捉网页内容、捕捉 http 报文、过滤页面广告、修改网页内容…… IE 扩展开发涉及 C++ 和 COM 技术，火狐扩展开发涉及环境搭建以及 web 开发以外的知识，而 chrome 扩展相对来说就比较简单，具备 JavaScript 等前端知识就能快速上手。以下，简单地介绍一下 chrome 扩展开发。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/11/15/chrome-extension/#more" class="more-link">More</a>
+          </p>
+        
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2016/11/15/chrome-extension/">
+    <time datetime="2016-11-15T09:32:59.000Z" class="entry-date">
+        2016-11-15
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/method/">method</a></li></ul>
 
     </footer>
 </article>
@@ -453,7 +445,7 @@
   
     <nav id="pagination">
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
       </nav>
     </nav>
   
@@ -472,6 +464,34 @@
       <ul>
         
           <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
@@ -483,34 +503,6 @@
             <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
           </li>
         
-          <li>
-            <a href="/2017/05/02/ready/">ready 方法的实现</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/variable/">JavaScript 变量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -520,7 +512,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </aside>
 
@@ -529,7 +521,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
     </div>
   </aside>
 

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_blank" />
+  
+  <meta name="description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>理解 css 块级格式化上下文（BFC） | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 css 块级格式化上下文（BFC）">
+<meta property="og:url" content="http://nanchao.win/2017/06/15/bfc/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
+<meta property="og:updated_time" content="2017-06-17T07:06:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 css 块级格式化上下文（BFC）">
+<meta name="twitter:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-bfc" class="post-bfc post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      理解 css 块级格式化上下文（BFC）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cj40xwqcu0004ol0b7x2p1vny" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。</p>
+<a id="more"></a>
+<p>css2.1 中除了 BFC（Block Formatting Contexts）还有 IFC（Inline formatting context）。其中 FC（Formatting Contexts）“格式化上下文”是指：页面中的一款渲染区域，该区域有自己的一套渲染规则，这个规则决定了这个区域元素如何摆放以及和其他元素的关系和作用。</p>
+<p><strong>w3c 中 BFC 定义：</strong></p>
+<blockquote>
+<p>浮动元素、绝对定位元素、非块级盒子的块级容器（inline-blocks, table-cells, 以及 table-captions 等）、以及 overflow 值不是 visible 的块级盒子，都会为它们的内容创建新的 BFC；</p>
+<p>在 BFC 中，盒子从包含块顶部垂直地一个接一个排列，两个盒子之间的垂直间隙由它们的 margin 值决定。相邻盒子直接的垂直外边距会折叠。</p>
+<p>在 BFC 中，每一个盒子的左外边缘（margin-left）触碰容器的左边缘（border-left）,即使存在浮动也这样，除非这个盒子又创建了一个新的 BFC。（如果是从右到左的格式，则每一个盒子的右外边缘触碰容器的右边缘。）</p>
+</blockquote>
+<p>盒子常分为【块级盒子】和【行内盒子】。display 属性为 block，list-item，table 的元素会生成块级盒子（block-level box）；display 属性为 inline，inline-block，inline-table 的元素会生成行内盒子（inline-level box）。</p>
+<p><strong>BFC 是一个独立容器，其里面元素不会影响到外面元素，也不会被外面元素影响。计算 BFC 高度时，浮动元素也参与计算。BFC的区域不会与 float box 重叠。</strong>举个例子：一个浮动元素 a 和另一个常规文档流元素 b 是重叠的，若给元素 b 设置一个 overflow: hidden 来创建一个 BFC，那么 a 和 b 便不再重合了，哪怕给 b 设置负的外边距也不会重合了。</p>
+<p><strong>以下条件会出现 BFC：</strong></p>
+<p>① float 值不是 none（float 的默认值，表示不浮动）的时候；<br>② position 值为 absolute | fixed；<br>③ overflow 值不是 visible 的时候（hidden | auto | scroll 等）；<br>④ display 值为 inline-block | table-cell | table-caption | flex | inline-flex；<br>⑤ 根元素、fieldset 元素。</p>
+<p>需要注意的是，display:table 本身并不会创建 BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的 display:table-cell 可以创建新的 BFC，换句话说，触发块级格式化上下文的是匿名框，而不是 display:table。所以通过 display:table 和 display:table-cell 创建的 BFC 效果是不一样的。</p>
+<p><strong>以下场景我们可以应用 BFC：</strong></p>
+<p><strong>a. 阻止外边距合并</strong></p>
+<p>我们知道，当两个垂直外边距相遇时，它们将形成一个外边距。合并规则如下：</p>
+<blockquote>
+<p>两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值。<br>两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值。<br>两个外边距一正一负时，折叠结果是两者相加的和。</p>
+</blockquote>
+<p><strong>注意，只有当元素在同一个BFC中时，垂直方向上的 margin 才会 clollpase。如果它们属于不同的 BFC，则不会有 margin collapse。</strong></p>
+<p>如果 div1 和相邻的 div2 的外边距都是 50px，正常情况下他们的外边距会叠加，叠加后外边距高度还是 50px。要使得他们之间外边距高度变成 100px，可以在两个 div 外层分别加一个父级 div，给父级 div 加上属性 overflow:hidden，即可触发 BFC，外边距不会合并，高度变为 100px。</p>
+<p><strong>b. 阻止行框围绕浮动框</strong></p>
+<p>如果浮动的 div1 和相邻的 div2 处于同一个父元素下，正常情况下，div1 会漂浮并遮挡住 div2。如果 div2 中文本足够多，会出现文本围绕 div1 的情景。如果给 div2 加上属性 overflow:hidden，触发 BFC，div2 就不会和浮动的 div1 重叠，也就不会再文本围绕了。</p>
+<p><strong>c. 清除浮动</strong></p>
+<p>如果一个容器里都是浮动元素，那么这个元素的高度就是 0。为了是这个容器有高度，一般，我们会用一个伪元素 claer 属性去清除浮动。由于<strong>计算 BFC 高度时，浮动元素也参与计算</strong>，所以我们可以给容器加上属性 overflow:hidden，触发 BFC，使得容器具有高度。</p>
+<p><strong>既然以上提到多种条件可以触发 BFC，为什么上面几个例子中都选择用 overflow:hidden 来触发呢？</strong></p>
+<p>我们可以为 container 容器附加属性，如 overflow:scroll，overflow:hidden，display: flex，float:left, 或 display:table 等等。尽管这些条件都能形成一个 BFC，但是它们各自却有着不一样的表现。如 overflow:scroll 可能会出现不想要的滚动条；float:left 会使得其他元素对其围绕；display:table 在响应式布局中会有问题。所以，比较简单的方式就是 overflow:hidden。</p>
+<p><strong>再回过头来详细说说外边距合并：</strong></p>
+<p>外边距合并的必要条件是 margin 必须邻接。<strong>而 margin 邻接要求主体必须是处于常规文档流（非 float，非 position:absolute）的块级盒子，并且它们处于同一个 BFC 当中。</strong>另外，如果有 clearance、padding 或 border 隔开了，也不算是邻接。</p>
+<p><strong>所以，以下都是邻接，会发生外边距合并：</strong></p>
+<p>① 元素的 margin-top 与其第一个常规文档流的子元素的 margin-top；<br>② 元素的 margin-bottom 与其下一个常规文档流的兄弟元素的 margin-top；<br>③ height 为 auto 的元素的 margin-bottom 与其最后一个常规文档流的子元素的 margin-bottom；<br>④ 高度为 0 并且最小高度也为 0，不包含常规文档流的子元素，并且自身没有建立新的 BFC 的元素的 margin-top 和 margin-bottom。前提是本身不能有 border 和 padding 高度。</p>
+<p><strong>以下不会发生外边距合并：</strong></p>
+<p>① 浮动元素、绝对定位元素、inline-block 元素不与任何元素外边距合并（包括其父元素、子元素）；<br>② 其他创建了新的 BFC 的元素（例如 overflow:hidden）和它的子元素外边距不合并；<br>③ 如果父元素包含 padding 或 border，那么其 margin-top 不会与第一个子元素的 margin-top 合并。margin-bottom 同理。</p>
+<p>上面提到的 clearance（间隙）指的是：当浮动元素之后的相邻元素设置 clear 属性以清除相关方向的浮动时，这个清除浮动的元素其 margin-top 以上会产生一定的空隙（clearance）。该空隙会阻止元素 margin-top 的折叠，其作为间距存在于清除浮动元素的 margin-top 的上方。</p>
+<div style="margin-bottom:20px;background-color:#ddd"><div style="margin-bottom:20px;background-color:#0f0;height:100px;width:100px;box-shadow:0 20px 0 rgba(0,255,0,0.2);">常规文档流元素，下外边距 20px</div><div style="float:left;margin:20px 0;background-color:#0ff;height:100px;width:200px">左浮动，上下外边距各 20px</div><div style="clear:left;margin-top:50px;background-color:#f0f;height:100px;width:300px;box-shadow:0 -50px 0 rgba(255,0,255,0.2);">清除左浮动，上外边距 50px</div></div>
+
+<p>（这里用阴影来标识外边距。）</p>
+<p>代码结构如下：</p>
+<pre><code>// dom
+&lt;div&gt;
+    &lt;div class=&quot;top&quot;&gt;常规文档流元素&lt;/div&gt;
+    &lt;div class=&quot;middle&quot;&gt;左浮动&lt;/div&gt;
+    &lt;div class=&quot;bottom&quot;&gt;清除左浮动&lt;/div&gt;
+&lt;/div&gt;
+
+// css
+.top {
+    margin-bottom:20px;
+    background-color:#0f0;
+    height:100px;
+    width:100px;
+    box-shadow:0 20px 0 rgba(0,255,0,0.2);
+}
+.middle {
+    float:left;
+    margin:20px 0;
+    background-color:#0ff;
+    height:100px;
+    width:200px;
+}
+.bottom {
+    clear:left;
+    margin-top:50px;
+    background-color:#f0f;
+    height:100px;width:300px;
+    box-shadow:0 -50px 0 rgba(255,0,255,0.2);
+}
+</code></pre><p>上面提到【浮动元素】不会与任何元素发生外边距合并。底部【清除浮动元素】的 margin-top 值设为 50px，可我们看到它与上面【浮动元素】的外边距是 20px。这里【浮动元素】和【清除浮动元素】貌似外边距合并了，实则不然。实际上，不管怎么修改这个 margin-top 值，这两个元素之间的间隙都等于【浮动元素】的下外边距。</p>
+<p>w3c 规定：【清除浮动元素】在 margin-top 上所产生的间距（clearance）的值与该块盒的margin-top 之和应该足够大，即大于【浮动元素】的 margin-bottom，这样使得【清除浮动元素】的 border-top 恰好与【浮动元素】块盒的 margin-bottom 紧贴。</p>
+<p><strong>也就是说，间隙多大我们不需要知道，只需记住【清除浮动元素】的 border-top 会紧贴着它上面的【浮动元素】的 margin-bottom。</strong></p>
+<p>参考：<br>[1] <a href="http://www.html-js.com/article/1866" target="_blank" rel="external">http://www.html-js.com/article/1866</a><br>[2] <a href="https://segmentfault.com/a/1190000009078619" target="_blank" rel="external">https://segmentfault.com/a/1190000009078619</a><br>[3] <a href="http://www.jianshu.com/p/fc1d61dace7b" target="_blank" rel="external">http://www.jianshu.com/p/fc1d61dace7b</a><br>[4] <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a><br>[5] <a href="https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="external">https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/06/15/bfc/">
+    <time datetime="2017-06-15T06:16:59.000Z" class="entry-date">
+        2017-06-15
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <p><span class="nav-previous"><a href="/2017/06/19/css-float/" rel="prev"><span class="meta-nav">上一篇：</span>css 浮动及清理浮动</a></span></p>
+    
+    
+        <p><span class="nav-next"><a href="/2017/06/14/css-layout/" rel="next"><span class="meta-nav">下一篇：</span>css 多列布局 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--网易云跟帖 开始-->
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "5a032688db1348678f3949687092d2c3",
+    target: "cloud-tie-wrapper"
+  };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <!--网易云跟帖 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>

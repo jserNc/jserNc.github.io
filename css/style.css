@@ -598,7 +598,7 @@ a:hover {
 
 /* Backgroud image */
 #bg {
-  background-image: url("images/20170420_3.jpg");
+  background-image: url("images/by3.jpg");
   background-color: #050a10;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -652,7 +652,7 @@ a:hover {
 }
 
 #cloud-tie-wrapper #yun-tie-sdk-wrap {
-	background-color: #dceed6;
+	background-color: #d5e0e9;
 }
 
 /* Page structure */
@@ -1004,7 +1004,7 @@ article.sticky .featured-post {
 .mu_register li {
 	margin: 0 0 0 36px;
 	/*margin: 0 0 0 2.571428571rem;*/
-	margin: 0 0 0 4rem;
+	margin: 0 0 0 2.5rem;
 }
 .entry-content blockquote,
 .comment-content blockquote {
@@ -1726,11 +1726,14 @@ img#wpstats {
 	}
 	.main-navigation ul.nav-menu,
 	.main-navigation div.nav-menu > ul {
-	    /* Border Line for Main */
-		/*border-bottom: 1px solid rgba(0, 0, 0, 0.24);
-		border-top: 1px solid rgba(0, 0, 0, 0.24);*/
-		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	    /* Border Line for Main 
 		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	   */
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+
+		
 		display: inline-block !important;
 		text-align: left;
 		width: 100%;

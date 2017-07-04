@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <base target="_blank" />
   
-  <meta name="description" content="利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。" />
+  <meta name="description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。" />
   
 
   
@@ -13,18 +13,18 @@
   
   
   
-  <title>css 垂直居中几种实现方法 | 南潮的博客</title>
+  <title>css 居中 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。">
+  <meta name="description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css 垂直居中几种实现方法">
+<meta property="og:title" content="css 居中">
 <meta property="og:url" content="http://nanchao.win/2016/12/26/css-vertical-centering/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。">
-<meta property="og:updated_time" content="2017-05-28T02:15:22.000Z">
+<meta property="og:description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。">
+<meta property="og:updated_time" content="2017-06-17T07:06:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css 垂直居中几种实现方法">
-<meta name="twitter:description" content="利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。">
+<meta name="twitter:title" content="css 居中">
+<meta name="twitter:description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -106,7 +106,7 @@
         
   
     <h1 class="entry-title article-title">
-      css 垂直居中几种实现方法
+      css 居中
     </h1>
   
 
@@ -115,7 +115,7 @@
             
             <a href="/2016/12/26/css-vertical-centering/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cj39pdy4x000uuh0br9oks95x" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cj40xwqdd000mol0bfykvq3vp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,12 +123,12 @@
 
     <div class="entry-content">
       
-        <p>利用 css 来实现 div 的垂直居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面介绍几种垂直居中的实现方法。</p>
+        <p>利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面分别探讨一下水平和垂直居中的实现方法。</p>
 <a id="more"></a>
-<p><strong> 方法一：使用表格的 vertical-align 属性</strong></p>
+<h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2><p><strong> ① 使用表格的 vertical-align 属性</strong></p>
 <pre><code>&lt;style&gt;
     #wrapper {
-        height: 200px;
+        height: 100px;
         width: 600px;
         background-color: #0f0;
         display: table;
@@ -148,15 +148,15 @@
         &lt;div class=&quot;content&quot;&gt;content&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</code></pre><div id="wrapper" style="height: 200px;width: 600px;background-color: #0f0;display: table;"><div id="cell" style="display: table-cell;vertical-align: middle;"><div class="content" style="height: 20px;width: 600px;background-color: #ff0;">content</div></div></div>
+</code></pre><div id="wrapper" style="height: 100px;width: 600px;background-color: #0f0;display: table;margin-bottom:15px;"><div id="cell" style="display: table-cell;vertical-align: middle;"><div class="content" style="height: 20px;width: 600px;background-color: #ff0;">content</div></div></div>
 
 <p>这种方法可以动态改变 div.content 的高度，但是 ie 兼容性不好。另外，嵌套标签也比较多。</p>
-<p><strong> 方法二：使用绝对定位，结合 top、margin-top 等属性</strong></p>
+<p><strong> ② 使用绝对定位，结合 top、margin-top 等属性</strong></p>
 <pre><code>&lt;style&gt;
 &lt;style&gt;
     #wrapper {
         position: absolute; 
-        height:200px;
+        height:100px;
         width:600px;
         background-color: #0f0;
     }  
@@ -172,13 +172,13 @@
 &lt;div id=&quot;wrapper&quot;&gt;
     &lt;div class=&quot;content&quot;&gt;content&lt;/div&gt;
 &lt;/div&gt;
-</code></pre><div style="height:200px;"><div id="wrapper" style="position: absolute; height:200px;width:600px;background-color: #0f0;"><div class="content" style="position: absolute;top: 50%;margin-top: -10px;height: 20px;background-color: #ff0;">content</div></div></div>
+</code></pre><div style="height:100px;margin-bottom:15px;"><div id="wrapper" style="position: absolute; height:100px;width:600px;background-color: #0f0;"><div class="content" style="position: absolute;top: 50%;margin-top: -10px;height: 20px;background-color: #ff0;">content</div></div></div>
 
 <p>margin-top 设置为负的 div.content 高度的一半。这种方法兼容性比较好，只是 div.content 空间不够时，content 会消失。</p>
-<p><strong> 方法三：同样使用绝对定位，结合 top、bottom、margin 等属性</strong></p>
+<p><strong> ③ 同样使用绝对定位，结合 top、bottom、margin 等属性</strong></p>
 <pre><code>&lt;style&gt;
     #wrapper {
-        height:200px;
+        height:100px;
         width:600px;
         background-color: #0f0;
         position: absolute;
@@ -195,13 +195,13 @@
 &lt;div id=&quot;wrapper&quot;&gt;
     &lt;div id=&quot;content&quot;&gt; Content goes here&lt;/div&gt;
 &lt;/div&gt;
-</code></pre><div style="height:200px;"><div id="wrapper" style="height:200px;width:600px;background-color: #0f0;position: absolute;"><div id="content" style="position: absolute;top: 0;bottom: 0;margin: auto;height: 20px;background-color: #ff0;"> Content goes here</div></div></div>
+</code></pre><div style="height:100px;margin-bottom:15px;"><div id="wrapper" style="height:100px;width:600px;background-color: #0f0;position: absolute;"><div id="content" style="position: absolute;top: 0;bottom: 0;margin: auto;height: 20px;background-color: #ff0;"> Content goes here</div></div></div>
 
 <p>使用绝对定位。这个 div 的 top 和 bottom 均为 0，但是它有高度，实际上并不能上下偏移都为 0，margin 设为 auto 会使它居中（如果需要水平也居中，可以说将 left、right 也设置为 0）。只是 ie 兼容性不好，空间不够时，content 会被截断。</p>
-<p><strong> 方法四：css3 属性 transform</strong></p>
+<p><strong> ④ css3 属性 transform</strong></p>
 <pre><code>&lt;style&gt;
     #wrapper {
-        height:200px;
+        height:100px;
         width:600px;
         background-color: #0f0;
         position: absolute;
@@ -217,15 +217,27 @@
 &lt;div id=&quot;wrapper&quot;&gt;
     &lt;div class=&quot;content&quot;&gt;Content goes here&lt;/div&gt;
 &lt;/div&gt;
-</code></pre><div style="height:200px;"><div id="wrapper" style="height:200px;width:600px;background-color: #0f0;position: absolute;"><div class="content" style="position: absolute;top: 50%;transform: translateY(-50%);height: 20px;background-color: #ff0;">Content goes here</div></div></div>
+</code></pre><div style="height:100px;margin-bottom:15px;"><div id="wrapper" style="height:100px;width:600px;background-color: #0f0;position: absolute;"><div class="content" style="position: absolute;top: 50%;transform: translateY(-50%);height: 20px;background-color: #ff0;">Content goes here</div></div></div>
 
 <p>这里 translateY 表示将元素在 Y 方向上移动，-50% 表示向上移动自身的 50% 高度。</p>
-<p><strong> 方法五：css3 flex 布局</strong></p>
+<p><strong> ⑤ 文本在 div 中垂直居中</strong></p>
+<pre><code>&lt;style&gt;
+    #content {
+        height: 100px;
+        line-height: 100px;
+        background-color: #0f0;
+    }
+&lt;/style&gt;
+&lt;div id=&quot;content&quot;&gt; Content here&lt;/div&gt;
+</code></pre><div id="content" style="height: 100px;line-height: 100px;background-color: #0f0;margin-bottom:15px;"> Content here</div>
+
+<p>将 line-height 属性设置为当前 div 的 height 值即可使文本垂直居中。</p>
+<p><strong> ⑥ css3 flex 布局</strong></p>
 <pre><code>&lt;style&gt;
     .box {
         display: flex;
         align-items: center;
-        height: 200px;
+        height: 100px;
         background-color: #0f0;
     }
     .content {
@@ -236,22 +248,79 @@
 &lt;div class=&quot;box&quot;&gt;
     &lt;div class=&quot;content&quot;&gt;Content goes here&lt;/div&gt;
 &lt;/div&gt;
-</code></pre><div class="box" style="display: flex;align-items: center;height: 200px;background-color: #0f0;"><div class="content" style="height: 20px;background-color: #ff0;">Content goes here</div></div>
+</code></pre><div class="box" style="display: flex;align-items: center;height: 100px;background-color: #0f0;margin-bottom:15px;"><div class="content" style="height: 20px;background-color: #ff0;">Content goes here</div></div>
 
 <p>将父容器 div.box 的 display 属性设置为 flex，align-items 属性指定项目在交叉轴上居中。</p>
-<p><strong> 最后，一个简单办法使得文本在 div 中垂直居中：</strong></p>
+<h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><p><strong> ① 子元素为行内元素 text-align:center</strong></p>
 <pre><code>&lt;style&gt;
-    #content {
-        height: 100px;
-        line-height: 100px;
-        background-color: #0f0;
+    .parent-span {
+        text-align :center;
+        height:100px;
+        background:#0f0;
     }
 &lt;/style&gt;
-&lt;div id=&quot;content&quot;&gt; Content here&lt;/div&gt;
-</code></pre><div id="content" style="height: 100px;line-height: 100px;background-color: #0f0;"> Content here</div>
+&lt;div class=&quot;parent-span&quot;&gt;
+    &lt;span&gt;行内元素span标签&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><div style="text-align :center;height:100px;background:#0f0;margin-bottom:25px;"><span>行内元素span标签</span></div>
 
-<p>将 line-height 属性设置为当前 div 的 height 值即可使文本垂直居中。</p>
-<p>参考：<br>[1] <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a><br>[2] <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/</a><br>[3] <a href="https://www.qianduan.net/css-to-achieve-the-vertical-center-of-the-five-kinds-of-methods/" target="_blank" rel="external">https://www.qianduan.net/css-to-achieve-the-vertical-center-of-the-five-kinds-of-methods/</a></p>
+<p><strong> ② 子元素为定宽块元素 margin:auto</strong></p>
+<pre><code>&lt;style&gt;
+    .parent {
+        height:100px;
+        background-color:#0f0;
+    }
+
+    .child-div {
+        width:200px;
+        margin:auto;
+        background-color:#f0f;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;child-div&quot;&gt;定宽块元素&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><div style="height:100px;background-color:#0f0;margin-bottom:25px;"><div style="width:200px;margin:auto;background-color:#f0f;">定宽块元素</div></div>
+
+<p><strong> ③ 子元素为不定宽块元素 display:inline;text-align:center;</strong></p>
+<pre><code>&lt;style&gt;
+    .child-ul {
+        background-color:#f0f;
+        display:inline;
+    }
+    .parent-ul {
+        height:100px;
+        background-color:#0f0;
+        text-align:center;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;parent-ul&quot;&gt;
+    &lt;div class=&quot;child-ul&quot;&gt;不定宽块元素&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><div style="height:100px;background-color:#0f0;text-align:center;margin-bottom:25px;"><div style="background-color:#f0f;display:inline;">不定宽块元素</div></div>
+
+<p><strong> ④ 子元素为块级元素 display:flex; align-items:center</strong></p>
+<pre><code>&lt;style&gt;
+    .parent-flex {
+        display:flex;
+        justify-content:center;
+        height:100px;
+        background-color:#0f0;
+    }
+    .child {
+        background-color:#f0f;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;parent-flex&quot;&gt;
+    &lt;div class=&quot;child&quot;&gt;子元素div&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class=&quot;parent-flex&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;child&quot;&gt;子元素a&lt;/a&gt;
+&lt;/div&gt;
+</code></pre><div style="display:flex;justify-content:center;height:100px;background-color:#0f0;"><div style="background-color:#f0f;">子元素div</div></div><br><div style="display:flex;justify-content:center;height:100px;background-color:#0f0;margin-bottom:50px;"><a href="#" style="background-color:#f0f;">子元素a</a></div>
+
+<p>参考：<br>[1] <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a><br>[2] <a href="http://web.jobbole.com/90844/" target="_blank" rel="external">http://web.jobbole.com/90844/</a><br>[3] <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/</a><br>[4] <a href="https://www.qianduan.net/css-to-achieve-the-vertical-center-of-the-five-kinds-of-methods/" target="_blank" rel="external">https://www.qianduan.net/css-to-achieve-the-vertical-center-of-the-five-kinds-of-methods/</a></p>
 
       
     </div><!-- .entry-content -->
@@ -327,6 +396,34 @@
       <ul>
         
           <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/09/function/">JavaScript 函数</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
@@ -338,34 +435,6 @@
             <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
           </li>
         
-          <li>
-            <a href="/2017/05/02/ready/">ready 方法的实现</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/21/call-apply-bind/">理解 call + bind</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/14/some-javascript-functions/">几个典型的 JavaScript 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/variable/">JavaScript 变量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/07/data-type/">JavaScript 数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/06/CSRF/">CSRF 攻击原理</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/05/XSS/">XSS 攻击原理</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -375,7 +444,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </aside>
 
@@ -384,7 +453,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grammar/" style="font-size: 12.5px;">grammar</a> <a href="/tags/js/" style="font-size: 17.5px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 15px;">problem</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
     </div>
   </aside>
 
