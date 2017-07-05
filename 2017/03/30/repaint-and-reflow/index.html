@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
 回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.663Z">
+<meta property="og:updated_time" content="2017-07-05T03:37:18.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重绘和回流（repaint & reflow）">
 <meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
@@ -119,7 +119,7 @@
             
             <a href="/2017/03/30/repaint-and-reflow/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj4nwwvv6002ejkbaopdk1ssn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cj4qgeq7c002chsba87xk2d0l" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -134,7 +134,7 @@
 <blockquote>
 <p>① 解析 html 结构为 dom 树。包括 display : none 元素和用 js 动态添加的元素；<br>② 解析 css，产生 css 规则树；<br>③ 通过 dom 树和 css 规则树构造渲染（render）树；<br>④ 浏览器“画”出所有渲染树中的节点。</p>
 </blockquote>
-<p>其中，渲染树不包括隐藏的节点，比如 display : none 的节点，head 节点等。</p>
+<p>其中，渲染树不包括隐藏的节点，比如 display : none 的节点，head 节点等。<strong>由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。</strong></p>
 <p><strong>以下情况会触发「重绘」和「回流」：</strong></p>
 <p>（1）页面首次加载；<br>（2）dom 元素的添加，修改，删除；<br>（3）应用新的 css 样式；<br>（4）resize 浏览器窗口、滚动页面；<br>（5）读取元素的某些属性（scrollTop/Left、clientTop/Left、currentStyle等）。</p>
 <p>前 4 条触发重绘或者回流的原因比较好理解。这里解释一下第 5 条：由于每次重绘、回流都会产生计算消耗，所以大多数浏览器都通过维护一个回流/重绘队列并批量执行来优化重排过程，而不是一句代码就回流/重绘一次的。但是，<strong>获取布局信息的（返回最新的布局信息）</strong>操作会导致队列被强制刷新（浏览器马上执行渲染队列并触发重排以返回正确值）</p>
