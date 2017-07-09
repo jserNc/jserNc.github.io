@@ -23,7 +23,7 @@
 <meta property="og:description" content="JavaScript 变量分为两种：【基本类型】和【引用类型】。6 种数据类型里，除了对象是引用类型变量，其他的都是基本类型变量。引用类型的变量由多个值构成。当然了，每种基本类型（null 和 undefined 除外）都有与其对应的引用类型，在必要时候，基本类型变量也会自动转换成对应引用类型变量，然后再继续运算。">
 <meta property="og:image" content="http://nanchao.win/css/images/variable/basic-type.png">
 <meta property="og:image" content="http://nanchao.win/css/images/variable/reference-type.png">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.808Z">
+<meta property="og:updated_time" content="2017-07-09T14:34:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 变量">
 <meta name="twitter:description" content="JavaScript 变量分为两种：【基本类型】和【引用类型】。6 种数据类型里，除了对象是引用类型变量，其他的都是基本类型变量。引用类型的变量由多个值构成。当然了，每种基本类型（null 和 undefined 除外）都有与其对应的引用类型，在必要时候，基本类型变量也会自动转换成对应引用类型变量，然后再继续运算。">
@@ -118,7 +118,7 @@
             
             <a href="/2017/04/07/variable/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/variable/" data-id="cj4rqq3y3002uoobaoauq31kc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/07/variable/" data-id="cj4wtd2ns0035ky0b6rdfbqql" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -213,6 +213,13 @@ console.log(obj2.name);
 </code></pre><p>以上对变量复制的过程，引用类型变量的“原变量”和“新变量”会“绑定在一起”，它们其中一个的属性变化，另一个也会跟着变化，这叫变量复制也叫做浅拷贝；基本类型变量的“原变量”和“新变量”是独立的，一个变化不会影响另一个，这种变量复制也叫做深拷贝。</p>
 <p>为什么会这样呢？</p>
 <p>我们再回顾一下上文 JavaScript 变量的存储方式。基本类型变量只有栈区的变量标识符和栈区的变量值，而引用类型变量有栈区的变量标识符、栈区的变量值（堆区的地址）以及堆区的对象数据。<strong>变量复制的本质是传值，这个值就是栈区的变量值。</strong>基本类型变量的的值就是存放在栈区里的值，复制后，两个变量互不影响；复制引用类型变量的时候，复制的也是栈区的变量值，而这个值是对象数据在堆区的地址，堆内存的对象数据并没有复制，然后两个标识符指向同一个堆内存，当我们对其中一个变量修改（修改堆内存数据），另一个变量当然也会跟着改变。</p>
+<p>再看一个赋值语句：</p>
+<pre><code>var obj1 = obj2 = {};
+obj1.name = &#39;hello&#39;;
+
+console.log(obj2.name)
+// &#39;hello&#39;
+</code></pre><p>这里，obj1 和 obj2 指向的是同一个对象，所以，改变对象 obj1 会影响到 obj2，不应该感到意外！</p>
 <p>引用类型变量（函数、数组、对象）直接复制都是浅拷贝，下面，我们举例说明如何实现其深拷贝。</p>
 <p>① 数组深拷贝：</p>
 <pre><code>//slice 方法或 concat 方法
