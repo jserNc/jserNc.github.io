@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/03/setTimeout/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.710Z">
+<meta property="og:updated_time" content="2017-07-13T02:57:33.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 JavaScript 中 setTimeout">
 <meta name="twitter:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
@@ -115,7 +115,7 @@
             
             <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cj4rqq3u7002eoobaadaumotq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="cj51uhs6j002aqobaoy9bmy3b" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -175,7 +175,13 @@ console.log(2);
 </code></pre><p>以上代码，我们写的延迟时间是 0，我们期待的是立刻输出 1。然而，执行以上代码我们发现，先输出 2，然后才输出 1。为什么会这样呢？</p>
 <p>首先，我们明确一个概念：<strong>JavaScript 是单线程的语言，在执行时必须等前面的任务处理完以后才会处理后面的。JavaScript 中的任务分为同步任务和异步任务，同步任务就是主线程上一个个排队执行的任务；异步任务则不进入主线任务而是被加入到任务队列中，任务队列的任务只有在主线任务执行完成之后才去处理任务队列中的任务。</strong></p>
 <p>setTimeout 方法中待执行的代码就是异步任务。延时参数设为 0，仅仅表示同步任务执行完后尽可能早地执行该异步任务。0 毫秒的延迟在实际中也不存在的。为了防止多个 setTimeout(f,0) 连续执行造成性能问题，html5 规定，setTimeout 方法指定的时间最少是 4 毫秒。如果小于这个值，会自动增加到 4 毫秒。当然了，设置的延迟时间太长也不行。setTimeout 最多只能延迟 24.8 天（ 即 2147483647 毫秒，因为浏览器内部使用 32 位带符号的整数，来储存这个延迟执行的时间），超过这个时间，等同于延迟时间设为 0，即 setTimeout(f,0)。</p>
-<p>由于要等到本次 Event Loop 的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照 setTimeout 方法指定的延迟时间执行。</p>
+<p>setTimeout 方法省略第二个参数，则该参数默认为 0。</p>
+<pre><code>setTimeout(function(){
+    console.log(1)
+});
+
+// 尽快打印 1
+</code></pre><p>由于要等到本次 Event Loop 的同步任务执行完才可能执行指定的异步任务。而前面的同步任务要多久才执行完是没法保证的。也就是说无法保证延迟任务一定按照 setTimeout 方法指定的延迟时间执行。</p>
 <pre><code>setTimeout(someTask,100);
 veryLongTask();
 </code></pre><p>上面代码指定 100 毫秒后运行一个任务。但是，如果后面立即执行的任务（当前脚本的同步任务）非常耗时，运行超过 100 毫秒无法结束。那么，推迟的 someTask 只有等着，等到前面的 veryLongTask 运行结束才开始执行。</p>
