@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/19/css-float/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="默认情况下，元素处于普通流。给元素设置 float 属性后，可以使元素向左或向右浮动，直到它的外边缘碰到包含块或者另一个浮动框。当然了，如果元素 float 属性设为 none，那就表示不浮动，它还是出现在它原本应该出现的位置。">
-<meta property="og:updated_time" content="2017-07-17T03:16:17.687Z">
+<meta property="og:updated_time" content="2017-07-17T03:50:02.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css 浮动及清理浮动">
 <meta name="twitter:description" content="默认情况下，元素处于普通流。给元素设置 float 属性后，可以使元素向左或向右浮动，直到它的外边缘碰到包含块或者另一个浮动框。当然了，如果元素 float 属性设为 none，那就表示不浮动，它还是出现在它原本应该出现的位置。">
@@ -115,7 +115,7 @@
             
             <a href="/2017/06/19/css-float/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/19/css-float/" data-id="cj57k3kny000kj8bay3xy70i6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/19/css-float/" data-id="cj57lzq6e000le8ba7ooj9iwc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -204,7 +204,7 @@
 }
 .clearfix {
     /** ie6-7 **/
-    zoom: 1;
+    *zoom: 1;
 }
 
 &lt;div class=&quot;wrap clearfix&quot;&gt;
@@ -213,6 +213,7 @@
     &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 </code></pre><p>其中，display:block 使生成的元素以块级元素显示，占满剩余空间；height:0 避免生成内容破坏原有布局的高度；visibility:hidden 使生成的内容不可见；通过 content:”.”生成内容作为最后一个元素，至于 content 里面是 “.” 还是其他都是可以的。</p>
+<p>注意：css 属性名前加 * 表示该属性对 ie6-7 有效，其他浏览器不识别，如这里的 *zoom；而 _ 开的属性只有 ie6 才能识别。</p>
 <p><strong> b) 浮动末尾添加空标签，对该空标签添加 clear 属性；</strong></p>
 <pre><code>&lt;div class=&quot;wrap&quot;&gt;
     &lt;div class=&quot;fleft&quot;&gt;左浮动&lt;/div&gt;
