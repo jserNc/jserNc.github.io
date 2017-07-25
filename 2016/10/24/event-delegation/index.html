@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/event-delegation/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
-<meta property="og:updated_time" content="2017-06-29T06:04:39.441Z">
+<meta property="og:updated_time" content="2017-07-25T01:57:03.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 事件代理（委托）">
 <meta name="twitter:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
@@ -115,7 +115,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj57lzq7i000xe8baagxms91d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj5iwe40q000s9sbae674umxg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -207,7 +207,26 @@
     }
 }
 </code></pre><p>以上代码中取消了事件的传播，这个处理不是必须的，可以省略。但是如果不这样，会导致事件传播到最顶层元素，甚至是 window 对象。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
+<h3 id="事件绑定："><a href="#事件绑定：" class="headerlink" title="事件绑定："></a>事件绑定：</h3><p>除了以上把回调函数赋值给元素的 onclick 属性来监听点击事件以外，我们还可以用以下方式给元素添加各种类型事件绑定。</p>
+<pre><code>var addEvent = function (el, type, fn ){
+    if (el.attachEvent) {
+        // ie
+        el.attachEvent( &#39;on&#39; + type, fn );
+    } else {
+        // w3c
+        el.addEventListener( type, fn, false );
+    }
+};
+</code></pre><p>这里需要注意的是 addEventListener 函数的第三个参数 useCapture。这个参数布尔值，指定事件是在捕获还是冒泡阶段执行。如果指定为 true，那么事件就在捕获阶段执行；如果是 false，事件在冒泡阶段执行。一般情况下，我们都会选择 false。</p>
+<p>举例说明：</p>
+<pre><code>&lt;div&gt;
+    &lt;p&gt;点击这里&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><p>对于以上 dom 结构，我们在 div 和 p 标签上都绑定了 click 事件。如果我们点击 p 标签，不止会触发 p 标签的 click 事件，还会触发它的父元素 div 的 click 事件。而 useCapture 这个参数可以控制这两个事件发生的先后顺序。</p>
+<p>如果 useCapture 为 true，那就是【事件捕获】，先触发 div 的 click 事件，再触发 p 的 click 事件；如果 useCapture 为 false，那就是【事件冒泡】，先触发 p 的 click 事件，再触发 div 的 click 事件。</p>
+<p>如果我们给所有的元素监听事件时，都设定 useCapture 为 false，那就所有的事件都在冒泡的阶段触发。而所有子元素的事件都会冒泡到祖先元素，所以，我们可以通过祖先元素来代理（委托）子元素的事件了。</p>
+<p>如果给不同的元素设置不一样的 useCapture 值，有的设为 true，有的设为 false。那就就先从最外层向【目标节点】方向寻找 useCapture 设为 true 的捕获事件，然后到达【目标节点】执行目标元素事件后，再往外层方向寻找 useCapture 设为 false 的冒泡事件。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a><br>[3] <a href="https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/" target="_blank" rel="external">https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/</a></p>
 
       
     </div><!-- .entry-content -->
