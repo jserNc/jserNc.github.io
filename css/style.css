@@ -598,7 +598,7 @@ a:hover {
 
 /* Backgroud image */
 #bg {
-  background-image: url("images/by3.jpg");
+  background-image: url("images/by9.jpg");
   background-color: #050a10;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -646,13 +646,9 @@ a:hover {
 	z-index: 100000; /* Above WP toolbar */
 }
 
-/* wangyiyun comment */
-#cloud-tie-wrapper.cloud-tie-wrapper{
-	margin-top: 30px;
-}
-
-#cloud-tie-wrapper #yun-tie-sdk-wrap {
-	background-color: #d5e0e9;
+/* uyan comment */
+#uyan_frame {
+	margin-top : 20px;
 }
 
 /* Page structure */

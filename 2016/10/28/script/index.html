@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base target="_blank" />
   
   <meta name="description" content="原文： http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
 我们知道，js 同步脚本会阻塞浏览器对 dom 的解析，体验比较差。如果可以，我们会尽可能地采取异步方式调取 js 脚本。鉴于 js 代码中有可能包含输出文档内容、修改 dom 结构、重定向等行为，所以默认同步执行脚本才是安全的。" />
@@ -124,7 +123,7 @@
             
             <a href="/2016/10/28/script/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cj4wtd2nk002jky0b0jwwphz8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/28/script/" data-id="cjbcz18wl002hr60bq8xl7aq1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -233,18 +232,10 @@
 
 
 <section id="comments">
-  <!--网易云跟帖 开始-->
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-  <script>
-  var cloudTieConfig = {
-    url: document.location.href, 
-    sourceId: "",
-    productKey: "5a032688db1348678f3949687092d2c3",
-    target: "cloud-tie-wrapper"
-  };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-  <!--网易云跟帖 结束-->
+  <!--友言 开始-->
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143418"></script>
+  <!--友言 结束-->
 </section>
 
 
@@ -261,6 +252,14 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget-content">
       <ul>
+        
+          <li>
+            <a href="/2017/12/19/vue-global-api/">vue 2.x 全局 api 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/09/jquery-summary/">jquery 基础</a>
+          </li>
         
           <li>
             <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
@@ -294,14 +293,6 @@
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
-          <li>
-            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -311,7 +302,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -320,7 +311,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </aside>
 

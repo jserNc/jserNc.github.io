@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base target="_blank" />
   
   <meta name="description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？" />
   
@@ -21,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/10/24/event-delegation/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
-<meta property="og:updated_time" content="2017-05-29T08:04:26.000Z">
+<meta property="og:updated_time" content="2017-12-19T01:26:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 事件代理（委托）">
 <meta name="twitter:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
@@ -115,7 +114,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cj4wtd2mw0016ky0blya2vp1b" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cjbcz18vt0014r60bh760w0lz" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -207,7 +206,26 @@
     }
 }
 </code></pre><p>以上代码中取消了事件的传播，这个处理不是必须的，可以省略。但是如果不这样，会导致事件传播到最顶层元素，甚至是 window 对象。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a></p>
+<h3 id="事件绑定："><a href="#事件绑定：" class="headerlink" title="事件绑定："></a>事件绑定：</h3><p>除了以上把回调函数赋值给元素的 onclick 属性来监听点击事件以外，我们还可以用以下方式给元素添加各种类型事件绑定。</p>
+<pre><code>var addEvent = function (el, type, fn ){
+    if (el.attachEvent) {
+        // ie
+        el.attachEvent( &#39;on&#39; + type, fn );
+    } else {
+        // w3c
+        el.addEventListener( type, fn, false );
+    }
+};
+</code></pre><p>这里需要注意的是 addEventListener 函数的第三个参数 useCapture。这个参数布尔值，指定事件是在捕获还是冒泡阶段执行。如果指定为 true，那么事件就在捕获阶段执行；如果是 false，事件在冒泡阶段执行。一般情况下，我们都会选择 false。</p>
+<p>举例说明：</p>
+<pre><code>&lt;div&gt;
+    &lt;p&gt;点击这里&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><p>对于以上 dom 结构，我们在 div 和 p 标签上都绑定了 click 事件。如果我们点击 p 标签，不止会触发 p 标签的 click 事件，还会触发它的父元素 div 的 click 事件。而 useCapture 这个参数可以控制这两个事件发生的先后顺序。</p>
+<p>如果 useCapture 为 true，那就是【事件捕获】，先触发 div 的 click 事件，再触发 p 的 click 事件；如果 useCapture 为 false，那就是【事件冒泡】，先触发 p 的 click 事件，再触发 div 的 click 事件。</p>
+<p>如果我们给所有的元素监听事件时，都设定 useCapture 为 false，那就所有的事件都在冒泡的阶段触发。而所有子元素的事件都会冒泡到祖先元素，所以，我们可以通过祖先元素来代理（委托）子元素的事件了。</p>
+<p>如果给不同的元素设置不一样的 useCapture 值，有的设为 true，有的设为 false。那就就先从最外层向【目标节点】方向寻找 useCapture 设为 true 的捕获事件，然后到达【目标节点】执行目标元素事件后，再往外层方向寻找 useCapture 设为 false 的冒泡事件。</p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a><br>[3] <a href="https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/" target="_blank" rel="external">https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/</a></p>
 
       
     </div><!-- .entry-content -->
@@ -253,18 +271,10 @@
 
 
 <section id="comments">
-  <!--网易云跟帖 开始-->
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-  <script>
-  var cloudTieConfig = {
-    url: document.location.href, 
-    sourceId: "",
-    productKey: "5a032688db1348678f3949687092d2c3",
-    target: "cloud-tie-wrapper"
-  };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-  <!--网易云跟帖 结束-->
+  <!--友言 开始-->
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143418"></script>
+  <!--友言 结束-->
 </section>
 
 
@@ -281,6 +291,14 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget-content">
       <ul>
+        
+          <li>
+            <a href="/2017/12/19/vue-global-api/">vue 2.x 全局 api 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/09/jquery-summary/">jquery 基础</a>
+          </li>
         
           <li>
             <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
@@ -314,14 +332,6 @@
             <a href="/2017/05/24/cross-origin/">跨域解决方案</a>
           </li>
         
-          <li>
-            <a href="/2017/05/12/observer/">JavaScript 观察者模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/04/singleton/">JavaScript 单例模式</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -331,7 +341,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -340,7 +350,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a>
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </aside>
 
