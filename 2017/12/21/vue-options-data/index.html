@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/12/21/vue-options-data/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="基于 Vue 的应用往往开始于新建一个 Vue 实例，将一个 options 配置对象传给 Vue 构造函数即可完成实例的创建，本文以一个小例子来梳理一下 Vue 实例的创建过程。">
-<meta property="og:updated_time" content="2017-12-23T15:08:39.000Z">
+<meta property="og:updated_time" content="2017-12-25T02:39:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 实例创建过程">
 <meta name="twitter:description" content="基于 Vue 的应用往往开始于新建一个 Vue 实例，将一个 options 配置对象传给 Vue 构造函数即可完成实例的创建，本文以一个小例子来梳理一下 Vue 实例的创建过程。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/12/21/vue-options-data/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/21/vue-options-data/" data-id="cjbft1yg70030ze0b3npes0fj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/21/vue-options-data/" data-id="cjblkf0q4003dut0b5yj88ott" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -139,7 +139,7 @@ var app = new Vue({
 })
 </code></pre><p>首先，执行构造函数 Vue（<a href="http://nanchao.win/2017/12/19/vue-global-api/">上篇已经分析过，这里的 Vue$3 就是我们用到的 Vue</a>)</p>
 <pre><code>function Vue$3 (options) {
-  // 若直接调用 Vue，打印警告，Vue 是构造函数，必须用 new 关键词调用
+  /* 若直接调用 Vue 打印警告，Vue 是构造函数，必须用 new 来调用 */
 
   // 根据 options 完成一系列初始化操作
   this._init(options);
@@ -238,6 +238,7 @@ vm._init({
 
   // 调用 beforeCreate 钩子回调函数
   callHook(vm, &#39;beforeCreate&#39;);
+
   // 初始化 inject（在初始化 data/props 之前）
   initInjections(vm);
 
@@ -245,7 +246,7 @@ vm._init({
   initState(vm);
 
   // 初始化 provide（在初始化 data/props 之前）
-  initProvide(vm); // resolve provide after data/props
+  initProvide(vm);
 
   // 调用 created 钩子回调函数
   callHook(vm, &#39;created&#39;);
@@ -272,7 +273,7 @@ Vue$3.prototype.$mount = function (el,hydrating) {
   el = el &amp;&amp; query(el);
 
   if (el===document.body || el===document.documentElement){
-    // 警告：不能将挂载到 &lt;html&gt; 或 &lt;body&gt;，只能挂载到普通元素上
+    /* 警告：不能将挂载到 &lt;html&gt; 或 &lt;body&gt;，只能挂载到普通元素上 */
     return this
   }
 
@@ -297,7 +298,7 @@ Vue$3.prototype.$mount = function (el,hydrating) {
         template = template.innerHTML;
       // ③ 其他都是无效的 template 选项
       } else {
-        // 警告：无用 template
+        /* 警告：无用 template */
         return this
       }
     // (2) template 不存在，el 也可当做 template
@@ -307,7 +308,7 @@ Vue$3.prototype.$mount = function (el,hydrating) {
 
     // 根据模板 template 生成渲染函数
     if (template) {
-      // 标记编译开始
+      /* 标记编译开始 */
 
       /*
        compileToFunctions (template, options, vm) 生成渲染函数
@@ -330,7 +331,7 @@ Vue$3.prototype.$mount = function (el,hydrating) {
       options.render = render;
       options.staticRenderFns = staticRenderFns;
 
-      // 标记编译结束
+      /* 标记编译结束 */
     }
   }
   // 修正完 this.$options 的渲染函数，开始挂载
@@ -358,7 +359,7 @@ Vue$3.prototype.$mount = function (el,hydrating) {
          */
       // ② 直接发出警告，模板或渲染函数不存在
       } else {
-          // 警告，组件安装失败：未定义模板或者渲染函数
+          /* 警告，组件安装失败：未定义模板或者渲染函数 */
       }
     }
   }
