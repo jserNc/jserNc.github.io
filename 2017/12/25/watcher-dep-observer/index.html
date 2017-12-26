@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Vue 中 Observer-Dep-Watcher 三者的关系 | 南潮的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 中 Observer-Dep-Watcher 三者的关系">
+<meta property="og:url" content="http://nanchao.win/2017/12/25/watcher-dep-observer/index.html">
+<meta property="og:site_name" content="Enjoy javascript">
+<meta property="og:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
+<meta property="og:updated_time" content="2017-12-26T14:33:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 中 Observer-Dep-Watcher 三者的关系">
+<meta name="twitter:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+    
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <script src='/js/nprogress.js'></script>
+  <link rel='stylesheet' href='/css/nprogress.css'/>
+
+  <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+  <script src="/js/prettify.js" type="text/javascript"></script>
+
+  <!-- baidu webmaster push -->
+  <!--<script src='//push.zhanzhang.baidu.com/push.js'></script>-->
+    
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      
+
+<header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Enjoy javascript" rel="home">Enjoy javascript</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">为者常成，行者常至</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/demo">Demo</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+
+
+<script>
+    // Show the progress bar 
+    NProgress.start();
+
+    // Increase randomly
+    var interval = setInterval(function() { NProgress.inc(); }, 1000);        
+
+    // Trigger finish when page fully loaded
+    jQuery(window).load(function () {
+        clearInterval(interval);
+        NProgress.done();
+    });
+
+    // Trigger bar when exiting the page
+    jQuery(window).unload(function () {
+        NProgress.start();
+    });
+
+</script>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-watcher-dep-observer" class="post-watcher-dep-observer post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Vue 中 Observer-Dep-Watcher 三者的关系
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2017/12/25/watcher-dep-observer/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="cjblzrx9e003c7q0bc7feb0ci" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    
+
+    <div class="entry-content">
+      
+        <p>Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。</p>
+<a id="more"></a>
+<h2 id="发布者工厂方法-Observer"><a href="#发布者工厂方法-Observer" class="headerlink" title="发布者工厂方法 Observer"></a>发布者工厂方法 Observer</h2><p>下面通过一句代码来理解 Observer：</p>
+<pre><code>observe(data, true /* 作为根 data */);
+</code></pre><p>(1) 如果 data 不是对象就返回，只有对象才继续执行后续步骤<br>(2) 如果 data 有对应的 Observer 实例 data.<strong>ob</strong> 那就将它作为 observe 方法返回值<br>(3) 如果 data 没有对应的 Observer 实例，那就执行 ob = new Observer(value)<br>(4) new Observer(value) 的本质是执行 ob.walk(data)<br>(5) 依次遍历 data 的属性 key，执行 defineReactive$$1(obj, keys[i], obj[keys[i]])<br>(6) defineReactive$$1 会劫持属性 key 的 get/set 操作。<br>(7) 当获取属性 key 时除了返回属性值，还会将 Dep.target（即与属性 key 对应的 watcher）加入到 key 的订阅者数组里（dep.depend() -&gt; Dep.target.addDep(dep)）<br>(8) 当设置属性 key 时除了更新属性值外，还会由主题对象 dep 发出通知给所有的订阅者 dep.notify()</p>
+<p>总的来说就是：observe(data) -&gt; new Observer(data) -&gt; defineReactive$$1()</p>
+<p>下面着重看一下 defineReactive$$ 方法：</p>
+<pre><code>// 在 obj 对象上劫持 key 属性的 get/set 操作
+function defineReactive$$1(obj,key,val,customSetter,shallow){
+
+  // 新建一个主题对象
+  var dep = new Dep();
+
+  /*
+  对象的每一个属性都有相应的描述对象，例如：
+
+  var o = {a:1}
+  var props = Object.getOwnPropertyDescriptor(o,&#39;a&#39;)
+  -&gt; { 
+      value: 1, 
+      writable: true, 
+      enumerable: true, 
+      configurable: true
+    }
+  */
+  var property = Object.getOwnPropertyDescriptor(obj, key);
+
+  // 如果 obj 的 key 属性不可配置，直接返回
+  if (property &amp;&amp; property.configurable === false) {
+    return
+  }
+
+  // 之前定义的 getter/setters
+  var getter = property &amp;&amp; property.get;
+  var setter = property &amp;&amp; property.set;
+
+  /*
+   shallow 的意思是&quot;浅的&quot;，也就是说没有指定&quot;浅观察&quot;，就是深度观察
+
+   举例来说：
+   obj = {
+     a : {
+        aa : 1
+     },
+     b : {
+        bb : 2
+     }
+   }
+
+   这里的 val 就不同普通的原始类型值了，val 是 {aa : 1}，{bb : 1} 
+   这样的对象，那么就递归遍历 val 对象的属性，劫持其属性的 gett/set
+
+  */
+
+  // 【重要】这句作用就是：递归遍历劫持 val 的所有子属性
+  var childOb = !shallow &amp;&amp; observe(val);
+
+  /*
+    Object.defineProperty(obj, prop, descriptor) 
+    参数：
+    obj 需要定义属性的对象。
+    prop 需被定义或修改的属性名。
+    descriptor 需被定义或修改的属性的描述符
+
+    作用：直接在一个对象上定义一个新属性，或者修改一个已经存在的属性
+   */
+  Object.defineProperty(obj, key, {
+    // 可枚举
+    enumerable: true,
+    // 可配置
+    configurable: true,
+    // 获取 obj 的 key 属性时触发该方法
+    get: function reactiveGetter () {
+      var value = getter ? getter.call(obj) : val;
+      if (Dep.target) {
+        // 相当于 Dep.target.addDep(dep)
+        dep.depend();
+        if (childOb) {
+          // 相当于 Dep.target.addDep(childOb.dep)
+          childOb.dep.depend();
+        }
+        if (Array.isArray(value)) {
+          // 对数组每项 e 调用 Dep.target.addDep(e.__ob__.dep)
+          dependArray(value);
+        }
+      }
+      return value
+    },
+    // 设置 obj 的 key 属性时触发该函数
+    set: function reactiveSetter (newVal) {
+      // 获取旧值
+      var value = getter ? getter.call(obj) : val;
+
+      // 如果旧值和新值相等或者旧值和新值都是 NaN，则不进行设置操作。
+      //（NaN 是唯一不等于自身的值）
+      if (newVal === value || 
+         (newVal !== newVal &amp;&amp; value !== value)) {
+        return
+      }
+
+      // 执行自定义 setter
+      if (&quot;development&quot; !== &#39;production&#39; &amp;&amp; customSetter) {
+        customSetter();
+      }
+
+      // 设置新值
+      if (setter) {
+        setter.call(obj, newVal);
+      } else {
+        // 注意：set/set 函数在这里是闭包，所以能共用 val 的值
+        val = newVal;
+      }
+
+      // 递归遍历 newVal 的所有子属性
+      childOb = !shallow &amp;&amp; observe(newVal);
+
+      // 发通知订阅者，分别执行 update 方法
+      dep.notify();
+    }
+  });
+}
+</code></pre><h2 id="发布者-订阅者之间的主题工厂方法-Dep"><a href="#发布者-订阅者之间的主题工厂方法-Dep" class="headerlink" title="发布者-订阅者之间的主题工厂方法 Dep"></a>发布者-订阅者之间的主题工厂方法 Dep</h2><p>Dep 的作用是创建主题。主题的作用是替发布者管理订阅者。每一个发布者可以有多个订阅者，主题可以对订阅者进行增加、删除等操作。最重要的是当发布者有新的动作是，主题还可以把消息传达给所有订阅者，订阅者就会执行特定方法（这里是 update 方法）来完成相应的操作了。</p>
+<pre><code>var uid = 0;
+
+// 主题工厂方法，Dep 是 dependency 的简写，也可以叫依赖
+var Dep = function Dep () {
+  this.id = uid++;
+  // 订阅者将被添加到这个数组里
+  this.subs = [];
+};
+
+// 添加订阅者（watcher）
+Dep.prototype.addSub = function addSub (sub) {
+  this.subs.push(sub);
+};
+
+// 删除订阅者
+Dep.prototype.removeSub = function removeSub (sub) {
+  // 先找到 sub 在 this.subs 中的索引，然后删除它
+  remove(this.subs, sub);
+};
+
+// 添加依赖
+Dep.prototype.depend = function depend () {
+  if (Dep.target) {
+    // 相当于 this.addSub(Dep.target)
+    // 其中 Dep.target 为订阅者（watcher）
+    Dep.target.addDep(this);
+  }
+};
+
+// 触发更新
+Dep.prototype.notify = function notify () {
+  // 先复制一份订阅者数组，以免执行下面 for 循环过程中该数组变化了
+  var subs = this.subs.slice();
+  for (var i = 0, l = subs.length; i &lt; l; i++) {
+    subs[i].update();
+  }
+};
+
+// 任何时候只有一个全局唯一的正在进行计算的订阅者
+Dep.target = null;
+
+var targetStack = [];
+
+// 旧的 Dep.target 压栈，_target 作为新的 Dep.target
+function pushTarget (_target) {
+  if (Dep.target) { targetStack.push(Dep.target); }
+  Dep.target = _target;
+}
+
+// Dep.target 出栈，即恢复旧的 Dep.target
+function popTarget () {
+  Dep.target = targetStack.pop();
+}
+</code></pre><h2 id="订阅者工厂方法-Watcher"><a href="#订阅者工厂方法-Watcher" class="headerlink" title="订阅者工厂方法 Watcher"></a>订阅者工厂方法 Watcher</h2><p>每一个 Watcher 实例就是一个订阅者，为什么订阅者可以起到观察某个 expOrFn（表达式/函数）的作用呢？这里分两种情况说明：</p>
+<p>① expOrFn 为表达式，例如 ‘a’</p>
+<pre><code>// 新建 Vue 实例
+vm = new Vue({
+  data : {
+    aaa : {
+        bbb : {
+            ccc : 1
+        }
+    }
+  }
+});
+
+// 新建 watcher
+var watcher = new Watcher(vm, &#39;aaa.bbb.ccc&#39; , cb, options);
+</code></pre><p>理一理这个 watcher 工作的基本流程：</p>
+<p>(1) 执行 watcher = new Watcher() 会定义 watcher.getter = parsePath(‘aaa.bbb.ccc’)（这是一个函数，稍后会解释），同时也会定义 watcher.value = watcher.get()，而这会触发执行 watcher.get()<br>(2) 执行 watcher.get() 就是执行 watcher.getter.call(vm, vm)，也就是 parsePath(‘aaa.bbb.ccc’).call(vm, vm)<br>(3) 执行 parsePath(‘aaa.bbb.ccc’).call(vm, vm) 会触发 vm.aaa.bbb.ccc 属性读取操作<br>(5) vm.aaa.bbb.ccc 属性读取会触发 aaa.bbb.cc 属性的 get 函数（在 defineReactive$$1 函数中定义）<br>(6) get 函数会触发 dep.depend()，也就是 Dep.target.addDep(dep)，即把 Dep.target 这个 Watcher 实例添加到 dep.subs 数组里（也就是说，dep 可以发布消息通知给订阅者 Dep.target）<br>(7) 那么 Dep.targe 又是什么呢？其实 (2) 中执行 watcher.get() 之前已经将 Dep.target 锁定为当前 watcher（等到 watcher.get() 执行结束时释放 Dep.target）<br>(8) 于是，watcher 就进入了 aaa.bbb.ccc 属性的订阅数组，也就是说 watcher 这个订阅者订阅了 aaa.bbb.ccc 属性<br>(9) 当给 aaa.bbb.ccc 属性赋值时，如 vm.aaa.bbb.ccc = 100 会触发 vm 的 aaa.bbb.ccc 属性的 set 函数（在 defineReactive$$1 函数中定义）<br>(10) set 函数触发 dep.notify()<br>(11) 执行 dep.notify() 就会遍历 dep.subs 中的所有 watcher，并依次执行 watcher.update()<br>(12) 执行 watcher.update() 又会触发 watcher.run()<br>(13) watcher.run() 触发 watcher.cb.call(watcher.vm, value, oldValue);</p>
+<p>结合 parsePath 函数的定义，理解一下 parsePath(‘aaa.bbb.ccc’)</p>
+<pre><code>// 在这里
+path = &#39;aaa.bbb.ccc&#39; 
+
+segments = path.split(&#39;.&#39;)
+-&gt; segments = [&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;]
+
+// 于是
+watcher.getter = parsePath(&#39;aaa.bbb.ccc&#39;) = function (obj) {
+  for (var i = 0; i &lt; segments.length; i++) {
+    if (!obj) { return }
+    obj = obj[segments[i]];
+  }
+  return obj
+};
+
+// 所以
+watcher.getter.call(vm, vm)
+-&gt; parsePath(&#39;aaa.bbb.ccc&#39;)(vm)
+-&gt; vm.aaa.bbb.ccc
+
+// 也就是说这会触发 vm 的属性获取操作
+</code></pre><p>② expOrFn 为函数，例如 updateComponent（该函数作用是更新视图）</p>
+<pre><code>vm._watcher = new Watcher(vm, updateComponent, noop);
+</code></pre><p>理一理这个 watcher 工作的基本流程：</p>
+<p>(1) 执行 vm._watcher = new Watcher() 会定义 vm._watcher.getter = updateComponent，同时也会定义 vm._watcher.value = vm._watcher.get()，而这会触发执行 vm._watcher.get()<br>(2) 执行 vm._watcher.get() 就是执行 vm._watcher.getter.call(vm, vm)，也就是 updateComponent(vm, vm) 即可进行视图更新（事实上，视图的初始化更新就是这么完成的）</p>
+<p>若要要再次主动更新视图怎么做？</p>
+<p>(1) Vue.prototype.$forceUpdate() 触发 vm._watcher.update()<br>(2) vm._watcher.update() 触发 vm._watcher.run()<br>(3) vm._watcher.run() 执行 value = this.get()，触发 vm._watcher.get()，也就是执行 updateComponent(vm, vm)，这会导致视图再次更新</p>
+<p>着重看一下 Watcher.prototype.run 方法：</p>
+<pre><code>// 第 1 步，获取最新的值（这会导致 this.getter 方法执行）
+var value = this.get();
+
+// 第 2 步，新值和旧值对比，不同则继续第 3 步
+value !== (oldValue = this.value)
+
+// 第 3 步，执行 cb 回调函数，参数分别为新值和旧值
+this.cb.call(this.vm, value, oldValue);
+</code></pre><p>参考：<br>[1] <a href="https://github.com/bison1994" target="_blank" rel="external">https://github.com/bison1994</a><br>[2] <a href="https://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="external">https://www.cnblogs.com/kidney/p/6052935.html</a><br>[3] <a href="https://www.cnblogs.com/libin-1/p/6893712.html" target="_blank" rel="external">https://www.cnblogs.com/libin-1/p/6893712.html</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+
+    <footer class="entry-meta">
+    <a href="/2017/12/25/watcher-dep-observer/">
+    <time datetime="2017-12-25T09:16:18.000Z" class="entry-date">
+        2017-12-25
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+    <p>
+    <span id="busuanzi_container_page_pv">
+      <span id="busuanzi_value_page_pv"></span> views
+    </span>
+</p>
+</br>
+
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <p><span class="nav-next"><a href="/2017/12/21/vue-options-data/" rel="next"><span class="meta-nav">下一篇：</span>Vue 实例创建过程 </a></span></p>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!--友言 开始-->
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143418"></script>
+  <!--友言 结束-->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/25/watcher-dep-observer/">Vue 中 Observer-Dep-Watcher 三者的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/21/vue-options-data/">Vue 实例创建过程</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/19/vue-global-api/">Vue 2.x 全局 api 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/09/jquery-summary/">jQuery 基础</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/03/argument-undefined/">为什么函数形参设为 undefined</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/grunt/">前端构建工具 grunt</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/h5-boilerplate/">h5 项目脚手架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/19/css-float/">css 浮动及清理浮动</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/15/bfc/">理解 css 块级格式化上下文（BFC）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/14/css-layout/">css 多列布局</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grammar/">grammar</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/">h5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/method/">method</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/problem/">problem</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/grammar/" style="font-size: 16.67px;">grammar</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 18.33px;">js</a> <a href="/tags/method/" style="font-size: 20px;">method</a> <a href="/tags/problem/" style="font-size: 18.33px;">problem</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a>
+    </div>
+  </aside>
+
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    All rights reserved. Powered by 
+        <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </p>
+    <p>
+        <span id="busuanzi_container_site_uv">
+            你是本站第<span id="busuanzi_value_site_uv"></span>位访客，欢迎你！
+        </span>
+    </p>
+</footer>
+    
+
+<script>
+$(window).load(function(){
+ $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   prettyPrint();
+ })
+</script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/jquery.goup.min.js"></script>
+<script>
+$(document).ready(function () {  
+    $.goup({  
+        trigger: 100,  
+        bottomOffset: 62,       //距底部偏移量   
+        locationOffset: 150,     //距右部偏移量  
+        title: '返回顶部',  
+        titleAsText: true       //是否显示title  
+    });  
+}); 
+</script>
+
+
+<!--<script src="/js/navigation.js"></script>-->
+
+<div id="bg"></div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+  </div>
+</body>
+</html>
