@@ -20,10 +20,12 @@
 <meta property="og:url" content="http://nanchao.win/2017/12/25/watcher-dep-observer/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
-<meta property="og:updated_time" content="2017-12-26T14:33:12.000Z">
+<meta property="og:image" content="http://nanchao.win/css/images/observer-dep-watcher/observer-dep-watcher.png">
+<meta property="og:updated_time" content="2017-12-27T12:09:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 中 Observer-Dep-Watcher 三者的关系">
 <meta name="twitter:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
+<meta name="twitter:image" content="http://nanchao.win/css/images/observer-dep-watcher/observer-dep-watcher.png">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +116,7 @@
             
             <a href="/2017/12/25/watcher-dep-observer/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="cjblzrx9e003c7q0bc7feb0ci" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="cjbp0lnps00360l0biuj0gry3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -351,7 +353,9 @@ value !== (oldValue = this.value)
 
 // 第 3 步，执行 cb 回调函数，参数分别为新值和旧值
 this.cb.call(this.vm, value, oldValue);
-</code></pre><p>参考：<br>[1] <a href="https://github.com/bison1994" target="_blank" rel="external">https://github.com/bison1994</a><br>[2] <a href="https://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="external">https://www.cnblogs.com/kidney/p/6052935.html</a><br>[3] <a href="https://www.cnblogs.com/libin-1/p/6893712.html" target="_blank" rel="external">https://www.cnblogs.com/libin-1/p/6893712.html</a></p>
+</code></pre><p>最后，用一张图做个总结：</p>
+<p><img src="/css/images/observer-dep-watcher/observer-dep-watcher.png" alt="foo对象结构"></p>
+<p>参考：<br>[1] <a href="https://github.com/bison1994" target="_blank" rel="external">https://github.com/bison1994</a><br>[2] <a href="https://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="external">https://www.cnblogs.com/kidney/p/6052935.html</a><br>[3] <a href="https://www.cnblogs.com/libin-1/p/6893712.html" target="_blank" rel="external">https://www.cnblogs.com/libin-1/p/6893712.html</a></p>
 
       
     </div><!-- .entry-content -->
