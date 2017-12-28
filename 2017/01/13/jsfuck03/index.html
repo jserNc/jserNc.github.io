@@ -114,7 +114,7 @@
             
             <a href="/2017/01/13/jsfuck03/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cjbq3ijnx001w7j0bqt5ttspu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cjbq64n2l0020oz0bay2vyvmc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -315,10 +315,23 @@
 
 
 <section id="comments">
-  <!--友言 开始-->
-    <div id="uyan_frame"></div>
-    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143418"></script>
-  <!--友言 结束-->
+  <!--Gitment 开始-->
+	<div id="git-container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+	var gitment = new Gitment({
+	  id: '页面 ID', // 可选。默认为 location.href
+	  owner: 'jserNc',
+	  repo: 'git@github.com:jserNc/enjoyjs-gitment.git',
+	  oauth: {
+	    client_id: '6347bf778a39d0dcae14',
+	    client_secret: '10a5b94c9d66b90d35d075ab0415901be6f6db5c',
+	  },
+	})
+	gitment.render('git-container')
+	</script>
+  <!--Gitment 结束-->
 </section>
 
 
