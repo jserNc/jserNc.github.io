@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
 <meta property="og:image" content="http://nanchao.win/css/images/observer-dep-watcher/observer-dep-watcher.png">
-<meta property="og:updated_time" content="2017-12-27T12:09:04.000Z">
+<meta property="og:updated_time" content="2017-12-28T02:31:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 中 Observer-Dep-Watcher 三者的关系">
 <meta name="twitter:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/12/25/watcher-dep-observer/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="cjbp0lnps00360l0biuj0gry3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="cjbpv7oi10035a60bv2e43pz5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,6 +126,8 @@
       
         <p>Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。</p>
 <a id="more"></a>
+<p>为了方便理解，画了一幅图来描述一下 Observer-Dep-Watcher 三者之间的关系：</p>
+<p><img src="/css/images/observer-dep-watcher/observer-dep-watcher.png" alt="foo对象结构"></p>
 <h2 id="发布者工厂方法-Observer"><a href="#发布者工厂方法-Observer" class="headerlink" title="发布者工厂方法 Observer"></a>发布者工厂方法 Observer</h2><p>下面通过一句代码来理解 Observer：</p>
 <pre><code>observe(data, true /* 作为根 data */);
 </code></pre><p>(1) 如果 data 不是对象就返回，只有对象才继续执行后续步骤<br>(2) 如果 data 有对应的 Observer 实例 data.<strong>ob</strong> 那就将它作为 observe 方法返回值<br>(3) 如果 data 没有对应的 Observer 实例，那就执行 ob = new Observer(value)<br>(4) new Observer(value) 的本质是执行 ob.walk(data)<br>(5) 依次遍历 data 的属性 key，执行 defineReactive$$1(obj, keys[i], obj[keys[i]])<br>(6) defineReactive$$1 会劫持属性 key 的 get/set 操作。<br>(7) 当获取属性 key 时除了返回属性值，还会将 Dep.target（即与属性 key 对应的 watcher）加入到 key 的订阅者数组里（dep.depend() -&gt; Dep.target.addDep(dep)）<br>(8) 当设置属性 key 时除了更新属性值外，还会由主题对象 dep 发出通知给所有的订阅者 dep.notify()</p>
@@ -353,8 +355,7 @@ value !== (oldValue = this.value)
 
 // 第 3 步，执行 cb 回调函数，参数分别为新值和旧值
 this.cb.call(this.vm, value, oldValue);
-</code></pre><p>最后，用一张图做个总结：</p>
-<p><img src="/css/images/observer-dep-watcher/observer-dep-watcher.png" alt="foo对象结构"></p>
+</code></pre><p>以上基本说清楚了“数据变化时怎样驱动视图更新”，反过来，“视图变化驱动数据更新”就容易多了，例如监听 input 元素的 input/change 事件，当元素内容变化时就可以更新数据了，这里就不详细的说了，后续会继续对 Vue 的其他部分展开分析。</p>
 <p>参考：<br>[1] <a href="https://github.com/bison1994" target="_blank" rel="external">https://github.com/bison1994</a><br>[2] <a href="https://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="external">https://www.cnblogs.com/kidney/p/6052935.html</a><br>[3] <a href="https://www.cnblogs.com/libin-1/p/6893712.html" target="_blank" rel="external">https://www.cnblogs.com/libin-1/p/6893712.html</a></p>
 
       
