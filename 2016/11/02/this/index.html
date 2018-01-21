@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/02/this/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，">
-<meta property="og:updated_time" content="2017-05-27T13:21:53.000Z">
+<meta property="og:updated_time" content="2018-01-21T08:04:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 JavaScript 中 this">
 <meta name="twitter:description" content="this 出现的地方无非两种：全局环境中和函数中。不管哪种情况，this 都是执行上下文的一个属性，并且 this 总是返回一个对象。（1）在全局上下文中，this 就是全局对象本身。（2）在函数上下文中，函数的每次调用对应 this 对象都可能不同。不过，关于函数中的 this，我们可以记住一句结论：this 对象是在函数调用时，具体代码执行以前，激活该函数上下文的执行者（比如调用该函数的对象，">
@@ -114,7 +114,7 @@
             
             <a href="/2016/11/02/this/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="cjbqa39yj0037xk0bgiemlvlv" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/02/this/" data-id="cjcohu25z002xmv0buwgh71cq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -344,7 +344,7 @@ f.call(o,1,2) === o;
 // true
 </code></pre><p>函数 f 内部的 this 指向 call 方法第一个实参 o，其余参数（1 , 2）分别作为函数 f 执行时的实参。</p>
 <p><strong>(2) Function.prototype.apply</strong></p>
-<p>apply 方法和 call 方法作用和用法几乎一样，都是改变函数内部的 this 指向，然后执行该函数。唯一的区别就是接收的参数格式不一样。</p>
+<p>apply 方法和 call 方法作用和用法几乎一样，都是改变函数内部的 this 指向，然后执行该函数。唯一的区别就是它接收一个数组作为函数执行时的参数。</p>
 <pre><code>f.call(thisValue,arg1,arg2,arg3...);
 // 各个参数以逗号 , 分隔
 f.apply(thisValue,[arg1,arg2,arg3...]);
@@ -358,6 +358,33 @@ var a = [10,2,3,45,5,66,20];
 Math.max.apply(null,a);
 // 66
 </code></pre><p>如果 call / apply 方法的第一个参数为空、null 或者 undefined，则将函数内部 this 指向全局对象 window。</p>
+<p>实际上，apply 方法的第二个参数也可以是类数组对象，例如 {length: 3}，这个对象指定长度为 3，每个元素值都为 undefined。</p>
+<pre><code>Array.apply(null, { length: 3 })
+-&gt; [undefined, undefined, undefined]
+
+// 相当于
+Array.apply(null, [undefined, undefined, undefined])
+-&gt; [undefined, undefined, undefined]
+
+// 对比一下这种写法：
+Array(3)
+-&gt; [empty × 3] // 也就是 [,,,]
+
+// 注意 
+[,,,].length -&gt; 3
+</code></pre><p>[,,,] 和 [undefined, undefined, undefined] 大多是时候可以认为相同的，不过也是有区别的。这里涉及到一个”数组空位“的概念，也就是数组的某个位置是空元素（两个逗号之间没有任何值）。空位对数组的 length 属性没影响，该位置的返回值也是 undefined。不过使用数组的 forEach/map 方法、for…in 结构、以及 Object.keys 方法进行遍历，空位都会被跳过。</p>
+<pre><code>// 显式 undefined
+[undefined, undefined, undefined].map(function(){
+    return 1;
+})
+-&gt; [1,1,1]
+
+// 空位
+[,,,].map(function(){
+    return 1;
+})
+-&gt; [,,,]
+</code></pre><p>简单理解就是：空位就是这个位置没有元素，所以不会被遍历到，而每个位置值为 undefined 则表示有这个元素，值是 undefined ，所以不会跳过。</p>
 <p><strong>(3) Function.prototype.bind</strong></p>
 <p>将函数内部的 this 绑定到 bind 方法指定的第一个参数，然后返回一个新的函数。</p>
 <pre><code>var d = new Date();
@@ -535,7 +562,7 @@ print()
 </div>
       </div>
       <footer id="colophon" role="contentinfo">
-    <p>&copy; 2017 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
+    <p>&copy; 2018 <a href="https://github.com/jserNc/" target="_blank">nanc</a>
     All rights reserved. Powered by 
         <a href="http://hexo.io/" target="_blank">Hexo</a>
     </p>
