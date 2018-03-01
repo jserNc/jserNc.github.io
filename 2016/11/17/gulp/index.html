@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/11/17/gulp/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
-<meta property="og:updated_time" content="2017-07-04T13:03:31.000Z">
+<meta property="og:updated_time" content="2018-03-01T13:07:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具 gulp">
 <meta name="twitter:description" content="前端开发过程中，源代码编写完成后，一般还要经过代码语法检查、文件合并、代码压缩、浏览器刷新查看效果等步骤。gulp 就是可以替我们开发者完成这些重复工作的自动化构建工具之一。换句话说，gulp 是一个编译、打包、压缩 javascript/coffee/sass/less/html/image/css 等文件的工具。类似的工具还有较早的 ant、grunt 等。">
@@ -114,7 +114,7 @@
             
             <a href="/2016/11/17/gulp/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cje72d78x001ell0bqm4trvdj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/17/gulp/" data-id="cje84feef001h5q0b5usrl1yr" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -190,10 +190,10 @@ gulp.task(&#39;minify&#39;, function () {
 </code></pre><p>一旦 js/app.js 发生改动，就执行 build 任务。</p>
 <p>再看个完整的实例 gulpfile.js 文件：</p>
 <pre><code>var gulp = require(&#39;gulp&#39;);
-var jshint = require(&#39;gulp-jshint&#39;);//语法检查
-var concat = require(&#39;gulp-concat&#39;);//合并文件
-var uglify = require(&#39;gulp-uglify&#39;);//压缩代码
-var rename = require(&#39;gulp-rename&#39;);//重命名
+var jshint = require(&#39;gulp-jshint&#39;); // 语法检查
+var concat = require(&#39;gulp-concat&#39;); // 合并文件
+var uglify = require(&#39;gulp-uglify&#39;); // 压缩代码
+var rename = require(&#39;gulp-rename&#39;); // 重命名
 
 // 语法检查
 gulp.task(&#39;jshint&#39;, function () {

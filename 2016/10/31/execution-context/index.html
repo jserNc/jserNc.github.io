@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：" />
+执行上下文是 JavaScript 中最重要的概念之一。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：" />
   
 
   
@@ -16,22 +16,22 @@
   <title>JavaScript 执行上下文（译） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中最重要的概念之一。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 执行上下文（译）">
 <meta property="og:url" content="http://nanchao.win/2016/10/31/execution-context/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中最重要的概念之一。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/stack1.png">
 <meta property="og:image" content="http://nanchao.win/css/images/execution-context/context-object.png">
-<meta property="og:updated_time" content="2017-07-09T14:28:51.000Z">
+<meta property="og:updated_time" content="2018-03-01T09:18:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 执行上下文（译）">
 <meta name="twitter:description" content="原文： http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/
-执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
+执行上下文是 JavaScript 中最重要的概念之一。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：">
 <meta name="twitter:image" content="http://nanchao.win/css/images/execution-context/context1.png">
   
   
@@ -123,7 +123,7 @@
             
             <a href="/2016/10/31/execution-context/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cje72d78u001cll0bwqmfceje" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/31/execution-context/" data-id="cje84fee600155q0bya7m5ea2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -132,7 +132,7 @@
     <div class="entry-content">
       
         <p>原文： <a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" rel="external">http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
-<p>执行上下文是 JavaScript 中一个最基础也是最重要的概念。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
+<p>执行上下文是 JavaScript 中最重要的概念之一。理解了执行上下文才会对变量提升，this 对象，函数作用域等概念有更深入的认识。在介绍执行上下文之前，我们先来看个变量提升的例子：</p>
 <a id="more"></a>
 <pre><code>var v = 1;
 (function(){
@@ -140,7 +140,7 @@
     var v = 2;
 })();
 
-//v: undefined
+// v: undefined
 </code></pre><p>变量 v 明明在调用之前就已经在全局环境中定义过，可打印结果还是 undefined，为什么？</p>
 <p>这里涉及到了“变量作用域”和“变量提升”等概念。后续会对“变量作用域”做一个详细介绍，这里先简单说下变量提升。</p>
 <p>不管全局环境中，还是函数调用时，JavaScript 引擎都先获取当前环境下用 var，function 等关键词声明的变量，然后再一行一行地执行代码。这样的结果就是所有的变量的声明语句，都会被提升到当前环境（全局环境或者函数内部）的头部，这就叫做“变量提升”（hoisting）。</p>
@@ -192,10 +192,10 @@ fn();   // 进入 fn 函数上下文
 <p>用对象表示为：</p>
 <pre><code>executionContextObj = {
     variableObject : { 
-    /*函数的arguments对象, 参数, 内部的变量以及函数声明*/ 
+    /* 函数的 arguments 对象, 参数, 内部的变量以及函数声明 */ 
     },
     scopeChain : { 
-    /*variableObject以及所有父执行上下文中的variableObject*/ 
+    /* variableObject 以及所有父执行上下文中的 variableObject */ 
     },
     this : {}
 }
@@ -321,7 +321,7 @@ foo(22);
 }());
 </code></pre><p>上面定义了一个自执行函数。函数执行时就有个上下文被创建，然后我们打印 foo 和 bar 的值并没有显示未定义错误。这里有两个问题：</p>
 <p><strong> 1.为什么 foo 类型是 function，而不是 string 或者 undefined？</strong></p>
-<p>因为在上下文的建立阶段，<strong>先是处理 arguments, 参数，接着是函数的声明，最后是变量的声明</strong>。那么，发现 foo 函数的声明后，就会在 variableObject 下面建立一个 foo 属性，其值是一个指向函数的引用。当处理变量声明的时候，发现有 var foo 的声明，但是 variableObject 已经具有了 foo 属性，所以直接跳过。当进入代码执行阶段的时候，就可以通过访问到 foo 属性了，因为它已经就存在，并且是一个函数引用。</p>
+<p>因为在上下文的建立阶段，<strong>先是处理 arguments, 参数，接着是函数的声明，最后是变量的声明</strong>。当发现 foo 函数的声明后，就会在 variableObject 下面建立一个 foo 属性，其值是一个指向函数的引用。当处理变量声明的时候，发现有 var foo 的声明，但是 variableObject 已经具有了 foo 属性，所以直接跳过。</p>
 <p><strong> 2.为什么 bar 类型是 undefined？</strong></p>
 <p>因为 bar 是变量的声明，在建立阶段的时候，被赋予的默认的值为 undefined。由于它只会在后续代码执行过程中才会被赋予具体的值，所以，当调用 typeof(bar) 的时候输出的值为 undefined。</p>
 <p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://blogread.cn/it/article/6178" target="_blank" rel="external">http://blogread.cn/it/article/6178</a><br>[3] <a href="https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352" target="_blank" rel="external">https://www.kancloud.cn/kancloud/javascript-prototype-closure/66352</a></p>

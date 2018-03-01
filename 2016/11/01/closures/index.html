@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
-<meta property="og:updated_time" content="2017-05-29T00:44:15.000Z">
+<meta property="og:updated_time" content="2018-03-01T07:15:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 闭包（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
@@ -118,7 +118,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cje72d78e000rll0b79s2gx5c" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cje84fedz000v5q0b97yb1by1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -146,7 +146,7 @@ f1();
 
 console.log(n)
 // Uncaught ReferenceError: n is not defined(…)
-</code></pre><p>如果一个函数（子函数）是从另一个函数（父函数）的返回值。为了在父函数上下文结束的情况下也能访问其中的变量，子函数在被创建的时候会在它的 [[Scope]] 属性中保存父函数的作用域链。所以当子函数被调用的时候，它上下文的对象的作用域链属性会被格式化成当前函数的变量对象（函数的变量对象 [也叫活动对象 AO] 也是一个同样简单的变量对象，但是除了变量和函数声明之外，它还存储了形参和 arguments 对象）与 [[Scope]] 属性（父函数的作用域链）的和：</p>
+</code></pre><p>如果一个函数（子函数）是另一个函数（父函数）的返回值。为了在父函数上下文结束的情况下也能访问其中的变量，子函数在被创建的时候会在它的 [[Scope]] 属性中保存父函数的作用域链。所以当子函数被调用的时候，它上下文的对象的作用域链属性会被格式化成当前函数的变量对象（也叫活动对象 AO，除了包括变量和函数声明之外，它还存储了形参和 arguments 对象）与 [[Scope]] 属性（父函数的作用域链）的和：</p>
 <p><strong>Scope chain = Activation object + [[Scope]]</strong></p>
 <p>强调一个关键点：子函数在<strong>创建时刻</strong>会保存父函数的作用域链，将来子函数调用时会在这个作用域链中查找变量。注意是<strong>创建时刻</strong>，而不是<strong>调用时刻</strong>，这一点很重要！！</p>
 <pre><code>function foo() {
@@ -277,7 +277,7 @@ k++;
 data[0](); // 3
 data[1](); // 3
 data[2](); // 3
-</code></pre><p>要想依次输出 0,1,2，我们可以这样定义函数：</p>
+</code></pre><p>要想依次输出 0、1、2，我们可以这样定义函数：</p>
 <pre><code>var data = [];
 
 for (var k = 0; k &lt; 3; k++) {
@@ -331,7 +331,7 @@ fn(1);   // undefined
 fn();
 Uncaught ReferenceError: x is not defined(…)
 </code></pre><p>可以看到，内层函数的作用域确实是和其外层函数息息相关！</p>
-<p>最后，看看闭包实现单体模式：</p>
+<p>最后，看看如果利用闭包实现单体模式：</p>
 <pre><code>function Singleton(){
     var instance = this;
 
