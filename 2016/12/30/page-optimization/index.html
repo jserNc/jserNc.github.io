@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/30/page-optimization/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
-<meta property="og:updated_time" content="2017-05-28T00:29:47.000Z">
+<meta property="og:updated_time" content="2018-03-02T03:08:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页性能优化建议">
 <meta name="twitter:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
@@ -114,7 +114,7 @@
             
             <a href="/2016/12/30/page-optimization/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cje84feer00225q0b7o512aj9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cje9a0d7a0025270bj9xwf2n0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,11 +129,11 @@
 <h2 id="加载优化"><a href="#加载优化" class="headerlink" title="加载优化"></a>加载优化</h2></blockquote>
 <h3 id="·-减少-http-请求数"><a href="#·-减少-http-请求数" class="headerlink" title="· 减少 http 请求数"></a>· 减少 http 请求数</h3><p>​合并图片（css sprites）,尽可能地合并 css 和 js 文件。css sprites 是指只用将页面上的背景元素合并成一张图，然后通过调整 css 的 background-position 属性获取对应的背景图。</p>
 <h3 id="·-css-文件放在页面头部，js-文件放置页面底部"><a href="#·-css-文件放在页面头部，js-文件放置页面底部" class="headerlink" title="· css 文件放在页面头部，js 文件放置页面底部"></a>· css 文件放在页面头部，js 文件放置页面底部</h3><p>ie，firefox 等浏览器在 css 全部传输完全之前不会去渲染任何的东西。css 的全称是 Cascading Style Sheets（层叠样式表），层叠，顾名思义，后面的样式可以覆盖前面的样式，优先级高的样式可以覆盖优先级低的样式，所以为了避免页面加载过程中重画某些页面元素，导致闪烁和性能问题，浏览器这么做也是合理的。</p>
-<p>不带特殊属性的 script 标签。当 html 页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析 html 文档。如果该脚本中有耗时任务，那么页面视觉上加载就比较慢了。考虑到页面内容和脚本之间的依赖关系，我们并不能做到把所有脚本放置页面底部，所以，还是尽可能地往后放吧。</p>
+<p>不带特殊属性的 script 标签。当 html 页面解析到该标签时会停止，然后浏览器立即发出请求去下载该脚本（如果该脚本是外部脚本的话），等到脚本下载完成，马上解析执行该脚本。脚本执行完毕再接着解析 html 文档。如果该脚本中有耗时任务，那么页面加载在视觉上看起来就比较慢了。考虑到页面内容和脚本之间的依赖关系，我们并不能简单地把所有脚本放置页面底部，但是，如果可以的话，还是尽可能地往后放吧。</p>
 <h3 id="·-精简-css-和-js-文件，即压缩文件体积"><a href="#·-精简-css-和-js-文件，即压缩文件体积" class="headerlink" title="· 精简 css 和 js 文件，即压缩文件体积"></a>· 精简 css 和 js 文件，即压缩文件体积</h3><h3 id="·-使用-cdn。图片、css、js-等静态资源使用-cdn-分发"><a href="#·-使用-cdn。图片、css、js-等静态资源使用-cdn-分发" class="headerlink" title="· 使用 cdn。图片、css、js 等静态资源使用 cdn 分发"></a>· 使用 cdn。图片、css、js 等静态资源使用 cdn 分发</h3><h3 id="·-避免空的-href-和-src-等属性值为空"><a href="#·-避免空的-href-和-src-等属性值为空" class="headerlink" title="· 避免空的 href 和 src 等属性值为空"></a>· 避免空的 href 和 src 等属性值为空</h3><p>当 link 标签的 href 属性为空、script 标签的 src 属性为空的时候，浏览器渲染的时候会把当前页面的 URL 作为它们的属性值，从而把页面的内容加载进来作为它们的值。</p>
 <h3 id="·-合理利用缓存（Expires-或者-Cache-Control）"><a href="#·-合理利用缓存（Expires-或者-Cache-Control）" class="headerlink" title="· 合理利用缓存（Expires 或者 Cache-Control）"></a>· 合理利用缓存（Expires 或者 Cache-Control）</h3><p>前提是 css 和 js 写在外部文件中。例如，用 Exipres 是用来设置 css、js、图片资源文件的过期时间，可以使这些内容在指定时间内具有缓存性，这样下回再访问同样的资源时就通过浏览器缓存区读取，不需要再发出 http 请求（用户强制刷新页面除外）。不过哪些文件应该缓存，哪些文件应该实时更新给用户还是应该斟酌一下。</p>
-<h3 id="·-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#·-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="· 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>· 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>比如外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间，在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
-<p>另外，确保网站根目录下有 favicon.ico 文件。即使网页中根本不包括这个文件，浏览器每次打开我们的站点也会发起对这个文件的请求。所以，如果这个文件不存在，就会产生 404 错误，消耗资源。</p>
+<h3 id="·-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#·-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="· 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>· 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间，在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
+<p>例如，确保网站根目录下有 favicon.ico 文件。即使网页中根本不包括这个文件，浏览器每次打开我们的站点也会发起对这个文件的请求。所以，如果这个文件不存在，就会产生 404 错误，消耗资源。</p>
 <h3 id="·-避免重定向"><a href="#·-避免重定向" class="headerlink" title="· 避免重定向"></a>· 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="external">http://baidu.com/</a> 。</p>
 <h3 id="·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量"><a href="#·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量" class="headerlink" title="· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量"></a>· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量</h3><p>域名之下如果有 cookie，那么客户端每次向该域名发出 http 请求，都会附上 cookie 的内容，这会影响加载速度，所以静态资源域名不使用 cookie。</p>
 <h3 id="·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”"><a href="#·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”" class="headerlink" title="· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”"></a>· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”</h3><p>首屏一定要快！能不加载的先不加载，能不执行的先不执行！</p>
