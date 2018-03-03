@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/13/jsfuck03/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。">
-<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta property="og:updated_time" content="2018-03-03T15:00:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（四）">
 <meta name="twitter:description" content="前文我们说 JavaScript 语言中所有的字符都可以用 [，]，(，)，!，+ 等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/01/13/jsfuck03/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cjea3lbx3001tlx0bz3nze5fq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/13/jsfuck03/" data-id="cjea41xot001zps0byljqbfbu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -125,7 +125,7 @@
         <p>前文我们说 JavaScript 语言中所有的字符都可以用<strong> [，]，(，)，!，+ </strong>等 6 个字符来表示，下面，我们接着探讨这个问题，这个问题弄清楚了，也就基本掌握了 JSFuck 的原理。</p>
 <a id="more"></a>
 <p><strong> 标点符号 </strong></p>
-<pre><code>// 空格字符&#39; &#39;，而不是空字符&#39;&#39;
+<pre><code>// 空格字符&#39; &#39;，而不是空字符 &#39;&#39;
 &#39;&#39; === &#39;&#39;   // true
 &#39;&#39; === &#39; &#39;  // false
 &#39; &#39; === (NaN+[][&quot;filter&quot;])[11]
@@ -136,8 +136,8 @@
 -&gt; (&quot;&quot;).fontcolor()[12]
 -&gt; &#39;&lt;font color=&quot;undefined&quot;&gt;&lt;/font&gt;&#39;[12]
 -&gt; &#39;&quot;&#39;
-// 对字符串调用fontcolor()函数，
-// 会用font标签将font标签将字符串包围，并且加color属性
+// 对字符串调用 fontcolor() 函数，
+// 会用 font 标签将字符串包围，并且带 color 属性
 &#39;str&#39;.fontcolor(&#39;red&#39;) 
 -&gt; &#39;&lt;font color=&quot;red&quot;&gt;str&lt;/font&gt;&#39;
 
@@ -161,7 +161,7 @@
 -&gt; true
 // +[]
 -&gt; 0
-// 左边是字符 &#39;+&#39;，右边是一元（二元）运算符 +
+
 &#39;+&#39; === (+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+!+[]]+[+[]]+[+[]])+[])[2]
 -&gt; (+(+true+(true+[])[true+true+true]+[+true]+[0]+[0])+[])[2]
 -&gt; (+(+true+(&quot;true&quot;)[3]+[1]+[0]+[0])+[])[2]
@@ -171,7 +171,7 @@
 -&gt; &quot;1e+100&quot;[2]
 -&gt; &#39;+&#39;
 
-// 如果call方法的参数是一个原始值，
+// 如果 call 方法的参数是一个原始值，
 // 那么这个原始值会自动转成对应的包装对象
 &#39;,&#39; === ([][&quot;slice&quot;][&quot;call&quot;](false+&quot;&quot;)+&quot;&quot;)[1]
 -&gt; ([][&quot;slice&quot;][&quot;call&quot;](&quot;false&quot;)+&quot;&quot;)[1]
@@ -256,7 +256,7 @@
 
 1 === +!+[]
 -&gt; +!0
--&gt; +1
+-&gt; +true
 -&gt; 1
 
 2 === 1 + 1
@@ -264,11 +264,11 @@
 
 3 = 1 + 2
 3 === +!+[] + +!+[] + +!+[]
-//当然了，最前面的 + 是可以不要的
+// 当然了，最前面的 + 是可以不要的
 3 === !+[] + +!+[] + +!+[]
 
 // “一生二，二生三，三生无穷”，其他数字都可以这样得到
-</code></pre><p>好了，暂时到这里，下篇我们继续。</p>
+</code></pre><p>好了，暂时到这里，后面有空再继续分析。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://github.com/aemkei/jsfuck" target="_blank" rel="external">https://github.com/aemkei/jsfuck</a><br>[4] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
 
       

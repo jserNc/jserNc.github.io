@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/01/11/jsfuck02/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
-<meta property="og:updated_time" content="2017-05-27T23:31:37.000Z">
+<meta property="og:updated_time" content="2018-03-03T04:28:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（三）">
 <meta name="twitter:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cjea3lbx8001ylx0bdi9ri7v2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cjea41xos001wps0btf7mb7yg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,7 +133,7 @@ undefined === [][[]]
 
 +[![]]
 -&gt; NaN
-//NaN不等于其自身，所以，不能像上面那样用 === 表示
+// NaN不等于其自身，所以，不能像上面那样用 === 表示
 
 Infinity === +(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+
              [+!+[]]+[+[]]+[+[]]+[+[]])
@@ -195,7 +195,7 @@ RegExp === Function(&quot;return/&quot;+false+&quot;/&quot;)().constructor
 -&gt; (101).toString(21)[1]
 -&gt; &quot;4h&quot;[1]
 -&gt; &quot;h&quot;
-//其中，toString()可以传递一个参数，表示待转换的数值的基数
+// 其中，toString() 可以接受一个参数，表示待转换的数值的基数
 
 &quot;i&quot; === ([false]+undefined)[10]
 -&gt; &quot;falseundefined&quot;[10]
@@ -285,10 +285,10 @@ RegExp === Function(&quot;return/&quot;+false+&quot;/&quot;)().constructor
 -&gt; escape(&quot;&lt;i&gt;&lt;/i&gt;&quot;)[2]
 -&gt; &quot;%3Ci%3E%3C/i%3E&quot;[2]
 -&gt; &quot;C&quot;
-//italics()方法会在字符串，外层加上&lt;i&gt;标签，如：
+// italics() 方法会在字符串外层加上 &lt;i&gt; 标签，如：
 &quot;字符变斜体&quot;.italics()
 -&gt; &quot;&lt;i&gt;字符变斜体&lt;/i&gt;&quot;
-//escape() 函数可对字符串进行编码,如：
+// escape() 函数可对字符串进行编码,如：
 escape(&quot;&lt;&quot;)
 -&gt; &quot;%3C&quot;
 
@@ -346,7 +346,7 @@ escape(&quot;&lt;&quot;)
 -&gt; (NaN + &quot;[object Undefined]&quot;)[11]
 -&gt; &quot;NaN[object Undefined]&quot;[11]
 -&gt; &quot;U&quot;
-//注意({}).toString.call()的用法
+// 注意 ({}).toString.call() 的用法
 ({}).toString.call(window)
 -&gt; &quot;[object Window]&quot;
 ({}).toString.call(null)
@@ -355,7 +355,7 @@ escape(&quot;&lt;&quot;)
 -&gt; &quot;[object Undefined]&quot;
 ({}).toString.call(1)
 -&gt; &quot;[object Number]&quot;
-</code></pre><p>由于篇幅太长，不便查看，就先写到这里。下篇我们接着这里讨论。</p>
+</code></pre><p>由于篇幅太长，不便查看，就先写到这里。下篇我们接着讨论。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
 
       
