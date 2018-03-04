@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。" />
+  <meta name="description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求加载速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>浏览器本地存储（二） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
+  <meta name="description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求加载速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器本地存储（二）">
 <meta property="og:url" content="http://nanchao.win/2017/04/05/localStorage01/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
-<meta property="og:updated_time" content="2017-05-12T09:34:20.000Z">
+<meta property="og:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求加载速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
+<meta property="og:updated_time" content="2018-03-04T13:26:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器本地存储（二）">
-<meta name="twitter:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
+<meta name="twitter:description" content="上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求加载速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/04/05/localStorage01/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/localStorage01/" data-id="cjebhxrmw00233r0b7zgctij5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/localStorage01/" data-id="cjeclvnvo0021d70b8qrz45kk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,12 +122,12 @@
 
     <div class="entry-content">
       
-        <p>上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。</p>
+        <p>上篇讨论了 cookie 本地存储方式，这里继续讨论 localStorage。鉴于 cookie 会随着每个服务器请求来回传递，所以会影响请求加载速度，而且 cookie 的个数和容量都很有限。html5 提供了 localStorage 和 sessionStorage 等两种客户端存储数据的新方法。</p>
 <a id="more"></a>
 <p><strong>localStorage 相比于 cookie，最显著的特点就是：</strong></p>
 <p>① 除非主动清除数据，否则永远不会过期；<br>② 存储空间较大，5MB 左右；<br>③ 数据仅存在于浏览器客户端，不会随着请求来回传递；<br>④ ie8 以下浏览器不支持，兼容性不太好；<br>⑤ 同域名下，http 和 https 不可以共享数据。</p>
 <p><strong>localStorage 与 sessionStorage 区别是：</strong></p>
-<p>sessionStorage 针对一个 session 进行数据本地存储。当用户关闭当前浏览器窗口后，本地数据会被删除。sessionStorage 仅在当前浏览器窗口有效（允许刷新），关闭当前浏览器窗口或者浏览器后失效。另外，sessionStorage 不在不同的浏览器窗口中共享，即使是同一个页面也不行，而 localStorage 和 cookie 在所有同源窗口中都是共享的。</p>
+<p>sessionStorage 针对一个 session 进行数据本地存储。当用户关闭当前浏览器窗口后，本地数据会被删除。sessionStorage 仅在当前浏览器窗口有效（允许刷新），关闭当前浏览器窗口或者关闭浏览器后立即失效。另外，sessionStorage 不能被不同的浏览器窗口所共享，即便是不同窗口装载同一个页面也不行，而 localStorage 和 cookie 在所有同源窗口中都是共享的。</p>
 <p><strong>localStorage 使用方法：</strong></p>
 <p><strong>(1) 读取数据</strong></p>
 <p>直接打印 localStorage 会输出一个包含各个“键值对”的 Storage 对象。</p>
@@ -187,7 +187,7 @@ localStorage
 html.addBehavior(&quot;#default#userdata&quot;);
 </code></pre><p>或者显示地写在文档标签里，效果一样：</p>
 <pre><code>&lt;input style=&quot;BEHAVIOR:url(#default#userData)&quot;/&gt;
-</code></pre><p>以上 html 元素（或 input 元素）加上了 behavior 属性后，该元素就具备了一下属性和方法：</p>
+</code></pre><p>以上 html 元素（或 input 元素）加上了 behavior 属性后，该元素就具备了以下属性和方法：</p>
 <pre><code>// 属性：
 expires : 设置或者获取过期时间
 XMLDocument : 获取 XML 引用

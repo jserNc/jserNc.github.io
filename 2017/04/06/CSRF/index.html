@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/06/CSRF/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……">
-<meta property="og:updated_time" content="2017-04-10T11:54:14.000Z">
+<meta property="og:updated_time" content="2018-03-04T09:55:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSRF 攻击原理">
 <meta name="twitter:description" content="CSRF : 跨站请求伪造（Cross Site Request Forgery）。攻击者冒充用户身份，以用户的名义做出各种操作，而这些操作用户未必知道和愿意做。比如，以用户的名义登录注销、发送消息、购买商品……">
@@ -114,7 +114,7 @@
             
             <a href="/2017/04/06/CSRF/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/06/CSRF/" data-id="cjebhxrl700043r0blngy6pjt" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/06/CSRF/" data-id="cjeclvnu30003d70bkb6hleit" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,13 +133,13 @@
 </blockquote>
 <p>那么问题的关键就是攻击者如何让用户发出请求。上面场景一说明了其中一种请求伪造方式。下面再看一个场景。</p>
 <p><strong>场景二：</strong></p>
-<p>银行网站 A，它以 get 请求来完成转账操作，地址为：</p>
+<p>假设银行网站 A，它以 get 请求来完成转账操作，地址为：</p>
 <pre><code>http://A.com/t.php?toId=id&amp;money=num
 </code></pre><p>攻击者网站 B，里面有一段代码：</p>
 <pre><code>&lt;img src = &quot;http://A.com/t.php?toId=11&amp;money=1000&quot;&gt;
 </code></pre><p>如果你登录了 A 网站后，然后访问网站 B，然后你的账户就少了 1000 块……</p>
 <p>因为你在 A 网站登录状态下访问网站 B，网站 B 中有指向 A 网站的图片资源，这使得你又向 A 网站发出了请求（带有你的登录身份标识），A 网站受到这个请求后，发现是一个转账请求，于是，便在你的账户上划走了 1000 块。</p>
-<p>以上 get 请求来更新资源是极不安全的，为了防止以上问题，银行改用 post 请求来执行转账操作。银行网站 A 的表单代码：</p>
+<p>以上 get 请求来更新资源是极不安全的，为了防止以上问题，假设银行改用 post 请求来执行转账操作。银行网站 A 的表单代码：</p>
 <pre><code>&lt;form action=&quot;t.php&quot; method=&quot;POST&quot;&gt;
 　　&lt;p&gt;ToBankId: &lt;input type=&quot;text&quot; name=&quot;toId&quot; /&gt;&lt;/p&gt;
 　　&lt;p&gt;Money: &lt;input type=&quot;text&quot; name=&quot;money&quot; /&gt;&lt;/p&gt;
@@ -177,7 +177,7 @@
 <p><strong>以上 CSRF 攻击的根本原因：WEB的身份验证机制虽然可以保证一个请求是来自于用户的浏览器（用户身份），但却无法保证该请求是用户主动发送的！</strong></p>
 </blockquote>
 <p><strong>CSRF 防御：</strong></p>
-<p>鉴于以上攻击手段的特点，从用户和网站开发人员角度都可以做一些事情来降低受到 CSRF 攻击的可能性。</p>
+<p>针对攻击手段的特点，从用户和网站开发人员角度都可以做一些事情来降低受到 CSRF 攻击的可能性。</p>
 <p><strong>（1）从用户角度：</strong></p>
 <p>· 在使用完某网站之后，应该立即退出登录；<br>· 尽量不要让浏览器记住用户名密码；<br>· 陌生的链接不要轻易去点，尤其是邮件里的链接。</p>
 <p><strong>（2）从开发人员角度：</strong></p>
