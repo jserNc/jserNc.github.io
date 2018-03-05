@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/05/04/singleton/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
-<meta property="og:updated_time" content="2017-05-26T14:36:39.000Z">
+<meta property="og:updated_time" content="2018-03-05T02:49:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 单例模式">
 <meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cjeclvnw1002sd70bgpvs07ox" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cjecuse4t002ri70b5rgg24wj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -132,7 +132,7 @@ o1 === o2;
 o1 == o2;
 // false;
 </code></pre><p>我们看到，即便是具有相同成员的同类对象，它们也是彼此独立的个体。</p>
-<p>除此之外，我们还可以用 new 运算符来新建实例对象，再探讨用这种方式创建单例对象之前，先复习一下 new 运算符：</p>
+<p>除此之外，我们还可以用 new 运算符来新建实例对象，再探讨用这种方式创建单例对象之前，先看一下 new 运算符的用法：</p>
 <p><strong> new 命令调用后会依次执行以下步骤：</strong></p>
 <blockquote>
 <p>1.创建一个空对象，作为将要返回的对象实例；<br>2.将这个空对象的原型对象（__proto__）指向构造函数的 prototype 属性；<br>3.将构造函数内部的 this 指向该空对象；<br>4.执行构造函数代码。</p>
@@ -145,12 +145,12 @@ o1 == o2;
 var f = new F();
 </code></pre><p>会发生：</p>
 <blockquote>
-<p>1.一个新的空对象 {} 会被创建，并且该对象的原型对象（__proto__）为 F.prototype；<br>2.构造函数 F 内的 this 指向这个新对象，然后执行构造函数；<br>3.如果构造函数中明确地用 return（返回）了一个其他对象，那么这个对象会作为整个 new 运算的返回结果。否则，返回刚才创建的那个对象。</p>
+<p>1.一个新的空对象 {} 会被创建，并且该对象的原型对象（__proto__）为 F.prototype；<br>2.将构造函数 F 内的 this 指向这个新对象，然后执行构造函数；<br>3.如果构造函数中明确地用 return（返回）了一个其他对象，那么这个对象会作为整个 new 运算的返回结果。否则，返回刚才创建的那个对象。</p>
 </blockquote>
-<p>总结一下：new 命令通过构造函数创建新的实例对象，实质就是：<strong>将实例对象的原型指向构造函数的 prototype 的属性，然后在实例对象上执行构造函数（构造函数内 this 绑定为该实例对象）</strong>，所以，以上的 new 命名可以换种写法：</p>
+<p>总结一下：new 命令通过构造函数创建新的实例对象，实质就是：<strong>将实例对象的原型指向构造函数的 prototype 的属性，然后在实例对象上执行构造函数（构造函数内 this 绑定为该实例对象）。</strong>以上的 new 命名可以换种写法：</p>
 <pre><code>var f = Object.setPrototypeOf({}, F.prototype);
 F.call(f);
-f.foo   //&quot;bar&quot;
+f.foo   // &quot;bar&quot;
 </code></pre><p>首先看一个构造函数静态属性缓存单例的示例：</p>
 <pre><code>function Singleton(){
     if (typeof Singleton.instance === &quot;object&quot;){
@@ -248,7 +248,7 @@ var o1 = new Singleton();
 <pre><code>Singleton.prototype.attr2 = &#39;attr2&#39;;
 var o2 = new Singleton();
 </code></pre><p>这两句代码的执行过程是：<br>(1) 上面提到新的 Singleton 的 prototype 指向对象 o，这里修改 Singleton.prototype 即是修改对象 o，对象 o 的所有属性都会被其实例对象继承，包括之前创建的实例对象 oNew，亦 instance；<br>(2) 实例化新的构造函数 Singleton，创建一个新的空对象 {}，不过，由于这次函数返回值 instance 不再是 undefined 了，而是一个对象，所以，返回会返回 instance，而不是空对象 {}，即变量 o2 指向对象 instance。</p>
-<p>换一种写法：</p>
+<p>再换一种写法：</p>
 <pre><code>var Singleton;
 (function(){
     var instance;

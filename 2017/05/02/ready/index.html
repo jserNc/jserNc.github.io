@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。" />
+  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>ready 方法的实现 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+  <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ready 方法的实现">
 <meta property="og:url" content="http://nanchao.win/2017/05/02/ready/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
-<meta property="og:updated_time" content="2017-05-26T13:16:51.000Z">
+<meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta property="og:updated_time" content="2018-03-05T02:23:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ready 方法的实现">
-<meta name="twitter:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta name="twitter:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/05/02/ready/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cjeclvnvt002cd70bv5u36gpc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cjecuse4n002fi70bo5gzofgs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,11 +122,11 @@
 
     <div class="entry-content">
       
-        <p>很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。</p>
+        <p>很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。</p>
 <a id="more"></a>
 <p>为了判断 dom 是否加载完成，对于一般主流浏览器我们可以利用 DOMContentLoaded 事件。而对于部分不支持 DOMContentLoaded 事件的 ie 浏览器，我们可以通过 document.readyState 的状态值来判断（看其是否为 loaded | complete）。如果页面还包含 iframe，ie6~8 等浏览器还会等 iframe 资源加载完才会更新状态值，可能会导致等待时间比较长，这不是我们想要的。</p>
 <p>不过，办法还是有的。ie 下页面元素会有个 doScroll 方法，如果 dom 没有加载完成调用该方法会报错，也就是说，我们可以循环调用该方法，只要它不报错了就表示 dom 已加载完成。</p>
-<p>下面是 jQuery 库实现的 ready 方法思路：</p>
+<p>下面是 ready 方法的一种实现：</p>
 <pre><code>(function(){
    // 判断 onDOMReady 方法是否已经被执行过
    var isReady = false; 
@@ -151,7 +151,7 @@
    }
    var onDOMReady = function(){
         // 依次执行队列中函数
-        for(var i=0; i&lt;readyList.length; i++){
+        for(var i = 0; i &lt; readyList.length; i++){
             readyList[i].apply(document);
         }
         // 销毁函数队列
@@ -160,7 +160,7 @@
    var bindReady = function(evt){
         // 该方法只在 dom 加载完成后执行一次
         if(isReady) return;
-        isReady=true;
+        isReady = true;
         // 主要回调函数
         onDOMReady.call(window);
         // 主流浏览器移除事件绑定
@@ -204,7 +204,7 @@
       if(window == window.top){
           timer = setInterval(function(){
               try{
-                  //判断 dom 是否加载完毕，没加载完会报错
+                  // 判断 dom 是否加载完毕，没加载完会报错
                   isReady || html.doScroll(&#39;left&#39;);
               }catch(e){
                   // 报错就在这里返回
@@ -216,7 +216,7 @@
       }
    }
 })();
-</code></pre><p>如果有多个函数绑定需要绑定到 dom 加载完成后执行，为了防止重复绑定，这里利用函数队列来保证多个函数有序执行。</p>
+</code></pre><p>如果有多个函数绑定需要绑定到 dom 加载完成后执行，为了防止重复绑定，这里利用函数队列来保证多个函数有序地执行。</p>
 <p>参考：<br>[1] <a href="http://yevon.is-programmer.com/posts/30046.html" target="_blank" rel="external">http://yevon.is-programmer.com/posts/30046.html</a></p>
 
       

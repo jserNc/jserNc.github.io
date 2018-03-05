@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。" />
+  <meta name="description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>JavaScript 观察者模式 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。">
+  <meta name="description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 观察者模式">
 <meta property="og:url" content="http://nanchao.win/2017/05/12/observer/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。">
-<meta property="og:updated_time" content="2017-05-26T14:14:21.000Z">
+<meta property="og:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”">
+<meta property="og:updated_time" content="2018-03-05T05:15:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 观察者模式">
-<meta name="twitter:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。">
+<meta name="twitter:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/05/12/observer/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/12/observer/" data-id="cjeclvnvp0025d70bxhe1lp1n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/12/observer/" data-id="cjecuse4j0026i70bkzuhtaym" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,9 +122,9 @@
 
     <div class="entry-content">
       
-        <p>观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的实例。订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。</p>
+        <p>观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”</p>
 <a id="more"></a>
-<p>下面以该模式实现一个小游戏，游戏规则为：若干名游戏者分别敲击键盘某个按键，看谁在 30 秒内敲击键盘次数最多。游戏过程中的比分会实时显示在记分牌上。</p>
+<p>下面用该模式实现一个小游戏，游戏规则为：若干名游戏者分别敲击键盘某个按键，看谁在 30 秒内敲击键盘次数最多。游戏过程中的比分会实时显示在记分牌上。</p>
 <p>首先，定义一个通用的发布者对象：</p>
 <pre><code>var publisher = {
     // 订阅者
@@ -166,8 +166,10 @@
             fn = subscribers[i].fn;
             context = subscribers[i].context;
 
+            // 发布消息
             if (action === &#39;publish&#39;){
                 fn.call(context,arg);
+            // 删除订阅者
             } else {
                 fn === arg &amp;&amp; 
                 context === context &amp;&amp;
@@ -179,11 +181,13 @@
 </code></pre><p>将一个普通对象转化成发布者对象：</p>
 <pre><code>function makePublisher(o){
     var i;
+    // 复制函数
     for (i in publisher){
         publisher.hasOwnProperty(i) &amp;&amp; 
         typeof publisher[i] === &quot;function&quot; &amp;&amp;
         (o[i] = publisher[i])
     }
+    // 复制属性
     o.subscribers = {any : []};
 }
 </code></pre><p>然后，定义玩家构造函数和实例方法：</p>
@@ -228,7 +232,7 @@ Player.prototype.play = function(){
             game.keys[e.which].play();
         }
     },
-    handlePlay : function(player){
+    handlePlay : function(){
         var i,
             players = this.keys,
             name = &#39;&#39;,
@@ -285,7 +289,7 @@ while (1) {
     window.onkeypress = null;
     alert(&#39;Game over!&#39;);
 }, 30000);
-</code></pre><p>程序执行流程如下：<br>(1) 动态创建多个 player 对象。用户在对话框输入用户名和对应的按键，并确认后，调用 new Player() 方法新建游戏者。重复执行此操作和依次创建多个游戏者。当用户取消输入用户名时，终止创建游戏者，进入游戏。<br>(2) new Player() 方法执行时，会发布 【<strong>newplayer</strong>】 类型消息。<br>(3) 消息 【<strong>newplayer</strong>】 会触发 game.addPlayer() 方法。也就是说，当用户依次输入用户名后，game 对象便会在其 keys 属性中保存各个用户名及对应按键信息。<br>(4) 游戏过程中，用户 player01 按下游戏前设置的按键，就会触发 game.handleKeypress() 方法。<br>(5) game.handleKeypress() 方法执行时，会触发 player01.play() 方法。<br>(6) player01.play() 方法会发布 【<strong>play</strong>】 类型消息。<br>(7) 消息 【<strong>play</strong>】 会触发 game.handlePlay() 方法。<br>(8) game.handlePlay() 方法会发布 【<strong>update</strong>】 类型消息。<br>(9) 消息 【<strong>update</strong>】 会触发 scoreboard.update() 方法。<br>(9) scoreboard.update() 方法更新记分牌。<br>(10) 30 秒时间到，游戏结束！</p>
+</code></pre><p>程序执行流程如下：<br>(1) 创建多个 player 对象。用户在对话框输入用户名和对应的按键，确认后，调用 new Player() 方法新建游戏者。重复执行此操作和依次创建多个游戏者。当取消输入用户名时，终止创建游戏者，进入游戏。<br>(2) new Player() 方法执行时，会发布 【<strong>newplayer</strong>】 类型消息。<br>(3) 消息 【<strong>newplayer</strong>】 会触发 game.addPlayer() 方法。也就是说，当用户依次输入用户名后，game 对象便会在其 keys 属性中保存各个用户名及对应按键信息。<br>(4) 游戏过程中，用户 player01 按下游戏前设置的按键，就会触发 game.handleKeypress() 方法。<br>(5) game.handleKeypress() 方法执行时，会触发 player01.play() 方法。<br>(6) player01.play() 方法会发布 【<strong>play</strong>】 类型消息。<br>(7) 消息 【<strong>play</strong>】 会触发 game.handlePlay() 方法。<br>(8) game.handlePlay() 方法会发布 【<strong>update</strong>】 类型消息。<br>(9) 消息 【<strong>update</strong>】 会触发 scoreboard.update() 方法。<br>(9) scoreboard.update() 方法更新记分牌。<br>(10) 30 秒时间到，游戏结束！</p>
 <p>参考：<br>[1] 《JavaScript 模式》</p>
 
       

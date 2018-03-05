@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。" />
+  <meta name="description" content="【function 命令】和【函数表达式】都是定义函数的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>JavaScript 函数 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+  <meta name="description" content="【function 命令】和【函数表达式】都是定义函数的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 函数">
 <meta property="og:url" content="http://nanchao.win/2017/06/09/function/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
-<meta property="og:updated_time" content="2017-06-17T07:06:32.000Z">
+<meta property="og:description" content="【function 命令】和【函数表达式】都是定义函数的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+<meta property="og:updated_time" content="2018-03-05T07:25:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 函数">
-<meta name="twitter:description" content="【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
+<meta name="twitter:description" content="【function 命令】和【函数表达式】都是定义函数的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/09/function/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/09/function/" data-id="cjeclvnv9001dd70b71oxvqm5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/09/function/" data-id="cjecuse41001hi70bx95ltjlf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,7 +122,7 @@
 
     <div class="entry-content">
       
-        <p>【function 命令】和【函数表达式】都是函数定义的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。</p>
+        <p>【function 命令】和【函数表达式】都是定义函数的方式，他们用法大同小异，在很多场景中可以通用。本文主要讨论一下它们之间的差异，同时也可以更深入地理解执行上下文、this 等概念。</p>
 <a id="more"></a>
 <p>首先看一个小例子：</p>
 <pre><code>function f1() {}
@@ -131,19 +131,19 @@
 console.log(typeof f1); // function
 console.log(typeof f2); // undefined
 </code></pre><p>对以上代码执行结果有没有感到意外呢？<strong>其实，第一种方式就是【function 命令】定义函数；第二种方式是【函数表达式】，函数表达式中关键词 function 后的函数名只在函数内部有效，函数外无效。</strong></p>
-<p>注意：【function 命令】定义函数语句后面不能跟分号（;），函数表达式后最好跟分号（;）。</p>
+<p>注意：【function 命令】定义函数语句后面不能跟分号（;），【函数表达式】后最好跟分号（;）。</p>
 <p>一般情况下，我们以为的函数表达式都长这样：</p>
 <pre><code>var f = function() {};
-</code></pre><p>实际上，<strong>只要 function 关键词不在行首，就是函数表达式！</strong>这也是理解 JavaScript 中【立即调用函数】的关键。我们知道，在 JavaScript 中，() 也是一种运算符，跟在函数名后面表示调用该函数，如 f() 表示执行 f 函数。【立即调用函数】实质定义一个函数后，立即调用这个函数。很自然，我们会想到这么写：</p>
+</code></pre><p>实际上，<strong>只要 function 关键词不在行首，就是函数表达式！</strong>这是理解 JavaScript 中【立即调用函数】的关键。我们知道，在 JavaScript 中，() 也是一种运算符，跟在函数名后面表示调用该函数，如 f() 表示执行 f 函数。【立即调用函数】实质定义一个函数后，立即调用这个函数。很自然，会想到这么写：</p>
 <pre><code>function f(){}()
 // Uncaught SyntaxError: Unexpected token )
-</code></pre><p>很遗憾！这句代码报错了，语法错误。因为 function 关键词既可以出现在函数声明语句中，也可以出现在函数表达式中,这么写会让 JavaScript 引擎比较为难。</p>
+</code></pre><p>很遗憾！这句代码报错了，语法错误。因为 function 关键词既可以出现在函数声明语句中，也可以出现在函数表达式中,这么写会让 JavaScript 引擎比较为难，从而报错。</p>
 <p>于是，引擎规定：如果 function 关键词出现在行首，就是函数声明语句，其后是不可以跟 () 运算符的；其他情况下都是函数表达式，其后可以跟 ()，表示执行该函数。</p>
 <p>一般，立即调用函数两种写法：</p>
 <pre><code>(function(){ /* code */ }());
 // 或者
 (function(){ /* code */ })();
-</code></pre><p>如果你开心，以下方式也都可以的：</p>
+</code></pre><p>当然，以下方式也都可以的：</p>
 <pre><code>// 逗号，赋值、与等运算符
 var i = function () { return 10; } ();
 true &amp;&amp; function () { /* code */ } ();
@@ -187,7 +187,7 @@ f2();
 var f2 = function(){
     console.log(&#39;function f2&#39;);
 }
-</code></pre><p>function 命令声明函数会提升到代码头部，所以，函数 f1 可以顺利执行；而变量 f2 的值开始只是 undefined，只有执行完变量 f2 的赋值语句，它才是指向一个函数，所以先于它的赋值语句执行 f2() 必然会报错。</p>
+</code></pre><p>function 命令声明的函数会提升到代码头部，所以，函数 f1 可以顺利执行；而变量 f2 的值开始只是 undefined，只有执行完赋值语句，它才指向一个函数，所以先于 f2 的赋值语句执行 f2() 必然会报错。</p>
 <p>如果用 function 命令和函数表达式方式声明同名函数会怎样呢？</p>
 <pre><code>// 代码段 1
 var f = function(){

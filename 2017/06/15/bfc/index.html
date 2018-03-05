@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/15/bfc/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
-<meta property="og:updated_time" content="2017-06-17T07:06:32.000Z">
+<meta property="og:updated_time" content="2018-03-05T13:06:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 css 块级格式化上下文（BFC）">
 <meta name="twitter:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjeclvnug000bd70b0g9viboi" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjecuse2z000bi70byn6rdhb7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,11 +124,11 @@
       
         <p>BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。</p>
 <a id="more"></a>
-<p>css2.1 中除了 BFC（Block Formatting Contexts）还有 IFC（Inline formatting context）。其中 FC（Formatting Contexts）“格式化上下文”是指：页面中的一款渲染区域，该区域有自己的一套渲染规则，这个规则决定了这个区域元素如何摆放以及和其他元素的关系和作用。</p>
+<p>css2.1 中除了 BFC（Block Formatting Contexts）还有 IFC（Inline formatting context）。其中 FC（Formatting Contexts）“格式化上下文”是指：页面中的一块渲染区域，该区域有自己的一套渲染规则，这个规则决定了这个区域元素如何摆放以及和其他元素的关系和作用。</p>
 <p><strong>w3c 中 BFC 定义：</strong></p>
 <blockquote>
 <p>浮动元素、绝对定位元素、非块级盒子的块级容器（inline-blocks, table-cells, 以及 table-captions 等）、以及 overflow 值不是 visible 的块级盒子，都会为它们的内容创建新的 BFC；</p>
-<p>在 BFC 中，盒子从包含块顶部垂直地一个接一个排列，两个盒子之间的垂直间隙由它们的 margin 值决定。相邻盒子直接的垂直外边距会折叠。</p>
+<p>在 BFC 中，盒子从包含块顶部垂直地一个接一个排列，两个盒子之间的垂直间隙由它们的 margin 值决定。相邻盒子之间的垂直外边距会折叠。</p>
 <p>在 BFC 中，每一个盒子的左外边缘（margin-left）触碰容器的左边缘（border-left）,即使存在浮动也这样，除非这个盒子又创建了一个新的 BFC。（如果是从右到左的格式，则每一个盒子的右外边缘触碰容器的右边缘。）</p>
 </blockquote>
 <p>盒子常分为【块级盒子】和【行内盒子】。display 属性为 block，list-item，table 的元素会生成块级盒子（block-level box）；display 属性为 inline，inline-block，inline-table 的元素会生成行内盒子（inline-level box）。</p>
@@ -142,12 +142,12 @@
 <blockquote>
 <p>两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值。<br>两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值。<br>两个外边距一正一负时，折叠结果是两者相加的和。</p>
 </blockquote>
-<p><strong>注意，只有当元素在同一个BFC中时，垂直方向上的 margin 才会 clollpase。如果它们属于不同的 BFC，则不会有 margin collapse。</strong></p>
+<p><strong>注意，只有当元素在同一个 BFC 中时，垂直方向上的 margin 才会 clollpase。如果它们属于不同的 BFC，则不会有 margin collapse。</strong></p>
 <p>如果 div1 和相邻的 div2 的外边距都是 50px，正常情况下他们的外边距会叠加，叠加后外边距高度还是 50px。要使得他们之间外边距高度变成 100px，可以在两个 div 外层分别加一个父级 div，给父级 div 加上属性 overflow:hidden，即可触发 BFC，外边距不会合并，高度变为 100px。</p>
 <p><strong>b. 阻止行框围绕浮动框</strong></p>
 <p>如果浮动的 div1 和相邻的 div2 处于同一个父元素下，正常情况下，div1 会漂浮并遮挡住 div2。如果 div2 中文本足够多，会出现文本围绕 div1 的情景。如果给 div2 加上属性 overflow:hidden，触发 BFC，div2 就不会和浮动的 div1 重叠，也就不会再文本围绕了。</p>
 <p><strong>c. 清除浮动</strong></p>
-<p>如果一个容器里都是浮动元素，那么这个元素的高度就是 0。为了是这个容器有高度，一般，我们会用一个伪元素 claer 属性去清除浮动。由于<strong>计算 BFC 高度时，浮动元素也参与计算</strong>，所以我们可以给容器加上属性 overflow:hidden，触发 BFC，使得容器具有高度。</p>
+<p>如果一个容器里都是浮动元素，那么这个元素的高度就是 0。为了使这个容器有高度，一般，我们会用一个伪元素 claer 属性去清除浮动。由于<strong>计算 BFC 高度时，浮动元素也参与计算</strong>，所以我们可以给容器加上属性 overflow:hidden，触发 BFC，使得容器具有高度。</p>
 <p><strong>既然以上提到多种条件可以触发 BFC，为什么上面几个例子中都选择用 overflow:hidden 来触发呢？</strong></p>
 <p>我们可以为 container 容器附加属性，如 overflow:scroll，overflow:hidden，display: flex，float:left, 或 display:table 等等。尽管这些条件都能形成一个 BFC，但是它们各自却有着不一样的表现。如 overflow:scroll 可能会出现不想要的滚动条；float:left 会使得其他元素对其围绕；display:table 在响应式布局中会有问题。所以，比较简单的方式就是 overflow:hidden。</p>
 <p><strong>再回过头来详细说说外边距合并：</strong></p>
