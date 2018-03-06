@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/21/h5-boilerplate/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的优秀实战经验。本文对这个项目做一个简单梳理，为以后的新项目开篇提供一个参考方案。">
-<meta property="og:updated_time" content="2017-07-04T13:03:31.000Z">
+<meta property="og:updated_time" content="2018-03-06T01:32:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="h5 项目脚手架">
 <meta name="twitter:description" content="开源项目 HTML5 Boilerplate 作为流行的前端项目模板，包含了百来位开发者的优秀实战经验。本文对这个项目做一个简单梳理，为以后的新项目开篇提供一个参考方案。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/21/h5-boilerplate/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/21/h5-boilerplate/" data-id="cjeeyh4n2001f830bz7tw49x1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/21/h5-boilerplate/" data-id="cjeeylwil001fb30bdww3hmv3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -148,7 +148,7 @@
 <p><strong>① ie 条件注释：</strong></p>
 <pre><code>&lt;!--[if IE 8]&gt; &lt;html class=&quot;no-js lt-ie9&quot;&gt; &lt;![endif]--&gt;
 </code></pre><p>文档开头一系列的 ie 条件注释，针对不同版本的 ie 浏览器给 html 标签标记不同的 class。这样做的好处是：可以将 class 作为全局条件来兼容不同的浏览器；避免了 ie6 条件注释引起的高版本 ie 文件阻塞问题；与 Modernizr 等特征检测类库使用相同的 class，具备通用性。</p>
-<p>“no-js” class （表示禁用了 js）是需要与 Modernizr 等特征检测类库配合使用的，如果你不想在项目中引入Modernizr，需要在 head 部分加入脚本使 “no-js” class 变为 “js” class。</p>
+<p>“no-js” class （表示禁用了 js）是需要与 Modernizr 等特征检测类库配合使用的，如果你不想在项目中引入 Modernizr，需要在 head 部分加入脚本使 “no-js” class 变为 “js” class。</p>
 <pre><code>&lt;script&gt;
 (function(H){
     H.className = H.className.replace(/\bno-js\b/,&#39;js&#39;);
@@ -167,9 +167,9 @@
 <p>Modernizr 是一个浏览器特性检测的 js 工具库，它可以根据特性检测结果给 html 标签加上 class 属性。这使得所有浏览器可以支持 h5 元素。</p>
 <p>由于 js 脚本文本会阻塞页面渲染，一般会将 js 脚本请求放在页面底部。但是 Modernizr.js 是个例外，它会在页面开始渲染之前同步加载。因为这个脚本需要做浏览器特性检测，并某些不支持新的 h5 元素的浏览器做兼容处理。 </p>
 <p><strong>④ ie6 等浏览器升级提示</strong></p>
-<p>如果项目需要支持 ie6 浏览器，删除这个片段。</p>
+<p>如果项目需要支持 ie6 浏览器，请删除这个片段。</p>
 <p><strong>⑤ jQuery 和 Google 统计</strong></p>
-<p>默认去 Google cdn 取，如果 cdn 没取到，则用本地版本（离线开发时候也可以用）。文档最后是一段谷歌统计代码，虽然谷歌建议放在页面头部，如果放在头部，除了影响页面加载速度，还会多统计一些没有完全加载页面的用户，所以，还是放在底部比较好。</p>
+<p>默认去 Google cdn 取，如果 cdn 没取到，则用本地版本（离线开发时候也可以用）。文档最后是一段谷歌统计代码，虽然谷歌建议放在页面头部，如果放在头部，除了影响页面加载速度，还会统计到一些页面没有完全加载的用户，所以，还是放在底部比较好。</p>
 <p><strong>humans.txt</strong></p>
 <p>项目成员、项目技术等介绍。</p>
 <p><strong>robots.txt</strong></p>

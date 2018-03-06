@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，有时间的话，后面会陆续对各个具体的功能模块进行分析。" />
+  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>jQuery 基础 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery 基础">
 <meta property="og:url" content="http://nanchao.win/2017/11/09/jquery-summary/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，有时间的话，后面会陆续对各个具体的功能模块进行分析。">
-<meta property="og:updated_time" content="2017-12-23T09:46:49.000Z">
+<meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+<meta property="og:updated_time" content="2018-03-06T07:42:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 基础">
-<meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+<meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/11/09/jquery-summary/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjeeyh4o5003g830btn0ay53d" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjeeylwiv001pb30bk2weietb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,15 +122,15 @@
 
     <div class="entry-content">
       
-        <p>用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，有时间的话，后面会陆续对各个具体的功能模块进行分析。</p>
+        <p>用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。</p>
 <a id="more"></a>
-<p><strong>jQuery 2.0.3 源码一共 8829 行（包括作者的注释），按行进行分解，总体框架如下：</strong></p>
+<p><strong>jQuery 2.0.3 源码一共 8829 行（包括作者的注释），按行数进行分解，总体代码结构如下：</strong></p>
 <pre><code>(function( window, undefined ) {
 
     (21 , 94) 定义一些变量和函数，其中包括：
     jQuery = function( selector, context ){}
 
-    (96 , 283) 给 jQuery 函数添加一些方法和属性
+    (96 , 283) 给原型对象 jQuery.prototype 添加一些方法和属性
 
     (285 , 347) 静态和实例继承方法的定义 
 

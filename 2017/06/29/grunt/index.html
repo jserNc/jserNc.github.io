@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/29/grunt/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="同样作为前端构建工具，grunt 和 gulp 的功能很类似，都可以帮助我们开发者进行代码检查、编译、单元测试、文件合并、压缩等任务。它们主要区别在于，grunt 在多个处理流程过程中会有多次 I/O 操作，并生成多个中间文件；而 gulp 只需要一次 I/O 操作，随后都是文件流式处理，效率较高。不过，grunt 生态系统非常庞大，有很多插件可供选择，jQuery、Bootstrap 等优秀项目">
-<meta property="og:updated_time" content="2017-07-04T13:03:31.000Z">
+<meta property="og:updated_time" content="2018-03-06T06:44:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端构建工具 grunt">
 <meta name="twitter:description" content="同样作为前端构建工具，grunt 和 gulp 的功能很类似，都可以帮助我们开发者进行代码检查、编译、单元测试、文件合并、压缩等任务。它们主要区别在于，grunt 在多个处理流程过程中会有多次 I/O 操作，并生成多个中间文件；而 gulp 只需要一次 I/O 操作，随后都是文件流式处理，效率较高。不过，grunt 生态系统非常庞大，有很多插件可供选择，jQuery、Bootstrap 等优秀项目">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/29/grunt/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/29/grunt/" data-id="cjeeyh4mw001a830b9iv7a278" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/29/grunt/" data-id="cjeeylwih001ab30blkiz18lu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,15 +126,15 @@
 <a id="more"></a>
 <p>关于 grunt 任务，插件等有很多内容可以深入研究的，这里着重介绍一下 grunt 的使用流程：</p>
 <h3 id="1-安装node环境；"><a href="#1-安装node环境；" class="headerlink" title="1. 安装node环境；"></a>1. 安装node环境；</h3><p>详细安装步骤见<a href="https://nodejs.org/en/" target="_blank" rel="external"> node 官网</a></p>
-<h3 id="2-安装-cli"><a href="#2-安装-cli" class="headerlink" title="2. 安装 cli"></a>2. 安装 cli</h3><p>将 grunt 命令行（cli）安装到全局环境中，例如，windows 下执行命令：</p>
+<h3 id="2-安装-cli"><a href="#2-安装-cli" class="headerlink" title="2. 安装 cli"></a>2. 安装 cli</h3><p>将 grunt 命令行（cli）安装到全局环境中，执行命令：</p>
 <pre><code>npm install -g grunt-cli
-</code></pre><p>这样，grunt 命令就加入到系统路径中了，随后我们就可以在任何项目目录中执行 grunt 命令来构建项目了。</p>
+</code></pre><p>这样，grunt 命令就加入到系统路径中了，随后就可以在任何项目目录中执行 grunt 命令来构建项目了。</p>
 <h3 id="3-项目本地安装-grunt-及-grunt-插件；"><a href="#3-项目本地安装-grunt-及-grunt-插件；" class="headerlink" title="3. 项目本地安装 grunt 及 grunt 插件；"></a>3. 项目本地安装 grunt 及 grunt 插件；</h3><pre><code># 进入项目目录
 # 确定已经有 package.json，没有就通过 npm init 创建
 
 # 安装 grunt 依赖
 npm install grunt --save-dev
-</code></pre><p>如果配置文件 Gruntfile.js 文件中还调用了其他 grunt 插件，那我们需要依次安装每个插件。例如，我们需要对代码进行检查，就安装 jshint 插件，执行命令：</p>
+</code></pre><p>如果配置文件 Gruntfile.js 文件中还调用了其他 grunt 插件，那我们需要依次安装每个插件。例如，若需要对代码进行检查，就安装 jshint 插件，执行命令：</p>
 <pre><code>npm install grunt-contrib-jshint --save-dev
 </code></pre><h3 id="4-编写-Gruntfile-js-文件；"><a href="#4-编写-Gruntfile-js-文件；" class="headerlink" title="4. 编写 Gruntfile.js 文件；"></a>4. 编写 Gruntfile.js 文件；</h3><p>在项目根目录中新建一个普通的 js 文件，命名为 Gruntfile.js。该文件的作用是定义 grunt 任务，即定义我们用 grunt 来做什么。大体格式如下：</p>
 <pre><code>module.exports = function(grunt) {
