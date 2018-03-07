@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/11/09/jquery-summary/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
-<meta property="og:updated_time" content="2018-03-06T07:42:40.000Z">
+<meta property="og:updated_time" content="2018-03-07T05:50:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 基础">
 <meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/11/09/jquery-summary/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjeft78ch001o7y0bffgkdws0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjego0a1q001oz80bbwv5hdrs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -206,7 +206,7 @@
     ...
 };
 </code></pre><p>这里给 jQuery.prototype 定义了一系列的属性和方法，同时给 jQuery.prototype 也取了个别名 jQuery.fn。所以，上面提到的 jQuery.fn.init 就是 jQuery.prototype.init。</p>
-<p>我们知道，给 jQuery.prototype 添加属性和方法，意味着 jQuery 作为构造函数时，jQuery 的实例对象都会自动拥有 jQuery.prototype 中的属性和方法。</p>
+<p>我们知道，给 jQuery.prototype 添加属性和方法，那么构造函数 jQuery 的实例对象都会自动拥有 jQuery.prototype 中的属性和方法。</p>
 <p>可是，上边说到 jQuery 只是一个普通函数而已，并没有作为一个真正的构造函数使用，那么给 jQuery 原型添加那么多属性和方法还有意义吗？答案是必须有！</p>
 <p>继续往下看，还有一句：</p>
 <pre><code>jQuery.fn.init.prototype = jQuery.fn;
