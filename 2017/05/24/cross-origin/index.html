@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/05/24/cross-origin/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体选用哪种方案还需要根据实际应用场景来确定。">
-<meta property="og:updated_time" content="2018-03-05T07:06:59.000Z">
+<meta property="og:updated_time" content="2018-03-12T13:27:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域解决方案">
 <meta name="twitter:description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体选用哪种方案还需要根据实际应用场景来确定。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/05/24/cross-origin/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cjemvtv6k000p7r0bbbhzcnx1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cjeo9co3e000pia0bt3byhotr" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -129,7 +129,7 @@
 <p>也就是说：即在一个窗口（window）的生命周期内，在该窗口载入的所有的页面都是共享同一个 window.name，并且这些页面对 window.name 都有读写的权限。window.name 是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而被重置。</p>
 <p>window.name 属性只能保存字符串，并且当前窗口关闭后这个值就会消失，实际应用中一般将其与 iframe 结合使用。</p>
 <p>例如，A 域下有一个页面 a.htm 想要获取 B 域下的 b.htm 中的数据。</p>
-<p>我们可以在 a.htm 中设置一个 iframe，地址指向 b.htm，等到 b.htm 加载完毕，再将 iframe 窗口内的地址替换成 A 域下的 a1.htm，然后就可以通过该 iframe 的 contentWindow.name 属性获取到想要的数据。</p>
+<p>我们可以在 a.htm 中设置一个 iframe，地址指向 b.htm，等到 b.htm 加载完毕，再将 iframe 窗口的地址替换成 A 域下的 a1.htm，这样父子窗口就同域名了，然后就可以通过该 iframe 的 contentWindow.name 属性获取到子页面里的数据了。</p>
 <p>子页面 B.com/b.htm 代码：</p>
 <pre><code>&lt;script&gt;
  window.name = &#39;a.htm想要获取的数据&#39;;
