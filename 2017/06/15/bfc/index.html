@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/15/bfc/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
-<meta property="og:updated_time" content="2018-03-05T13:06:40.000Z">
+<meta property="og:updated_time" content="2018-03-13T02:40:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 css 块级格式化上下文（BFC）">
 <meta name="twitter:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjeo9co2z000bia0b8eeigfd5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjepla29r0008j80b0z7zstks" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -132,7 +132,7 @@
 <p>在 BFC 中，每一个盒子的左外边缘（margin-left）触碰容器的左边缘（border-left）,即使存在浮动也这样，除非这个盒子又创建了一个新的 BFC。（如果是从右到左的格式，则每一个盒子的右外边缘触碰容器的右边缘。）</p>
 </blockquote>
 <p>盒子常分为【块级盒子】和【行内盒子】。display 属性为 block，list-item，table 的元素会生成块级盒子（block-level box）；display 属性为 inline，inline-block，inline-table 的元素会生成行内盒子（inline-level box）。</p>
-<p><strong>BFC 是一个独立容器，其里面元素不会影响到外面元素，也不会被外面元素影响。计算 BFC 高度时，浮动元素也参与计算。BFC的区域不会与 float box 重叠。</strong>举个例子：一个浮动元素 a 和另一个常规文档流元素 b 是重叠的，若给元素 b 设置一个 overflow: hidden 来创建一个 BFC，那么 a 和 b 便不再重合了，哪怕给 b 设置负的外边距也不会重合了。</p>
+<p><strong>BFC 是一个独立容器，其里面元素不会影响到外面元素，也不会被外面元素影响。计算 BFC 高度时，浮动元素也参与计算。BFC 的区域不会与 float box 重叠。</strong>举个例子：一个浮动元素 a 和另一个常规文档流元素 b 是重叠的，若给元素 b 设置一个 overflow: hidden 来创建一个 BFC，那么 a 和 b 便不再重合了，哪怕给 b 设置负的外边距也不会重合了。</p>
 <p><strong>以下条件会出现 BFC：</strong></p>
 <p>① float 值不是 none（float 的默认值，表示不浮动）的时候；<br>② position 值为 absolute | fixed；<br>③ overflow 值不是 visible 的时候（hidden | auto | scroll 等）；<br>④ display 值为 inline-block | table-cell | table-caption | flex | inline-flex；<br>⑤ 根元素、fieldset 元素。</p>
 <p>需要注意的是，display:table 本身并不会创建 BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的 display:table-cell 可以创建新的 BFC，换句话说，触发块级格式化上下文的是匿名框，而不是 display:table。所以通过 display:table 和 display:table-cell 创建的 BFC 效果是不一样的。</p>
@@ -147,7 +147,7 @@
 <p><strong>b. 阻止行框围绕浮动框</strong></p>
 <p>如果浮动的 div1 和相邻的 div2 处于同一个父元素下，正常情况下，div1 会漂浮并遮挡住 div2。如果 div2 中文本足够多，会出现文本围绕 div1 的情景。如果给 div2 加上属性 overflow:hidden，触发 BFC，div2 就不会和浮动的 div1 重叠，也就不会再文本围绕了。</p>
 <p><strong>c. 清除浮动</strong></p>
-<p>如果一个容器里都是浮动元素，那么这个元素的高度就是 0。为了使这个容器有高度，一般，我们会用一个伪元素 claer 属性去清除浮动。由于<strong>计算 BFC 高度时，浮动元素也参与计算</strong>，所以我们可以给容器加上属性 overflow:hidden，触发 BFC，使得容器具有高度。</p>
+<p>如果一个容器里都是浮动元素，那么这个元素的高度就是 0。为了使这个容器有高度，一般我们会用一个伪元素 claer 属性去清除浮动。由于<strong>计算 BFC 高度时，浮动元素也参与计算</strong>，所以我们还可以给容器加上属性 overflow:hidden，触发 BFC，使得容器具有高度。</p>
 <p><strong>既然以上提到多种条件可以触发 BFC，为什么上面几个例子中都选择用 overflow:hidden 来触发呢？</strong></p>
 <p>我们可以为 container 容器附加属性，如 overflow:scroll，overflow:hidden，display: flex，float:left, 或 display:table 等等。尽管这些条件都能形成一个 BFC，但是它们各自却有着不一样的表现。如 overflow:scroll 可能会出现不想要的滚动条；float:left 会使得其他元素对其围绕；display:table 在响应式布局中会有问题。所以，比较简单的方式就是 overflow:hidden。</p>
 <p><strong>再回过头来详细说说外边距合并：</strong></p>
