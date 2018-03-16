@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/06/19/css-float/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="默认情况下，元素处于普通流。给元素设置 float 属性后，可以使元素向左或向右浮动，直到它的外边缘碰到包含块或者另一个浮动框。当然了，如果元素 float 属性设为 none，那就表示不浮动，它还是出现在它原本应该出现的位置。">
-<meta property="og:updated_time" content="2018-03-05T14:15:20.000Z">
+<meta property="og:updated_time" content="2018-03-16T03:58:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css 浮动及清理浮动">
 <meta name="twitter:description" content="默认情况下，元素处于普通流。给元素设置 float 属性后，可以使元素向左或向右浮动，直到它的外边缘碰到包含块或者另一个浮动框。当然了，如果元素 float 属性设为 none，那就表示不浮动，它还是出现在它原本应该出现的位置。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/06/19/css-float/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/19/css-float/" data-id="cjervhvsk000wby0bmvb17e0m" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/19/css-float/" data-id="cjetezljt000uzz0bfbqjnlnm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -164,7 +164,7 @@
 
 <p>以上三图中 div1、div2 都是都是左浮动，现在我们需要 div2 移到 div1 下面去，就好像 div1 是普通流元素一样。</p>
 <p>中间图给 div1 加上属性 clear : right，结果和左图没什么区别，并没什么用；右图给 div2 加上属性 clear : left，成功把 div2 移到 div1 下面。</p>
-<p>总结一下就是：如果要想 div2 左边没有浮动元素，那就该对 div2 设置 clear : left 属性，而不是对其他元素设置；如果要想 div2 右边没有浮动元素，那就该对 div2 设置 clear : right 属性，而不是对其他元素设置。两边都情浮动，则用 clear : both。</p>
+<p>总结一下就是：如果要想 div2 左边没有浮动元素，那就该对 div2 设置 clear : left 属性，而不是对其他元素设置；如果要想 div2 右边没有浮动元素，那就该对 div2 设置 clear : right 属性，而不是对其他元素设置。若两边都需清浮动，则用 clear : both。</p>
 <blockquote>
 <p><strong>如果一个父容器中所有元素都浮动，则会父容器高度塌陷，表现出高度为 0。</strong></p>
 </blockquote>
