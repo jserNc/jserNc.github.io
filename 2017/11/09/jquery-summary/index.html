@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/11/09/jquery-summary/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
-<meta property="og:updated_time" content="2018-03-07T06:08:37.000Z">
+<meta property="og:updated_time" content="2018-03-21T03:15:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 基础">
 <meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/11/09/jquery-summary/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjexwez40001kl40b69ews193" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="cjf0iolzl001k2b0bkstmd91r" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -257,7 +257,7 @@ $(document).on(&#39;ready&#39;,function(){
 <p><strong>(6) 链式调用</strong></p>
 <p>平常使用 jQuery 过程中，会经常用到这种链式写法：</p>
 <pre><code>$(&#39;input&#39;).css(&#39;width&#39;,&#39;20px&#39;).click(function(){alert(1)})
-</code></pre><p>这句的作用是，将所有的 input 元素字体设为 20px，然后监听所有的 input 元素的点击事件，当我们点击 input 元素时，弹出 1。</p>
+</code></pre><p>这句的作用是，将所有的 input 元素宽度设为 20px，然后监听所有的 input 元素的点击事件，当我们点击 input 元素时，弹出 1。</p>
 <p>这样的链式写法，看起来语义清晰，写起来也挺方便的，其实它的实现原理也是很简单。</p>
 <p>以上 css、click 方法都是我们定义在 jQuery.fn 上的方法，根据前边的分析我们知道，任何一个 jQuery() 方法生成的对象（称之为 jQuery 实例对象）都可以调用jQuery.fn 上挂载的方法，所以 css、click 等方法是可以被 jQuery 实例对象调用的。</p>
 <p>所以，我们断定以下都是 jQuery 对象：</p>
