@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。" />
+  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说若多次用同一个类来创建对象，得到的都是同一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。" />
   
 
   
@@ -14,16 +14,16 @@
   
   <title>JavaScript 单例模式 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
+  <meta name="description" content="单例模式保证一个特定类只有一个实例对象。也就是说若多次用同一个类来创建对象，得到的都是同一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 单例模式">
 <meta property="og:url" content="http://nanchao.win/2017/05/04/singleton/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
-<meta property="og:updated_time" content="2018-03-05T02:49:08.000Z">
+<meta property="og:description" content="单例模式保证一个特定类只有一个实例对象。也就是说若多次用同一个类来创建对象，得到的都是同一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
+<meta property="og:updated_time" content="2018-03-26T12:34:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 单例模式">
-<meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
+<meta name="twitter:description" content="单例模式保证一个特定类只有一个实例对象。也就是说若多次用同一个类来创建对象，得到的都是同一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -114,7 +114,7 @@
             
             <a href="/2017/05/04/singleton/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cjf1uxf72002r4z0biexzpi7r" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/04/singleton/" data-id="cjf87ss2l002ncn0bwpa8fuw6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,7 +122,7 @@
 
     <div class="entry-content">
       
-        <p>单例模式保证一个特定类只有一个实例对象。也就是说多次用同一个类来创建对象，得到的都是同样一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。</p>
+        <p>单例模式保证一个特定类只有一个实例对象。也就是说若多次用同一个类来创建对象，得到的都是同一个对象。严格意义上，JavaScript 没有类，只有对象，对象之间永远不会完全相等，除非它们是同一个对象，所以我们创建的每一个对象都可以看做是单例。比如，我们可以用对象字面量来创建单例对象。</p>
 <a id="more"></a>
 <pre><code>var o1 = {name : &#39;singleton&#39;};
 var o2 = {name : &#39;singleton&#39;};
@@ -132,7 +132,7 @@ o1 === o2;
 o1 == o2;
 // false;
 </code></pre><p>我们看到，即便是具有相同成员的同类对象，它们也是彼此独立的个体。</p>
-<p>除此之外，我们还可以用 new 运算符来新建实例对象，再探讨用这种方式创建单例对象之前，先看一下 new 运算符的用法：</p>
+<p>除此之外，我们还可以用 new 运算符来新建实例对象，在探讨用这种方式创建单例对象之前，先看一下 new 运算符的用法：</p>
 <p><strong> new 命令调用后会依次执行以下步骤：</strong></p>
 <blockquote>
 <p>1.创建一个空对象，作为将要返回的对象实例；<br>2.将这个空对象的原型对象（__proto__）指向构造函数的 prototype 属性；<br>3.将构造函数内部的 this 指向该空对象；<br>4.执行构造函数代码。</p>
@@ -151,7 +151,7 @@ var f = new F();
 <pre><code>var f = Object.setPrototypeOf({}, F.prototype);
 F.call(f);
 f.foo   // &quot;bar&quot;
-</code></pre><p>首先看一个构造函数静态属性缓存单例的示例：</p>
+</code></pre><p>先来看一个构造函数静态属性缓存单例的示例：</p>
 <pre><code>function Singleton(){
     if (typeof Singleton.instance === &quot;object&quot;){
         return Singleton.instance;
