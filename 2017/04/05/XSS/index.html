@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2017/04/05/XSS/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
-<meta property="og:updated_time" content="2018-03-04T10:06:40.000Z">
+<meta property="og:updated_time" content="2018-03-27T03:24:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS 攻击原理">
 <meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
@@ -114,7 +114,7 @@
             
             <a href="/2017/04/05/XSS/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cjf87ss0a0004cn0bqcav2vxu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="cjf93qhix00035u0bgexo54qs" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -156,7 +156,12 @@
 空格  -&gt;  &amp;nbsp;  
 /     -&gt;  &amp;#x2f;
 </code></pre><p>以上编码转换能够防御一部分 XSS 攻击。实际生产过程中，具体问题还是应该具体分析。</p>
-<p>参考：<br>[1] <a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md" target="_blank" rel="external">https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md</a><br>[2] <a href="http://blog.csdn.net/ghsau/article/details/17027893" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17027893</a><br>[3] <a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/9977.html</a></p>
+<p>总结一下，对于 XSS 攻击，我们可以做如下防范：</p>
+<p>(1) 输入过滤。不要相信用户的输入，对用户输入的数据进行过滤。如用户输入的日期、手机号、用户名等是否格式正确，是否包含 script 等敏感关键词。</p>
+<p>(2) 输出编码。服务器端输出到浏览器的数据，可以使用系统的安全函数来进行编码或转义。如 PHP 中的 htmlentities() 和 htmlspecialchars() 函数。</p>
+<p>(3) 安全编码。开发需尽量避免在客户端进行文档重写、重定向或其他敏感操作，同时要避免使用客户端数据，这些操作需尽量在服务器端使用动态页面来实现。</p>
+<p>(4) HttpOnly Cookie。Web应用程序在设置 cookie 时，将其属性设为 HttpOnly，这样可以避免该网页的 cookie 被客户端恶意 JavaScript 窃取。</p>
+<p>参考：<br>[1] <a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md" target="_blank" rel="external">https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/09.3.md</a><br>[2] <a href="http://blog.csdn.net/ghsau/article/details/17027893" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17027893</a><br>[3] <a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/9977.html</a><br>[4] <a href="http://wetest.qq.com/lab/view/136.html" target="_blank" rel="external">http://wetest.qq.com/lab/view/136.html</a></p>
 
       
     </div><!-- .entry-content -->
