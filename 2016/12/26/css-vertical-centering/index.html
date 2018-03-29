@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://nanchao.win/2016/12/26/css-vertical-centering/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面探讨一下垂直和水平居中的几种实现方法。">
-<meta property="og:updated_time" content="2018-03-19T07:17:52.000Z">
+<meta property="og:updated_time" content="2018-03-29T02:08:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css 居中">
 <meta name="twitter:description" content="利用 css 来实现居中有多种方法，每种方法都有其优缺点，不能简单地断定某种方法是最好的，应该根据实际应用场景来选择合适的方案。下面探讨一下垂直和水平居中的几种实现方法。">
@@ -114,7 +114,7 @@
             
             <a href="/2016/12/26/css-vertical-centering/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cjf93qhk2000z5u0bf71y7h12" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/26/css-vertical-centering/" data-id="cjfc2qywd000v2k0b2jfnv1y8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -283,14 +283,14 @@
 
 <p><strong> ③ 子元素为不定宽块元素 display:inline;text-align:center;</strong></p>
 <pre><code>&lt;style&gt;
-    .child-ul {
-        background-color:#f0f;
-        display:inline;
-    }
     .parent-ul {
         height:100px;
         background-color:#0f0;
         text-align:center;
+    }
+    .child-ul {
+        background-color:#f0f;
+        display:inline;
     }
 &lt;/style&gt;
 &lt;div class=&quot;parent-ul&quot;&gt;
