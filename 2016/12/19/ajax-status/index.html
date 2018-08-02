@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：" />
+  <meta name="description" content="每个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：" />
   
 
   
@@ -14,18 +14,18 @@
   
   <title>关于 ajax 请求 status 值为 0 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+  <meta name="description" content="每个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
 <meta name="keywords" content="problem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 ajax 请求 status 值为 0">
 <meta property="og:url" content="http://nanchao.win/2016/12/19/ajax-status/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta property="og:description" content="每个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-01T09:55:38.000Z">
+<meta property="og:updated_time" content="2018-08-02T09:08:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 ajax 请求 status 值为 0">
-<meta name="twitter:description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta name="twitter:description" content="每个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +116,7 @@
             
             <a href="/2016/12/19/ajax-status/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cjkcc2un00004e90b2tk0tgs8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cjkcc8e7e0006aj0bcayr8k10" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,7 +124,7 @@
 
     <div class="entry-content">
       
-        <p>一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：</p>
+        <p>每个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：</p>
 <a id="more"></a>
 <blockquote>
 <p><strong>0</strong> (UNSENT)：初始化，XMLHttpRequest 对象还没有完成初始化<br><strong>1</strong> (OPENED)：载入，XMLHttpRequest 对象开始发送请求<br><strong>2</strong> (HEADERS_RECEIVED)：载入完成，XMLHttpRequest 对象的请求发送完成<br><strong>3</strong> (LOADING)：解析，XMLHttpRequest 对象开始读取服务器的响应<br><strong>4</strong> (DONE)：数据传输已完成或传输过程中出现问题（例如无限重定向、跨域等）。</p>
@@ -148,7 +148,7 @@
         }
     };
     xhr.open(&#39;GET&#39;, url, true);
-    xhr.send(null); 
+    xhr.send(null);
 }
 </code></pre><p>即满足 <strong>xhr.readyState == 4 &amp;&amp; xhr.status == 200</strong>，才能表示请求成功！</p>
 <p>我们把以上代码稍微改写一下，打印出每次 ajax 请求返回的状态码：</p>
@@ -166,7 +166,7 @@
         }
     };
     xhr.open(&#39;GET&#39;, url, true);
-    xhr.send(null); 
+    xhr.send(null);
 }
 </code></pre><p>实际应用中，会发现存在少量用户打印出的 xhr.status 值为0。这就奇怪了，http 状态码也没有值为 0 的场景，这里的 0 又是怎么来的？</p>
 <p><a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="noopener">官方文档https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a>  指出：</p>
