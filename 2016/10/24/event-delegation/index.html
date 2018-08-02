@@ -15,11 +15,13 @@
   <title>JavaScript 事件代理（委托） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 事件代理（委托）">
 <meta property="og:url" content="http://nanchao.win/2016/10/24/event-delegation/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-12-19T01:26:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 事件代理（委托）">
@@ -114,7 +116,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cjfc418ei00152l0bsgt1sl44" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="cjkc8t7lt0016uk0bdf9b510l" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -225,7 +227,7 @@
 <p>如果 useCapture 为 true，那就是【事件捕获】，先触发 div 的 click 事件，再触发 p 的 click 事件；如果 useCapture 为 false，那就是【事件冒泡】，先触发 p 的 click 事件，再触发 div 的 click 事件。</p>
 <p>如果我们给所有的元素监听事件时，都设定 useCapture 为 false，那就所有的事件都在冒泡的阶段触发。而所有子元素的事件都会冒泡到祖先元素，所以，我们可以通过祖先元素来代理（委托）子元素的事件了。</p>
 <p>如果给不同的元素设置不一样的 useCapture 值，有的设为 true，有的设为 false。那就就先从最外层向【目标节点】方向寻找 useCapture 设为 true 的捕获事件，然后到达【目标节点】执行目标元素事件后，再往外层方向寻找 useCapture 设为 false 的冒泡事件。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="external">http://www.diguage.com/archives/71.html</a><br>[3] <a href="https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/" target="_blank" rel="external">https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="noopener">http://www.diguage.com/archives/71.html</a><br>[3] <a href="https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/" target="_blank" rel="noopener">https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/</a></p>
 
       
     </div><!-- .entry-content -->

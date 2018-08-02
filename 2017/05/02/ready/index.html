@@ -15,11 +15,13 @@
   <title>ready 方法的实现 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ready 方法的实现">
 <meta property="og:url" content="http://nanchao.win/2017/05/02/ready/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="很多时候，我们需要在页面加载完成后执行某些方法。我们首先可能会想到 window.onload 事件，但是，该事件会等到 dom、script、css、image 以及 iframe 等所有资源都加载完后才会触发，这么多资源都加载完是很耗时间的，所以，比较好的办法是只在 dom 加载完后就执行这些方法。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-05T02:23:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ready 方法的实现">
@@ -114,7 +116,7 @@
             
             <a href="/2017/05/02/ready/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cjfc418fa002e2l0b3ju0qixm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/02/ready/" data-id="cjkc8t7ne002kuk0bpdkl6o3n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -217,7 +219,7 @@
    }
 })();
 </code></pre><p>如果有多个函数绑定需要绑定到 dom 加载完成后执行，为了防止重复绑定，这里利用函数队列来保证多个函数有序地执行。</p>
-<p>参考：<br>[1] <a href="http://yevon.is-programmer.com/posts/30046.html" target="_blank" rel="external">http://yevon.is-programmer.com/posts/30046.html</a></p>
+<p>参考：<br>[1] <a href="http://yevon.is-programmer.com/posts/30046.html" target="_blank" rel="noopener">http://yevon.is-programmer.com/posts/30046.html</a></p>
 
       
     </div><!-- .entry-content -->

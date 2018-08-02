@@ -15,19 +15,18 @@
   
   <title>JavaScript 闭包（译） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 闭包（译）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/closures/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-01T07:15:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 闭包（译）">
-<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
+<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -118,7 +117,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cjfc418dz000o2l0bihm51k68" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="cjkc8t7lh000ruk0bvl4ewyly" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,7 +125,7 @@
 
     <div class="entry-content">
       
-        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="noopener">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 <p><strong>在ECMAScript中，函数是第一级（first-class）对象。</strong>这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作<strong>高阶函数</strong>。同样函数也可以从其他函数中返回。返回其他函数的函数叫作<strong>以函数为值的函数</strong>。</p>
 <a id="more"></a>
 <p>首先，明确一下，<strong>JavaScript有两种作用域：全局作用域和函数作用域</strong>。函数内部可以直接读取全局变量，反之则不行！</p>
@@ -187,7 +186,7 @@ function foo() {
 
   funArg(); // 10, but not 20
 
-})(foo);
+})(foo); 
 </code></pre><p>我们看到 x 并未到父函数去取值，而是去其声明时所在环境（全局作用域）中取值。那么，如果我们去掉全局作用域中变量 x 的声明，会怎样？</p>
 <pre><code>function foo() {
   console.log(x);
@@ -200,7 +199,7 @@ function foo() {
   funArg(); 
   //Uncaught ReferenceError: x is not defined(…) 
 
-})(foo);
+})(foo); 
 </code></pre><p>我们看到，报错了！！</p>
 <p>其实，这里有一个重要结论：<strong>函数（function）声明时所在的环境代表其作用域方向！！也就是说函数的作用域链是在其声明时确定，而不是其调用时！！</strong></p>
 <p>换句话讲，函数内标识符该使用哪个作用域的值——以静态的方式存储在函数创建时刻的作用域还是在执行过程中以动态方式生成的作用域？JavaScript采用的是前者！<strong>JavaScript没有动态作用域。</strong></p>
@@ -348,7 +347,7 @@ var o2 = new Singleton();
 o1 === o2
 // true
 </code></pre><p>这里的构造函数是一个自定义函数（函数执行一遍后，会改变函数的定义）。第一次 new 运算符执行该构造函数时，它像普通的构造函数一样返回 this 对象。以后就执行重写过的构造函数（该闭包函数可以访问原函数的私有变量 instance），直接返回 instance 对象。</p>
-<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a><br>[3] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/function.html</a></p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="noopener">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="noopener">http://ourjs.com/detail/529bc7e44c742ef031000002</a><br>[3] <a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/grammar/function.html</a></p>
 
       
     </div><!-- .entry-content -->

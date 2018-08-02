@@ -15,19 +15,18 @@
   
   <title>重绘和回流（repaint &amp; reflow） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+  <meta name="description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素； 回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta name="keywords" content="problem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重绘和回流（repaint & reflow）">
+<meta property="og:title" content="重绘和回流（repaint &amp; reflow）">
 <meta property="og:url" content="http://nanchao.win/2017/03/30/repaint-and-reflow/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta property="og:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素； 回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-07-09T14:28:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重绘和回流（repaint & reflow）">
-<meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素；
-回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
+<meta name="twitter:title" content="重绘和回流（repaint &amp; reflow）">
+<meta name="twitter:description" content="重绘（repaint）：当元素的属性（如 color）发生变化时，浏览器会重新绘制相应的元素； 回流（reflow）：当元素布局（如 width）改变，浏览器抛弃原有属性，重新计算渲染树并重新布局。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -118,7 +117,7 @@
             
             <a href="/2017/03/30/repaint-and-reflow/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cjfc418fb002i2l0beflksa3n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/03/30/repaint-and-reflow/" data-id="cjkc8t7ng002muk0b1o5esypk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -150,6 +149,7 @@ el.className += &quot; newClassName&quot;;
 
 // 推荐
 el.style.cssText += &quot;;left:&quot;+left+&quot;px;top:&quot;+top+&quot;px;&quot;;
+
 </code></pre><p>（2）<strong>dom 离线后修改；</strong></p>
 <p>  · clone 一份要修改的 DOM 节点，改完后，覆盖在线的对应节点；</p>
 <p>  · 先把 DOM 给 display:none （有一次 reflow），然后修改。改好了再把它显示出来。</p>

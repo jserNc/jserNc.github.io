@@ -16,22 +16,18 @@ httpd-2.2.21-win32-x86-openssl-0.9.8r.msi" />
   
   <title>https 本地环境搭建(windows) | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="（注：这里以 www.nc.com 域名为例）
-1. 安装支持 ssl 功能的 apache这里采用版本：
-httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+  <meta name="description" content="（注：这里以 www.nc.com 域名为例） 1. 安装支持 ssl 功能的 apache这里采用版本： httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="https 本地环境搭建(windows)">
 <meta property="og:url" content="http://nanchao.win/2016/10/14/https/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="（注：这里以 www.nc.com 域名为例）
-1. 安装支持 ssl 功能的 apache这里采用版本：
-httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta property="og:description" content="（注：这里以 www.nc.com 域名为例） 1. 安装支持 ssl 功能的 apache这里采用版本： httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="https 本地环境搭建(windows)">
-<meta name="twitter:description" content="（注：这里以 www.nc.com 域名为例）
-1. 安装支持 ssl 功能的 apache这里采用版本：
-httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
+<meta name="twitter:description" content="（注：这里以 www.nc.com 域名为例） 1. 安装支持 ssl 功能的 apache这里采用版本： httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -122,7 +118,7 @@ httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
             
             <a href="/2016/10/14/https/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="cjfc418es001m2l0btmef9fse" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/https/" data-id="cjkc8t7m5001kuk0bn2qhry8z" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -130,7 +126,7 @@ httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
 
     <div class="entry-content">
       
-        <p><em>（注：这里以 www.nc.com 域名为例）</em></p>
+        <p><em>（注：这里以 <a href="http://www.nc.com" target="_blank" rel="noopener">www.nc.com</a> 域名为例）</em></p>
 <h3 id="1-安装支持-ssl-功能的-apache"><a href="#1-安装支持-ssl-功能的-apache" class="headerlink" title="1. 安装支持 ssl 功能的 apache"></a>1. 安装支持 ssl 功能的 apache</h3><p><strong>这里采用版本：</strong></p>
 <p>httpd-2.2.21-win32-x86-openssl-0.9.8r.msi</p>
 <a id="more"></a>
@@ -146,7 +142,7 @@ httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
 <pre><code>openssl genrsa -out server.key 1024
 </code></pre><p><strong>b) 生成签署申请</strong></p>
 <p>用上一步的密钥生成证书请求文件 server.csr：</p>
-<pre><code>openssl req -new –out server.csr -key server.key -config ..\conf\openssl.cnf
+<pre><code>openssl req -new –out server.csr -key server.key -config ..\conf\openssl.cnf 
 </code></pre><p>这里有一系列参数需要输入：</p>
 <pre><code>Country Name (2 letter code) [AU]: CN　国家代码
 </code></pre><pre><code>State or Province Name (full name) [Some-State]: SH　省份
@@ -166,7 +162,7 @@ httpd-2.2.21-win32-x86-openssl-0.9.8r.msi">
 <p><strong>c) CA 为网站签署证书</strong></p>
 <p>bin 目录下创建 demoCA 目录，包含：index.txt、serial（内容为01）、空文件夹 newcerts，然后执行：</p>
 <pre><code>openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key -config ..\conf\openssl.cnf
-</code></pre><h3 id="4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache"><a href="#4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache" class="headerlink" title="4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache"></a>4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache</h3><h3 id="5-访问-https-www-nc-com"><a href="#5-访问-https-www-nc-com" class="headerlink" title="5. 访问 https://www.nc.com"></a>5. 访问 <a href="https://www.nc.com" target="_blank" rel="external">https://www.nc.com</a></h3>
+</code></pre><h3 id="4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache"><a href="#4-将-server-crt，server-key-复制到-apache-conf-文件夹下，重启-apache" class="headerlink" title="4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache"></a>4. 将 server.crt，server.key 复制到 apache/conf 文件夹下，重启 apache</h3><h3 id="5-访问-https-www-nc-com"><a href="#5-访问-https-www-nc-com" class="headerlink" title="5. 访问 https://www.nc.com"></a>5. 访问 <a href="https://www.nc.com" target="_blank" rel="noopener">https://www.nc.com</a></h3>
       
     </div><!-- .entry-content -->
 

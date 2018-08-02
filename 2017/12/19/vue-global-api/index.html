@@ -15,11 +15,13 @@
   <title>Vue 2.x 全局 api 详解 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="vue 官网上专门列出了全局 api 供大家参考，这些 api 我之前看了好几遍，但是对其用法始终没能理解得很透彻。这里根据 Vue 2.4.0 源码对这些全局 api 做一些尽可能详细的注解。">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 2.x 全局 api 详解">
 <meta property="og:url" content="http://nanchao.win/2017/12/19/vue-global-api/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="vue 官网上专门列出了全局 api 供大家参考，这些 api 我之前看了好几遍，但是对其用法始终没能理解得很透彻。这里根据 Vue 2.4.0 源码对这些全局 api 做一些尽可能详细的注解。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-08T06:11:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 2.x 全局 api 详解">
@@ -114,7 +116,7 @@
             
             <a href="/2017/12/19/vue-global-api/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/19/vue-global-api/" data-id="cjfc418fn003a2l0b40f8c940" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/19/vue-global-api/" data-id="cjkc8t7o1003fuk0bcyavnwpu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -332,6 +334,7 @@ var nextTick = (function () {
     }
   }
 })();
+
 </code></pre><p>虽然 Promise 和 MutationObserver 都可以在“事件循环”结束后异步触发回调函数，但由于 MutationObserver 在 ios 系统有 bug，所以还是首选还是 Promise。</p>
 <p><strong>（1）先来看看 MutationObserver：</strong></p>
 <p>MutationObserver（变动观察器）是监视 DOM 变动的接口。当 DOM 对象树发生任何变动时，MutationObserver 会得到通知。在概念上，它很接近事件。可以理解为，当 DOM 发生变动会触发 MutationObserver 事件。但是，它与事件有一个本质不同：</p>
@@ -389,6 +392,7 @@ var nextTick = function queueNextTick (cb, ctx) {
       })
     }
 }
+
 </code></pre><p>那么，若条件 !cb &amp;&amp; typeof Promise !== ‘undefined’ 满足，理解一下以下代码：</p>
 <pre><code>// nextTick() 不带参数时，可以当做 Promise 实例
 var p = nextTick();
@@ -769,6 +773,7 @@ function mergeField (key) {
 
 <p>将模板字符串转为真正的渲染函数。</p>
 <pre><code>Vue$3.compile = compileToFunctions;
+
 </code></pre><p>其实，这里的 Vue$3 就是 Vue，看一下整个 Vue 框架结构就明白了：</p>
 <pre><code>(function (global, factory) {
   // CommonJS 规范
@@ -910,12 +915,13 @@ new Vue({
   render: res.render,
   staticRenderFns: res.staticRenderFns
 })
+
 </code></pre><h2 id="vue-version">Vue.version</h2>
 
 <p>以字符串形式返回 Vue 的版本号。</p>
 <pre><code>Vue$3.version = &#39;2.4.0&#39;;
 </code></pre><p>篇幅有点长，暂时写到这里，后续会继续对 Vue 展开分析。</p>
-<p>参考：<br>[1] <a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="external">https://cn.vuejs.org/v2/api/</a><br>[2] <a href="http://www.cnblogs.com/jscode/p/3600060.html" target="_blank" rel="external">http://www.cnblogs.com/jscode/p/3600060.html</a></p>
+<p>参考：<br>[1] <a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener">https://cn.vuejs.org/v2/api/</a><br>[2] <a href="http://www.cnblogs.com/jscode/p/3600060.html" target="_blank" rel="noopener">http://www.cnblogs.com/jscode/p/3600060.html</a></p>
 
       
     </div><!-- .entry-content -->

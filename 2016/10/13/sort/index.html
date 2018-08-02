@@ -15,11 +15,13 @@
   <title>JavaScript 排序算法 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出冒泡排序、选择排序、插入排序、合并排序、快速排序等 5 种排序的一种实现，以便将来参考和在此基础上改进。">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 排序算法">
 <meta property="og:url" content="http://nanchao.win/2016/10/13/sort/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="排序算法作为老生常谈的话题，其实现方式多种多样，这里给出冒泡排序、选择排序、插入排序、合并排序、快速排序等 5 种排序的一种实现，以便将来参考和在此基础上改进。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 排序算法">
@@ -114,7 +116,7 @@
             
             <a href="/2016/10/13/sort/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="cjfc418fi002w2l0bv8zjnp24" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/sort/" data-id="cjkc8t7no002wuk0btzpuj8qk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -150,7 +152,7 @@ function bubbleSort(arr){
         }
     }
     return arr;
-}
+} 
 </code></pre><p><strong>(2) 选择排序</strong></p>
 <p>　　找出数组中最大的数字与最末尾数字位置交换。对除末尾元素外的数组元素重复该过程，直至全部数字升序排列。</p>
 <pre><code>//将数组最大元素放置在最末尾
@@ -184,6 +186,7 @@ function selectSort(arr){
     }
     return arr;
 }
+
 </code></pre><p><strong>(3) 插入排序</strong></p>
 <p>　　它将数组分成“已排序”和“未排序”两部分，一开始的时候，“已排序”的部分只有一个元素，然后将它后面一个元素从“未排序”部分插入“已排序”部分，从而“已排序”部分增加一个元素，“未排序”部分减少一个元素。以此类推，完成全部排序。</p>
 <pre><code>//向升序数组插入数字

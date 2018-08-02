@@ -15,11 +15,13 @@
   <title>网页性能优化建议 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网页性能优化建议">
 <meta property="og:url" content="http://nanchao.win/2016/12/30/page-optimization/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="通常，实现网页功能并不难，难在如何用简洁高效的代码实现所需功能，并且有着良好的健壮性、可扩展性、可维护性。从用户角度看，网页打开速度快，各种操作都很流畅，这是很重要的问题（网页性能优化）。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-02T03:08:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页性能优化建议">
@@ -114,7 +116,7 @@
             
             <a href="/2016/12/30/page-optimization/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cjfc418f9002b2l0b76l1f3zx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/30/page-optimization/" data-id="cjkc8t7n40027uk0bse4vg3pl" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -134,7 +136,7 @@
 <h3 id="·-合理利用缓存（Expires-或者-Cache-Control）"><a href="#·-合理利用缓存（Expires-或者-Cache-Control）" class="headerlink" title="· 合理利用缓存（Expires 或者 Cache-Control）"></a>· 合理利用缓存（Expires 或者 Cache-Control）</h3><p>前提是 css 和 js 写在外部文件中。例如，用 Exipres 是用来设置 css、js、图片资源文件的过期时间，可以使这些内容在指定时间内具有缓存性，这样下回再访问同样的资源时就通过浏览器缓存区读取，不需要再发出 http 请求（用户强制刷新页面除外）。不过哪些文件应该缓存，哪些文件应该实时更新给用户还是应该斟酌一下。</p>
 <h3 id="·-避免-404，减少-dns-查询时间（减少资源域名数量）"><a href="#·-避免-404，减少-dns-查询时间（减少资源域名数量）" class="headerlink" title="· 避免 404，减少 dns 查询时间（减少资源域名数量）"></a>· 避免 404，减少 dns 查询时间（减少资源域名数量）</h3><p>外链的 css、js 文件出现问题返回 404 时，会破坏浏览器的并行加载。一次 dns 解析过程会消耗一定的时间，在 dns 查询结束之前，浏览器不会下载该域名下的任何东西。所以减少 dns 查询的时间可以加快页面的加载速度，也就是减少页面包含的资源域名数量。</p>
 <p>例如，确保网站根目录下有 favicon.ico 文件。即使网页中根本不包括这个文件，浏览器每次打开我们的站点也会发起对这个文件的请求。所以，如果这个文件不存在，就会产生 404 错误，消耗资源。</p>
-<h3 id="·-避免重定向"><a href="#·-避免重定向" class="headerlink" title="· 避免重定向"></a>· 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="external">http://baidu.com/</a> 。</p>
+<h3 id="·-避免重定向"><a href="#·-避免重定向" class="headerlink" title="· 避免重定向"></a>· 避免重定向</h3><p>每增加一次重定向就会增加一次 web 请求，应该尽量减少。比如当 URL 本该有斜杠（/）却被忽略掉时。例如，当我们要访问 <a href="http://baidu.com" target="_blank" rel="noopener">http://baidu.com</a> 时，实际上返回的是一个包含 307 临时重定向的跳转，它指向的是 <a href="http://baidu.com/" target="_blank" rel="noopener">http://baidu.com/</a> 。</p>
 <h3 id="·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量"><a href="#·-使用无-cookie-的域存放静态资源，同时减少主域名-cookie-数量" class="headerlink" title="· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量"></a>· 使用无 cookie 的域存放静态资源，同时减少主域名 cookie 数量</h3><p>域名之下如果有 cookie，那么客户端每次向该域名发出 http 请求，都会附上 cookie 的内容，这会影响加载速度，所以静态资源域名不使用 cookie。</p>
 <h3 id="·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”"><a href="#·-js-尽量使用“异步加载”，非首屏模块使用“惰性加载”" class="headerlink" title="· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”"></a>· js 尽量使用“异步加载”，非首屏模块使用“惰性加载”</h3><p>首屏一定要快！能不加载的先不加载，能不执行的先不执行！</p>
 <blockquote>
@@ -149,7 +151,7 @@
 <h3 id="·-正确使用-display-的属性"><a href="#·-正确使用-display-的属性" class="headerlink" title="· 正确使用 display 的属性"></a>· 正确使用 display 的属性</h3><p>display 属性会影响页面的渲染，因此请合理使用<br>1) display:inline 后不应该再使用 width、height、margin、padding 以及 float<br>2) display:inline-block 后不应该再使用 float<br>3) display:block 后不应该再使用 vertical-align<br>4) display:table-* 后不应该再使用 margin 或者 float</p>
 <h3 id="·-不滥用-float"><a href="#·-不滥用-float" class="headerlink" title="· 不滥用 float"></a>· 不滥用 float</h3><p>float 在渲染时计算量比较大，尽量减少使用</p>
 <h3 id="·-值为-0-时不需要任何单位"><a href="#·-值为-0-时不需要任何单位" class="headerlink" title="· 值为 0 时不需要任何单位"></a>· 值为 0 时不需要任何单位</h3><p>为了浏览器的兼容性和性能，值为 0 时不要带单位</p>
-<p>参考：<br>[1] <a href="http://developer.51cto.com/art/201207/347525_all.htm" target="_blank" rel="external">http://developer.51cto.com/art/201207/347525_all.htm</a><br>[2] <a href="http://div.io/topic/371" target="_blank" rel="external">http://div.io/topic/371</a><br>[3] <a href="https://isux.tencent.com/h5-performance.html" target="_blank" rel="external">https://isux.tencent.com/h5-performance.html</a></p>
+<p>参考：<br>[1] <a href="http://developer.51cto.com/art/201207/347525_all.htm" target="_blank" rel="noopener">http://developer.51cto.com/art/201207/347525_all.htm</a><br>[2] <a href="http://div.io/topic/371" target="_blank" rel="noopener">http://div.io/topic/371</a><br>[3] <a href="https://isux.tencent.com/h5-performance.html" target="_blank" rel="noopener">https://isux.tencent.com/h5-performance.html</a></p>
 
       
     </div><!-- .entry-content -->

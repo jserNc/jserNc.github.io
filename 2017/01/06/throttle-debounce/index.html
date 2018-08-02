@@ -15,14 +15,16 @@
   <title>去抖和节流（debounce &amp; throttle） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="函数去抖和函数节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如抽奖现场，嘉宾连续点击了多次“特等奖按钮”，抽出了多名特等奖，尴尬；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条会密集触发 scroll 事件，如果回调事件复杂，就会造成浏览器卡顿。">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
-<meta property="og:title" content="去抖和节流（debounce & throttle）">
+<meta property="og:title" content="去抖和节流（debounce &amp; throttle）">
 <meta property="og:url" content="http://nanchao.win/2017/01/06/throttle-debounce/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="函数去抖和函数节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如抽奖现场，嘉宾连续点击了多次“特等奖按钮”，抽出了多名特等奖，尴尬；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条会密集触发 scroll 事件，如果回调事件复杂，就会造成浏览器卡顿。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-02T02:51:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="去抖和节流（debounce & throttle）">
+<meta name="twitter:title" content="去抖和节流（debounce &amp; throttle）">
 <meta name="twitter:description" content="函数去抖和函数节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如抽奖现场，嘉宾连续点击了多次“特等奖按钮”，抽出了多名特等奖，尴尬；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条会密集触发 scroll 事件，如果回调事件复杂，就会造成浏览器卡顿。">
   
   
@@ -114,7 +116,7 @@
             
             <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cjfc418fk00302l0b6n5tlxsj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="cjkc8t7nr0030uk0bhqze44ft" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -181,7 +183,7 @@ var throttle = function(delay, action){
     console.log(&#39;你拖动了滚动条&#39;);
 };
 window.addEventListener(&#39;scroll&#39;,throttle(2000,f),false);
-</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fsjohnhuang/p/4147810.html" target="_blank" rel="external">http://www.cnblogs.com/fsjohnhuang/p/4147810.html</a><br>[2] <a href="http://blog.csdn.net/dyllove98/article/details/9281507" target="_blank" rel="external">http://blog.csdn.net/dyllove98/article/details/9281507</a></p>
+</code></pre><p>参考：<br>[1] <a href="http://www.cnblogs.com/fsjohnhuang/p/4147810.html" target="_blank" rel="noopener">http://www.cnblogs.com/fsjohnhuang/p/4147810.html</a><br>[2] <a href="http://blog.csdn.net/dyllove98/article/details/9281507" target="_blank" rel="noopener">http://blog.csdn.net/dyllove98/article/details/9281507</a></p>
 
       
     </div><!-- .entry-content -->

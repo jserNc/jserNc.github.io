@@ -15,11 +15,13 @@
   <title>toString.call() 引起的一些思考 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。">
+<meta name="keywords" content="grammar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="toString.call() 引起的一些思考">
 <meta property="og:url" content="http://nanchao.win/2016/10/14/tostring/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="toString 作为全局方法时，挂载于 window 全局对象。原型链最顶层的原型对象 Object.prototype 有 Object.prototype.toString 方法（其实，这个方法就是和全局的 toString 是同一方法），另外，一些内置构造函数 Array、String、Boolean、Function、Date 等也都分别部署了自己的 toString 方法。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-05-29T09:20:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="toString.call() 引起的一些思考">
@@ -114,7 +116,7 @@
             
             <a href="/2016/10/14/tostring/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cjfc418fl00322l0bbqawvcli" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/14/tostring/" data-id="cjkc8t7nq002yuk0bcu9vmgi3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -312,7 +314,7 @@ Array.__proto__ === Function.prototype   // true
 Empty                                    
 //ReferenceError: Empty is not defined
 </code></pre><p>以上 Empty 不是全局构造方法，但是，Number、Function、Array 等是全局构造方法</p>
-<pre><code>Number === window.Number   //true
+<pre><code>Number === window.Number   //true  
 </code></pre><p>当然了，“所有构造函数”也包括自定义的构造函数</p>
 <pre><code>var MyArray = function () {};
 MyArray instanceof Function               //true

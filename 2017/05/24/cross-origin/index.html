@@ -15,11 +15,13 @@
   <title>跨域解决方案 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体选用哪种方案还需要根据实际应用场景来确定。">
+<meta name="keywords" content="method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跨域解决方案">
 <meta property="og:url" content="http://nanchao.win/2017/05/24/cross-origin/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="受浏览器同源策略的限制，ajax 只能向同源（协议、域名、端口都相同）网址发出 http 请求，跨源请求会被阻止、报错。下面介绍 5 种跨域解决方案，具体选用哪种方案还需要根据实际应用场景来确定。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-12T13:27:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域解决方案">
@@ -114,7 +116,7 @@
             
             <a href="/2017/05/24/cross-origin/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cjfc418e4000q2l0b5w6ctqmg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/24/cross-origin/" data-id="cjkc8t7le000puk0blw8y0ejk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -152,15 +154,15 @@
 </code></pre><p>首先，iframe 地址为 b.htm，等到 b.htm 加载完毕，会触发 onload 事件，这时 flag 为 0。于是，将 flag 值置为 1，iframe 地址改为 a1.htm，重新加载该 iframe。等到 iframe 再次加载完毕，这时 flag 为 1，因为 a1.htm 和 a.htm 同域，所以，这时候父页面可以取子页面的 window.name 属性了。</p>
 <h3 id="③-修改-document-domain-跨子域"><a href="#③-修改-document-domain-跨子域" class="headerlink" title="③ 修改 document.domain 跨子域"></a>③ 修改 document.domain 跨子域</h3><p>该方法只适用于顶级域名相同，子域不同的框架间的交互。</p>
 <p>不同的框架之间，是能够获取到彼此的 window 对象的，但是你却不能使用获取到的 window 对象的属性和方法（html5 中的 postMessage 方法是一个例外，还有些浏览器比如 ie6 也可以使用 top、parent 等少数几个属性），总之，你可以当做是只能获取到一个几乎无用的 window 对象。</p>
-<p>如有一个页面，它的地址是 www.example.com/a.html  ， 在这个页面里面有一个 iframe，它的 src 是 example.com/b.html, 很显然，这个页面与它里面的 iframe 框架是不同子域的。</p>
+<p>如有一个页面，它的地址是 <a href="http://www.example.com/a.html" target="_blank" rel="noopener">www.example.com/a.html</a>  ， 在这个页面里面有一个 iframe，它的 src 是 example.com/b.html, 很显然，这个页面与它里面的 iframe 框架是不同子域的。</p>
 <p>我们只需要将 a.html 和 b.html 都设置成：</p>
 <pre><code>document.domain = &#39;example.com&#39;
 </code></pre><p>这样父页面和子页面就可以通过 js 来访问彼此的属性和对象了。</p>
-<h3 id="④-使用-h5-中的-window-postMessage-方法"><a href="#④-使用-h5-中的-window-postMessage-方法" class="headerlink" title="④ 使用 h5 中的 window.postMessage 方法"></a>④ 使用 h5 中的 window.postMessage 方法</h3><pre><code>window.postMessage(message,targetOrigin)
+<h3 id="④-使用-h5-中的-window-postMessage-方法"><a href="#④-使用-h5-中的-window-postMessage-方法" class="headerlink" title="④ 使用 h5 中的 window.postMessage 方法"></a>④ 使用 h5 中的 window.postMessage 方法</h3><pre><code>window.postMessage(message,targetOrigin) 
 </code></pre><p>该方法可以向其他的 window 对象发送消息，无论这两个对象是否同源。</p>
 <p>向其他 window 对象发送消息，是指一个页面有几个框架的情况下，每一个框架都有一个 window 对象，框架之间可以互发消息。这里发送消息不受同源政策限制，即不同域的框架之间也可以获取到对方的 window 对象，然后用 window.postMessage 方法发送消息。</p>
 <p>需要接收消息的 window 对象，可是通过监听自身的 message 事件来获取传过来的消息，消息内容储存在该事件对象的 data 属性中。举例如下：</p>
-<p>www.a.com/a.htm 代码:</p>
+<p><a href="http://www.a.com/a.htm" target="_blank" rel="noopener">www.a.com/a.htm</a> 代码:</p>
 <pre><code>&lt;iframe id=&quot;ifr&quot; src=&quot;http://www.b.com/b.htm&quot;&gt;&lt;/iframe&gt;
 &lt;script&gt;
     document.getElementById(&quot;ifr&quot;).onload = function(){
@@ -168,7 +170,8 @@
         win.postMessage(&#39;来自a页面的消息&#39;)
     }
 &lt;/script&gt;
-</code></pre><p>www.b.com/b.htm 代码:</p>
+
+</code></pre><p><a href="http://www.b.com/b.htm" target="_blank" rel="noopener">www.b.com/b.htm</a> 代码:</p>
 <pre><code>&lt;script&gt;
     window.onmessage = function(e){
         e = e || event;
@@ -178,7 +181,7 @@
 </code></pre><p>使用 postMessage 来跨域传送数据还是比较直观和方便的，缺点是 IE6、IE7 等浏览器不支持，所以用不用还得根据实际需求来决定。</p>
 <h3 id="⑤-CORS-跨源资源分享（Cross-Origin-Resource-Sharing）"><a href="#⑤-CORS-跨源资源分享（Cross-Origin-Resource-Sharing）" class="headerlink" title="⑤ CORS 跨源资源分享（Cross-Origin Resource Sharing）"></a>⑤ CORS 跨源资源分享（Cross-Origin Resource Sharing）</h3><p>它是 w3c 标准，是跨源 AJAX 请求的根本解决方法。目前，除了 ie10 以下的低版本浏览器，其他浏览器都支持该功能。实现 CORS 通信的关键是服务器，只要服务器实现了 CORS 接口，就可以跨源通信。</p>
 <p>相比 jsonp 只能发 GET 请求，CORS 允许任何类型的请求。对开发者来说，CORS 通信与同源的 AJAX 通信没有差别，代码完全一样。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/bom/cors.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/cors.html</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/bom/cors.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/bom/cors.html</a></p>
 
       
     </div><!-- .entry-content -->

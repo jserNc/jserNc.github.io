@@ -18,29 +18,19 @@
   
   <title>JavaScript 作用域链（译） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-作用域（scope）控制着变量和参数的可见性及生命周期。
-通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
-
-作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
+  <meta name="description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 作用域（scope）控制着变量和参数的可见性及生命周期。 通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。  作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 作用域链（译）">
 <meta property="og:url" content="http://nanchao.win/2016/11/01/scope-chain/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-作用域（scope）控制着变量和参数的可见性及生命周期。
-通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
-
-作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
+<meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 作用域（scope）控制着变量和参数的可见性及生命周期。 通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。  作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
 <meta property="og:updated_time" content="2018-03-01T08:07:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 作用域链（译）">
-<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
-作用域（scope）控制着变量和参数的可见性及生命周期。
-通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。
-
-作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
+<meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 作用域（scope）控制着变量和参数的可见性及生命周期。 通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。  作用域链是一个对象列表，执行上下文中出现的变量标识符在这个列表中进行查找。执行上下文的建立阶段会建立作用域">
 <meta name="twitter:image" content="http://nanchao.win/css/images/scope-chain/scope-chain.png">
   
   
@@ -132,7 +122,7 @@
             
             <a href="/2016/11/01/scope-chain/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cjfc418fd002m2l0bbf48ol5k" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/scope-chain/" data-id="cjkc8t7nb002iuk0bp6w1bzr1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -140,7 +130,7 @@
 
     <div class="entry-content">
       
-        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+        <p>原文： <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="noopener">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 <p><strong>作用域</strong>（scope）控制着变量和参数的<strong>可见性</strong>及<strong>生命周期</strong>。</p>
 <p>通常来说，一段程序代码中所用的变量并不是总是可用的，而限定这个变量的可用性的代码范围就是这个变量的作用域。</p>
 <blockquote>
@@ -267,7 +257,7 @@ document.write(p3);
 <pre><code>onclick=&quot;f()&quot;
 </code></pre><p>这里的 f 函数是由 window 对象触发的，若 f 是定义在自定义函数内部的函数，全局环境 window 找不到它那是必然的，所以才有了以上的报错。</p>
 <p>段落1 的绑定方式是将函数 f 的赋值给 p1 的 onclick 属性，所以在点击事情发生时，不必再通过 f 了，这和段落 3 是有区别的。</p>
-<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="external">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
+<p>参考：<br>[1] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="noopener">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a><br>[2] <a href="http://ourjs.com/detail/529bc7e44c742ef031000002" target="_blank" rel="noopener">http://ourjs.com/detail/529bc7e44c742ef031000002</a></p>
 
       
     </div><!-- .entry-content -->

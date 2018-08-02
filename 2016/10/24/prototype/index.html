@@ -15,11 +15,13 @@
   <title>JavaScript 原型链 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="js 中，除了 null，每个对象都会继承另一个对象（“原型对象”）。原型对象的所有属性和方法都可以被派生对象共享，这就是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototyp">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 原型链">
 <meta property="og:url" content="http://nanchao.win/2016/10/24/prototype/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="js 中，除了 null，每个对象都会继承另一个对象（“原型对象”）。原型对象的所有属性和方法都可以被派生对象共享，这就是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototyp">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
 <meta property="og:updated_time" content="2018-03-10T15:23:01.000Z">
@@ -117,7 +119,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cjfc418fa002g2l0b6pw8cvqe" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="cjkc8t7n8002buk0bmpozst9g" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -329,7 +331,7 @@ var f = new F();
 <pre><code>var f = Object.setPrototypeOf({}, F.prototype);
 F.call(f);
 f.foo   // &quot;bar&quot;
-</code></pre><p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/prototype.html</a><br>[2] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="external">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
+</code></pre><p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/prototype.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/oop/prototype.html</a><br>[2] <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" target="_blank" rel="noopener">http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</a></p>
 
       
     </div><!-- .entry-content -->

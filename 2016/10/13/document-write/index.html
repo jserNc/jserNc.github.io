@@ -15,11 +15,13 @@
   <title>关于 document.write 引入第三方脚本 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。">
+<meta name="keywords" content="problem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 document.write 引入第三方脚本">
 <meta property="og:url" content="http://nanchao.win/2016/10/13/document-write/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="一般情况下，我们会选择异步方式调取 js 文件，但是又有一些不得不使用同步方式来调用 js 的场景。对于这种场景，除了可以直接用 script 标签插入同步脚本，document.write 也是一种选择。然而，chrome 认为后者会拖慢页面加载速度，牺牲用户体验。所以，新版 chrome 决定对用document.write 注入第三方脚本的方式采取一些干预措施。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 document.write 引入第三方脚本">
@@ -114,7 +116,7 @@
             
             <a href="/2016/10/13/document-write/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="cjfc418eg00132l0bgg588k4a" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/13/document-write/" data-id="cjkc8t7lp0011uk0bn05ufl49" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -126,7 +128,7 @@
 <a id="more"></a>
 <p>最近，可能也有人像我一样，看某些网页的时候，chrome 控制台出现了下面的警告：</p>
 <pre><code>A Parser-blocking, cross-origin script, https://paul.kinlan.me/ad-inject.js, is invoked via document.write. This may be blocked by the browser if the device has poor network connectivity.
-</code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="external">官方</a> 指出chrome 即将干预通过 document.write 引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="external">我们应该避免使用这种写法</a>：</p>
+</code></pre><p><a href="https://developers.google.com/web/updates/2016/08/removing-document-write" target="_blank" rel="noopener">官方</a> 指出chrome 即将干预通过 document.write 引入的脚本了，<a href="http://blog.dareboost.com/en/2016/09/avoid-using-document-write-scripts-injection/" target="_blank" rel="noopener">我们应该避免使用这种写法</a>：</p>
 <pre><code>document.write(&#39;&lt;scri&#39;+&#39;pt  src = &quot;https://paul.kinlan.me/ad-inject.js&quot;&gt;&lt;/scri&#39;+&#39;pt&gt;&#39;);
 </code></pre><p>注意，以上代码中 script 关键字需要拆开，否则会和前面或者后面的 script 配对，从而造成代码块提前结束，出现错误。</p>
 <p>那么，使用 document.write 会有什么问题？</p>

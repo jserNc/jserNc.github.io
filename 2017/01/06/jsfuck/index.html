@@ -15,11 +15,13 @@
   <title>jsfuck 6 个字符写 js 代码（一） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中没人这么写代码，但是这种做法很有趣，对其原理的探讨很有助于加深我们对 JavaScript 基础知识的理解。">
+<meta name="keywords" content="grammar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsfuck 6 个字符写 js 代码（一）">
 <meta property="og:url" content="http://nanchao.win/2017/01/06/jsfuck/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 是一门灵活的语言，表达力很丰富。JSFuck 使得我们可以只使用 [，]，(，)，!，+ 等 6 个字符来写 JavaScript 代码。虽然实际应用中没人这么写代码，但是这种做法很有趣，对其原理的探讨很有助于加深我们对 JavaScript 基础知识的理解。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-02T02:08:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（一）">
@@ -114,7 +116,7 @@
             
             <a href="/2017/01/06/jsfuck/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cjfc418eq001k2l0be6oobjhf" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/jsfuck/" data-id="cjkc8t7mf001ruk0blpclon9u" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -137,7 +139,11 @@
 <p>① 参数是数值，返回还是原来的数值；<br>② 参数是字符串，除整个非字符串能被解析成对应的数值，否则返回 NaN；<br>③ 参数是布尔值，true 转成 1，false 转成 0；<br>④ undefined 转成 NaN，null 转成 0；<br>⑤ 参数是对象，处理流程如下：</p>
 <blockquote>
 <p><strong> 【1】调用 valueOf 方法 </strong><br>调用对象自身的 valueOf 方法。如果返回前 4 种类型的值，则对该值使用 Number 函数，不再进行后续步骤;</p>
+</blockquote>
+<blockquote>
 <p><strong> 【2】调用 toString 方法 </strong><br>如果 valueOf 方法返回的还是对象，则改为调用对象自身的 toString 方法。如果返回前 4 种类型的值，则对该值使用 Number 函数，不再进行后续步骤。</p>
+</blockquote>
+<blockquote>
 <p><strong> 【3】报错 </strong><br>如果 toString 方法返回的是也是对象，就报错。</p>
 </blockquote>
 <pre><code>+ &#39;abc&#39;        // NaN
@@ -172,7 +178,11 @@ Number({
 <p>分以下几种情况：</p>
 <blockquote>
 <p><strong> 【1】运算子之中存在字符串 </strong><br>只要两个运算子中有一个是字符串，则不管另一个什么类型，都会被自动转换为字符串，然后执行字符串的连接运算；</p>
+</blockquote>
+<blockquote>
 <p><strong> 【2】运算子均为数值或布尔值 </strong><br>两个运算子都是数值或者布尔值，布尔值转换为数值（true 为 1，false 为 0），然后执行加法运算;</p>
+</blockquote>
+<blockquote>
 <p><strong> 【3】运算子中存在对象 </strong><br>两个运算子中存在对象（非原始类型数据），先调用该对象的 valueOf 方法，如果返回值为原始类型，然后按上面两条规则执行；否则调用该对象的 toString 方法，然后按上面两条规则执行。</p>
 </blockquote>
 <p>那么，如果一个运算子是字符串，一个运算子是对象，怎么处理呢？</p>
@@ -208,7 +218,7 @@ Number({
 </code></pre><p>先看 {} + []，{} 视作空代码块被忽略，相对于 +[] ，[] 也是对象的一种，所以调用 toString 方法，相当 +””，最终结果为 0。</p>
 <p>再看  ({}) + []，两个运算子均为对象，分别调用 toString 方法，相当于 “[object Object]” + “”，最终结果为 “[object Object]”。</p>
 <p>以上是最基本的数组类型转换，也是 jsFuck 的基本原理之一。暂时先到这里，后面我们会继续探讨这个话题。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="noopener">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="noopener">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
 
       
     </div><!-- .entry-content -->

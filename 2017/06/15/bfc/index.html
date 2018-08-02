@@ -15,11 +15,13 @@
   <title>理解 css 块级格式化上下文（BFC） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解 css 块级格式化上下文（BFC）">
 <meta property="og:url" content="http://nanchao.win/2017/06/15/bfc/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-29T03:00:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 css 块级格式化上下文（BFC）">
@@ -114,7 +116,7 @@
             
             <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjfc418dq000b2l0bd3j59t6s" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="cjkc8t7kz000buk0b33mbm2pq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -128,7 +130,11 @@
 <p><strong>w3c 中 BFC 定义：</strong></p>
 <blockquote>
 <p>浮动元素、绝对定位元素、非块级盒子的块级容器（inline-blocks, table-cells, 以及 table-captions 等）、以及 overflow 值不是 visible 的块级盒子，都会为它们的内容创建新的 BFC；</p>
+</blockquote>
+<blockquote>
 <p>在 BFC 中，盒子从包含块顶部垂直地一个接一个排列，两个盒子之间的垂直间隙由它们的 margin 值决定。相邻盒子之间的垂直外边距会折叠。</p>
+</blockquote>
+<blockquote>
 <p>在 BFC 中，每一个盒子的左外边缘（margin-left）触碰容器的左边缘（border-left）,即使存在浮动也这样，除非这个盒子又创建了一个新的 BFC。（如果是从右到左的格式，则每一个盒子的右外边缘触碰容器的右边缘。）</p>
 </blockquote>
 <p>盒子常分为【块级盒子】和【行内盒子】。display 属性为 block，list-item，table 的元素会生成块级盒子（block-level box）；display 属性为 inline，inline-block，inline-table 的元素会生成行内盒子（inline-level box）。</p>
@@ -193,7 +199,7 @@
 </code></pre><p>上面提到【浮动元素】不会与任何元素发生外边距合并。底部【清除浮动元素】的 margin-top 值设为 50px，可我们看到它与上面【浮动元素】的外边距是 20px。这里【浮动元素】和【清除浮动元素】貌似外边距合并了，实则不然。实际上，不管怎么修改这个 margin-top 值，这两个元素之间的间隙都等于【浮动元素】的下外边距。</p>
 <p>w3c 规定：【清除浮动元素】在 margin-top 上所产生的间距（clearance）的值与该块盒的margin-top 之和应该足够大，即大于【浮动元素】的 margin-bottom，这样使得【清除浮动元素】的 border-top 恰好与【浮动元素】块盒的 margin-bottom 紧贴。</p>
 <p><strong>也就是说，间隙多大我们不需要知道，只需记住【清除浮动元素】的 border-top 会紧贴着它上面的【浮动元素】的 margin-bottom。</strong></p>
-<p>参考：<br>[1] <a href="http://www.html-js.com/article/1866" target="_blank" rel="external">http://www.html-js.com/article/1866</a><br>[2] <a href="https://segmentfault.com/a/1190000009078619" target="_blank" rel="external">https://segmentfault.com/a/1190000009078619</a><br>[3] <a href="http://www.jianshu.com/p/fc1d61dace7b" target="_blank" rel="external">http://www.jianshu.com/p/fc1d61dace7b</a><br>[4] <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a><br>[5] <a href="https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="external">https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p>
+<p>参考：<br>[1] <a href="http://www.html-js.com/article/1866" target="_blank" rel="noopener">http://www.html-js.com/article/1866</a><br>[2] <a href="https://segmentfault.com/a/1190000009078619" target="_blank" rel="noopener">https://segmentfault.com/a/1190000009078619</a><br>[3] <a href="http://www.jianshu.com/p/fc1d61dace7b" target="_blank" rel="noopener">http://www.jianshu.com/p/fc1d61dace7b</a><br>[4] <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="noopener">http://www.iyunlu.com/view/css-xhtml/55.html</a><br>[5] <a href="https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="noopener">https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p>
 
       
     </div><!-- .entry-content -->

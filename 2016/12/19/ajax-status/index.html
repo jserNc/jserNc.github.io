@@ -15,11 +15,13 @@
   <title>关于 ajax 请求 status 值为 0 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta name="keywords" content="problem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 ajax 请求 status 值为 0">
 <meta property="og:url" content="http://nanchao.win/2016/12/19/ajax-status/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="一个 ajax 请求，onreadystatechange 事件会触发 5 次，对应 readyState 从 0 到 4 变化。例：值为 4 表示请求已经完成或者传输过程中出现错误。readyState 总共有 5 个状态值，分别为 0 ~ 4，每个值代表了不同的含义：">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-01T09:55:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 ajax 请求 status 值为 0">
@@ -114,7 +116,7 @@
             
             <a href="/2016/12/19/ajax-status/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cjfc418dh00062l0bt0b71xpw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/12/19/ajax-status/" data-id="cjkc8t7kp0006uk0bn9lh454j" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -167,22 +169,26 @@
     xhr.send(null); 
 }
 </code></pre><p>实际应用中，会发现存在少量用户打印出的 xhr.status 值为0。这就奇怪了，http 状态码也没有值为 0 的场景，这里的 0 又是怎么来的？</p>
-<p><a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="external">官方文档https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a>  指出：</p>
+<p><a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="noopener">官方文档https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a>  指出：</p>
 <p>status 值会由以下几个步骤确定：</p>
 <blockquote>
 <p>1.If the state is UNSENT or OPENED, return 0.</p>
+</blockquote>
+<blockquote>
 <p>2.If the error flag is set, return 0.</p>
+</blockquote>
+<blockquote>
 <p>3.Return the HTTP status code.</p>
 </blockquote>
 <p>也就是说，如果 readyState 是 UNSENT（0）或 OPENED（1）状态，status 返回值为 0；如果出现某种网络错误或者请求终止，error flag 就会由 unset 变为 set，status 返回值也为 0；否则，返回 http 状态码。</p>
 <p>下面举例说明：</p>
 <p>调取跨域资源，status 会返回 0：</p>
 <pre><code>getStatus(&#39;https://www.baidu.com&#39;);
-</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load <a href="https://www.baidu.com/" target="_blank" rel="external">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://www.nc.com" target="_blank" rel="external">http://www.nc.com</a>‘ is therefore not allowed access.</p>
+</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load <a href="https://www.baidu.com/" target="_blank" rel="noopener">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://www.nc.com&#39;" target="_blank" rel="noopener">http://www.nc.com&#39;</a> is therefore not allowed access.</p>
 <p>调取本地文件，status 同样会返回 0：</p>
 <pre><code>getStatus(&#39;file:///E:/www/www.nc.com/index.html&#39;);
-</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load file:///D:/www/www.nc.com/index.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https, chrome-extension-resource.</p>
-<p>参考：<br>[1] <a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="external">https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a><br>[2] <a href="http://www.w3school.com.cn/ajax/" target="_blank" rel="external">http://www.w3school.com.cn/ajax/</a><br>[3] <a href="http://www.cnblogs.com/liu-fei-fei/p/5618782.html" target="_blank" rel="external">http://www.cnblogs.com/liu-fei-fei/p/5618782.html</a><br>[4] <a href="http://blog.csdn.net/iaiti/article/details/42192659" target="_blank" rel="external">http://blog.csdn.net/iaiti/article/details/42192659</a></p>
+</code></pre><p>控制台会打印：status: 0，同时报出错误：XMLHttpRequest cannot load file:///D:/www/<a href="http://www.nc.com/index.html" target="_blank" rel="noopener">www.nc.com/index.html</a>. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https, chrome-extension-resource.</p>
+<p>参考：<br>[1] <a href="https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/" target="_blank" rel="noopener">https://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/</a><br>[2] <a href="http://www.w3school.com.cn/ajax/" target="_blank" rel="noopener">http://www.w3school.com.cn/ajax/</a><br>[3] <a href="http://www.cnblogs.com/liu-fei-fei/p/5618782.html" target="_blank" rel="noopener">http://www.cnblogs.com/liu-fei-fei/p/5618782.html</a><br>[4] <a href="http://blog.csdn.net/iaiti/article/details/42192659" target="_blank" rel="noopener">http://blog.csdn.net/iaiti/article/details/42192659</a></p>
 
       
     </div><!-- .entry-content -->

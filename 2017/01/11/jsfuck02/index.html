@@ -15,11 +15,13 @@
   <title>jsfuck 6 个字符写 js 代码（三） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
+<meta name="keywords" content="grammar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsfuck 6 个字符写 js 代码（三）">
 <meta property="og:url" content="http://nanchao.win/2017/01/11/jsfuck02/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-03T04:28:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（三）">
@@ -114,7 +116,7 @@
             
             <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cjfc418f4001y2l0bkk03tlv4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="cjkc8t7mm001wuk0bz264gllj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -122,7 +124,7 @@
 
     <div class="entry-content">
       
-        <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="external">JSFuck源码</a> ，我们发现，之所以能用<strong> [，]，(，)，!，+  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
+        <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="noopener">JSFuck源码</a> ，我们发现，之所以能用<strong> [，]，(，)，!，+  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
 <a id="more"></a>
 <p><strong> 关键字 </strong></p>
 <pre><code>false === ![]
@@ -356,7 +358,7 @@ escape(&quot;&lt;&quot;)
 ({}).toString.call(1)
 -&gt; &quot;[object Number]&quot;
 </code></pre><p>由于篇幅太长，不便查看，就先写到这里。下篇我们接着讨论。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="external">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="external">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/grammar/conversion.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/grammar/conversion.html</a><br>[2] <a href="http://www.jsfuck.com/" target="_blank" rel="noopener">http://www.jsfuck.com/</a><br>[3] <a href="https://gold.xitu.io/entry/5834a964570c35006c4ac205" target="_blank" rel="noopener">https://gold.xitu.io/entry/5834a964570c35006c4ac205</a></p>
 
       
     </div><!-- .entry-content -->

@@ -15,11 +15,13 @@
   <title>script.onerror 的兼容写法 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="script 的 onerror 事件 IE6~8 与 opera11 都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
+<meta name="keywords" content="problem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="script.onerror 的兼容写法">
 <meta property="og:url" content="http://nanchao.win/2016/10/27/script-error/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="script 的 onerror 事件 IE6~8 与 opera11 都不支持，但是，我们又经常遇到需要检测脚本是否出错的场景。下面给出一种可以兼容各种浏览器的解决方法：">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-03-13T08:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="script.onerror 的兼容写法">
@@ -114,7 +116,7 @@
             
             <a href="/2016/10/27/script-error/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cjfc418fc002k2l0b7mar1k0f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/27/script-error/" data-id="cjkc8t7na002fuk0bdbk53w4v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -138,7 +140,7 @@
 }
 loadjs(myUrl, &#39;objName&#39;);
 </code></pre><p>对非 ie 的其他浏览器，!this.readyState 为 true；而对于 ie 浏览器，当 script.readyState 为 “loaded” 或 “complete”，则表示 script 加载完成或失败（404 的时候，同样为 loaded 或 complete），所以还要判断某特定对象是否存在，来确定究竟是文件加载完成，还是 404。</p>
-<p>参考：<br>[1] <a href="http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html" target="_blank" rel="external">http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html</a></p>
+<p>参考：<br>[1] <a href="http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html" target="_blank" rel="noopener">http://www.cnblogs.com/chyingp/archive/2012/11/15/scriptOnerrorNotSupportedInIE6to8.html</a></p>
 
       
     </div><!-- .entry-content -->

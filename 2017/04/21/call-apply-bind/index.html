@@ -15,11 +15,13 @@
   <title>理解 call + bind | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数执行时其内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果该参数设为 null 或 undefined，则指向全局对象（浏览器环境下，就是指 window 对象）。这三个方法的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里就不再赘述。下面更深入地讨">
+<meta name="keywords" content="grammar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解 call + bind">
 <meta property="og:url" content="http://nanchao.win/2017/04/21/call-apply-bind/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="JavaScript 提供了 call、apply、bind 等三个方法，来切换/固定函数执行时其内部 this 的指向。它们的第一个参数都是函数内 this 所要指向的对象，如果该参数设为 null 或 undefined，则指向全局对象（浏览器环境下，就是指 window 对象）。这三个方法的基本用法在 理解 JavaScript 中 this 一文已经做了介绍，这里就不再赘述。下面更深入地讨">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2018-03-05T02:07:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 call + bind">
@@ -114,7 +116,7 @@
             
             <a href="/2017/04/21/call-apply-bind/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/21/call-apply-bind/" data-id="cjfc418dt000g2l0b0nihtxp9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/21/call-apply-bind/" data-id="cjkc8t7l4000guk0bchwxuntg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -287,7 +289,7 @@ bind.bind(call)(bind)(f,o)()
 // 等价于（前面可以包含任意个 bind）：
 bind.bind.bind.bind.bind(call)(bind)(f,o)()
 </code></pre><p>以上推理过程也许有点绕，但我相信读懂它们对于理解 call 和 bind 方法是很有帮助的。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/this.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/oop/this.html</a></p>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/oop/this.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/oop/this.html</a></p>
 
       
     </div><!-- .entry-content -->
