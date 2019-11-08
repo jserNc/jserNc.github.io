@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-29T03:00:32.000Z">
+<meta property="og:updated_time" content="2019-11-08T03:16:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 css 块级格式化上下文（BFC）">
 <meta name="twitter:description" content="BFC（Block Formatting Contexts）即“块级格式化上下文”。BFC 是一个独立的布局环境，里面元素的位置是不受外界元素的影响的，其中的块盒和行盒（行盒由一行中所有的内联元素组成）都会沿着父容器边框垂直排列。例如，只要元素的 overflow 值不是 visible，就会触发 BFC。这也是我们将父元素设置 overflow: hidden 来清除浮动的原理。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/06/15/bfc/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="ck2ojb2xv000mv60bwa1wix3h" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/06/15/bfc/" data-id="ck2pkj2mj00067a0b79zfs23q" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -163,7 +163,7 @@
 <p><strong>以下不会发生外边距合并：</strong></p>
 <p>① 浮动元素、绝对定位元素、inline-block 元素不与任何元素外边距合并（包括其父元素、子元素）；<br>② 其他创建了新的 BFC 的元素（例如 overflow:hidden）和它的子元素外边距不合并；<br>③ 如果父元素包含 padding 或 border，那么其 margin-top 不会与第一个子元素的 margin-top 合并。margin-bottom 同理。</p>
 <p>上面提到的 clearance（间隙）指的是：当浮动元素之后的相邻元素设置 clear 属性以清除相关方向的浮动时，这个清除浮动的元素其 margin-top 以上会产生一定的空隙（clearance）。该空隙会阻止元素 margin-top 的折叠，其作为间距存在于清除浮动元素的 margin-top 的上方。</p>
-<div style="margin-bottom:20px;background-color:#ddd"><div style="margin-bottom:20px;background-color:#0f0;height:100px;width:100px;box-shadow:0 20px 0 rgba(0,255,0,0.2);">常规文档流元素，下外边距 20px</div><div style="float:left;margin:20px 0;background-color:#0ff;height:100px;width:200px">左浮动，上下外边距各 20px</div><div style="clear:left;margin-top:50px;background-color:#f0f;height:100px;width:300px;box-shadow:0 -50px 0 rgba(255,0,255,0.2);">清除左浮动，上外边距 50px</div></div>
+<div style="margin-bottom:20px;"><div style="margin-bottom:20px;background-color:#0f0;height:100px;width:100px;box-shadow:0 20px 0 rgba(0,255,0,0.2);">常规文档流元素，下外边距 20px</div><div style="float:left;margin:20px 0;background-color:#0ff;height:100px;width:200px">左浮动，上下外边距各 20px</div><div style="clear:left;margin-top:50px;background-color:#f0f;height:100px;width:300px;box-shadow:0 -50px 0 rgba(255,0,255,0.2);">清除左浮动，上外边距 50px</div></div>
 
 <p>（这里用阴影来标识外边距。）</p>
 <p>代码结构如下：</p>
