@@ -24,7 +24,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2018-03-10T15:23:01.000Z">
+<meta property="og:updated_time" content="2020-01-08T03:34:29.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 原型链">
 <meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象（“原型对象”）。原型对象的所有属性和方法都可以被派生对象共享，这就是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototyp">
@@ -119,7 +119,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ck54nd7vq002vs90bhzn1h43o" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ck54r3lvr002z080bd0tn9kq7" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -215,7 +215,7 @@ v instanceof Vehicle    // true
 <p>那么，对以下结果我们应该也不意外：</p>
 <pre><code>var arr = [];
 arr instanceof Array;        // true
-arr instanceof Object;    // true
+arr instanceof Object;        // true
 
 arr.__proto__ === Array.prototype  // true
 Array.prototype.__proto__ === Object.prototype  // true
