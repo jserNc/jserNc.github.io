@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-05T05:15:46.000Z">
+<meta property="og:updated_time" content="2020-01-09T03:45:25.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 观察者模式">
 <meta name="twitter:description" content="观察者（observer）模式又叫订阅/发布（subscriber/publisher）模式。浏览器的事件监听就是这种模式的应用实例。原理就是：“订阅者 A 订阅发布者 B 的特定动作，当发布者 B 的特定动作发生后，订阅者 A 便会收到通知，然后订阅者 A 就可以进行相应的处理。”">
@@ -116,7 +116,7 @@
             
             <a href="/2017/05/12/observer/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/12/observer/" data-id="ck54r6hh1001pdp0b2mqa3x95" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/05/12/observer/" data-id="ck566wdlo001rnj0bv8gpjkt0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -272,7 +272,7 @@ game.subscribe(&quot;update&quot;,scoreboard.update,scoreboard);
 // 会触发 game.handleKeypress() 方法
 window.onkeypress = game.handleKeypress;
 </code></pre><p>新建游戏者：</p>
-<pre><code>var palyername,key;
+<pre><code>var playername,key;
 while (1) {
     playername = prompt(&quot;Add player (name)&quot;);
     if (!playername){
