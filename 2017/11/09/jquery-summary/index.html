@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-21T03:15:37.000Z">
+<meta property="og:updated_time" content="2020-01-15T06:14:44.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 基础">
 <meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/11/09/jquery-summary/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="ck5euqi8z003gw70bdlu8ngcw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="ck5ewwjx1003ejj0bogk4bllb" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -359,7 +359,7 @@ var jQuery = 456;
 }
 </code></pre><p>这里 type 属性和 set 子属性，说明 type 属性的设置（set）需要兼容。很明显看到，如果 jQuery.support.radioValue 为 true，是不会真正执行以上 attrHooks.type.set 方法的。</p>
 <p>以上的 attrHooks 只是钩子的一种，以上 jQuery.support 中的兼容问题都是分散在众多类似于 attrHooks 的钩子中完成的。如果上面的叙述没能很好的说明钩子的用法，那就再举个简单例子：</p>
-<p>例如，假如学生获得了某比赛第一名，考生加 50 分，获得了第二名，高考加 30 分，获得了第三名，高考加 10 分。那么，统计学生高考总分时，不同的奖项加分就可以用钩子机制来实现。</p>
+<p>例如，假如学生获得了某比赛第一名，高考加 50 分；获得了第二名，高考加 30 分；获得了第三名，高考加 10 分。那么，统计学生高考总分时，不同的奖项加分就可以用钩子机制来实现。</p>
 <pre><code>var reward = {
     firstPlace : 50,   
     secondPlace : 30,
