@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-01T07:15:12.000Z">
+<meta property="og:updated_time" content="2020-08-04T05:32:01.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 闭包（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ckdfdprzm002phx0b0bo291uo" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ckdfidxc6002ocs0bfrwrynx8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -330,7 +330,7 @@ fn(1);   // undefined
 fn();
 Uncaught ReferenceError: x is not defined(…)
 </code></pre><p>可以看到，内层函数的作用域确实是和其外层函数息息相关！</p>
-<p>最后，看看如果利用闭包实现单体模式：</p>
+<p>最后，看看如何利用闭包实现单例模式：</p>
 <pre><code>function Singleton(){
     var instance = this;
 
