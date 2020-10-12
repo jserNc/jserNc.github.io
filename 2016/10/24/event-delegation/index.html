@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-19T01:26:20.000Z">
+<meta property="og:updated_time" content="2020-10-12T06:10:23.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 事件代理（委托）">
 <meta name="twitter:description" content="在浏览器设计过程中，关于交互，面临着一个很基本的问题：页面元素层层嵌套，那么当用户点击页面上某个区域的时候，用户真正感兴趣的到底是哪个元素呢？">
@@ -116,7 +116,7 @@
             
             <a href="/2016/10/24/event-delegation/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ckdnx0na4000ruf0byq4lqysn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/event-delegation/" data-id="ckg6544gf000tak0bqlp0gwy2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -227,6 +227,8 @@
 <p>如果 useCapture 为 true，那就是【事件捕获】，先触发 div 的 click 事件，再触发 p 的 click 事件；如果 useCapture 为 false，那就是【事件冒泡】，先触发 p 的 click 事件，再触发 div 的 click 事件。</p>
 <p>如果我们给所有的元素监听事件时，都设定 useCapture 为 false，那就所有的事件都在冒泡的阶段触发。而所有子元素的事件都会冒泡到祖先元素，所以，我们可以通过祖先元素来代理（委托）子元素的事件了。</p>
 <p>如果给不同的元素设置不一样的 useCapture 值，有的设为 true，有的设为 false。那就就先从最外层向【目标节点】方向寻找 useCapture 设为 true 的捕获事件，然后到达【目标节点】执行目标元素事件后，再往外层方向寻找 useCapture 设为 false 的冒泡事件。</p>
+<p>总结一下：两个概念不要混淆，一个是【事件传播阶段】，一个是【事件回调函数】的执行。【事件传播阶段】是固定的，捕获阶段-&gt;处于目标阶段-&gt;冒泡阶段，这是事件流的固定过程。【事件回调函数】可以绑定到捕获阶段，也可以绑定到冒泡阶段，若某个元素的回调函数绑定到捕获阶段，那么这个回调函数执行时间会早于其子元素的回调函数，若某个元素的回调绑定到冒泡阶段，那么这个回调函数的执行时间会晚于其子元素的回调函数。</p>
+<p>问题来了，若是某个元素的捕获阶段和冒泡阶段都绑定了回调函数，那么事件发生后会触发两个回调函数吗？答案：会的。那么为啥我们写应用过程中绑定的回调函数不会执行两遍呢？那是因为我们绑定回调时一般会单独绑定在捕获阶段或单独绑定在冒泡阶段，若是分开绑定的话，确实会执行两遍的。</p>
 <p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/dom/event.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/dom/event.html</a><br>[2] <a href="http://www.diguage.com/archives/71.html" target="_blank" rel="noopener">http://www.diguage.com/archives/71.html</a><br>[3] <a href="https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/" target="_blank" rel="noopener">https://blog.othree.net/log/2007/02/06/third-argument-of-addeventlistener/</a></p>
 
       
