@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="函数去抖和函数节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如抽奖现场，嘉宾连续点击了多次“特等奖按钮”，抽出了多名特等奖，尴尬；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条会密集触发 scroll 事件，如果回调事件复杂，就会造成浏览器卡顿。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-02T02:51:10.000Z">
+<meta property="og:updated_time" content="2020-10-12T07:11:29.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="去抖和节流（debounce &amp; throttle）">
 <meta name="twitter:description" content="函数去抖和函数节流的区别，一言以蔽之，去抖是为了防止短时间内多次触发同一事件，造成意外的结果，比如抽奖现场，嘉宾连续点击了多次“特等奖按钮”，抽出了多名特等奖，尴尬；节流是为了防止某事件触发的频率过高，造成性能问题，比如拖动滚动条会密集触发 scroll 事件，如果回调事件复杂，就会造成浏览器卡顿。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/01/06/throttle-debounce/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="ckg6544h90024ak0b9w5gj7dd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/06/throttle-debounce/" data-id="ckg66sz83002a4d0bhz090r2t" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -128,9 +128,9 @@
 <a id="more"></a>
 <p>举两个例子来说明：</p>
 <p><strong> 场景一：</strong></p>
-<p>窗口的 resize 事件会在改变浏览器大小事连续触发； onmousemove 事件会在鼠标移动时被连续触发。如果这些事件的回调函数过重，而不采取节流处理，可能会使浏览器崩溃。</p>
-<p><strong> 场景二：</strong></p>
 <p>年会现场，主持人邀请嘉宾抽取 1 位特等奖幸运小伙伴，如果嘉宾不小心连续点击了两次【特等奖】按钮，而没有采取去抖处理，可能会连续触发两次抽取程序，然后出现了 2 位获奖小伙伴，那就尴尬了。</p>
+<p><strong> 场景二：</strong></p>
+<p>窗口的 resize 事件会在改变浏览器大小事连续触发； onmousemove 事件会在鼠标移动时被连续触发。如果这些事件的回调函数过重，而不采取节流处理，可能会使浏览器崩溃。</p>
 <p>下面详细地阐述一下去抖和节流的概念以及实现。</p>
 <h3 id="去抖（debounce）"><a href="#去抖（debounce）" class="headerlink" title="去抖（debounce）"></a>去抖（debounce）</h3><p>如果用手指一直按住一个弹簧，虽然它有弹起的趋势，但是只要你按住不放（保持对它施力），它将不会弹起直到你松手为止。</p>
 <p>从代码角度看，假定事件 A 发生会触发回调函数 callback，当事件 A 连续发生时，理论上会连续触发回调函数 callback。但是，对于短时间内连续触发的 callback 我们不让其执行，直到时间 A 发生超过指定时间后，我们才调用一次 callback。即：<strong>当调用动作 n 毫秒后，才会执行该动作，若在这 n 毫秒内又调用此动作则将重新计算执行时间。</strong></p>
