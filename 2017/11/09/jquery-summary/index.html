@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。" />
+  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 好用得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理。" />
   
 
   
@@ -14,18 +14,18 @@
   
   <title>jQuery 基础 | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+  <meta name="description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 好用得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理。">
 <meta name="keywords" content="jquery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery 基础">
 <meta property="og:url" content="http://nanchao.win/2017/11/09/jquery-summary/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+<meta property="og:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 好用得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-15T06:14:44.160Z">
+<meta property="og:updated_time" content="2020-10-14T05:51:35.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 基础">
-<meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。">
+<meta name="twitter:description" content="用过 jQuery 的人应该都有感受，它比原生 JavaScript 好用得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +116,7 @@
             
             <a href="/2017/11/09/jquery-summary/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="ckg8xl6i4003hzb0btld4jn7v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/11/09/jquery-summary/" data-id="ckg90ozn9003ga70btx24mqvd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,7 +124,7 @@
 
     <div class="entry-content">
       
-        <p>用过 jQuery 的人应该都有感受，它比原生 JavaScript 容易得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理，如果有时间的话，后面会陆续对各个具体的功能模块进行分析。</p>
+        <p>用过 jQuery 的人应该都有感受，它比原生 JavaScript 好用得多，不得不好奇它是怎么做到的，于是决定打开 jQuery 源码一探究竟。本文针对的是 jQuery 2.0.3 版本源码，对其中一些重要又基本的概念进行梳理。</p>
 <a id="more"></a>
 <p><strong>jQuery 2.0.3 源码一共 8829 行（包括作者的注释），按行数进行分解，总体代码结构如下：</strong></p>
 <pre><code>(function( window, undefined ) {
@@ -178,7 +178,7 @@
 <p>① 一般情况下，项目中除了引入 jQuery 代码，还会有其他的 js 代码。这里将 jQuery 的所有代码由这个匿名函数包裹起来，那么这里定义的任何变量都是局部的，不会和其他的 js 代码互相干扰。</p>
 <p>② 将 windows 作为形参和实参，是因为 window 对象处于作用域链的最顶端，所以 window 下属性查找速度会比较慢，这样做可以提高 window 下属性的遍历效率，另外，将 window 作为形参，那么在代码压缩过程中，匿名函数里的所有 window 标识符都可以简化为一个字母，压缩效率高。</p>
 <p>③ 将 undefined 做为形参可以规避 ECMAScript3 中 undefined 可以被改写的问题。早期的 ECMAScript3 中，undefined 是可读可写的变量，后来的 ECMAScript5 中才修正为只读变量。而 undefined 作为有特殊含义的关键字，如果被修改会引起很多意想不到的麻烦。</p>
-<p>为什么这么写可以规避 undefined 被改写的问题呢？下面从正反两方面回答这个问题：</p>
+<p>为什么这么写可以规避 undefined 被改写的问题呢？下面从正反两角度回答这个问题：</p>
 <p>a. 假如不要形参 undefined，依据作用域链的原理，匿名函数中的 undefined 就会取全局的 undefined，而全局中的 undefined 是可能被修改的，所以这样是不好的。</p>
 <p>b. 假如像上面那样将 undefined 作为形参，省略对应的实参。我们知道，在 js 中函数被省略的实参默认是 undefined（货真价实的 undefined），那么，以上匿名函数执行时，这个货真价实的 undefined 就会复制给形参 undefined，所以，函数内部的 undefined 自然都是货真价实的 undefined 了。</p>
 <p><strong>(2) 伪构造函数 jQuery</strong></p>
@@ -254,7 +254,7 @@ $(document).on(&#39;ready&#39;,function(){
 <p>jQuery 几乎所有的功能都离不开 dom 元素，所以，首先要做的就是用 $(selector) 将所需的 dom 元素找出来。这里的 selector 我们称之为”选择器“，它可以是字符串，可以是 dom 元素，也可以是 jQuery 对象。</p>
 <p>如果 selector 是比较简单的选择器，比如 ‘#myId’ ，表示要找出 id 为 myId 的元素，那么直接调用 document.getElementById(‘myId’) 就可以了。可是，如果选择器比较复杂，比如：$(‘div + p span &gt; a[title=”hi”]’)，这就不是单纯地用 js 原生 api 可以解决了，这时候我们就需要 Sizzle 这个强大的选择器引擎，举个例子：</p>
 <p>$(‘div span’) 表示选取所有的 div 下的 span 元素。$(‘span &gt; a[title=”hi”]’) 表示选取作为 span 的子元素并且 title 属性为 hi 的 a 标签</p>
-<p>给 $ 函数传入 ‘div span’ 这种选择器 Sizzle 就能匹配出相应的元素。当然了，以上的例子还是比较简单，当选择器 selector 更加复杂时就更难体现出 Sizzle 的价值了，源码部分会详细地去了解它。</p>
+<p>给 $ 函数传入 ‘div span’ 这种选择器 Sizzle 就能匹配出相应的元素。当然了，以上的例子还是比较简单，当选择器 selector 更加复杂时就更能体现出 Sizzle 的价值了。</p>
 <p>另外，Sizzle 是独立的一部分，不依赖任何库，如果你不想用 jQuery，可以把 Sizzle 单独拿出来用。</p>
 <p><strong>(6) 链式调用</strong></p>
 <p>平常使用 jQuery 过程中，会经常用到这种链式写法：</p>
