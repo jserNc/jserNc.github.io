@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <meta name="description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。" />
+  <meta name="description" content="查看 JSFuck源码 ，我们发现，之所以能用 [ ] ( ) ! +  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。" />
   
 
   
@@ -14,18 +14,18 @@
   
   <title>jsfuck 6 个字符写 js 代码（三） | 南潮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
+  <meta name="description" content="查看 JSFuck源码 ，我们发现，之所以能用 [ ] ( ) ! +  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
 <meta name="keywords" content="grammar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsfuck 6 个字符写 js 代码（三）">
 <meta property="og:url" content="http://nanchao.win/2017/01/11/jsfuck02/index.html">
 <meta property="og:site_name" content="Enjoy javascript">
-<meta property="og:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
+<meta property="og:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [ ] ( ) ! +  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-03T04:28:50.000Z">
+<meta property="og:updated_time" content="2020-10-14T08:40:43.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsfuck 6 个字符写 js 代码（三）">
-<meta name="twitter:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [，]，(，)，!，+  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
+<meta name="twitter:description" content="查看 JSFuck源码 ，我们发现，之所以能用 [ ] ( ) ! +  等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -116,7 +116,7 @@
             
             <a href="/2017/01/11/jsfuck02/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="ckg93sgu5001g6k0bga44i70b" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/01/11/jsfuck02/" data-id="ckg95ayew001b2d0btc5g11gd" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,7 +124,7 @@
 
     <div class="entry-content">
       
-        <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="noopener">JSFuck源码</a> ，我们发现，之所以能用<strong> [，]，(，)，!，+  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
+        <p>查看 <a href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js" target="_blank" rel="noopener">JSFuck源码</a> ，我们发现，之所以能用<strong> [ ] ( ) ! +  </strong>等 6 个字符来写 JavaScript 代码，是因为所有的字符（变量）都可以通过这 6 个字符来表示（直接或者间接转换），下面我们分析各个字符和这 6 个元字符之间的映射关系。</p>
 <a id="more"></a>
 <p><strong> 关键字 </strong></p>
 <pre><code>false === ![]
