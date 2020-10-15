@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-04T05:32:01.192Z">
+<meta property="og:updated_time" content="2020-10-15T07:47:36.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 闭包（译）">
 <meta name="twitter:description" content="原文： http://dmitrysoshnikov.com/ecmascript/javascript-the-core/ 在ECMAScript中，函数是第一级（first-class）对象。这意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」）。接收「函数类型参数」的函数叫作高阶函数。同样函数也可以从其他函数中返回。返回其他函数的函数叫作以函数为值的函数。">
@@ -117,7 +117,7 @@
             
             <a href="/2016/11/01/closures/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ckgaeedss002o1j0bzjygo993" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/01/closures/" data-id="ckgalcxbg002l4f0bt01dayrp" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -145,7 +145,7 @@ f1();
 
 console.log(n)
 // Uncaught ReferenceError: n is not defined(…)
-</code></pre><p>如果一个函数（子函数）是另一个函数（父函数）的返回值。为了在父函数上下文结束的情况下也能访问其中的变量，子函数在被创建的时候会在它的 [[Scope]] 属性中保存父函数的作用域链。所以当子函数被调用的时候，它上下文的对象的作用域链属性会被格式化成当前函数的变量对象（也叫活动对象 AO，除了包括变量和函数声明之外，它还存储了形参和 arguments 对象）与 [[Scope]] 属性（父函数的作用域链）的和：</p>
+</code></pre><p>如果一个函数（子函数）是另一个函数（父函数）的返回值。为了在父函数上下文结束的情况下子函数也能访问其中的变量，子函数在被创建的时候会在它的 [[Scope]] 属性中保存父函数的作用域链。所以当子函数被调用的时候，它上下文的对象的作用域链属性会被格式化成当前函数的变量对象（也叫活动对象 AO，除了包括变量和函数声明之外，它还存储了形参和 arguments 对象）与 [[Scope]] 属性（父函数的作用域链）的和：</p>
 <p><strong>Scope chain = Activation object + [[Scope]]</strong></p>
 <p>强调一个关键点：子函数在<strong>创建时刻</strong>会保存父函数的作用域链，将来子函数调用时会在这个作用域链中查找变量。注意是<strong>创建时刻</strong>，而不是<strong>调用时刻</strong>，这一点很重要！！</p>
 <pre><code>function foo() {
@@ -187,7 +187,7 @@ function foo() {
   funArg(); // 10, but not 20
 
 })(foo); 
-</code></pre><p>我们看到 x 并未到父函数去取值，而是去其声明时所在环境（全局作用域）中取值。那么，如果我们去掉全局作用域中变量 x 的声明，会怎样？</p>
+</code></pre><p>我们看到 x 并未到外层的立即执行函数中去取值，而是去其声明时所在环境（全局作用域）中取值。那么，如果我们去掉全局作用域中变量 x 的声明，会怎样？</p>
 <pre><code>function foo() {
   console.log(x);
 }
