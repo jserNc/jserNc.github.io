@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-01T14:06:29.000Z">
+<meta property="og:updated_time" content="2020-10-15T05:41:25.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 JavaScript 中 setTimeout">
 <meta name="twitter:description" content="setTimeout(code,ms) 方法用于在 ms 毫秒后调用函数或计算表达式（code）。这种定时方法我们也叫定时器，该方法会返回一个整数 n，作为定时器的标识，之后可以用 clearTimeout(n) 方法来取消该定时器。">
@@ -116,7 +116,7 @@
             
             <a href="/2016/11/03/setTimeout/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="ckg98c51e0022m20bgrp0wp8b" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/11/03/setTimeout/" data-id="ckgaeedt000301j0b67lud21v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -222,7 +222,36 @@ timer = setTimeout(func, 0);
 </code></pre><p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 DOM 操作消耗较大，这种连续的 DOM 操作会造成大量 DOM 操作“堆积”，浏览器卡顿。而写法二将任务分散在空余时间执行，就不会造成“堵塞”，这就是 setTimeout(f, 0) 的好处。</p>
 <p>setTimeout 和 setInterval 的运行机制是：将指定的代码移除本次执行队列，等到下一轮 Event Loop 时，再检查是否到了指定的延迟时间。若延迟时间到了就执行指定的代码，否则在下一轮 Event Loop 时再重新判断。</p>
 <p>每一轮 Event Loop，都会将“任务队列”中需要执行的代码一次执行完。setTimeout 和 setInterval 都是把任务添加到“任务队列”的尾部。因此它们要等到当前脚本的所有同步任务执行完，然后再等到本次 Event Loop 中的“任务队列”中的所有任务执行完，才开始执行。而前面的任务到底要多久才能执行完是不确定的，所以，不能保证 setTimeout 和 setInterval 指定的任务一定会按照预定时间执行。</p>
-<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/advanced/timer.html</a></p>
+<p><strong>关于事件循环</strong></p>
+<p>javascript 中任务分为两类：<strong>macro（宏任务）</strong>和 <strong>micro（微任务）</strong>。</p>
+<ol>
+<li>常见的 macro-task 比如：setTimeout、setInterval、 setImmediate、script（整体代码）、 I/O 操作、UI 渲染等。</li>
+<li>常见的 micro-task 比如：process.nextTick、new Promise().then(回调)、MutationObserver(html5 新特性) 等。</li>
+</ol>
+<p>任务执行过程为：当某个宏任务执行完后，会查看是否有微任务队列。如果有，先执行微任务队列中的所有任务，如果没有，会读取宏任务队列中排在最前的任务，执行宏任务的过程中，遇到微任务，依次加入微任务队列。栈空后，再次读取微任务队列里的任务，依次类推。</p>
+<p>简单说就是：<strong>执行1个宏任务 -&gt; 执行所有的微任务 -&gt; 执行1个宏任务 -&gt; 执行所有的微任务 -&gt; ……</strong></p>
+<p>注意： 普通的 script 脚本代码也是宏任务，一般情况下首先执行该宏任务。</p>
+<pre><code>Promise.resolve().then(()=&gt;{
+  console.log(&#39;Promise1&#39;)
+  setTimeout(()=&gt;{
+    console.log(&#39;setTimeout2&#39;)
+  },0)
+})
+setTimeout(()=&gt;{
+  console.log(&#39;setTimeout1&#39;)
+  Promise.resolve().then(()=&gt;{
+    console.log(&#39;Promise2&#39;)
+  })
+},0)
+</code></pre><p>这段代码的执行结果是： Promise1，setTimeout1，Promise2，setTimeout2</p>
+<p>执行过程分析如下：</p>
+<ol>
+<li>一开始执行栈的同步任务（这属于宏任务）执行完毕，会去查看是否有微任务队列，上题中存在(有且只有一个)，然后执行微任务队列中的所有任务输出 Promise1，同时会生成一个宏任务 setTimeout2</li>
+<li>然后去查看宏任务队列，宏任务 setTimeout1 在 setTimeout2 之前，先执行宏任务 setTimeout1，输出 setTimeout1</li>
+<li>在执行宏任务 setTimeout1 时会生成微任务 Promise2 ，放入微任务队列中，接着先去清空微任务队列中的所有任务，输出 Promise2</li>
+<li>清空完微任务队列中的所有任务后，就又会去宏任务队列取一个，这回执行的是 setTimeout2</li>
+</ol>
+<p>参考：<br>[1] <a href="http://javascript.ruanyifeng.com/advanced/timer.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/advanced/timer.html</a><br>[2] <a href="https://zhuanlan.zhihu.com/p/54882306" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54882306</a></p>
 
       
     </div><!-- .entry-content -->
