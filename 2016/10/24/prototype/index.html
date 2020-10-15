@@ -24,7 +24,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/basic-object.png">
 <meta property="og:image" content="http://nanchao.win/css/images/prototype/constructor-proto-chain.png">
-<meta property="og:updated_time" content="2020-08-04T02:59:49.694Z">
+<meta property="og:updated_time" content="2020-10-15T09:29:45.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 原型链">
 <meta name="twitter:description" content="js 中，除了 null，每个对象都会继承另一个对象（“原型对象”）。原型对象的所有属性和方法都可以被派生对象共享，这就是 js 的继承机制。通过构造函数生成实例对象的时候，会自动给实例对象分配原型对象。实例对象生成时候的构造函数的 prototype 属性即为实例对象的原型对象。（在此我们需要注意原型对象是实例对象【生成时】的构造函数的 prototype 属性，因为构造函数的 prototyp">
@@ -119,7 +119,7 @@
             
             <a href="/2016/10/24/prototype/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ckgalcxbo002x4f0bskjydsnr" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2016/10/24/prototype/" data-id="ckgaml0yy002zch0bpdrj2moq" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -211,7 +211,7 @@ c.calculate(40);    // 80
 </code></pre><p>原型对象先说到这里。再来看看 instanceof 运算符：</p>
 <pre><code>var v = new F();
 v instanceof F    // true
-</code></pre><p>对于以上结果我们并不会感到意外，instanceof 运算符左边运算子是一个实例对象，右边运算子是某个构造函数。<strong> instanceof 运算的实质是：检查右边构造函数的 prototype 属性是否在左边的实例对象的原型链上。</strong>上例中判断 Vehicle.prototype 是否在对象 v 的原型链上，显然是的。</p>
+</code></pre><p>对于以上结果我们并不会感到意外，instanceof 运算符左边运算子是一个实例对象，右边运算子是某个构造函数。<strong> instanceof 运算的实质是：检查右边构造函数的 prototype 属性是否在左边的实例对象的原型链上。</strong>上例中判断 F.prototype 是否在对象 v 的原型链上，显然是的。</p>
 <p>那么，对以下结果我们应该也不意外：</p>
 <pre><code>var arr = [];
 arr instanceof Array;       // true
