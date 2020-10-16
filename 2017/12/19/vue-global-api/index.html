@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Enjoy javascript">
 <meta property="og:description" content="vue 官网上专门列出了全局 api 供大家参考，这些 api 我之前看了好几遍，但是对其用法始终没能理解得很透彻。这里根据 Vue 2.4.0 源码对这些全局 api 做一些尽可能详细的注解。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-08T06:11:49.000Z">
+<meta property="og:updated_time" content="2020-10-16T03:07:50.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 2.x 全局 api 详解">
 <meta name="twitter:description" content="vue 官网上专门列出了全局 api 供大家参考，这些 api 我之前看了好几遍，但是对其用法始终没能理解得很透彻。这里根据 Vue 2.4.0 源码对这些全局 api 做一些尽可能详细的注解。">
@@ -116,7 +116,7 @@
             
             <a href="/2017/12/19/vue-global-api/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/19/vue-global-api/" data-id="ckgaml107003lch0bn6kt5rgh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/19/vue-global-api/" data-id="ckgbsozn8003hfi0br5qsmpu5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -384,7 +384,7 @@ var nextTick = function queueNextTick (cb, ctx) {
       timerFunc();
     }
 
-    // 参数为空并且不支持 Promise
+    // 参数为空并且支持 Promise
     if (!cb &amp;&amp; typeof Promise !== &#39;undefined&#39;) {
       return new Promise(function (resolve, reject) {
         // 于是可以用 _resolve 方法来触发 Promise 实例的 then 回调
@@ -445,6 +445,7 @@ function set (target, key, val) {
   }
 
   /*
+    ③ 给 target 对象添加新的 key 属性
     走到这说明 ob 存在，即对象 target 是响应式的
 
     ob.value 其实就是 target。以下几句作用是：
@@ -702,7 +703,7 @@ function mergeOptions (parent, child, vm) {
     ① strats = config.optionMergeStrategies 
        我们可以为该对象添加方法属性，自定义合并策略的选项
 
-       每一个 strats[key] 是一个 functio
+       每一个 strats[key] 是一个 function
        不同的 key 对应不同的 function，也就是不同的合并策略
 
     ② defaultStrat(parentVal, childVal) 作为默认的合并函数
