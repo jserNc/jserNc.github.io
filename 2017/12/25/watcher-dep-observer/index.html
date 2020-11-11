@@ -23,7 +23,7 @@
 <meta property="og:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://nanchao.win/css/images/observer-dep-watcher/observer-dep-watcher.png">
-<meta property="og:updated_time" content="2018-03-29T05:40:35.000Z">
+<meta property="og:updated_time" content="2020-10-16T06:55:04.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 中 Observer-Dep-Watcher 三者的关系">
 <meta name="twitter:description" content="Vue 的特点之一就是双向绑定，即“数据（data）“和”视图（view）”绑定，当数据变化时会驱动视图更新，视图变化时也会驱动数据更新。本文从 Vue 源码出发，弄清 Observer-Dep-Watcher 三者之间的关系，这对理解双向绑定这个概念非常有意义。">
@@ -118,7 +118,7 @@
             
             <a href="/2017/12/25/watcher-dep-observer/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="ckgbsozmc0037fi0bee07fjpw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://nanchao.win/2017/12/25/watcher-dep-observer/" data-id="ckg66sz9900374d0bhf68lpvu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -303,7 +303,7 @@ function popTarget () {
   Dep.target = targetStack.pop();
 }
 </code></pre><h2 id="订阅者工厂方法-Watcher"><a href="#订阅者工厂方法-Watcher" class="headerlink" title="订阅者工厂方法 Watcher"></a>订阅者工厂方法 Watcher</h2><p>每一个 Watcher 实例就是一个订阅者，为什么订阅者可以起到观察某个 expOrFn（表达式/函数）的作用呢？这里分两种情况说明：</p>
-<p>① expOrFn 为表达式，例如 ‘a’</p>
+<p>① expOrFn 为表达式，例如 ‘aaa.bbb.ccc’</p>
 <pre><code>// 新建 Vue 实例
 vm = new Vue({
   data : {
